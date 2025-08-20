@@ -2,12 +2,12 @@
 use progenitor_client::{encode_path, ClientHooks, OperationInfo, RequestBuilderExt};
 #[allow(unused_imports)]
 pub use progenitor_client::{ByteStream, ClientInfo, Error, ResponseValue};
-/// Types used as operation parameters and responses.
+#[doc = r" Types used as operation parameters and responses."]
 #[allow(clippy::all)]
 pub mod types {
-    /// Error types.
+    #[doc = r" Error types."]
     pub mod error {
-        /// Error from a `TryFrom` or `FromStr` implementation.
+        #[doc = r" Error from a `TryFrom` or `FromStr` implementation."]
         pub struct ConversionError(::std::borrow::Cow<'static, str>);
         impl ::std::error::Error for ConversionError {}
         impl ::std::fmt::Display for ConversionError {
@@ -35,24 +35,24 @@ pub mod types {
         }
     }
 
-    ///`UnoBody`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "required": [
-    ///    "required"
-    ///  ],
-    ///  "properties": {
-    ///    "gateway": {
-    ///      "type": "string"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`UnoBody`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"required\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"gateway\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct UnoBody {
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
@@ -72,7 +72,7 @@ pub mod types {
         }
     }
 
-    /// Types for composing complex structures.
+    #[doc = r" Types for composing complex structures."]
     pub mod builder {
         #[derive(Clone, Debug)]
         pub struct UnoBody {
@@ -139,42 +139,47 @@ pub mod types {
 }
 
 #[derive(Clone, Debug)]
-///Client for CLI gen test
-///
-///Test case to exercise CLI generation
-///
-///Version: 9000
+#[doc = "Client for CLI gen test\n\nTest case to exercise CLI generation\n\nVersion: 9000"]
 pub struct Client {
     pub(crate) baseurl: String,
-    pub(crate) client: reqwest::Client,
+    pub(crate) client: reqwest_middleware::ClientWithMiddleware,
 }
 
 impl Client {
-    /// Create a new client.
-    ///
-    /// `baseurl` is the base URL provided to the internal
-    /// `reqwest::Client`, and should include a scheme and hostname,
-    /// as well as port and a path stem if applicable.
+    #[doc = r" Create a new client."]
+    #[doc = r""]
+    #[doc = r" `baseurl` is the base URL provided to the internal"]
+    #[doc = r" `reqwest::Client`, and should include a scheme and hostname,"]
+    #[doc = r" as well as port and a path stem if applicable."]
     pub fn new(baseurl: &str) -> Self {
         #[cfg(not(target_arch = "wasm32"))]
         let client = {
             let dur = std::time::Duration::from_secs(15);
-            reqwest::ClientBuilder::new()
+            let reqwest_client = reqwest::ClientBuilder::new()
                 .connect_timeout(dur)
                 .timeout(dur)
+                .build()
+                .unwrap();
+            reqwest_middleware::ClientBuilder::new(reqwest_client).build()
         };
         #[cfg(target_arch = "wasm32")]
-        let client = reqwest::ClientBuilder::new();
-        Self::new_with_client(baseurl, client.build().unwrap())
+        let client = {
+            let reqwest_client = reqwest::ClientBuilder::new().build().unwrap();
+            reqwest_middleware::ClientBuilder::new(reqwest_client).build()
+        };
+        Self::new_with_client(baseurl, client)
     }
 
-    /// Construct a new client with an existing `reqwest::Client`,
-    /// allowing more control over its configuration.
-    ///
-    /// `baseurl` is the base URL provided to the internal
-    /// `reqwest::Client`, and should include a scheme and hostname,
-    /// as well as port and a path stem if applicable.
-    pub fn new_with_client(baseurl: &str, client: reqwest::Client) -> Self {
+    #[doc = r" Construct a new client with an existing `reqwest_middleware::ClientWithMiddleware`,"]
+    #[doc = r" allowing more control over its configuration."]
+    #[doc = r""]
+    #[doc = r" `baseurl` is the base URL provided to the internal"]
+    #[doc = r" `reqwest_middleware::ClientWithMiddleware`, and should include a scheme and hostname,"]
+    #[doc = r" as well as port and a path stem if applicable."]
+    pub fn new_with_client(
+        baseurl: &str,
+        client: reqwest_middleware::ClientWithMiddleware,
+    ) -> Self {
         Self {
             baseurl: baseurl.to_string(),
             client,
@@ -191,7 +196,7 @@ impl ClientInfo<()> for Client {
         self.baseurl.as_str()
     }
 
-    fn client(&self) -> &reqwest::Client {
+    fn client(&self) -> &reqwest_middleware::ClientWithMiddleware {
         &self.client
     }
 
@@ -202,21 +207,13 @@ impl ClientInfo<()> for Client {
 
 impl ClientHooks<()> for &Client {}
 impl Client {
-    ///Sends a `GET` request to `/uno`
-    ///
-    ///```ignore
-    /// let response = client.uno()
-    ///    .gateway(gateway)
-    ///    .body(body)
-    ///    .send()
-    ///    .await;
-    /// ```
+    #[doc = "Sends a `GET` request to `/uno`\n\n```ignore\nlet response = client.uno()\n    .gateway(gateway)\n    .body(body)\n    .send()\n    .await;\n```"]
     pub fn uno(&self) -> builder::Uno<'_> {
         builder::Uno::new(self)
     }
 }
 
-/// Types for composing operation parameters.
+#[doc = r" Types for composing operation parameters."]
 #[allow(clippy::all)]
 pub mod builder {
     use super::types;
@@ -225,9 +222,7 @@ pub mod builder {
         encode_path, ByteStream, ClientHooks, ClientInfo, Error, OperationInfo, RequestBuilderExt,
         ResponseValue,
     };
-    ///Builder for [`Client::uno`]
-    ///
-    ///[`Client::uno`]: super::Client::uno
+    #[doc = "Builder for [`Client::uno`]\n\n[`Client::uno`]: super::Client::uno"]
     #[derive(Debug, Clone)]
     pub struct Uno<'a> {
         client: &'a super::Client,
@@ -274,7 +269,7 @@ pub mod builder {
             self
         }
 
-        ///Sends a `GET` request to `/uno`
+        #[doc = "Sends a `GET` request to `/uno`"]
         pub async fn send(self) -> Result<ResponseValue<ByteStream>, Error<()>> {
             let Self {
                 client,
@@ -314,8 +309,8 @@ pub mod builder {
     }
 }
 
-/// Items consumers will typically use such as the Client and
-/// extension traits.
+#[doc = r" Items consumers will typically use such as the Client and"]
+#[doc = r" extension traits."]
 pub mod prelude {
     #[allow(unused_imports)]
     pub use super::Client;

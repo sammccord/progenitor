@@ -2,12 +2,12 @@
 use progenitor_client::{encode_path, ClientHooks, OperationInfo, RequestBuilderExt};
 #[allow(unused_imports)]
 pub use progenitor_client::{ByteStream, ClientInfo, Error, ResponseValue};
-/// Types used as operation parameters and responses.
+#[doc = r" Types used as operation parameters and responses."]
 #[allow(clippy::all)]
 pub mod types {
-    /// Error types.
+    #[doc = r" Error types."]
     pub mod error {
-        /// Error from a `TryFrom` or `FromStr` implementation.
+        #[doc = r" Error from a `TryFrom` or `FromStr` implementation."]
         pub struct ConversionError(::std::borrow::Cow<'static, str>);
         impl ::std::error::Error for ConversionError {}
         impl ::std::fmt::Display for ConversionError {
@@ -35,78 +35,78 @@ pub mod types {
         }
     }
 
-    ///`CrucibleOpts`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "required": [
-    ///    "id",
-    ///    "lossy",
-    ///    "read_only",
-    ///    "target"
-    ///  ],
-    ///  "properties": {
-    ///    "cert_pem": {
-    ///      "type": [
-    ///        "string",
-    ///        "null"
-    ///      ]
-    ///    },
-    ///    "control": {
-    ///      "type": [
-    ///        "string",
-    ///        "null"
-    ///      ]
-    ///    },
-    ///    "flush_timeout": {
-    ///      "type": [
-    ///        "integer",
-    ///        "null"
-    ///      ],
-    ///      "format": "uint32",
-    ///      "minimum": 0.0
-    ///    },
-    ///    "id": {
-    ///      "type": "string",
-    ///      "format": "uuid"
-    ///    },
-    ///    "key": {
-    ///      "type": [
-    ///        "string",
-    ///        "null"
-    ///      ]
-    ///    },
-    ///    "key_pem": {
-    ///      "type": [
-    ///        "string",
-    ///        "null"
-    ///      ]
-    ///    },
-    ///    "lossy": {
-    ///      "type": "boolean"
-    ///    },
-    ///    "read_only": {
-    ///      "type": "boolean"
-    ///    },
-    ///    "root_cert_pem": {
-    ///      "type": [
-    ///        "string",
-    ///        "null"
-    ///      ]
-    ///    },
-    ///    "target": {
-    ///      "type": "array",
-    ///      "items": {
-    ///        "type": "string"
-    ///      }
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`CrucibleOpts`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"id\","]
+    #[doc = "    \"lossy\","]
+    #[doc = "    \"read_only\","]
+    #[doc = "    \"target\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"cert_pem\": {"]
+    #[doc = "      \"type\": ["]
+    #[doc = "        \"string\","]
+    #[doc = "        \"null\""]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"control\": {"]
+    #[doc = "      \"type\": ["]
+    #[doc = "        \"string\","]
+    #[doc = "        \"null\""]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"flush_timeout\": {"]
+    #[doc = "      \"type\": ["]
+    #[doc = "        \"integer\","]
+    #[doc = "        \"null\""]
+    #[doc = "      ],"]
+    #[doc = "      \"format\": \"uint32\","]
+    #[doc = "      \"minimum\": 0.0"]
+    #[doc = "    },"]
+    #[doc = "    \"id\": {"]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"uuid\""]
+    #[doc = "    },"]
+    #[doc = "    \"key\": {"]
+    #[doc = "      \"type\": ["]
+    #[doc = "        \"string\","]
+    #[doc = "        \"null\""]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"key_pem\": {"]
+    #[doc = "      \"type\": ["]
+    #[doc = "        \"string\","]
+    #[doc = "        \"null\""]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"lossy\": {"]
+    #[doc = "      \"type\": \"boolean\""]
+    #[doc = "    },"]
+    #[doc = "    \"read_only\": {"]
+    #[doc = "      \"type\": \"boolean\""]
+    #[doc = "    },"]
+    #[doc = "    \"root_cert_pem\": {"]
+    #[doc = "      \"type\": ["]
+    #[doc = "        \"string\","]
+    #[doc = "        \"null\""]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"target\": {"]
+    #[doc = "      \"type\": \"array\","]
+    #[doc = "      \"items\": {"]
+    #[doc = "        \"type\": \"string\""]
+    #[doc = "      }"]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct CrucibleOpts {
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
@@ -139,35 +139,35 @@ pub mod types {
         }
     }
 
-    ///`DiskAttachment`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "required": [
-    ///    "disk_id",
-    ///    "generation_id",
-    ///    "state"
-    ///  ],
-    ///  "properties": {
-    ///    "disk_id": {
-    ///      "type": "string",
-    ///      "format": "uuid"
-    ///    },
-    ///    "generation_id": {
-    ///      "type": "integer",
-    ///      "format": "uint64",
-    ///      "minimum": 0.0
-    ///    },
-    ///    "state": {
-    ///      "$ref": "#/components/schemas/DiskAttachmentState"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`DiskAttachment`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"disk_id\","]
+    #[doc = "    \"generation_id\","]
+    #[doc = "    \"state\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"disk_id\": {"]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"uuid\""]
+    #[doc = "    },"]
+    #[doc = "    \"generation_id\": {"]
+    #[doc = "      \"type\": \"integer\","]
+    #[doc = "      \"format\": \"uint64\","]
+    #[doc = "      \"minimum\": 0.0"]
+    #[doc = "    },"]
+    #[doc = "    \"state\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/DiskAttachmentState\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct DiskAttachment {
         pub disk_id: ::uuid::Uuid,
@@ -187,38 +187,38 @@ pub mod types {
         }
     }
 
-    ///`DiskAttachmentState`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "oneOf": [
-    ///    {
-    ///      "type": "string",
-    ///      "enum": [
-    ///        "Detached",
-    ///        "Destroyed",
-    ///        "Faulted"
-    ///      ]
-    ///    },
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "Attached"
-    ///      ],
-    ///      "properties": {
-    ///        "Attached": {
-    ///          "type": "string",
-    ///          "format": "uuid"
-    ///        }
-    ///      },
-    ///      "additionalProperties": false
-    ///    }
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`DiskAttachmentState`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"oneOf\": ["]
+    #[doc = "    {"]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"enum\": ["]
+    #[doc = "        \"Detached\","]
+    #[doc = "        \"Destroyed\","]
+    #[doc = "        \"Faulted\""]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    {"]
+    #[doc = "      \"type\": \"object\","]
+    #[doc = "      \"required\": ["]
+    #[doc = "        \"Attached\""]
+    #[doc = "      ],"]
+    #[doc = "      \"properties\": {"]
+    #[doc = "        \"Attached\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"format\": \"uuid\""]
+    #[doc = "        }"]
+    #[doc = "      },"]
+    #[doc = "      \"additionalProperties\": false"]
+    #[doc = "    }"]
+    #[doc = "  ]"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub enum DiskAttachmentState {
         Detached,
@@ -239,46 +239,46 @@ pub mod types {
         }
     }
 
-    ///`DiskRequest`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "required": [
-    ///    "device",
-    ///    "gen",
-    ///    "name",
-    ///    "read_only",
-    ///    "slot",
-    ///    "volume_construction_request"
-    ///  ],
-    ///  "properties": {
-    ///    "device": {
-    ///      "type": "string"
-    ///    },
-    ///    "gen": {
-    ///      "type": "integer",
-    ///      "format": "uint64",
-    ///      "minimum": 0.0
-    ///    },
-    ///    "name": {
-    ///      "type": "string"
-    ///    },
-    ///    "read_only": {
-    ///      "type": "boolean"
-    ///    },
-    ///    "slot": {
-    ///      "$ref": "#/components/schemas/Slot"
-    ///    },
-    ///    "volume_construction_request": {
-    ///      "$ref": "#/components/schemas/VolumeConstructionRequest"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`DiskRequest`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"device\","]
+    #[doc = "    \"gen\","]
+    #[doc = "    \"name\","]
+    #[doc = "    \"read_only\","]
+    #[doc = "    \"slot\","]
+    #[doc = "    \"volume_construction_request\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"device\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"gen\": {"]
+    #[doc = "      \"type\": \"integer\","]
+    #[doc = "      \"format\": \"uint64\","]
+    #[doc = "      \"minimum\": 0.0"]
+    #[doc = "    },"]
+    #[doc = "    \"name\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"read_only\": {"]
+    #[doc = "      \"type\": \"boolean\""]
+    #[doc = "    },"]
+    #[doc = "    \"slot\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/Slot\""]
+    #[doc = "    },"]
+    #[doc = "    \"volume_construction_request\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/VolumeConstructionRequest\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct DiskRequest {
         pub device: ::std::string::String,
@@ -301,32 +301,32 @@ pub mod types {
         }
     }
 
-    ///Error information from a response.
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Error information from a response.",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "message",
-    ///    "request_id"
-    ///  ],
-    ///  "properties": {
-    ///    "error_code": {
-    ///      "type": "string"
-    ///    },
-    ///    "message": {
-    ///      "type": "string"
-    ///    },
-    ///    "request_id": {
-    ///      "type": "string"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Error information from a response."]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Error information from a response.\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"message\","]
+    #[doc = "    \"request_id\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"error_code\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"message\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"request_id\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct Error {
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
@@ -347,42 +347,42 @@ pub mod types {
         }
     }
 
-    ///`Instance`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "required": [
-    ///    "disks",
-    ///    "nics",
-    ///    "properties",
-    ///    "state"
-    ///  ],
-    ///  "properties": {
-    ///    "disks": {
-    ///      "type": "array",
-    ///      "items": {
-    ///        "$ref": "#/components/schemas/DiskAttachment"
-    ///      }
-    ///    },
-    ///    "nics": {
-    ///      "type": "array",
-    ///      "items": {
-    ///        "$ref": "#/components/schemas/NetworkInterface"
-    ///      }
-    ///    },
-    ///    "properties": {
-    ///      "$ref": "#/components/schemas/InstanceProperties"
-    ///    },
-    ///    "state": {
-    ///      "$ref": "#/components/schemas/InstanceState"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`Instance`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"disks\","]
+    #[doc = "    \"nics\","]
+    #[doc = "    \"properties\","]
+    #[doc = "    \"state\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"disks\": {"]
+    #[doc = "      \"type\": \"array\","]
+    #[doc = "      \"items\": {"]
+    #[doc = "        \"$ref\": \"#/components/schemas/DiskAttachment\""]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    \"nics\": {"]
+    #[doc = "      \"type\": \"array\","]
+    #[doc = "      \"items\": {"]
+    #[doc = "        \"$ref\": \"#/components/schemas/NetworkInterface\""]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    \"properties\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/InstanceProperties\""]
+    #[doc = "    },"]
+    #[doc = "    \"state\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/InstanceState\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct Instance {
         pub disks: ::std::vec::Vec<DiskAttachment>,
@@ -403,59 +403,58 @@ pub mod types {
         }
     }
 
-    ///`InstanceEnsureRequest`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "required": [
-    ///    "properties"
-    ///  ],
-    ///  "properties": {
-    ///    "cloud_init_bytes": {
-    ///      "type": [
-    ///        "string",
-    ///        "null"
-    ///      ]
-    ///    },
-    ///    "disks": {
-    ///      "default": [],
-    ///      "type": "array",
-    ///      "items": {
-    ///        "$ref": "#/components/schemas/DiskRequest"
-    ///      }
-    ///    },
-    ///    "migrate": {
-    ///      "oneOf": [
-    ///        {
-    ///          "type": "null"
-    ///        },
-    ///        {
-    ///          "allOf": [
-    ///            {
-    ///              "$ref":
-    /// "#/components/schemas/InstanceMigrateInitiateRequest"
-    ///            }
-    ///          ]
-    ///        }
-    ///      ]
-    ///    },
-    ///    "nics": {
-    ///      "default": [],
-    ///      "type": "array",
-    ///      "items": {
-    ///        "$ref": "#/components/schemas/NetworkInterfaceRequest"
-    ///      }
-    ///    },
-    ///    "properties": {
-    ///      "$ref": "#/components/schemas/InstanceProperties"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`InstanceEnsureRequest`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"properties\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"cloud_init_bytes\": {"]
+    #[doc = "      \"type\": ["]
+    #[doc = "        \"string\","]
+    #[doc = "        \"null\""]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"disks\": {"]
+    #[doc = "      \"default\": [],"]
+    #[doc = "      \"type\": \"array\","]
+    #[doc = "      \"items\": {"]
+    #[doc = "        \"$ref\": \"#/components/schemas/DiskRequest\""]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    \"migrate\": {"]
+    #[doc = "      \"oneOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"type\": \"null\""]
+    #[doc = "        },"]
+    #[doc = "        {"]
+    #[doc = "          \"allOf\": ["]
+    #[doc = "            {"]
+    #[doc = "              \"$ref\": \"#/components/schemas/InstanceMigrateInitiateRequest\""]
+    #[doc = "            }"]
+    #[doc = "          ]"]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"nics\": {"]
+    #[doc = "      \"default\": [],"]
+    #[doc = "      \"type\": \"array\","]
+    #[doc = "      \"items\": {"]
+    #[doc = "        \"$ref\": \"#/components/schemas/NetworkInterfaceRequest\""]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    \"properties\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/InstanceProperties\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct InstanceEnsureRequest {
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
@@ -481,33 +480,32 @@ pub mod types {
         }
     }
 
-    ///`InstanceEnsureResponse`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "properties": {
-    ///    "migrate": {
-    ///      "oneOf": [
-    ///        {
-    ///          "type": "null"
-    ///        },
-    ///        {
-    ///          "allOf": [
-    ///            {
-    ///              "$ref":
-    /// "#/components/schemas/InstanceMigrateInitiateResponse"
-    ///            }
-    ///          ]
-    ///        }
-    ///      ]
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`InstanceEnsureResponse`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"migrate\": {"]
+    #[doc = "      \"oneOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"type\": \"null\""]
+    #[doc = "        },"]
+    #[doc = "        {"]
+    #[doc = "          \"allOf\": ["]
+    #[doc = "            {"]
+    #[doc = "              \"$ref\": \"#/components/schemas/InstanceMigrateInitiateResponse\""]
+    #[doc = "            }"]
+    #[doc = "          ]"]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct InstanceEnsureResponse {
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
@@ -534,24 +532,24 @@ pub mod types {
         }
     }
 
-    ///`InstanceGetResponse`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "required": [
-    ///    "instance"
-    ///  ],
-    ///  "properties": {
-    ///    "instance": {
-    ///      "$ref": "#/components/schemas/Instance"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`InstanceGetResponse`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"instance\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"instance\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/Instance\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct InstanceGetResponse {
         pub instance: Instance,
@@ -569,34 +567,34 @@ pub mod types {
         }
     }
 
-    ///`InstanceMigrateInitiateRequest`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "required": [
-    ///    "migration_id",
-    ///    "src_addr",
-    ///    "src_uuid"
-    ///  ],
-    ///  "properties": {
-    ///    "migration_id": {
-    ///      "type": "string",
-    ///      "format": "uuid"
-    ///    },
-    ///    "src_addr": {
-    ///      "type": "string"
-    ///    },
-    ///    "src_uuid": {
-    ///      "type": "string",
-    ///      "format": "uuid"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`InstanceMigrateInitiateRequest`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"migration_id\","]
+    #[doc = "    \"src_addr\","]
+    #[doc = "    \"src_uuid\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"migration_id\": {"]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"uuid\""]
+    #[doc = "    },"]
+    #[doc = "    \"src_addr\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"src_uuid\": {"]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"uuid\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct InstanceMigrateInitiateRequest {
         pub migration_id: ::uuid::Uuid,
@@ -616,25 +614,25 @@ pub mod types {
         }
     }
 
-    ///`InstanceMigrateInitiateResponse`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "required": [
-    ///    "migration_id"
-    ///  ],
-    ///  "properties": {
-    ///    "migration_id": {
-    ///      "type": "string",
-    ///      "format": "uuid"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`InstanceMigrateInitiateResponse`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"migration_id\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"migration_id\": {"]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"uuid\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct InstanceMigrateInitiateResponse {
         pub migration_id: ::uuid::Uuid,
@@ -652,25 +650,25 @@ pub mod types {
         }
     }
 
-    ///`InstanceMigrateStatusRequest`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "required": [
-    ///    "migration_id"
-    ///  ],
-    ///  "properties": {
-    ///    "migration_id": {
-    ///      "type": "string",
-    ///      "format": "uuid"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`InstanceMigrateStatusRequest`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"migration_id\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"migration_id\": {"]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"uuid\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct InstanceMigrateStatusRequest {
         pub migration_id: ::uuid::Uuid,
@@ -688,24 +686,24 @@ pub mod types {
         }
     }
 
-    ///`InstanceMigrateStatusResponse`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "required": [
-    ///    "state"
-    ///  ],
-    ///  "properties": {
-    ///    "state": {
-    ///      "$ref": "#/components/schemas/MigrationState"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`InstanceMigrateStatusResponse`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"state\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"state\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/MigrationState\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct InstanceMigrateStatusResponse {
         pub state: MigrationState,
@@ -723,78 +721,77 @@ pub mod types {
         }
     }
 
-    ///`InstanceProperties`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "required": [
-    ///    "bootrom_id",
-    ///    "description",
-    ///    "id",
-    ///    "image_id",
-    ///    "memory",
-    ///    "name",
-    ///    "vcpus"
-    ///  ],
-    ///  "properties": {
-    ///    "bootrom_id": {
-    ///      "description": "ID of the bootrom used to initialize this
-    /// Instance.",
-    ///      "type": "string",
-    ///      "format": "uuid"
-    ///    },
-    ///    "description": {
-    ///      "description": "Free-form text description of an Instance.",
-    ///      "type": "string"
-    ///    },
-    ///    "id": {
-    ///      "description": "Unique identifier for this Instance.",
-    ///      "type": "string",
-    ///      "format": "uuid"
-    ///    },
-    ///    "image_id": {
-    ///      "description": "ID of the image used to initialize this Instance.",
-    ///      "type": "string",
-    ///      "format": "uuid"
-    ///    },
-    ///    "memory": {
-    ///      "description": "Size of memory allocated to the Instance, in MiB.",
-    ///      "type": "integer",
-    ///      "format": "uint64",
-    ///      "minimum": 0.0
-    ///    },
-    ///    "name": {
-    ///      "description": "Human-readable name of the Instance.",
-    ///      "type": "string"
-    ///    },
-    ///    "vcpus": {
-    ///      "description": "Number of vCPUs to be allocated to the Instance.",
-    ///      "type": "integer",
-    ///      "format": "uint8",
-    ///      "minimum": 0.0
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`InstanceProperties`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"bootrom_id\","]
+    #[doc = "    \"description\","]
+    #[doc = "    \"id\","]
+    #[doc = "    \"image_id\","]
+    #[doc = "    \"memory\","]
+    #[doc = "    \"name\","]
+    #[doc = "    \"vcpus\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"bootrom_id\": {"]
+    #[doc = "      \"description\": \"ID of the bootrom used to initialize this Instance.\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"uuid\""]
+    #[doc = "    },"]
+    #[doc = "    \"description\": {"]
+    #[doc = "      \"description\": \"Free-form text description of an Instance.\","]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"id\": {"]
+    #[doc = "      \"description\": \"Unique identifier for this Instance.\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"uuid\""]
+    #[doc = "    },"]
+    #[doc = "    \"image_id\": {"]
+    #[doc = "      \"description\": \"ID of the image used to initialize this Instance.\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"uuid\""]
+    #[doc = "    },"]
+    #[doc = "    \"memory\": {"]
+    #[doc = "      \"description\": \"Size of memory allocated to the Instance, in MiB.\","]
+    #[doc = "      \"type\": \"integer\","]
+    #[doc = "      \"format\": \"uint64\","]
+    #[doc = "      \"minimum\": 0.0"]
+    #[doc = "    },"]
+    #[doc = "    \"name\": {"]
+    #[doc = "      \"description\": \"Human-readable name of the Instance.\","]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"vcpus\": {"]
+    #[doc = "      \"description\": \"Number of vCPUs to be allocated to the Instance.\","]
+    #[doc = "      \"type\": \"integer\","]
+    #[doc = "      \"format\": \"uint8\","]
+    #[doc = "      \"minimum\": 0.0"]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct InstanceProperties {
-        ///ID of the bootrom used to initialize this Instance.
+        #[doc = "ID of the bootrom used to initialize this Instance."]
         pub bootrom_id: ::uuid::Uuid,
-        ///Free-form text description of an Instance.
+        #[doc = "Free-form text description of an Instance."]
         pub description: ::std::string::String,
-        ///Unique identifier for this Instance.
+        #[doc = "Unique identifier for this Instance."]
         pub id: ::uuid::Uuid,
-        ///ID of the image used to initialize this Instance.
+        #[doc = "ID of the image used to initialize this Instance."]
         pub image_id: ::uuid::Uuid,
-        ///Size of memory allocated to the Instance, in MiB.
+        #[doc = "Size of memory allocated to the Instance, in MiB."]
         pub memory: u64,
-        ///Human-readable name of the Instance.
+        #[doc = "Human-readable name of the Instance."]
         pub name: ::std::string::String,
-        ///Number of vCPUs to be allocated to the Instance.
+        #[doc = "Number of vCPUs to be allocated to the Instance."]
         pub vcpus: u8,
     }
 
@@ -810,29 +807,29 @@ pub mod types {
         }
     }
 
-    ///Current state of an Instance.
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Current state of an Instance.",
-    ///  "type": "string",
-    ///  "enum": [
-    ///    "Creating",
-    ///    "Starting",
-    ///    "Running",
-    ///    "Stopping",
-    ///    "Stopped",
-    ///    "Rebooting",
-    ///    "Migrating",
-    ///    "Repairing",
-    ///    "Failed",
-    ///    "Destroyed"
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Current state of an Instance."]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Current state of an Instance.\","]
+    #[doc = "  \"type\": \"string\","]
+    #[doc = "  \"enum\": ["]
+    #[doc = "    \"Creating\","]
+    #[doc = "    \"Starting\","]
+    #[doc = "    \"Running\","]
+    #[doc = "    \"Stopping\","]
+    #[doc = "    \"Stopped\","]
+    #[doc = "    \"Rebooting\","]
+    #[doc = "    \"Migrating\","]
+    #[doc = "    \"Repairing\","]
+    #[doc = "    \"Failed\","]
+    #[doc = "    \"Destroyed\""]
+    #[doc = "  ]"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(
         :: serde :: Deserialize,
         :: serde :: Serialize,
@@ -925,26 +922,26 @@ pub mod types {
         }
     }
 
-    ///`InstanceStateMonitorRequest`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "required": [
-    ///    "gen"
-    ///  ],
-    ///  "properties": {
-    ///    "gen": {
-    ///      "type": "integer",
-    ///      "format": "uint64",
-    ///      "minimum": 0.0
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`InstanceStateMonitorRequest`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"gen\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"gen\": {"]
+    #[doc = "      \"type\": \"integer\","]
+    #[doc = "      \"format\": \"uint64\","]
+    #[doc = "      \"minimum\": 0.0"]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct InstanceStateMonitorRequest {
         pub gen: u64,
@@ -962,30 +959,30 @@ pub mod types {
         }
     }
 
-    ///`InstanceStateMonitorResponse`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "required": [
-    ///    "gen",
-    ///    "state"
-    ///  ],
-    ///  "properties": {
-    ///    "gen": {
-    ///      "type": "integer",
-    ///      "format": "uint64",
-    ///      "minimum": 0.0
-    ///    },
-    ///    "state": {
-    ///      "$ref": "#/components/schemas/InstanceState"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`InstanceStateMonitorResponse`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"gen\","]
+    #[doc = "    \"state\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"gen\": {"]
+    #[doc = "      \"type\": \"integer\","]
+    #[doc = "      \"format\": \"uint64\","]
+    #[doc = "      \"minimum\": 0.0"]
+    #[doc = "    },"]
+    #[doc = "    \"state\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/InstanceState\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct InstanceStateMonitorResponse {
         pub gen: u64,
@@ -1004,22 +1001,22 @@ pub mod types {
         }
     }
 
-    ///`InstanceStateRequested`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "string",
-    ///  "enum": [
-    ///    "Run",
-    ///    "Stop",
-    ///    "Reboot",
-    ///    "MigrateStart"
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`InstanceStateRequested`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"string\","]
+    #[doc = "  \"enum\": ["]
+    #[doc = "    \"Run\","]
+    #[doc = "    \"Stop\","]
+    #[doc = "    \"Reboot\","]
+    #[doc = "    \"MigrateStart\""]
+    #[doc = "  ]"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(
         :: serde :: Deserialize,
         :: serde :: Serialize,
@@ -1094,28 +1091,28 @@ pub mod types {
         }
     }
 
-    ///`MigrationState`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "string",
-    ///  "enum": [
-    ///    "Sync",
-    ///    "RamPush",
-    ///    "Pause",
-    ///    "RamPushDirty",
-    ///    "Device",
-    ///    "Arch",
-    ///    "Resume",
-    ///    "RamPull",
-    ///    "Finish",
-    ///    "Error"
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`MigrationState`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"string\","]
+    #[doc = "  \"enum\": ["]
+    #[doc = "    \"Sync\","]
+    #[doc = "    \"RamPush\","]
+    #[doc = "    \"Pause\","]
+    #[doc = "    \"RamPushDirty\","]
+    #[doc = "    \"Device\","]
+    #[doc = "    \"Arch\","]
+    #[doc = "    \"Resume\","]
+    #[doc = "    \"RamPull\","]
+    #[doc = "    \"Finish\","]
+    #[doc = "    \"Error\""]
+    #[doc = "  ]"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(
         :: serde :: Deserialize,
         :: serde :: Serialize,
@@ -1208,28 +1205,28 @@ pub mod types {
         }
     }
 
-    ///`NetworkInterface`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "required": [
-    ///    "attachment",
-    ///    "name"
-    ///  ],
-    ///  "properties": {
-    ///    "attachment": {
-    ///      "$ref": "#/components/schemas/NetworkInterfaceAttachmentState"
-    ///    },
-    ///    "name": {
-    ///      "type": "string"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`NetworkInterface`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"attachment\","]
+    #[doc = "    \"name\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"attachment\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/NetworkInterfaceAttachmentState\""]
+    #[doc = "    },"]
+    #[doc = "    \"name\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct NetworkInterface {
         pub attachment: NetworkInterfaceAttachmentState,
@@ -1248,36 +1245,36 @@ pub mod types {
         }
     }
 
-    ///`NetworkInterfaceAttachmentState`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "oneOf": [
-    ///    {
-    ///      "type": "string",
-    ///      "enum": [
-    ///        "Detached",
-    ///        "Faulted"
-    ///      ]
-    ///    },
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "Attached"
-    ///      ],
-    ///      "properties": {
-    ///        "Attached": {
-    ///          "$ref": "#/components/schemas/Slot"
-    ///        }
-    ///      },
-    ///      "additionalProperties": false
-    ///    }
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`NetworkInterfaceAttachmentState`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"oneOf\": ["]
+    #[doc = "    {"]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"enum\": ["]
+    #[doc = "        \"Detached\","]
+    #[doc = "        \"Faulted\""]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    {"]
+    #[doc = "      \"type\": \"object\","]
+    #[doc = "      \"required\": ["]
+    #[doc = "        \"Attached\""]
+    #[doc = "      ],"]
+    #[doc = "      \"properties\": {"]
+    #[doc = "        \"Attached\": {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/Slot\""]
+    #[doc = "        }"]
+    #[doc = "      },"]
+    #[doc = "      \"additionalProperties\": false"]
+    #[doc = "    }"]
+    #[doc = "  ]"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub enum NetworkInterfaceAttachmentState {
         Detached,
@@ -1297,28 +1294,28 @@ pub mod types {
         }
     }
 
-    ///`NetworkInterfaceRequest`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "required": [
-    ///    "name",
-    ///    "slot"
-    ///  ],
-    ///  "properties": {
-    ///    "name": {
-    ///      "type": "string"
-    ///    },
-    ///    "slot": {
-    ///      "$ref": "#/components/schemas/Slot"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`NetworkInterfaceRequest`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"name\","]
+    #[doc = "    \"slot\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"name\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"slot\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/Slot\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct NetworkInterfaceRequest {
         pub name: ::std::string::String,
@@ -1337,21 +1334,19 @@ pub mod types {
         }
     }
 
-    ///A stable index which is translated by Propolis into a PCI BDF, visible
-    /// to the guest.
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "A stable index which is translated by Propolis into a
-    /// PCI BDF, visible to the guest.",
-    ///  "type": "integer",
-    ///  "format": "uint8",
-    ///  "minimum": 0.0
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "A stable index which is translated by Propolis into a PCI BDF, visible to the guest."]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"A stable index which is translated by Propolis into a PCI BDF, visible to the guest.\","]
+    #[doc = "  \"type\": \"integer\","]
+    #[doc = "  \"format\": \"uint8\","]
+    #[doc = "  \"minimum\": 0.0"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     #[serde(transparent)]
     pub struct Slot(pub u8);
@@ -1414,152 +1409,151 @@ pub mod types {
         }
     }
 
-    ///`VolumeConstructionRequest`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "oneOf": [
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "block_size",
-    ///        "id",
-    ///        "sub_volumes",
-    ///        "type"
-    ///      ],
-    ///      "properties": {
-    ///        "block_size": {
-    ///          "type": "integer",
-    ///          "format": "uint64",
-    ///          "minimum": 0.0
-    ///        },
-    ///        "id": {
-    ///          "type": "string",
-    ///          "format": "uuid"
-    ///        },
-    ///        "read_only_parent": {
-    ///          "oneOf": [
-    ///            {
-    ///              "type": "null"
-    ///            },
-    ///            {
-    ///              "allOf": [
-    ///                {
-    ///                  "$ref":
-    /// "#/components/schemas/VolumeConstructionRequest"
-    ///                }
-    ///              ]
-    ///            }
-    ///          ]
-    ///        },
-    ///        "sub_volumes": {
-    ///          "type": "array",
-    ///          "items": {
-    ///            "$ref": "#/components/schemas/VolumeConstructionRequest"
-    ///          }
-    ///        },
-    ///        "type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "volume"
-    ///          ]
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "block_size",
-    ///        "id",
-    ///        "type",
-    ///        "url"
-    ///      ],
-    ///      "properties": {
-    ///        "block_size": {
-    ///          "type": "integer",
-    ///          "format": "uint64",
-    ///          "minimum": 0.0
-    ///        },
-    ///        "id": {
-    ///          "type": "string",
-    ///          "format": "uuid"
-    ///        },
-    ///        "type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "url"
-    ///          ]
-    ///        },
-    ///        "url": {
-    ///          "type": "string"
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "block_size",
-    ///        "gen",
-    ///        "opts",
-    ///        "type"
-    ///      ],
-    ///      "properties": {
-    ///        "block_size": {
-    ///          "type": "integer",
-    ///          "format": "uint64",
-    ///          "minimum": 0.0
-    ///        },
-    ///        "gen": {
-    ///          "type": "integer",
-    ///          "format": "uint64",
-    ///          "minimum": 0.0
-    ///        },
-    ///        "opts": {
-    ///          "$ref": "#/components/schemas/CrucibleOpts"
-    ///        },
-    ///        "type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "region"
-    ///          ]
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "block_size",
-    ///        "id",
-    ///        "path",
-    ///        "type"
-    ///      ],
-    ///      "properties": {
-    ///        "block_size": {
-    ///          "type": "integer",
-    ///          "format": "uint64",
-    ///          "minimum": 0.0
-    ///        },
-    ///        "id": {
-    ///          "type": "string",
-    ///          "format": "uuid"
-    ///        },
-    ///        "path": {
-    ///          "type": "string"
-    ///        },
-    ///        "type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "file"
-    ///          ]
-    ///        }
-    ///      }
-    ///    }
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`VolumeConstructionRequest`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"oneOf\": ["]
+    #[doc = "    {"]
+    #[doc = "      \"type\": \"object\","]
+    #[doc = "      \"required\": ["]
+    #[doc = "        \"block_size\","]
+    #[doc = "        \"id\","]
+    #[doc = "        \"sub_volumes\","]
+    #[doc = "        \"type\""]
+    #[doc = "      ],"]
+    #[doc = "      \"properties\": {"]
+    #[doc = "        \"block_size\": {"]
+    #[doc = "          \"type\": \"integer\","]
+    #[doc = "          \"format\": \"uint64\","]
+    #[doc = "          \"minimum\": 0.0"]
+    #[doc = "        },"]
+    #[doc = "        \"id\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"format\": \"uuid\""]
+    #[doc = "        },"]
+    #[doc = "        \"read_only_parent\": {"]
+    #[doc = "          \"oneOf\": ["]
+    #[doc = "            {"]
+    #[doc = "              \"type\": \"null\""]
+    #[doc = "            },"]
+    #[doc = "            {"]
+    #[doc = "              \"allOf\": ["]
+    #[doc = "                {"]
+    #[doc = "                  \"$ref\": \"#/components/schemas/VolumeConstructionRequest\""]
+    #[doc = "                }"]
+    #[doc = "              ]"]
+    #[doc = "            }"]
+    #[doc = "          ]"]
+    #[doc = "        },"]
+    #[doc = "        \"sub_volumes\": {"]
+    #[doc = "          \"type\": \"array\","]
+    #[doc = "          \"items\": {"]
+    #[doc = "            \"$ref\": \"#/components/schemas/VolumeConstructionRequest\""]
+    #[doc = "          }"]
+    #[doc = "        },"]
+    #[doc = "        \"type\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"enum\": ["]
+    #[doc = "            \"volume\""]
+    #[doc = "          ]"]
+    #[doc = "        }"]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    {"]
+    #[doc = "      \"type\": \"object\","]
+    #[doc = "      \"required\": ["]
+    #[doc = "        \"block_size\","]
+    #[doc = "        \"id\","]
+    #[doc = "        \"type\","]
+    #[doc = "        \"url\""]
+    #[doc = "      ],"]
+    #[doc = "      \"properties\": {"]
+    #[doc = "        \"block_size\": {"]
+    #[doc = "          \"type\": \"integer\","]
+    #[doc = "          \"format\": \"uint64\","]
+    #[doc = "          \"minimum\": 0.0"]
+    #[doc = "        },"]
+    #[doc = "        \"id\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"format\": \"uuid\""]
+    #[doc = "        },"]
+    #[doc = "        \"type\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"enum\": ["]
+    #[doc = "            \"url\""]
+    #[doc = "          ]"]
+    #[doc = "        },"]
+    #[doc = "        \"url\": {"]
+    #[doc = "          \"type\": \"string\""]
+    #[doc = "        }"]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    {"]
+    #[doc = "      \"type\": \"object\","]
+    #[doc = "      \"required\": ["]
+    #[doc = "        \"block_size\","]
+    #[doc = "        \"gen\","]
+    #[doc = "        \"opts\","]
+    #[doc = "        \"type\""]
+    #[doc = "      ],"]
+    #[doc = "      \"properties\": {"]
+    #[doc = "        \"block_size\": {"]
+    #[doc = "          \"type\": \"integer\","]
+    #[doc = "          \"format\": \"uint64\","]
+    #[doc = "          \"minimum\": 0.0"]
+    #[doc = "        },"]
+    #[doc = "        \"gen\": {"]
+    #[doc = "          \"type\": \"integer\","]
+    #[doc = "          \"format\": \"uint64\","]
+    #[doc = "          \"minimum\": 0.0"]
+    #[doc = "        },"]
+    #[doc = "        \"opts\": {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/CrucibleOpts\""]
+    #[doc = "        },"]
+    #[doc = "        \"type\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"enum\": ["]
+    #[doc = "            \"region\""]
+    #[doc = "          ]"]
+    #[doc = "        }"]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    {"]
+    #[doc = "      \"type\": \"object\","]
+    #[doc = "      \"required\": ["]
+    #[doc = "        \"block_size\","]
+    #[doc = "        \"id\","]
+    #[doc = "        \"path\","]
+    #[doc = "        \"type\""]
+    #[doc = "      ],"]
+    #[doc = "      \"properties\": {"]
+    #[doc = "        \"block_size\": {"]
+    #[doc = "          \"type\": \"integer\","]
+    #[doc = "          \"format\": \"uint64\","]
+    #[doc = "          \"minimum\": 0.0"]
+    #[doc = "        },"]
+    #[doc = "        \"id\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"format\": \"uuid\""]
+    #[doc = "        },"]
+    #[doc = "        \"path\": {"]
+    #[doc = "          \"type\": \"string\""]
+    #[doc = "        },"]
+    #[doc = "        \"type\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"enum\": ["]
+    #[doc = "            \"file\""]
+    #[doc = "          ]"]
+    #[doc = "        }"]
+    #[doc = "      }"]
+    #[doc = "    }"]
+    #[doc = "  ]"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     #[serde(tag = "type")]
     pub enum VolumeConstructionRequest {
@@ -1597,7 +1591,7 @@ pub mod types {
         }
     }
 
-    /// Types for composing complex structures.
+    #[doc = r" Types for composing complex structures."]
     pub mod builder {
         #[derive(Clone, Debug)]
         pub struct CrucibleOpts {
@@ -1880,9 +1874,9 @@ pub mod types {
                     name: Err("no value supplied for name".to_string()),
                     read_only: Err("no value supplied for read_only".to_string()),
                     slot: Err("no value supplied for slot".to_string()),
-                    volume_construction_request: Err("no value supplied for \
-                                                      volume_construction_request"
-                        .to_string()),
+                    volume_construction_request: Err(
+                        "no value supplied for volume_construction_request".to_string(),
+                    ),
                 }
             }
         }
@@ -2933,42 +2927,47 @@ pub mod types {
 }
 
 #[derive(Clone, Debug)]
-///Client for Oxide Propolis Server API
-///
-///API for interacting with the Propolis hypervisor frontend.
-///
-///Version: 0.0.1
+#[doc = "Client for Oxide Propolis Server API\n\nAPI for interacting with the Propolis hypervisor frontend.\n\nVersion: 0.0.1"]
 pub struct Client {
     pub(crate) baseurl: String,
-    pub(crate) client: reqwest::Client,
+    pub(crate) client: reqwest_middleware::ClientWithMiddleware,
 }
 
 impl Client {
-    /// Create a new client.
-    ///
-    /// `baseurl` is the base URL provided to the internal
-    /// `reqwest::Client`, and should include a scheme and hostname,
-    /// as well as port and a path stem if applicable.
+    #[doc = r" Create a new client."]
+    #[doc = r""]
+    #[doc = r" `baseurl` is the base URL provided to the internal"]
+    #[doc = r" `reqwest::Client`, and should include a scheme and hostname,"]
+    #[doc = r" as well as port and a path stem if applicable."]
     pub fn new(baseurl: &str) -> Self {
         #[cfg(not(target_arch = "wasm32"))]
         let client = {
             let dur = std::time::Duration::from_secs(15);
-            reqwest::ClientBuilder::new()
+            let reqwest_client = reqwest::ClientBuilder::new()
                 .connect_timeout(dur)
                 .timeout(dur)
+                .build()
+                .unwrap();
+            reqwest_middleware::ClientBuilder::new(reqwest_client).build()
         };
         #[cfg(target_arch = "wasm32")]
-        let client = reqwest::ClientBuilder::new();
-        Self::new_with_client(baseurl, client.build().unwrap())
+        let client = {
+            let reqwest_client = reqwest::ClientBuilder::new().build().unwrap();
+            reqwest_middleware::ClientBuilder::new(reqwest_client).build()
+        };
+        Self::new_with_client(baseurl, client)
     }
 
-    /// Construct a new client with an existing `reqwest::Client`,
-    /// allowing more control over its configuration.
-    ///
-    /// `baseurl` is the base URL provided to the internal
-    /// `reqwest::Client`, and should include a scheme and hostname,
-    /// as well as port and a path stem if applicable.
-    pub fn new_with_client(baseurl: &str, client: reqwest::Client) -> Self {
+    #[doc = r" Construct a new client with an existing `reqwest_middleware::ClientWithMiddleware`,"]
+    #[doc = r" allowing more control over its configuration."]
+    #[doc = r""]
+    #[doc = r" `baseurl` is the base URL provided to the internal"]
+    #[doc = r" `reqwest_middleware::ClientWithMiddleware`, and should include a scheme and hostname,"]
+    #[doc = r" as well as port and a path stem if applicable."]
+    pub fn new_with_client(
+        baseurl: &str,
+        client: reqwest_middleware::ClientWithMiddleware,
+    ) -> Self {
         Self {
             baseurl: baseurl.to_string(),
             client,
@@ -2985,7 +2984,7 @@ impl ClientInfo<()> for Client {
         self.baseurl.as_str()
     }
 
-    fn client(&self) -> &reqwest::Client {
+    fn client(&self) -> &reqwest_middleware::ClientWithMiddleware {
         &self.client
     }
 
@@ -2996,95 +2995,45 @@ impl ClientInfo<()> for Client {
 
 impl ClientHooks<()> for &Client {}
 impl Client {
-    ///Sends a `GET` request to `/instance`
-    ///
-    ///```ignore
-    /// let response = client.instance_get()
-    ///    .send()
-    ///    .await;
-    /// ```
+    #[doc = "Sends a `GET` request to `/instance`\n\n```ignore\nlet response = client.instance_get()\n    .send()\n    .await;\n```"]
     pub fn instance_get(&self) -> builder::InstanceGet<'_> {
         builder::InstanceGet::new(self)
     }
 
-    ///Sends a `PUT` request to `/instance`
-    ///
-    ///```ignore
-    /// let response = client.instance_ensure()
-    ///    .body(body)
-    ///    .send()
-    ///    .await;
-    /// ```
+    #[doc = "Sends a `PUT` request to `/instance`\n\n```ignore\nlet response = client.instance_ensure()\n    .body(body)\n    .send()\n    .await;\n```"]
     pub fn instance_ensure(&self) -> builder::InstanceEnsure<'_> {
         builder::InstanceEnsure::new(self)
     }
 
-    ///Issue a snapshot request to a crucible backend
-    ///
-    ///Sends a `POST` request to `/instance/disk/{id}/snapshot/{snapshot_id}`
-    ///
-    ///```ignore
-    /// let response = client.instance_issue_crucible_snapshot_request()
-    ///    .id(id)
-    ///    .snapshot_id(snapshot_id)
-    ///    .send()
-    ///    .await;
-    /// ```
+    #[doc = "Issue a snapshot request to a crucible backend\n\nSends a `POST` request to `/instance/disk/{id}/snapshot/{snapshot_id}`\n\n```ignore\nlet response = client.instance_issue_crucible_snapshot_request()\n    .id(id)\n    .snapshot_id(snapshot_id)\n    .send()\n    .await;\n```"]
     pub fn instance_issue_crucible_snapshot_request(
         &self,
     ) -> builder::InstanceIssueCrucibleSnapshotRequest<'_> {
         builder::InstanceIssueCrucibleSnapshotRequest::new(self)
     }
 
-    ///Sends a `GET` request to `/instance/migrate/status`
-    ///
-    ///```ignore
-    /// let response = client.instance_migrate_status()
-    ///    .body(body)
-    ///    .send()
-    ///    .await;
-    /// ```
+    #[doc = "Sends a `GET` request to `/instance/migrate/status`\n\n```ignore\nlet response = client.instance_migrate_status()\n    .body(body)\n    .send()\n    .await;\n```"]
     pub fn instance_migrate_status(&self) -> builder::InstanceMigrateStatus<'_> {
         builder::InstanceMigrateStatus::new(self)
     }
 
-    ///Sends a `GET` request to `/instance/serial`
-    ///
-    ///```ignore
-    /// let response = client.instance_serial()
-    ///    .send()
-    ///    .await;
-    /// ```
+    #[doc = "Sends a `GET` request to `/instance/serial`\n\n```ignore\nlet response = client.instance_serial()\n    .send()\n    .await;\n```"]
     pub fn instance_serial(&self) -> builder::InstanceSerial<'_> {
         builder::InstanceSerial::new(self)
     }
 
-    ///Sends a `PUT` request to `/instance/state`
-    ///
-    ///```ignore
-    /// let response = client.instance_state_put()
-    ///    .body(body)
-    ///    .send()
-    ///    .await;
-    /// ```
+    #[doc = "Sends a `PUT` request to `/instance/state`\n\n```ignore\nlet response = client.instance_state_put()\n    .body(body)\n    .send()\n    .await;\n```"]
     pub fn instance_state_put(&self) -> builder::InstanceStatePut<'_> {
         builder::InstanceStatePut::new(self)
     }
 
-    ///Sends a `GET` request to `/instance/state-monitor`
-    ///
-    ///```ignore
-    /// let response = client.instance_state_monitor()
-    ///    .body(body)
-    ///    .send()
-    ///    .await;
-    /// ```
+    #[doc = "Sends a `GET` request to `/instance/state-monitor`\n\n```ignore\nlet response = client.instance_state_monitor()\n    .body(body)\n    .send()\n    .await;\n```"]
     pub fn instance_state_monitor(&self) -> builder::InstanceStateMonitor<'_> {
         builder::InstanceStateMonitor::new(self)
     }
 }
 
-/// Types for composing operation parameters.
+#[doc = r" Types for composing operation parameters."]
 #[allow(clippy::all)]
 pub mod builder {
     use super::types;
@@ -3093,9 +3042,7 @@ pub mod builder {
         encode_path, ByteStream, ClientHooks, ClientInfo, Error, OperationInfo, RequestBuilderExt,
         ResponseValue,
     };
-    ///Builder for [`Client::instance_get`]
-    ///
-    ///[`Client::instance_get`]: super::Client::instance_get
+    #[doc = "Builder for [`Client::instance_get`]\n\n[`Client::instance_get`]: super::Client::instance_get"]
     #[derive(Debug, Clone)]
     pub struct InstanceGet<'a> {
         client: &'a super::Client,
@@ -3106,7 +3053,7 @@ pub mod builder {
             Self { client: client }
         }
 
-        ///Sends a `GET` request to `/instance`
+        #[doc = "Sends a `GET` request to `/instance`"]
         pub async fn send(
             self,
         ) -> Result<ResponseValue<types::InstanceGetResponse>, Error<types::Error>> {
@@ -3147,9 +3094,7 @@ pub mod builder {
         }
     }
 
-    ///Builder for [`Client::instance_ensure`]
-    ///
-    ///[`Client::instance_ensure`]: super::Client::instance_ensure
+    #[doc = "Builder for [`Client::instance_ensure`]\n\n[`Client::instance_ensure`]: super::Client::instance_ensure"]
     #[derive(Debug, Clone)]
     pub struct InstanceEnsure<'a> {
         client: &'a super::Client,
@@ -3188,7 +3133,7 @@ pub mod builder {
             self
         }
 
-        ///Sends a `PUT` request to `/instance`
+        #[doc = "Sends a `PUT` request to `/instance`"]
         pub async fn send(
             self,
         ) -> Result<ResponseValue<types::InstanceEnsureResponse>, Error<types::Error>> {
@@ -3233,9 +3178,7 @@ pub mod builder {
         }
     }
 
-    ///Builder for [`Client::instance_issue_crucible_snapshot_request`]
-    ///
-    ///[`Client::instance_issue_crucible_snapshot_request`]: super::Client::instance_issue_crucible_snapshot_request
+    #[doc = "Builder for [`Client::instance_issue_crucible_snapshot_request`]\n\n[`Client::instance_issue_crucible_snapshot_request`]: super::Client::instance_issue_crucible_snapshot_request"]
     #[derive(Debug, Clone)]
     pub struct InstanceIssueCrucibleSnapshotRequest<'a> {
         client: &'a super::Client,
@@ -3272,8 +3215,7 @@ pub mod builder {
             self
         }
 
-        ///Sends a `POST` request to
-        /// `/instance/disk/{id}/snapshot/{snapshot_id}`
+        #[doc = "Sends a `POST` request to `/instance/disk/{id}/snapshot/{snapshot_id}`"]
         pub async fn send(self) -> Result<ResponseValue<()>, Error<types::Error>> {
             let Self {
                 client,
@@ -3323,9 +3265,7 @@ pub mod builder {
         }
     }
 
-    ///Builder for [`Client::instance_migrate_status`]
-    ///
-    ///[`Client::instance_migrate_status`]: super::Client::instance_migrate_status
+    #[doc = "Builder for [`Client::instance_migrate_status`]\n\n[`Client::instance_migrate_status`]: super::Client::instance_migrate_status"]
     #[derive(Debug, Clone)]
     pub struct InstanceMigrateStatus<'a> {
         client: &'a super::Client,
@@ -3365,7 +3305,7 @@ pub mod builder {
             self
         }
 
-        ///Sends a `GET` request to `/instance/migrate/status`
+        #[doc = "Sends a `GET` request to `/instance/migrate/status`"]
         pub async fn send(
             self,
         ) -> Result<ResponseValue<types::InstanceMigrateStatusResponse>, Error<types::Error>>
@@ -3413,9 +3353,7 @@ pub mod builder {
         }
     }
 
-    ///Builder for [`Client::instance_serial`]
-    ///
-    ///[`Client::instance_serial`]: super::Client::instance_serial
+    #[doc = "Builder for [`Client::instance_serial`]\n\n[`Client::instance_serial`]: super::Client::instance_serial"]
     #[derive(Debug, Clone)]
     pub struct InstanceSerial<'a> {
         client: &'a super::Client,
@@ -3426,7 +3364,7 @@ pub mod builder {
             Self { client: client }
         }
 
-        ///Sends a `GET` request to `/instance/serial`
+        #[doc = "Sends a `GET` request to `/instance/serial`"]
         pub async fn send(
             self,
         ) -> Result<ResponseValue<reqwest::Upgraded>, Error<reqwest::Upgraded>> {
@@ -3468,9 +3406,7 @@ pub mod builder {
         }
     }
 
-    ///Builder for [`Client::instance_state_put`]
-    ///
-    ///[`Client::instance_state_put`]: super::Client::instance_state_put
+    #[doc = "Builder for [`Client::instance_state_put`]\n\n[`Client::instance_state_put`]: super::Client::instance_state_put"]
     #[derive(Debug, Clone)]
     pub struct InstanceStatePut<'a> {
         client: &'a super::Client,
@@ -3495,7 +3431,7 @@ pub mod builder {
             self
         }
 
-        ///Sends a `PUT` request to `/instance/state`
+        #[doc = "Sends a `PUT` request to `/instance/state`"]
         pub async fn send(self) -> Result<ResponseValue<()>, Error<types::Error>> {
             let Self { client, body } = self;
             let body = body.map_err(Error::InvalidRequest)?;
@@ -3536,9 +3472,7 @@ pub mod builder {
         }
     }
 
-    ///Builder for [`Client::instance_state_monitor`]
-    ///
-    ///[`Client::instance_state_monitor`]: super::Client::instance_state_monitor
+    #[doc = "Builder for [`Client::instance_state_monitor`]\n\n[`Client::instance_state_monitor`]: super::Client::instance_state_monitor"]
     #[derive(Debug, Clone)]
     pub struct InstanceStateMonitor<'a> {
         client: &'a super::Client,
@@ -3578,7 +3512,7 @@ pub mod builder {
             self
         }
 
-        ///Sends a `GET` request to `/instance/state-monitor`
+        #[doc = "Sends a `GET` request to `/instance/state-monitor`"]
         pub async fn send(
             self,
         ) -> Result<ResponseValue<types::InstanceStateMonitorResponse>, Error<types::Error>>
@@ -3627,8 +3561,8 @@ pub mod builder {
     }
 }
 
-/// Items consumers will typically use such as the Client and
-/// extension traits.
+#[doc = r" Items consumers will typically use such as the Client and"]
+#[doc = r" extension traits."]
 pub mod prelude {
     #[allow(unused_imports)]
     pub use super::Client;

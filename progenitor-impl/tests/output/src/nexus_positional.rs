@@ -2,12 +2,12 @@
 use progenitor_client::{encode_path, ClientHooks, OperationInfo, RequestBuilderExt};
 #[allow(unused_imports)]
 pub use progenitor_client::{ByteStream, ClientInfo, Error, ResponseValue};
-/// Types used as operation parameters and responses.
+#[doc = r" Types used as operation parameters and responses."]
 #[allow(clippy::all)]
 pub mod types {
-    /// Error types.
+    #[doc = r" Error types."]
     pub mod error {
-        /// Error from a `TryFrom` or `FromStr` implementation.
+        #[doc = r" Error from a `TryFrom` or `FromStr` implementation."]
         pub struct ConversionError(::std::borrow::Cow<'static, str>);
         impl ::std::error::Error for ConversionError {}
         impl ::std::fmt::Display for ConversionError {
@@ -35,35 +35,34 @@ pub mod types {
         }
     }
 
-    ///Describes properties that should uniquely identify a Gimlet.
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Describes properties that should uniquely identify a
-    /// Gimlet.",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "part",
-    ///    "revision",
-    ///    "serial"
-    ///  ],
-    ///  "properties": {
-    ///    "part": {
-    ///      "type": "string"
-    ///    },
-    ///    "revision": {
-    ///      "type": "integer",
-    ///      "format": "int64"
-    ///    },
-    ///    "serial": {
-    ///      "type": "string"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Describes properties that should uniquely identify a Gimlet."]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Describes properties that should uniquely identify a Gimlet.\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"part\","]
+    #[doc = "    \"revision\","]
+    #[doc = "    \"serial\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"part\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"revision\": {"]
+    #[doc = "      \"type\": \"integer\","]
+    #[doc = "      \"format\": \"int64\""]
+    #[doc = "    },"]
+    #[doc = "    \"serial\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct Baseboard {
         pub part: ::std::string::String,
@@ -77,104 +76,93 @@ pub mod types {
         }
     }
 
-    ///A type storing a range over `T`.
-    ///
-    ///This type supports ranges similar to the `RangeTo`, `Range` and
-    /// `RangeFrom` types in the standard library. Those cover `(..end)`,
-    /// `(start..end)`, and `(start..)` respectively.
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "A type storing a range over `T`.\n\nThis type supports
-    /// ranges similar to the `RangeTo`, `Range` and `RangeFrom` types in the
-    /// standard library. Those cover `(..end)`, `(start..end)`, and `(start..)`
-    /// respectively.",
-    ///  "oneOf": [
-    ///    {
-    ///      "description": "A range unbounded below and exclusively above,
-    /// `..end`.",
-    ///      "type": "object",
-    ///      "required": [
-    ///        "end",
-    ///        "type"
-    ///      ],
-    ///      "properties": {
-    ///        "end": {
-    ///          "type": "number",
-    ///          "format": "double"
-    ///        },
-    ///        "type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "range_to"
-    ///          ]
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "description": "A range bounded inclusively below and exclusively
-    /// above, `start..end`.",
-    ///      "type": "object",
-    ///      "required": [
-    ///        "end",
-    ///        "start",
-    ///        "type"
-    ///      ],
-    ///      "properties": {
-    ///        "end": {
-    ///          "type": "number",
-    ///          "format": "double"
-    ///        },
-    ///        "start": {
-    ///          "type": "number",
-    ///          "format": "double"
-    ///        },
-    ///        "type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "range"
-    ///          ]
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "description": "A range bounded inclusively below and unbounded
-    /// above, `start..`.",
-    ///      "type": "object",
-    ///      "required": [
-    ///        "start",
-    ///        "type"
-    ///      ],
-    ///      "properties": {
-    ///        "start": {
-    ///          "type": "number",
-    ///          "format": "double"
-    ///        },
-    ///        "type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "range_from"
-    ///          ]
-    ///        }
-    ///      }
-    ///    }
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "A type storing a range over `T`.\n\nThis type supports ranges similar to the `RangeTo`, `Range` and `RangeFrom` types in the standard library. Those cover `(..end)`, `(start..end)`, and `(start..)` respectively."]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"A type storing a range over `T`.\\n\\nThis type supports ranges similar to the `RangeTo`, `Range` and `RangeFrom` types in the standard library. Those cover `(..end)`, `(start..end)`, and `(start..)` respectively.\","]
+    #[doc = "  \"oneOf\": ["]
+    #[doc = "    {"]
+    #[doc = "      \"description\": \"A range unbounded below and exclusively above, `..end`.\","]
+    #[doc = "      \"type\": \"object\","]
+    #[doc = "      \"required\": ["]
+    #[doc = "        \"end\","]
+    #[doc = "        \"type\""]
+    #[doc = "      ],"]
+    #[doc = "      \"properties\": {"]
+    #[doc = "        \"end\": {"]
+    #[doc = "          \"type\": \"number\","]
+    #[doc = "          \"format\": \"double\""]
+    #[doc = "        },"]
+    #[doc = "        \"type\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"enum\": ["]
+    #[doc = "            \"range_to\""]
+    #[doc = "          ]"]
+    #[doc = "        }"]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    {"]
+    #[doc = "      \"description\": \"A range bounded inclusively below and exclusively above, `start..end`.\","]
+    #[doc = "      \"type\": \"object\","]
+    #[doc = "      \"required\": ["]
+    #[doc = "        \"end\","]
+    #[doc = "        \"start\","]
+    #[doc = "        \"type\""]
+    #[doc = "      ],"]
+    #[doc = "      \"properties\": {"]
+    #[doc = "        \"end\": {"]
+    #[doc = "          \"type\": \"number\","]
+    #[doc = "          \"format\": \"double\""]
+    #[doc = "        },"]
+    #[doc = "        \"start\": {"]
+    #[doc = "          \"type\": \"number\","]
+    #[doc = "          \"format\": \"double\""]
+    #[doc = "        },"]
+    #[doc = "        \"type\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"enum\": ["]
+    #[doc = "            \"range\""]
+    #[doc = "          ]"]
+    #[doc = "        }"]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    {"]
+    #[doc = "      \"description\": \"A range bounded inclusively below and unbounded above, `start..`.\","]
+    #[doc = "      \"type\": \"object\","]
+    #[doc = "      \"required\": ["]
+    #[doc = "        \"start\","]
+    #[doc = "        \"type\""]
+    #[doc = "      ],"]
+    #[doc = "      \"properties\": {"]
+    #[doc = "        \"start\": {"]
+    #[doc = "          \"type\": \"number\","]
+    #[doc = "          \"format\": \"double\""]
+    #[doc = "        },"]
+    #[doc = "        \"type\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"enum\": ["]
+    #[doc = "            \"range_from\""]
+    #[doc = "          ]"]
+    #[doc = "        }"]
+    #[doc = "      }"]
+    #[doc = "    }"]
+    #[doc = "  ]"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     #[serde(tag = "type")]
     pub enum BinRangedouble {
-        ///A range unbounded below and exclusively above, `..end`.
+        #[doc = "A range unbounded below and exclusively above, `..end`."]
         #[serde(rename = "range_to")]
         RangeTo { end: f64 },
-        ///A range bounded inclusively below and exclusively above,
-        /// `start..end`.
+        #[doc = "A range bounded inclusively below and exclusively above, `start..end`."]
         #[serde(rename = "range")]
         Range { end: f64, start: f64 },
-        ///A range bounded inclusively below and unbounded above, `start..`.
+        #[doc = "A range bounded inclusively below and unbounded above, `start..`."]
         #[serde(rename = "range_from")]
         RangeFrom { start: f64 },
     }
@@ -185,104 +173,93 @@ pub mod types {
         }
     }
 
-    ///A type storing a range over `T`.
-    ///
-    ///This type supports ranges similar to the `RangeTo`, `Range` and
-    /// `RangeFrom` types in the standard library. Those cover `(..end)`,
-    /// `(start..end)`, and `(start..)` respectively.
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "A type storing a range over `T`.\n\nThis type supports
-    /// ranges similar to the `RangeTo`, `Range` and `RangeFrom` types in the
-    /// standard library. Those cover `(..end)`, `(start..end)`, and `(start..)`
-    /// respectively.",
-    ///  "oneOf": [
-    ///    {
-    ///      "description": "A range unbounded below and exclusively above,
-    /// `..end`.",
-    ///      "type": "object",
-    ///      "required": [
-    ///        "end",
-    ///        "type"
-    ///      ],
-    ///      "properties": {
-    ///        "end": {
-    ///          "type": "integer",
-    ///          "format": "int64"
-    ///        },
-    ///        "type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "range_to"
-    ///          ]
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "description": "A range bounded inclusively below and exclusively
-    /// above, `start..end`.",
-    ///      "type": "object",
-    ///      "required": [
-    ///        "end",
-    ///        "start",
-    ///        "type"
-    ///      ],
-    ///      "properties": {
-    ///        "end": {
-    ///          "type": "integer",
-    ///          "format": "int64"
-    ///        },
-    ///        "start": {
-    ///          "type": "integer",
-    ///          "format": "int64"
-    ///        },
-    ///        "type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "range"
-    ///          ]
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "description": "A range bounded inclusively below and unbounded
-    /// above, `start..`.",
-    ///      "type": "object",
-    ///      "required": [
-    ///        "start",
-    ///        "type"
-    ///      ],
-    ///      "properties": {
-    ///        "start": {
-    ///          "type": "integer",
-    ///          "format": "int64"
-    ///        },
-    ///        "type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "range_from"
-    ///          ]
-    ///        }
-    ///      }
-    ///    }
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "A type storing a range over `T`.\n\nThis type supports ranges similar to the `RangeTo`, `Range` and `RangeFrom` types in the standard library. Those cover `(..end)`, `(start..end)`, and `(start..)` respectively."]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"A type storing a range over `T`.\\n\\nThis type supports ranges similar to the `RangeTo`, `Range` and `RangeFrom` types in the standard library. Those cover `(..end)`, `(start..end)`, and `(start..)` respectively.\","]
+    #[doc = "  \"oneOf\": ["]
+    #[doc = "    {"]
+    #[doc = "      \"description\": \"A range unbounded below and exclusively above, `..end`.\","]
+    #[doc = "      \"type\": \"object\","]
+    #[doc = "      \"required\": ["]
+    #[doc = "        \"end\","]
+    #[doc = "        \"type\""]
+    #[doc = "      ],"]
+    #[doc = "      \"properties\": {"]
+    #[doc = "        \"end\": {"]
+    #[doc = "          \"type\": \"integer\","]
+    #[doc = "          \"format\": \"int64\""]
+    #[doc = "        },"]
+    #[doc = "        \"type\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"enum\": ["]
+    #[doc = "            \"range_to\""]
+    #[doc = "          ]"]
+    #[doc = "        }"]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    {"]
+    #[doc = "      \"description\": \"A range bounded inclusively below and exclusively above, `start..end`.\","]
+    #[doc = "      \"type\": \"object\","]
+    #[doc = "      \"required\": ["]
+    #[doc = "        \"end\","]
+    #[doc = "        \"start\","]
+    #[doc = "        \"type\""]
+    #[doc = "      ],"]
+    #[doc = "      \"properties\": {"]
+    #[doc = "        \"end\": {"]
+    #[doc = "          \"type\": \"integer\","]
+    #[doc = "          \"format\": \"int64\""]
+    #[doc = "        },"]
+    #[doc = "        \"start\": {"]
+    #[doc = "          \"type\": \"integer\","]
+    #[doc = "          \"format\": \"int64\""]
+    #[doc = "        },"]
+    #[doc = "        \"type\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"enum\": ["]
+    #[doc = "            \"range\""]
+    #[doc = "          ]"]
+    #[doc = "        }"]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    {"]
+    #[doc = "      \"description\": \"A range bounded inclusively below and unbounded above, `start..`.\","]
+    #[doc = "      \"type\": \"object\","]
+    #[doc = "      \"required\": ["]
+    #[doc = "        \"start\","]
+    #[doc = "        \"type\""]
+    #[doc = "      ],"]
+    #[doc = "      \"properties\": {"]
+    #[doc = "        \"start\": {"]
+    #[doc = "          \"type\": \"integer\","]
+    #[doc = "          \"format\": \"int64\""]
+    #[doc = "        },"]
+    #[doc = "        \"type\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"enum\": ["]
+    #[doc = "            \"range_from\""]
+    #[doc = "          ]"]
+    #[doc = "        }"]
+    #[doc = "      }"]
+    #[doc = "    }"]
+    #[doc = "  ]"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     #[serde(tag = "type")]
     pub enum BinRangeint64 {
-        ///A range unbounded below and exclusively above, `..end`.
+        #[doc = "A range unbounded below and exclusively above, `..end`."]
         #[serde(rename = "range_to")]
         RangeTo { end: i64 },
-        ///A range bounded inclusively below and exclusively above,
-        /// `start..end`.
+        #[doc = "A range bounded inclusively below and exclusively above, `start..end`."]
         #[serde(rename = "range")]
         Range { end: i64, start: i64 },
-        ///A range bounded inclusively below and unbounded above, `start..`.
+        #[doc = "A range bounded inclusively below and unbounded above, `start..`."]
         #[serde(rename = "range_from")]
         RangeFrom { start: i64 },
     }
@@ -293,43 +270,42 @@ pub mod types {
         }
     }
 
-    ///Type storing bin edges and a count of samples within it.
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Type storing bin edges and a count of samples within
-    /// it.",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "count",
-    ///    "range"
-    ///  ],
-    ///  "properties": {
-    ///    "count": {
-    ///      "description": "The total count of samples in this bin.",
-    ///      "type": "integer",
-    ///      "format": "uint64",
-    ///      "minimum": 0.0
-    ///    },
-    ///    "range": {
-    ///      "description": "The range of the support covered by this bin.",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/BinRangedouble"
-    ///        }
-    ///      ]
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Type storing bin edges and a count of samples within it."]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Type storing bin edges and a count of samples within it.\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"count\","]
+    #[doc = "    \"range\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"count\": {"]
+    #[doc = "      \"description\": \"The total count of samples in this bin.\","]
+    #[doc = "      \"type\": \"integer\","]
+    #[doc = "      \"format\": \"uint64\","]
+    #[doc = "      \"minimum\": 0.0"]
+    #[doc = "    },"]
+    #[doc = "    \"range\": {"]
+    #[doc = "      \"description\": \"The range of the support covered by this bin.\","]
+    #[doc = "      \"allOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/BinRangedouble\""]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct Bindouble {
-        ///The total count of samples in this bin.
+        #[doc = "The total count of samples in this bin."]
         pub count: u64,
-        ///The range of the support covered by this bin.
+        #[doc = "The range of the support covered by this bin."]
         pub range: BinRangedouble,
     }
 
@@ -339,43 +315,42 @@ pub mod types {
         }
     }
 
-    ///Type storing bin edges and a count of samples within it.
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Type storing bin edges and a count of samples within
-    /// it.",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "count",
-    ///    "range"
-    ///  ],
-    ///  "properties": {
-    ///    "count": {
-    ///      "description": "The total count of samples in this bin.",
-    ///      "type": "integer",
-    ///      "format": "uint64",
-    ///      "minimum": 0.0
-    ///    },
-    ///    "range": {
-    ///      "description": "The range of the support covered by this bin.",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/BinRangeint64"
-    ///        }
-    ///      ]
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Type storing bin edges and a count of samples within it."]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Type storing bin edges and a count of samples within it.\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"count\","]
+    #[doc = "    \"range\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"count\": {"]
+    #[doc = "      \"description\": \"The total count of samples in this bin.\","]
+    #[doc = "      \"type\": \"integer\","]
+    #[doc = "      \"format\": \"uint64\","]
+    #[doc = "      \"minimum\": 0.0"]
+    #[doc = "    },"]
+    #[doc = "    \"range\": {"]
+    #[doc = "      \"description\": \"The range of the support covered by this bin.\","]
+    #[doc = "      \"allOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/BinRangeint64\""]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct Binint64 {
-        ///The total count of samples in this bin.
+        #[doc = "The total count of samples in this bin."]
         pub count: u64,
-        ///The range of the support covered by this bin.
+        #[doc = "The range of the support covered by this bin."]
         pub range: BinRangeint64,
     }
 
@@ -385,22 +360,22 @@ pub mod types {
         }
     }
 
-    ///`BlockSize`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "title": "disk block size in bytes",
-    ///  "type": "integer",
-    ///  "enum": [
-    ///    512,
-    ///    2048,
-    ///    4096
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`BlockSize`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"title\": \"disk block size in bytes\","]
+    #[doc = "  \"type\": \"integer\","]
+    #[doc = "  \"enum\": ["]
+    #[doc = "    512,"]
+    #[doc = "    2048,"]
+    #[doc = "    4096"]
+    #[doc = "  ]"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Serialize, Clone, Debug)]
     #[serde(transparent)]
     pub struct BlockSize(i64);
@@ -444,31 +419,19 @@ pub mod types {
         }
     }
 
-    ///A count of bytes, typically used either for memory or storage capacity
-    ///
-    ///The maximum supported byte count is [`i64::MAX`].  This makes it
-    /// somewhat inconvenient to define constructors: a u32 constructor can be
-    /// infallible, but an i64 constructor can fail (if the value is negative)
-    /// and a u64 constructor can fail (if the value is larger than i64::MAX).
-    /// We provide all of these for consumers' convenience.
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "A count of bytes, typically used either for memory or
-    /// storage capacity\n\nThe maximum supported byte count is [`i64::MAX`].
-    /// This makes it somewhat inconvenient to define constructors: a u32
-    /// constructor can be infallible, but an i64 constructor can fail (if the
-    /// value is negative) and a u64 constructor can fail (if the value is
-    /// larger than i64::MAX).  We provide all of these for consumers'
-    /// convenience.",
-    ///  "type": "integer",
-    ///  "format": "uint64",
-    ///  "minimum": 0.0
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "A count of bytes, typically used either for memory or storage capacity\n\nThe maximum supported byte count is [`i64::MAX`].  This makes it somewhat inconvenient to define constructors: a u32 constructor can be infallible, but an i64 constructor can fail (if the value is negative) and a u64 constructor can fail (if the value is larger than i64::MAX).  We provide all of these for consumers' convenience."]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"A count of bytes, typically used either for memory or storage capacity\\n\\nThe maximum supported byte count is [`i64::MAX`].  This makes it somewhat inconvenient to define constructors: a u32 constructor can be infallible, but an i64 constructor can fail (if the value is negative) and a u64 constructor can fail (if the value is larger than i64::MAX).  We provide all of these for consumers' convenience.\","]
+    #[doc = "  \"type\": \"integer\","]
+    #[doc = "  \"format\": \"uint64\","]
+    #[doc = "  \"minimum\": 0.0"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     #[serde(transparent)]
     pub struct ByteCount(pub u64);
@@ -531,71 +494,69 @@ pub mod types {
         }
     }
 
-    ///Client view of a [`Certificate`]
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Client view of a [`Certificate`]",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "description",
-    ///    "id",
-    ///    "name",
-    ///    "service",
-    ///    "time_created",
-    ///    "time_modified"
-    ///  ],
-    ///  "properties": {
-    ///    "description": {
-    ///      "description": "human-readable free-form text about a resource",
-    ///      "type": "string"
-    ///    },
-    ///    "id": {
-    ///      "description": "unique, immutable, system-controlled identifier for
-    /// each resource",
-    ///      "type": "string",
-    ///      "format": "uuid"
-    ///    },
-    ///    "name": {
-    ///      "description": "unique, mutable, user-controlled identifier for
-    /// each resource",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/Name"
-    ///        }
-    ///      ]
-    ///    },
-    ///    "service": {
-    ///      "$ref": "#/components/schemas/ServiceUsingCertificate"
-    ///    },
-    ///    "time_created": {
-    ///      "description": "timestamp when this resource was created",
-    ///      "type": "string",
-    ///      "format": "date-time"
-    ///    },
-    ///    "time_modified": {
-    ///      "description": "timestamp when this resource was last modified",
-    ///      "type": "string",
-    ///      "format": "date-time"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Client view of a [`Certificate`]"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Client view of a [`Certificate`]\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"description\","]
+    #[doc = "    \"id\","]
+    #[doc = "    \"name\","]
+    #[doc = "    \"service\","]
+    #[doc = "    \"time_created\","]
+    #[doc = "    \"time_modified\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"description\": {"]
+    #[doc = "      \"description\": \"human-readable free-form text about a resource\","]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"id\": {"]
+    #[doc = "      \"description\": \"unique, immutable, system-controlled identifier for each resource\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"uuid\""]
+    #[doc = "    },"]
+    #[doc = "    \"name\": {"]
+    #[doc = "      \"description\": \"unique, mutable, user-controlled identifier for each resource\","]
+    #[doc = "      \"allOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/Name\""]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"service\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/ServiceUsingCertificate\""]
+    #[doc = "    },"]
+    #[doc = "    \"time_created\": {"]
+    #[doc = "      \"description\": \"timestamp when this resource was created\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"date-time\""]
+    #[doc = "    },"]
+    #[doc = "    \"time_modified\": {"]
+    #[doc = "      \"description\": \"timestamp when this resource was last modified\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"date-time\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct Certificate {
-        ///human-readable free-form text about a resource
+        #[doc = "human-readable free-form text about a resource"]
         pub description: ::std::string::String,
-        ///unique, immutable, system-controlled identifier for each resource
+        #[doc = "unique, immutable, system-controlled identifier for each resource"]
         pub id: ::uuid::Uuid,
-        ///unique, mutable, user-controlled identifier for each resource
+        #[doc = "unique, mutable, user-controlled identifier for each resource"]
         pub name: Name,
         pub service: ServiceUsingCertificate,
-        ///timestamp when this resource was created
+        #[doc = "timestamp when this resource was created"]
         pub time_created: ::chrono::DateTime<::chrono::offset::Utc>,
-        ///timestamp when this resource was last modified
+        #[doc = "timestamp when this resource was last modified"]
         pub time_modified: ::chrono::DateTime<::chrono::offset::Utc>,
     }
 
@@ -605,69 +566,67 @@ pub mod types {
         }
     }
 
-    ///Create-time parameters for a
-    /// [`Certificate`](crate::external_api::views::Certificate)
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Create-time parameters for a
-    /// [`Certificate`](crate::external_api::views::Certificate)",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "cert",
-    ///    "description",
-    ///    "key",
-    ///    "name",
-    ///    "service"
-    ///  ],
-    ///  "properties": {
-    ///    "cert": {
-    ///      "description": "PEM file containing public certificate chain",
-    ///      "type": "array",
-    ///      "items": {
-    ///        "type": "integer",
-    ///        "format": "uint8",
-    ///        "minimum": 0.0
-    ///      }
-    ///    },
-    ///    "description": {
-    ///      "type": "string"
-    ///    },
-    ///    "key": {
-    ///      "description": "PEM file containing private key",
-    ///      "type": "array",
-    ///      "items": {
-    ///        "type": "integer",
-    ///        "format": "uint8",
-    ///        "minimum": 0.0
-    ///      }
-    ///    },
-    ///    "name": {
-    ///      "$ref": "#/components/schemas/Name"
-    ///    },
-    ///    "service": {
-    ///      "description": "The service using this certificate",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/ServiceUsingCertificate"
-    ///        }
-    ///      ]
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Create-time parameters for a [`Certificate`](crate::external_api::views::Certificate)"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Create-time parameters for a [`Certificate`](crate::external_api::views::Certificate)\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"cert\","]
+    #[doc = "    \"description\","]
+    #[doc = "    \"key\","]
+    #[doc = "    \"name\","]
+    #[doc = "    \"service\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"cert\": {"]
+    #[doc = "      \"description\": \"PEM file containing public certificate chain\","]
+    #[doc = "      \"type\": \"array\","]
+    #[doc = "      \"items\": {"]
+    #[doc = "        \"type\": \"integer\","]
+    #[doc = "        \"format\": \"uint8\","]
+    #[doc = "        \"minimum\": 0.0"]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    \"description\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"key\": {"]
+    #[doc = "      \"description\": \"PEM file containing private key\","]
+    #[doc = "      \"type\": \"array\","]
+    #[doc = "      \"items\": {"]
+    #[doc = "        \"type\": \"integer\","]
+    #[doc = "        \"format\": \"uint8\","]
+    #[doc = "        \"minimum\": 0.0"]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    \"name\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/Name\""]
+    #[doc = "    },"]
+    #[doc = "    \"service\": {"]
+    #[doc = "      \"description\": \"The service using this certificate\","]
+    #[doc = "      \"allOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/ServiceUsingCertificate\""]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct CertificateCreate {
-        ///PEM file containing public certificate chain
+        #[doc = "PEM file containing public certificate chain"]
         pub cert: ::std::vec::Vec<u8>,
         pub description: ::std::string::String,
-        ///PEM file containing private key
+        #[doc = "PEM file containing private key"]
         pub key: ::std::vec::Vec<u8>,
         pub name: Name,
-        ///The service using this certificate
+        #[doc = "The service using this certificate"]
         pub service: ServiceUsingCertificate,
     }
 
@@ -677,42 +636,41 @@ pub mod types {
         }
     }
 
-    ///A single page of results
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "A single page of results",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "items"
-    ///  ],
-    ///  "properties": {
-    ///    "items": {
-    ///      "description": "list of items on this page of results",
-    ///      "type": "array",
-    ///      "items": {
-    ///        "$ref": "#/components/schemas/Certificate"
-    ///      }
-    ///    },
-    ///    "next_page": {
-    ///      "description": "token used to fetch the next page of results (if
-    /// any)",
-    ///      "type": [
-    ///        "string",
-    ///        "null"
-    ///      ]
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "A single page of results"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"A single page of results\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"items\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"items\": {"]
+    #[doc = "      \"description\": \"list of items on this page of results\","]
+    #[doc = "      \"type\": \"array\","]
+    #[doc = "      \"items\": {"]
+    #[doc = "        \"$ref\": \"#/components/schemas/Certificate\""]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    \"next_page\": {"]
+    #[doc = "      \"description\": \"token used to fetch the next page of results (if any)\","]
+    #[doc = "      \"type\": ["]
+    #[doc = "        \"string\","]
+    #[doc = "        \"null\""]
+    #[doc = "      ]"]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct CertificateResultsPage {
-        ///list of items on this page of results
+        #[doc = "list of items on this page of results"]
         pub items: ::std::vec::Vec<Certificate>,
-        ///token used to fetch the next page of results (if any)
+        #[doc = "token used to fetch the next page of results (if any)"]
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
         pub next_page: ::std::option::Option<::std::string::String>,
     }
@@ -723,58 +681,55 @@ pub mod types {
         }
     }
 
-    ///Identity-related metadata that's included in "asset" public API objects
-    /// (which generally have no name or description)
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Identity-related metadata that's included in \"asset\"
-    /// public API objects (which generally have no name or description)",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "component_type",
-    ///    "id",
-    ///    "time_created",
-    ///    "time_modified",
-    ///    "version"
-    ///  ],
-    ///  "properties": {
-    ///    "component_type": {
-    ///      "$ref": "#/components/schemas/UpdateableComponentType"
-    ///    },
-    ///    "id": {
-    ///      "description": "unique, immutable, system-controlled identifier for
-    /// each resource",
-    ///      "type": "string",
-    ///      "format": "uuid"
-    ///    },
-    ///    "time_created": {
-    ///      "description": "timestamp when this resource was created",
-    ///      "type": "string",
-    ///      "format": "date-time"
-    ///    },
-    ///    "time_modified": {
-    ///      "description": "timestamp when this resource was last modified",
-    ///      "type": "string",
-    ///      "format": "date-time"
-    ///    },
-    ///    "version": {
-    ///      "$ref": "#/components/schemas/SemverVersion"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Identity-related metadata that's included in \"asset\" public API objects (which generally have no name or description)"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Identity-related metadata that's included in \\\"asset\\\" public API objects (which generally have no name or description)\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"component_type\","]
+    #[doc = "    \"id\","]
+    #[doc = "    \"time_created\","]
+    #[doc = "    \"time_modified\","]
+    #[doc = "    \"version\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"component_type\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/UpdateableComponentType\""]
+    #[doc = "    },"]
+    #[doc = "    \"id\": {"]
+    #[doc = "      \"description\": \"unique, immutable, system-controlled identifier for each resource\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"uuid\""]
+    #[doc = "    },"]
+    #[doc = "    \"time_created\": {"]
+    #[doc = "      \"description\": \"timestamp when this resource was created\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"date-time\""]
+    #[doc = "    },"]
+    #[doc = "    \"time_modified\": {"]
+    #[doc = "      \"description\": \"timestamp when this resource was last modified\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"date-time\""]
+    #[doc = "    },"]
+    #[doc = "    \"version\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/SemverVersion\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct ComponentUpdate {
         pub component_type: UpdateableComponentType,
-        ///unique, immutable, system-controlled identifier for each resource
+        #[doc = "unique, immutable, system-controlled identifier for each resource"]
         pub id: ::uuid::Uuid,
-        ///timestamp when this resource was created
+        #[doc = "timestamp when this resource was created"]
         pub time_created: ::chrono::DateTime<::chrono::offset::Utc>,
-        ///timestamp when this resource was last modified
+        #[doc = "timestamp when this resource was last modified"]
         pub time_modified: ::chrono::DateTime<::chrono::offset::Utc>,
         pub version: SemverVersion,
     }
@@ -785,42 +740,41 @@ pub mod types {
         }
     }
 
-    ///A single page of results
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "A single page of results",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "items"
-    ///  ],
-    ///  "properties": {
-    ///    "items": {
-    ///      "description": "list of items on this page of results",
-    ///      "type": "array",
-    ///      "items": {
-    ///        "$ref": "#/components/schemas/ComponentUpdate"
-    ///      }
-    ///    },
-    ///    "next_page": {
-    ///      "description": "token used to fetch the next page of results (if
-    /// any)",
-    ///      "type": [
-    ///        "string",
-    ///        "null"
-    ///      ]
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "A single page of results"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"A single page of results\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"items\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"items\": {"]
+    #[doc = "      \"description\": \"list of items on this page of results\","]
+    #[doc = "      \"type\": \"array\","]
+    #[doc = "      \"items\": {"]
+    #[doc = "        \"$ref\": \"#/components/schemas/ComponentUpdate\""]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    \"next_page\": {"]
+    #[doc = "      \"description\": \"token used to fetch the next page of results (if any)\","]
+    #[doc = "      \"type\": ["]
+    #[doc = "        \"string\","]
+    #[doc = "        \"null\""]
+    #[doc = "      ]"]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct ComponentUpdateResultsPage {
-        ///list of items on this page of results
+        #[doc = "list of items on this page of results"]
         pub items: ::std::vec::Vec<ComponentUpdate>,
-        ///token used to fetch the next page of results (if any)
+        #[doc = "token used to fetch the next page of results (if any)"]
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
         pub next_page: ::std::option::Option<::std::string::String>,
     }
@@ -831,31 +785,31 @@ pub mod types {
         }
     }
 
-    ///A cumulative or counter data type.
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "A cumulative or counter data type.",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "start_time",
-    ///    "value"
-    ///  ],
-    ///  "properties": {
-    ///    "start_time": {
-    ///      "type": "string",
-    ///      "format": "date-time"
-    ///    },
-    ///    "value": {
-    ///      "type": "number",
-    ///      "format": "double"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "A cumulative or counter data type."]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"A cumulative or counter data type.\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"start_time\","]
+    #[doc = "    \"value\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"start_time\": {"]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"date-time\""]
+    #[doc = "    },"]
+    #[doc = "    \"value\": {"]
+    #[doc = "      \"type\": \"number\","]
+    #[doc = "      \"format\": \"double\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct Cumulativedouble {
         pub start_time: ::chrono::DateTime<::chrono::offset::Utc>,
@@ -868,31 +822,31 @@ pub mod types {
         }
     }
 
-    ///A cumulative or counter data type.
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "A cumulative or counter data type.",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "start_time",
-    ///    "value"
-    ///  ],
-    ///  "properties": {
-    ///    "start_time": {
-    ///      "type": "string",
-    ///      "format": "date-time"
-    ///    },
-    ///    "value": {
-    ///      "type": "integer",
-    ///      "format": "int64"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "A cumulative or counter data type."]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"A cumulative or counter data type.\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"start_time\","]
+    #[doc = "    \"value\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"start_time\": {"]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"date-time\""]
+    #[doc = "    },"]
+    #[doc = "    \"value\": {"]
+    #[doc = "      \"type\": \"integer\","]
+    #[doc = "      \"format\": \"int64\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct Cumulativeint64 {
         pub start_time: ::chrono::DateTime<::chrono::offset::Utc>,
@@ -905,188 +859,187 @@ pub mod types {
         }
     }
 
-    ///A `Datum` is a single sampled data point from a metric.
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "A `Datum` is a single sampled data point from a
-    /// metric.",
-    ///  "oneOf": [
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "datum",
-    ///        "type"
-    ///      ],
-    ///      "properties": {
-    ///        "datum": {
-    ///          "type": "boolean"
-    ///        },
-    ///        "type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "bool"
-    ///          ]
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "datum",
-    ///        "type"
-    ///      ],
-    ///      "properties": {
-    ///        "datum": {
-    ///          "type": "integer",
-    ///          "format": "int64"
-    ///        },
-    ///        "type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "i64"
-    ///          ]
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "datum",
-    ///        "type"
-    ///      ],
-    ///      "properties": {
-    ///        "datum": {
-    ///          "type": "number",
-    ///          "format": "double"
-    ///        },
-    ///        "type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "f64"
-    ///          ]
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "datum",
-    ///        "type"
-    ///      ],
-    ///      "properties": {
-    ///        "datum": {
-    ///          "type": "string"
-    ///        },
-    ///        "type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "string"
-    ///          ]
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "datum",
-    ///        "type"
-    ///      ],
-    ///      "properties": {
-    ///        "datum": {
-    ///          "type": "array",
-    ///          "items": {
-    ///            "type": "integer",
-    ///            "format": "uint8",
-    ///            "minimum": 0.0
-    ///          }
-    ///        },
-    ///        "type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "bytes"
-    ///          ]
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "datum",
-    ///        "type"
-    ///      ],
-    ///      "properties": {
-    ///        "datum": {
-    ///          "$ref": "#/components/schemas/Cumulativeint64"
-    ///        },
-    ///        "type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "cumulative_i64"
-    ///          ]
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "datum",
-    ///        "type"
-    ///      ],
-    ///      "properties": {
-    ///        "datum": {
-    ///          "$ref": "#/components/schemas/Cumulativedouble"
-    ///        },
-    ///        "type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "cumulative_f64"
-    ///          ]
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "datum",
-    ///        "type"
-    ///      ],
-    ///      "properties": {
-    ///        "datum": {
-    ///          "$ref": "#/components/schemas/Histogramint64"
-    ///        },
-    ///        "type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "histogram_i64"
-    ///          ]
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "datum",
-    ///        "type"
-    ///      ],
-    ///      "properties": {
-    ///        "datum": {
-    ///          "$ref": "#/components/schemas/Histogramdouble"
-    ///        },
-    ///        "type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "histogram_f64"
-    ///          ]
-    ///        }
-    ///      }
-    ///    }
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "A `Datum` is a single sampled data point from a metric."]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"A `Datum` is a single sampled data point from a metric.\","]
+    #[doc = "  \"oneOf\": ["]
+    #[doc = "    {"]
+    #[doc = "      \"type\": \"object\","]
+    #[doc = "      \"required\": ["]
+    #[doc = "        \"datum\","]
+    #[doc = "        \"type\""]
+    #[doc = "      ],"]
+    #[doc = "      \"properties\": {"]
+    #[doc = "        \"datum\": {"]
+    #[doc = "          \"type\": \"boolean\""]
+    #[doc = "        },"]
+    #[doc = "        \"type\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"enum\": ["]
+    #[doc = "            \"bool\""]
+    #[doc = "          ]"]
+    #[doc = "        }"]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    {"]
+    #[doc = "      \"type\": \"object\","]
+    #[doc = "      \"required\": ["]
+    #[doc = "        \"datum\","]
+    #[doc = "        \"type\""]
+    #[doc = "      ],"]
+    #[doc = "      \"properties\": {"]
+    #[doc = "        \"datum\": {"]
+    #[doc = "          \"type\": \"integer\","]
+    #[doc = "          \"format\": \"int64\""]
+    #[doc = "        },"]
+    #[doc = "        \"type\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"enum\": ["]
+    #[doc = "            \"i64\""]
+    #[doc = "          ]"]
+    #[doc = "        }"]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    {"]
+    #[doc = "      \"type\": \"object\","]
+    #[doc = "      \"required\": ["]
+    #[doc = "        \"datum\","]
+    #[doc = "        \"type\""]
+    #[doc = "      ],"]
+    #[doc = "      \"properties\": {"]
+    #[doc = "        \"datum\": {"]
+    #[doc = "          \"type\": \"number\","]
+    #[doc = "          \"format\": \"double\""]
+    #[doc = "        },"]
+    #[doc = "        \"type\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"enum\": ["]
+    #[doc = "            \"f64\""]
+    #[doc = "          ]"]
+    #[doc = "        }"]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    {"]
+    #[doc = "      \"type\": \"object\","]
+    #[doc = "      \"required\": ["]
+    #[doc = "        \"datum\","]
+    #[doc = "        \"type\""]
+    #[doc = "      ],"]
+    #[doc = "      \"properties\": {"]
+    #[doc = "        \"datum\": {"]
+    #[doc = "          \"type\": \"string\""]
+    #[doc = "        },"]
+    #[doc = "        \"type\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"enum\": ["]
+    #[doc = "            \"string\""]
+    #[doc = "          ]"]
+    #[doc = "        }"]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    {"]
+    #[doc = "      \"type\": \"object\","]
+    #[doc = "      \"required\": ["]
+    #[doc = "        \"datum\","]
+    #[doc = "        \"type\""]
+    #[doc = "      ],"]
+    #[doc = "      \"properties\": {"]
+    #[doc = "        \"datum\": {"]
+    #[doc = "          \"type\": \"array\","]
+    #[doc = "          \"items\": {"]
+    #[doc = "            \"type\": \"integer\","]
+    #[doc = "            \"format\": \"uint8\","]
+    #[doc = "            \"minimum\": 0.0"]
+    #[doc = "          }"]
+    #[doc = "        },"]
+    #[doc = "        \"type\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"enum\": ["]
+    #[doc = "            \"bytes\""]
+    #[doc = "          ]"]
+    #[doc = "        }"]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    {"]
+    #[doc = "      \"type\": \"object\","]
+    #[doc = "      \"required\": ["]
+    #[doc = "        \"datum\","]
+    #[doc = "        \"type\""]
+    #[doc = "      ],"]
+    #[doc = "      \"properties\": {"]
+    #[doc = "        \"datum\": {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/Cumulativeint64\""]
+    #[doc = "        },"]
+    #[doc = "        \"type\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"enum\": ["]
+    #[doc = "            \"cumulative_i64\""]
+    #[doc = "          ]"]
+    #[doc = "        }"]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    {"]
+    #[doc = "      \"type\": \"object\","]
+    #[doc = "      \"required\": ["]
+    #[doc = "        \"datum\","]
+    #[doc = "        \"type\""]
+    #[doc = "      ],"]
+    #[doc = "      \"properties\": {"]
+    #[doc = "        \"datum\": {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/Cumulativedouble\""]
+    #[doc = "        },"]
+    #[doc = "        \"type\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"enum\": ["]
+    #[doc = "            \"cumulative_f64\""]
+    #[doc = "          ]"]
+    #[doc = "        }"]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    {"]
+    #[doc = "      \"type\": \"object\","]
+    #[doc = "      \"required\": ["]
+    #[doc = "        \"datum\","]
+    #[doc = "        \"type\""]
+    #[doc = "      ],"]
+    #[doc = "      \"properties\": {"]
+    #[doc = "        \"datum\": {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/Histogramint64\""]
+    #[doc = "        },"]
+    #[doc = "        \"type\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"enum\": ["]
+    #[doc = "            \"histogram_i64\""]
+    #[doc = "          ]"]
+    #[doc = "        }"]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    {"]
+    #[doc = "      \"type\": \"object\","]
+    #[doc = "      \"required\": ["]
+    #[doc = "        \"datum\","]
+    #[doc = "        \"type\""]
+    #[doc = "      ],"]
+    #[doc = "      \"properties\": {"]
+    #[doc = "        \"datum\": {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/Histogramdouble\""]
+    #[doc = "        },"]
+    #[doc = "        \"type\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"enum\": ["]
+    #[doc = "            \"histogram_f64\""]
+    #[doc = "          ]"]
+    #[doc = "        }"]
+    #[doc = "      }"]
+    #[doc = "    }"]
+    #[doc = "  ]"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     #[serde(tag = "type", content = "datum")]
     pub enum Datum {
@@ -1164,28 +1117,28 @@ pub mod types {
         }
     }
 
-    ///The type of an individual datum of a metric.
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "The type of an individual datum of a metric.",
-    ///  "type": "string",
-    ///  "enum": [
-    ///    "bool",
-    ///    "i64",
-    ///    "f64",
-    ///    "string",
-    ///    "bytes",
-    ///    "cumulative_i64",
-    ///    "cumulative_f64",
-    ///    "histogram_i64",
-    ///    "histogram_f64"
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "The type of an individual datum of a metric."]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"The type of an individual datum of a metric.\","]
+    #[doc = "  \"type\": \"string\","]
+    #[doc = "  \"enum\": ["]
+    #[doc = "    \"bool\","]
+    #[doc = "    \"i64\","]
+    #[doc = "    \"f64\","]
+    #[doc = "    \"string\","]
+    #[doc = "    \"bytes\","]
+    #[doc = "    \"cumulative_i64\","]
+    #[doc = "    \"cumulative_f64\","]
+    #[doc = "    \"histogram_i64\","]
+    #[doc = "    \"histogram_f64\""]
+    #[doc = "  ]"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(
         :: serde :: Deserialize,
         :: serde :: Serialize,
@@ -1284,37 +1237,35 @@ pub mod types {
         }
     }
 
-    ///`DerEncodedKeyPair`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "required": [
-    ///    "private_key",
-    ///    "public_cert"
-    ///  ],
-    ///  "properties": {
-    ///    "private_key": {
-    ///      "description": "request signing private key (base64 encoded der
-    /// file)",
-    ///      "type": "string"
-    ///    },
-    ///    "public_cert": {
-    ///      "description": "request signing public certificate (base64 encoded
-    /// der file)",
-    ///      "type": "string"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`DerEncodedKeyPair`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"private_key\","]
+    #[doc = "    \"public_cert\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"private_key\": {"]
+    #[doc = "      \"description\": \"request signing private key (base64 encoded der file)\","]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"public_cert\": {"]
+    #[doc = "      \"description\": \"request signing public certificate (base64 encoded der file)\","]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct DerEncodedKeyPair {
-        ///request signing private key (base64 encoded der file)
+        #[doc = "request signing private key (base64 encoded der file)"]
         pub private_key: ::std::string::String,
-        ///request signing public certificate (base64 encoded der file)
+        #[doc = "request signing public certificate (base64 encoded der file)"]
         pub public_cert: ::std::string::String,
     }
 
@@ -1324,33 +1275,33 @@ pub mod types {
         }
     }
 
-    ///`DeviceAccessTokenRequest`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "required": [
-    ///    "client_id",
-    ///    "device_code",
-    ///    "grant_type"
-    ///  ],
-    ///  "properties": {
-    ///    "client_id": {
-    ///      "type": "string",
-    ///      "format": "uuid"
-    ///    },
-    ///    "device_code": {
-    ///      "type": "string"
-    ///    },
-    ///    "grant_type": {
-    ///      "type": "string"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`DeviceAccessTokenRequest`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"client_id\","]
+    #[doc = "    \"device_code\","]
+    #[doc = "    \"grant_type\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"client_id\": {"]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"uuid\""]
+    #[doc = "    },"]
+    #[doc = "    \"device_code\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"grant_type\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct DeviceAccessTokenRequest {
         pub client_id: ::uuid::Uuid,
@@ -1364,25 +1315,25 @@ pub mod types {
         }
     }
 
-    ///`DeviceAuthRequest`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "required": [
-    ///    "client_id"
-    ///  ],
-    ///  "properties": {
-    ///    "client_id": {
-    ///      "type": "string",
-    ///      "format": "uuid"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`DeviceAuthRequest`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"client_id\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"client_id\": {"]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"uuid\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct DeviceAuthRequest {
         pub client_id: ::uuid::Uuid,
@@ -1394,24 +1345,24 @@ pub mod types {
         }
     }
 
-    ///`DeviceAuthVerify`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "required": [
-    ///    "user_code"
-    ///  ],
-    ///  "properties": {
-    ///    "user_code": {
-    ///      "type": "string"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`DeviceAuthVerify`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"user_code\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"user_code\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct DeviceAuthVerify {
         pub user_code: ::std::string::String,
@@ -1423,35 +1374,35 @@ pub mod types {
         }
     }
 
-    ///`Digest`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "oneOf": [
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "type",
-    ///        "value"
-    ///      ],
-    ///      "properties": {
-    ///        "type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "sha256"
-    ///          ]
-    ///        },
-    ///        "value": {
-    ///          "type": "string"
-    ///        }
-    ///      }
-    ///    }
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`Digest`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"oneOf\": ["]
+    #[doc = "    {"]
+    #[doc = "      \"type\": \"object\","]
+    #[doc = "      \"required\": ["]
+    #[doc = "        \"type\","]
+    #[doc = "        \"value\""]
+    #[doc = "      ],"]
+    #[doc = "      \"properties\": {"]
+    #[doc = "        \"type\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"enum\": ["]
+    #[doc = "            \"sha256\""]
+    #[doc = "          ]"]
+    #[doc = "        },"]
+    #[doc = "        \"value\": {"]
+    #[doc = "          \"type\": \"string\""]
+    #[doc = "        }"]
+    #[doc = "      }"]
+    #[doc = "    }"]
+    #[doc = "  ]"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     #[serde(tag = "type", content = "value")]
     pub enum Digest {
@@ -1465,110 +1416,108 @@ pub mod types {
         }
     }
 
-    ///Client view of a [`Disk`]
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Client view of a [`Disk`]",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "block_size",
-    ///    "description",
-    ///    "device_path",
-    ///    "id",
-    ///    "name",
-    ///    "project_id",
-    ///    "size",
-    ///    "state",
-    ///    "time_created",
-    ///    "time_modified"
-    ///  ],
-    ///  "properties": {
-    ///    "block_size": {
-    ///      "$ref": "#/components/schemas/ByteCount"
-    ///    },
-    ///    "description": {
-    ///      "description": "human-readable free-form text about a resource",
-    ///      "type": "string"
-    ///    },
-    ///    "device_path": {
-    ///      "type": "string"
-    ///    },
-    ///    "id": {
-    ///      "description": "unique, immutable, system-controlled identifier for
-    /// each resource",
-    ///      "type": "string",
-    ///      "format": "uuid"
-    ///    },
-    ///    "image_id": {
-    ///      "type": [
-    ///        "string",
-    ///        "null"
-    ///      ],
-    ///      "format": "uuid"
-    ///    },
-    ///    "name": {
-    ///      "description": "unique, mutable, user-controlled identifier for
-    /// each resource",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/Name"
-    ///        }
-    ///      ]
-    ///    },
-    ///    "project_id": {
-    ///      "type": "string",
-    ///      "format": "uuid"
-    ///    },
-    ///    "size": {
-    ///      "$ref": "#/components/schemas/ByteCount"
-    ///    },
-    ///    "snapshot_id": {
-    ///      "type": [
-    ///        "string",
-    ///        "null"
-    ///      ],
-    ///      "format": "uuid"
-    ///    },
-    ///    "state": {
-    ///      "$ref": "#/components/schemas/DiskState"
-    ///    },
-    ///    "time_created": {
-    ///      "description": "timestamp when this resource was created",
-    ///      "type": "string",
-    ///      "format": "date-time"
-    ///    },
-    ///    "time_modified": {
-    ///      "description": "timestamp when this resource was last modified",
-    ///      "type": "string",
-    ///      "format": "date-time"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Client view of a [`Disk`]"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Client view of a [`Disk`]\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"block_size\","]
+    #[doc = "    \"description\","]
+    #[doc = "    \"device_path\","]
+    #[doc = "    \"id\","]
+    #[doc = "    \"name\","]
+    #[doc = "    \"project_id\","]
+    #[doc = "    \"size\","]
+    #[doc = "    \"state\","]
+    #[doc = "    \"time_created\","]
+    #[doc = "    \"time_modified\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"block_size\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/ByteCount\""]
+    #[doc = "    },"]
+    #[doc = "    \"description\": {"]
+    #[doc = "      \"description\": \"human-readable free-form text about a resource\","]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"device_path\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"id\": {"]
+    #[doc = "      \"description\": \"unique, immutable, system-controlled identifier for each resource\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"uuid\""]
+    #[doc = "    },"]
+    #[doc = "    \"image_id\": {"]
+    #[doc = "      \"type\": ["]
+    #[doc = "        \"string\","]
+    #[doc = "        \"null\""]
+    #[doc = "      ],"]
+    #[doc = "      \"format\": \"uuid\""]
+    #[doc = "    },"]
+    #[doc = "    \"name\": {"]
+    #[doc = "      \"description\": \"unique, mutable, user-controlled identifier for each resource\","]
+    #[doc = "      \"allOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/Name\""]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"project_id\": {"]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"uuid\""]
+    #[doc = "    },"]
+    #[doc = "    \"size\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/ByteCount\""]
+    #[doc = "    },"]
+    #[doc = "    \"snapshot_id\": {"]
+    #[doc = "      \"type\": ["]
+    #[doc = "        \"string\","]
+    #[doc = "        \"null\""]
+    #[doc = "      ],"]
+    #[doc = "      \"format\": \"uuid\""]
+    #[doc = "    },"]
+    #[doc = "    \"state\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/DiskState\""]
+    #[doc = "    },"]
+    #[doc = "    \"time_created\": {"]
+    #[doc = "      \"description\": \"timestamp when this resource was created\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"date-time\""]
+    #[doc = "    },"]
+    #[doc = "    \"time_modified\": {"]
+    #[doc = "      \"description\": \"timestamp when this resource was last modified\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"date-time\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct Disk {
         pub block_size: ByteCount,
-        ///human-readable free-form text about a resource
+        #[doc = "human-readable free-form text about a resource"]
         pub description: ::std::string::String,
         pub device_path: ::std::string::String,
-        ///unique, immutable, system-controlled identifier for each resource
+        #[doc = "unique, immutable, system-controlled identifier for each resource"]
         pub id: ::uuid::Uuid,
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
         pub image_id: ::std::option::Option<::uuid::Uuid>,
-        ///unique, mutable, user-controlled identifier for each resource
+        #[doc = "unique, mutable, user-controlled identifier for each resource"]
         pub name: Name,
         pub project_id: ::uuid::Uuid,
         pub size: ByteCount,
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
         pub snapshot_id: ::std::option::Option<::uuid::Uuid>,
         pub state: DiskState,
-        ///timestamp when this resource was created
+        #[doc = "timestamp when this resource was created"]
         pub time_created: ::chrono::DateTime<::chrono::offset::Utc>,
-        ///timestamp when this resource was last modified
+        #[doc = "timestamp when this resource was last modified"]
         pub time_modified: ::chrono::DateTime<::chrono::offset::Utc>,
     }
 
@@ -1578,56 +1527,54 @@ pub mod types {
         }
     }
 
-    ///Create-time parameters for a
-    /// [`Disk`](omicron_common::api::external::Disk)
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Create-time parameters for a
-    /// [`Disk`](omicron_common::api::external::Disk)",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "description",
-    ///    "disk_source",
-    ///    "name",
-    ///    "size"
-    ///  ],
-    ///  "properties": {
-    ///    "description": {
-    ///      "type": "string"
-    ///    },
-    ///    "disk_source": {
-    ///      "description": "initial source for this disk",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/DiskSource"
-    ///        }
-    ///      ]
-    ///    },
-    ///    "name": {
-    ///      "$ref": "#/components/schemas/Name"
-    ///    },
-    ///    "size": {
-    ///      "description": "total size of the Disk in bytes",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/ByteCount"
-    ///        }
-    ///      ]
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Create-time parameters for a [`Disk`](omicron_common::api::external::Disk)"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Create-time parameters for a [`Disk`](omicron_common::api::external::Disk)\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"description\","]
+    #[doc = "    \"disk_source\","]
+    #[doc = "    \"name\","]
+    #[doc = "    \"size\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"description\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"disk_source\": {"]
+    #[doc = "      \"description\": \"initial source for this disk\","]
+    #[doc = "      \"allOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/DiskSource\""]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"name\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/Name\""]
+    #[doc = "    },"]
+    #[doc = "    \"size\": {"]
+    #[doc = "      \"description\": \"total size of the Disk in bytes\","]
+    #[doc = "      \"allOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/ByteCount\""]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct DiskCreate {
         pub description: ::std::string::String,
-        ///initial source for this disk
+        #[doc = "initial source for this disk"]
         pub disk_source: DiskSource,
         pub name: Name,
-        ///total size of the Disk in bytes
+        #[doc = "total size of the Disk in bytes"]
         pub size: ByteCount,
     }
 
@@ -1637,29 +1584,25 @@ pub mod types {
         }
     }
 
-    ///TODO-v1: Delete this Parameters for the
-    /// [`Disk`](omicron_common::api::external::Disk) to be attached or detached
-    /// to an instance
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "TODO-v1: Delete this Parameters for the
-    /// [`Disk`](omicron_common::api::external::Disk) to be attached or detached
-    /// to an instance",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "name"
-    ///  ],
-    ///  "properties": {
-    ///    "name": {
-    ///      "$ref": "#/components/schemas/Name"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "TODO-v1: Delete this Parameters for the [`Disk`](omicron_common::api::external::Disk) to be attached or detached to an instance"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"TODO-v1: Delete this Parameters for the [`Disk`](omicron_common::api::external::Disk) to be attached or detached to an instance\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"name\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"name\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/Name\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct DiskIdentifier {
         pub name: Name,
@@ -1671,24 +1614,24 @@ pub mod types {
         }
     }
 
-    ///`DiskMetricName`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "string",
-    ///  "enum": [
-    ///    "activated",
-    ///    "flush",
-    ///    "read",
-    ///    "read_bytes",
-    ///    "write",
-    ///    "write_bytes"
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`DiskMetricName`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"string\","]
+    #[doc = "  \"enum\": ["]
+    #[doc = "    \"activated\","]
+    #[doc = "    \"flush\","]
+    #[doc = "    \"read\","]
+    #[doc = "    \"read_bytes\","]
+    #[doc = "    \"write\","]
+    #[doc = "    \"write_bytes\""]
+    #[doc = "  ]"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(
         :: serde :: Deserialize,
         :: serde :: Serialize,
@@ -1775,24 +1718,24 @@ pub mod types {
         }
     }
 
-    ///`DiskPath`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "required": [
-    ///    "disk"
-    ///  ],
-    ///  "properties": {
-    ///    "disk": {
-    ///      "$ref": "#/components/schemas/NameOrId"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`DiskPath`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"disk\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"disk\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/NameOrId\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct DiskPath {
         pub disk: NameOrId,
@@ -1804,42 +1747,41 @@ pub mod types {
         }
     }
 
-    ///A single page of results
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "A single page of results",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "items"
-    ///  ],
-    ///  "properties": {
-    ///    "items": {
-    ///      "description": "list of items on this page of results",
-    ///      "type": "array",
-    ///      "items": {
-    ///        "$ref": "#/components/schemas/Disk"
-    ///      }
-    ///    },
-    ///    "next_page": {
-    ///      "description": "token used to fetch the next page of results (if
-    /// any)",
-    ///      "type": [
-    ///        "string",
-    ///        "null"
-    ///      ]
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "A single page of results"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"A single page of results\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"items\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"items\": {"]
+    #[doc = "      \"description\": \"list of items on this page of results\","]
+    #[doc = "      \"type\": \"array\","]
+    #[doc = "      \"items\": {"]
+    #[doc = "        \"$ref\": \"#/components/schemas/Disk\""]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    \"next_page\": {"]
+    #[doc = "      \"description\": \"token used to fetch the next page of results (if any)\","]
+    #[doc = "      \"type\": ["]
+    #[doc = "        \"string\","]
+    #[doc = "        \"null\""]
+    #[doc = "      ]"]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct DiskResultsPage {
-        ///list of items on this page of results
+        #[doc = "list of items on this page of results"]
         pub items: ::std::vec::Vec<Disk>,
-        ///token used to fetch the next page of results (if any)
+        #[doc = "token used to fetch the next page of results (if any)"]
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
         pub next_page: ::std::option::Option<::std::string::String>,
     }
@@ -1850,120 +1792,118 @@ pub mod types {
         }
     }
 
-    ///Different sources for a disk
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Different sources for a disk",
-    ///  "oneOf": [
-    ///    {
-    ///      "description": "Create a blank disk",
-    ///      "type": "object",
-    ///      "required": [
-    ///        "block_size",
-    ///        "type"
-    ///      ],
-    ///      "properties": {
-    ///        "block_size": {
-    ///          "description": "size of blocks for this Disk. valid values are:
-    /// 512, 2048, or 4096",
-    ///          "allOf": [
-    ///            {
-    ///              "$ref": "#/components/schemas/BlockSize"
-    ///            }
-    ///          ]
-    ///        },
-    ///        "type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "blank"
-    ///          ]
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "description": "Create a disk from a disk snapshot",
-    ///      "type": "object",
-    ///      "required": [
-    ///        "snapshot_id",
-    ///        "type"
-    ///      ],
-    ///      "properties": {
-    ///        "snapshot_id": {
-    ///          "type": "string",
-    ///          "format": "uuid"
-    ///        },
-    ///        "type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "snapshot"
-    ///          ]
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "description": "Create a disk from a project image",
-    ///      "type": "object",
-    ///      "required": [
-    ///        "image_id",
-    ///        "type"
-    ///      ],
-    ///      "properties": {
-    ///        "image_id": {
-    ///          "type": "string",
-    ///          "format": "uuid"
-    ///        },
-    ///        "type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "image"
-    ///          ]
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "description": "Create a disk from a global image",
-    ///      "type": "object",
-    ///      "required": [
-    ///        "image_id",
-    ///        "type"
-    ///      ],
-    ///      "properties": {
-    ///        "image_id": {
-    ///          "type": "string",
-    ///          "format": "uuid"
-    ///        },
-    ///        "type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "global_image"
-    ///          ]
-    ///        }
-    ///      }
-    ///    }
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Different sources for a disk"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Different sources for a disk\","]
+    #[doc = "  \"oneOf\": ["]
+    #[doc = "    {"]
+    #[doc = "      \"description\": \"Create a blank disk\","]
+    #[doc = "      \"type\": \"object\","]
+    #[doc = "      \"required\": ["]
+    #[doc = "        \"block_size\","]
+    #[doc = "        \"type\""]
+    #[doc = "      ],"]
+    #[doc = "      \"properties\": {"]
+    #[doc = "        \"block_size\": {"]
+    #[doc = "          \"description\": \"size of blocks for this Disk. valid values are: 512, 2048, or 4096\","]
+    #[doc = "          \"allOf\": ["]
+    #[doc = "            {"]
+    #[doc = "              \"$ref\": \"#/components/schemas/BlockSize\""]
+    #[doc = "            }"]
+    #[doc = "          ]"]
+    #[doc = "        },"]
+    #[doc = "        \"type\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"enum\": ["]
+    #[doc = "            \"blank\""]
+    #[doc = "          ]"]
+    #[doc = "        }"]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    {"]
+    #[doc = "      \"description\": \"Create a disk from a disk snapshot\","]
+    #[doc = "      \"type\": \"object\","]
+    #[doc = "      \"required\": ["]
+    #[doc = "        \"snapshot_id\","]
+    #[doc = "        \"type\""]
+    #[doc = "      ],"]
+    #[doc = "      \"properties\": {"]
+    #[doc = "        \"snapshot_id\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"format\": \"uuid\""]
+    #[doc = "        },"]
+    #[doc = "        \"type\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"enum\": ["]
+    #[doc = "            \"snapshot\""]
+    #[doc = "          ]"]
+    #[doc = "        }"]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    {"]
+    #[doc = "      \"description\": \"Create a disk from a project image\","]
+    #[doc = "      \"type\": \"object\","]
+    #[doc = "      \"required\": ["]
+    #[doc = "        \"image_id\","]
+    #[doc = "        \"type\""]
+    #[doc = "      ],"]
+    #[doc = "      \"properties\": {"]
+    #[doc = "        \"image_id\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"format\": \"uuid\""]
+    #[doc = "        },"]
+    #[doc = "        \"type\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"enum\": ["]
+    #[doc = "            \"image\""]
+    #[doc = "          ]"]
+    #[doc = "        }"]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    {"]
+    #[doc = "      \"description\": \"Create a disk from a global image\","]
+    #[doc = "      \"type\": \"object\","]
+    #[doc = "      \"required\": ["]
+    #[doc = "        \"image_id\","]
+    #[doc = "        \"type\""]
+    #[doc = "      ],"]
+    #[doc = "      \"properties\": {"]
+    #[doc = "        \"image_id\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"format\": \"uuid\""]
+    #[doc = "        },"]
+    #[doc = "        \"type\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"enum\": ["]
+    #[doc = "            \"global_image\""]
+    #[doc = "          ]"]
+    #[doc = "        }"]
+    #[doc = "      }"]
+    #[doc = "    }"]
+    #[doc = "  ]"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     #[serde(tag = "type")]
     pub enum DiskSource {
-        ///Create a blank disk
+        #[doc = "Create a blank disk"]
         #[serde(rename = "blank")]
         Blank {
-            ///size of blocks for this Disk. valid values are: 512, 2048, or
-            /// 4096
+            #[doc = "size of blocks for this Disk. valid values are: 512, 2048, or 4096"]
             block_size: BlockSize,
         },
-        ///Create a disk from a disk snapshot
+        #[doc = "Create a disk from a disk snapshot"]
         #[serde(rename = "snapshot")]
         Snapshot { snapshot_id: ::uuid::Uuid },
-        ///Create a disk from a project image
+        #[doc = "Create a disk from a project image"]
         #[serde(rename = "image")]
         Image { image_id: ::uuid::Uuid },
-        ///Create a disk from a global image
+        #[doc = "Create a disk from a global image"]
         #[serde(rename = "global_image")]
         GlobalImage { image_id: ::uuid::Uuid },
     }
@@ -1974,138 +1914,138 @@ pub mod types {
         }
     }
 
-    ///State of a Disk (primarily: attached or not)
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "State of a Disk (primarily: attached or not)",
-    ///  "oneOf": [
-    ///    {
-    ///      "description": "Disk is being initialized",
-    ///      "type": "object",
-    ///      "required": [
-    ///        "state"
-    ///      ],
-    ///      "properties": {
-    ///        "state": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "creating"
-    ///          ]
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "description": "Disk is ready but detached from any Instance",
-    ///      "type": "object",
-    ///      "required": [
-    ///        "state"
-    ///      ],
-    ///      "properties": {
-    ///        "state": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "detached"
-    ///          ]
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "description": "Disk is being attached to the given Instance",
-    ///      "type": "object",
-    ///      "required": [
-    ///        "instance",
-    ///        "state"
-    ///      ],
-    ///      "properties": {
-    ///        "instance": {
-    ///          "type": "string",
-    ///          "format": "uuid"
-    ///        },
-    ///        "state": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "attaching"
-    ///          ]
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "description": "Disk is attached to the given Instance",
-    ///      "type": "object",
-    ///      "required": [
-    ///        "instance",
-    ///        "state"
-    ///      ],
-    ///      "properties": {
-    ///        "instance": {
-    ///          "type": "string",
-    ///          "format": "uuid"
-    ///        },
-    ///        "state": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "attached"
-    ///          ]
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "description": "Disk is being detached from the given Instance",
-    ///      "type": "object",
-    ///      "required": [
-    ///        "instance",
-    ///        "state"
-    ///      ],
-    ///      "properties": {
-    ///        "instance": {
-    ///          "type": "string",
-    ///          "format": "uuid"
-    ///        },
-    ///        "state": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "detaching"
-    ///          ]
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "description": "Disk has been destroyed",
-    ///      "type": "object",
-    ///      "required": [
-    ///        "state"
-    ///      ],
-    ///      "properties": {
-    ///        "state": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "destroyed"
-    ///          ]
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "description": "Disk is unavailable",
-    ///      "type": "object",
-    ///      "required": [
-    ///        "state"
-    ///      ],
-    ///      "properties": {
-    ///        "state": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "faulted"
-    ///          ]
-    ///        }
-    ///      }
-    ///    }
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "State of a Disk (primarily: attached or not)"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"State of a Disk (primarily: attached or not)\","]
+    #[doc = "  \"oneOf\": ["]
+    #[doc = "    {"]
+    #[doc = "      \"description\": \"Disk is being initialized\","]
+    #[doc = "      \"type\": \"object\","]
+    #[doc = "      \"required\": ["]
+    #[doc = "        \"state\""]
+    #[doc = "      ],"]
+    #[doc = "      \"properties\": {"]
+    #[doc = "        \"state\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"enum\": ["]
+    #[doc = "            \"creating\""]
+    #[doc = "          ]"]
+    #[doc = "        }"]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    {"]
+    #[doc = "      \"description\": \"Disk is ready but detached from any Instance\","]
+    #[doc = "      \"type\": \"object\","]
+    #[doc = "      \"required\": ["]
+    #[doc = "        \"state\""]
+    #[doc = "      ],"]
+    #[doc = "      \"properties\": {"]
+    #[doc = "        \"state\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"enum\": ["]
+    #[doc = "            \"detached\""]
+    #[doc = "          ]"]
+    #[doc = "        }"]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    {"]
+    #[doc = "      \"description\": \"Disk is being attached to the given Instance\","]
+    #[doc = "      \"type\": \"object\","]
+    #[doc = "      \"required\": ["]
+    #[doc = "        \"instance\","]
+    #[doc = "        \"state\""]
+    #[doc = "      ],"]
+    #[doc = "      \"properties\": {"]
+    #[doc = "        \"instance\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"format\": \"uuid\""]
+    #[doc = "        },"]
+    #[doc = "        \"state\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"enum\": ["]
+    #[doc = "            \"attaching\""]
+    #[doc = "          ]"]
+    #[doc = "        }"]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    {"]
+    #[doc = "      \"description\": \"Disk is attached to the given Instance\","]
+    #[doc = "      \"type\": \"object\","]
+    #[doc = "      \"required\": ["]
+    #[doc = "        \"instance\","]
+    #[doc = "        \"state\""]
+    #[doc = "      ],"]
+    #[doc = "      \"properties\": {"]
+    #[doc = "        \"instance\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"format\": \"uuid\""]
+    #[doc = "        },"]
+    #[doc = "        \"state\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"enum\": ["]
+    #[doc = "            \"attached\""]
+    #[doc = "          ]"]
+    #[doc = "        }"]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    {"]
+    #[doc = "      \"description\": \"Disk is being detached from the given Instance\","]
+    #[doc = "      \"type\": \"object\","]
+    #[doc = "      \"required\": ["]
+    #[doc = "        \"instance\","]
+    #[doc = "        \"state\""]
+    #[doc = "      ],"]
+    #[doc = "      \"properties\": {"]
+    #[doc = "        \"instance\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"format\": \"uuid\""]
+    #[doc = "        },"]
+    #[doc = "        \"state\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"enum\": ["]
+    #[doc = "            \"detaching\""]
+    #[doc = "          ]"]
+    #[doc = "        }"]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    {"]
+    #[doc = "      \"description\": \"Disk has been destroyed\","]
+    #[doc = "      \"type\": \"object\","]
+    #[doc = "      \"required\": ["]
+    #[doc = "        \"state\""]
+    #[doc = "      ],"]
+    #[doc = "      \"properties\": {"]
+    #[doc = "        \"state\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"enum\": ["]
+    #[doc = "            \"destroyed\""]
+    #[doc = "          ]"]
+    #[doc = "        }"]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    {"]
+    #[doc = "      \"description\": \"Disk is unavailable\","]
+    #[doc = "      \"type\": \"object\","]
+    #[doc = "      \"required\": ["]
+    #[doc = "        \"state\""]
+    #[doc = "      ],"]
+    #[doc = "      \"properties\": {"]
+    #[doc = "        \"state\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"enum\": ["]
+    #[doc = "            \"faulted\""]
+    #[doc = "          ]"]
+    #[doc = "        }"]
+    #[doc = "      }"]
+    #[doc = "    }"]
+    #[doc = "  ]"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     #[serde(tag = "state", content = "instance")]
     pub enum DiskState {
@@ -2113,13 +2053,13 @@ pub mod types {
         Creating,
         #[serde(rename = "detached")]
         Detached,
-        ///Disk is being attached to the given Instance
+        #[doc = "Disk is being attached to the given Instance"]
         #[serde(rename = "attaching")]
         Attaching(::uuid::Uuid),
-        ///Disk is attached to the given Instance
+        #[doc = "Disk is attached to the given Instance"]
         #[serde(rename = "attached")]
         Attached(::uuid::Uuid),
-        ///Disk is being detached from the given Instance
+        #[doc = "Disk is being detached from the given Instance"]
         #[serde(rename = "detaching")]
         Detaching(::uuid::Uuid),
         #[serde(rename = "destroyed")]
@@ -2134,42 +2074,40 @@ pub mod types {
         }
     }
 
-    ///OS image distribution
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "OS image distribution",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "name",
-    ///    "version"
-    ///  ],
-    ///  "properties": {
-    ///    "name": {
-    ///      "description": "The name of the distribution (e.g. \"alpine\" or
-    /// \"ubuntu\")",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/Name"
-    ///        }
-    ///      ]
-    ///    },
-    ///    "version": {
-    ///      "description": "The version of the distribution (e.g. \"3.10\" or
-    /// \"18.04\")",
-    ///      "type": "string"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "OS image distribution"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"OS image distribution\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"name\","]
+    #[doc = "    \"version\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"name\": {"]
+    #[doc = "      \"description\": \"The name of the distribution (e.g. \\\"alpine\\\" or \\\"ubuntu\\\")\","]
+    #[doc = "      \"allOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/Name\""]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"version\": {"]
+    #[doc = "      \"description\": \"The version of the distribution (e.g. \\\"3.10\\\" or \\\"18.04\\\")\","]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct Distribution {
-        ///The name of the distribution (e.g. "alpine" or "ubuntu")
+        #[doc = "The name of the distribution (e.g. \"alpine\" or \"ubuntu\")"]
         pub name: Name,
-        ///The version of the distribution (e.g. "3.10" or "18.04")
+        #[doc = "The version of the distribution (e.g. \"3.10\" or \"18.04\")"]
         pub version: ::std::string::String,
     }
 
@@ -2179,32 +2117,32 @@ pub mod types {
         }
     }
 
-    ///Error information from a response.
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Error information from a response.",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "message",
-    ///    "request_id"
-    ///  ],
-    ///  "properties": {
-    ///    "error_code": {
-    ///      "type": "string"
-    ///    },
-    ///    "message": {
-    ///      "type": "string"
-    ///    },
-    ///    "request_id": {
-    ///      "type": "string"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Error information from a response."]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Error information from a response.\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"message\","]
+    #[doc = "    \"request_id\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"error_code\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"message\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"request_id\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct Error {
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
@@ -2219,29 +2157,29 @@ pub mod types {
         }
     }
 
-    ///`ExternalIp`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "required": [
-    ///    "ip",
-    ///    "kind"
-    ///  ],
-    ///  "properties": {
-    ///    "ip": {
-    ///      "type": "string",
-    ///      "format": "ip"
-    ///    },
-    ///    "kind": {
-    ///      "$ref": "#/components/schemas/IpKind"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`ExternalIp`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"ip\","]
+    #[doc = "    \"kind\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"ip\": {"]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"ip\""]
+    #[doc = "    },"]
+    #[doc = "    \"kind\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/IpKind\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct ExternalIp {
         pub ip: ::std::net::IpAddr,
@@ -2254,56 +2192,51 @@ pub mod types {
         }
     }
 
-    ///Parameters for creating an external IP address for instances.
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Parameters for creating an external IP address for
-    /// instances.",
-    ///  "oneOf": [
-    ///    {
-    ///      "description": "An IP address providing both inbound and outbound
-    /// access. The address is automatically-assigned from the provided IP Pool,
-    /// or all available pools if not specified.",
-    ///      "type": "object",
-    ///      "required": [
-    ///        "type"
-    ///      ],
-    ///      "properties": {
-    ///        "pool_name": {
-    ///          "oneOf": [
-    ///            {
-    ///              "type": "null"
-    ///            },
-    ///            {
-    ///              "allOf": [
-    ///                {
-    ///                  "$ref": "#/components/schemas/Name"
-    ///                }
-    ///              ]
-    ///            }
-    ///          ]
-    ///        },
-    ///        "type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "ephemeral"
-    ///          ]
-    ///        }
-    ///      }
-    ///    }
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Parameters for creating an external IP address for instances."]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Parameters for creating an external IP address for instances.\","]
+    #[doc = "  \"oneOf\": ["]
+    #[doc = "    {"]
+    #[doc = "      \"description\": \"An IP address providing both inbound and outbound access. The address is automatically-assigned from the provided IP Pool, or all available pools if not specified.\","]
+    #[doc = "      \"type\": \"object\","]
+    #[doc = "      \"required\": ["]
+    #[doc = "        \"type\""]
+    #[doc = "      ],"]
+    #[doc = "      \"properties\": {"]
+    #[doc = "        \"pool_name\": {"]
+    #[doc = "          \"oneOf\": ["]
+    #[doc = "            {"]
+    #[doc = "              \"type\": \"null\""]
+    #[doc = "            },"]
+    #[doc = "            {"]
+    #[doc = "              \"allOf\": ["]
+    #[doc = "                {"]
+    #[doc = "                  \"$ref\": \"#/components/schemas/Name\""]
+    #[doc = "                }"]
+    #[doc = "              ]"]
+    #[doc = "            }"]
+    #[doc = "          ]"]
+    #[doc = "        },"]
+    #[doc = "        \"type\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"enum\": ["]
+    #[doc = "            \"ephemeral\""]
+    #[doc = "          ]"]
+    #[doc = "        }"]
+    #[doc = "      }"]
+    #[doc = "    }"]
+    #[doc = "  ]"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     #[serde(tag = "type")]
     pub enum ExternalIpCreate {
-        ///An IP address providing both inbound and outbound access. The
-        /// address is automatically-assigned from the provided IP Pool, or all
-        /// available pools if not specified.
+        #[doc = "An IP address providing both inbound and outbound access. The address is automatically-assigned from the provided IP Pool, or all available pools if not specified."]
         #[serde(rename = "ephemeral")]
         Ephemeral {
             #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
@@ -2317,42 +2250,41 @@ pub mod types {
         }
     }
 
-    ///A single page of results
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "A single page of results",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "items"
-    ///  ],
-    ///  "properties": {
-    ///    "items": {
-    ///      "description": "list of items on this page of results",
-    ///      "type": "array",
-    ///      "items": {
-    ///        "$ref": "#/components/schemas/ExternalIp"
-    ///      }
-    ///    },
-    ///    "next_page": {
-    ///      "description": "token used to fetch the next page of results (if
-    /// any)",
-    ///      "type": [
-    ///        "string",
-    ///        "null"
-    ///      ]
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "A single page of results"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"A single page of results\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"items\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"items\": {"]
+    #[doc = "      \"description\": \"list of items on this page of results\","]
+    #[doc = "      \"type\": \"array\","]
+    #[doc = "      \"items\": {"]
+    #[doc = "        \"$ref\": \"#/components/schemas/ExternalIp\""]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    \"next_page\": {"]
+    #[doc = "      \"description\": \"token used to fetch the next page of results (if any)\","]
+    #[doc = "      \"type\": ["]
+    #[doc = "        \"string\","]
+    #[doc = "        \"null\""]
+    #[doc = "      ]"]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct ExternalIpResultsPage {
-        ///list of items on this page of results
+        #[doc = "list of items on this page of results"]
         pub items: ::std::vec::Vec<ExternalIp>,
-        ///token used to fetch the next page of results (if any)
+        #[doc = "token used to fetch the next page of results (if any)"]
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
         pub next_page: ::std::option::Option<::std::string::String>,
     }
@@ -2363,34 +2295,33 @@ pub mod types {
         }
     }
 
-    ///The name and type information for a field of a timeseries schema.
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "The name and type information for a field of a
-    /// timeseries schema.",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "name",
-    ///    "source",
-    ///    "ty"
-    ///  ],
-    ///  "properties": {
-    ///    "name": {
-    ///      "type": "string"
-    ///    },
-    ///    "source": {
-    ///      "$ref": "#/components/schemas/FieldSource"
-    ///    },
-    ///    "ty": {
-    ///      "$ref": "#/components/schemas/FieldType"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "The name and type information for a field of a timeseries schema."]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"The name and type information for a field of a timeseries schema.\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"name\","]
+    #[doc = "    \"source\","]
+    #[doc = "    \"ty\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"name\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"source\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/FieldSource\""]
+    #[doc = "    },"]
+    #[doc = "    \"ty\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/FieldType\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct FieldSchema {
         pub name: ::std::string::String,
@@ -2404,22 +2335,21 @@ pub mod types {
         }
     }
 
-    ///The source from which a field is derived, the target or metric.
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "The source from which a field is derived, the target or
-    /// metric.",
-    ///  "type": "string",
-    ///  "enum": [
-    ///    "target",
-    ///    "metric"
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "The source from which a field is derived, the target or metric."]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"The source from which a field is derived, the target or metric.\","]
+    #[doc = "  \"type\": \"string\","]
+    #[doc = "  \"enum\": ["]
+    #[doc = "    \"target\","]
+    #[doc = "    \"metric\""]
+    #[doc = "  ]"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(
         :: serde :: Deserialize,
         :: serde :: Serialize,
@@ -2490,25 +2420,24 @@ pub mod types {
         }
     }
 
-    ///The `FieldType` identifies the data type of a target or metric field.
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "The `FieldType` identifies the data type of a target or
-    /// metric field.",
-    ///  "type": "string",
-    ///  "enum": [
-    ///    "string",
-    ///    "i64",
-    ///    "ip_addr",
-    ///    "uuid",
-    ///    "bool"
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "The `FieldType` identifies the data type of a target or metric field."]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"The `FieldType` identifies the data type of a target or metric field.\","]
+    #[doc = "  \"type\": \"string\","]
+    #[doc = "  \"enum\": ["]
+    #[doc = "    \"string\","]
+    #[doc = "    \"i64\","]
+    #[doc = "    \"ip_addr\","]
+    #[doc = "    \"uuid\","]
+    #[doc = "    \"bool\""]
+    #[doc = "  ]"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(
         :: serde :: Deserialize,
         :: serde :: Serialize,
@@ -2591,21 +2520,21 @@ pub mod types {
         }
     }
 
-    ///`FleetRole`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "string",
-    ///  "enum": [
-    ///    "admin",
-    ///    "collaborator",
-    ///    "viewer"
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`FleetRole`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"string\","]
+    #[doc = "  \"enum\": ["]
+    #[doc = "    \"admin\","]
+    #[doc = "    \"collaborator\","]
+    #[doc = "    \"viewer\""]
+    #[doc = "  ]"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(
         :: serde :: Deserialize,
         :: serde :: Serialize,
@@ -2680,40 +2609,32 @@ pub mod types {
         }
     }
 
-    ///Client view of a [`Policy`], which describes how this resource may be
-    /// accessed
-    ///
-    ///Note that the Policy only describes access granted explicitly for this
-    /// resource.  The policies of parent resources can also cause a user to
-    /// have access to this resource.
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Client view of a [`Policy`], which describes how this
-    /// resource may be accessed\n\nNote that the Policy only describes access
-    /// granted explicitly for this resource.  The policies of parent resources
-    /// can also cause a user to have access to this resource.",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "role_assignments"
-    ///  ],
-    ///  "properties": {
-    ///    "role_assignments": {
-    ///      "description": "Roles directly assigned on this resource",
-    ///      "type": "array",
-    ///      "items": {
-    ///        "$ref": "#/components/schemas/FleetRoleRoleAssignment"
-    ///      }
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Client view of a [`Policy`], which describes how this resource may be accessed\n\nNote that the Policy only describes access granted explicitly for this resource.  The policies of parent resources can also cause a user to have access to this resource."]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Client view of a [`Policy`], which describes how this resource may be accessed\\n\\nNote that the Policy only describes access granted explicitly for this resource.  The policies of parent resources can also cause a user to have access to this resource.\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"role_assignments\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"role_assignments\": {"]
+    #[doc = "      \"description\": \"Roles directly assigned on this resource\","]
+    #[doc = "      \"type\": \"array\","]
+    #[doc = "      \"items\": {"]
+    #[doc = "        \"$ref\": \"#/components/schemas/FleetRoleRoleAssignment\""]
+    #[doc = "      }"]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct FleetRolePolicy {
-        ///Roles directly assigned on this resource
+        #[doc = "Roles directly assigned on this resource"]
         pub role_assignments: ::std::vec::Vec<FleetRoleRoleAssignment>,
     }
 
@@ -2723,43 +2644,34 @@ pub mod types {
         }
     }
 
-    ///Describes the assignment of a particular role on a particular resource
-    /// to a particular identity (user, group, etc.)
-    ///
-    ///The resource is not part of this structure.  Rather, [`RoleAssignment`]s
-    /// are put into a [`Policy`] and that Policy is applied to a particular
-    /// resource.
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Describes the assignment of a particular role on a
-    /// particular resource to a particular identity (user, group, etc.)\n\nThe
-    /// resource is not part of this structure.  Rather, [`RoleAssignment`]s are
-    /// put into a [`Policy`] and that Policy is applied to a particular
-    /// resource.",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "identity_id",
-    ///    "identity_type",
-    ///    "role_name"
-    ///  ],
-    ///  "properties": {
-    ///    "identity_id": {
-    ///      "type": "string",
-    ///      "format": "uuid"
-    ///    },
-    ///    "identity_type": {
-    ///      "$ref": "#/components/schemas/IdentityType"
-    ///    },
-    ///    "role_name": {
-    ///      "$ref": "#/components/schemas/FleetRole"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Describes the assignment of a particular role on a particular resource to a particular identity (user, group, etc.)\n\nThe resource is not part of this structure.  Rather, [`RoleAssignment`]s are put into a [`Policy`] and that Policy is applied to a particular resource."]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Describes the assignment of a particular role on a particular resource to a particular identity (user, group, etc.)\\n\\nThe resource is not part of this structure.  Rather, [`RoleAssignment`]s are put into a [`Policy`] and that Policy is applied to a particular resource.\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"identity_id\","]
+    #[doc = "    \"identity_type\","]
+    #[doc = "    \"role_name\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"identity_id\": {"]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"uuid\""]
+    #[doc = "    },"]
+    #[doc = "    \"identity_type\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/IdentityType\""]
+    #[doc = "    },"]
+    #[doc = "    \"role_name\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/FleetRole\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct FleetRoleRoleAssignment {
         pub identity_id: ::uuid::Uuid,
@@ -2773,130 +2685,128 @@ pub mod types {
         }
     }
 
-    ///Client view of global Images
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Client view of global Images",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "block_size",
-    ///    "description",
-    ///    "distribution",
-    ///    "id",
-    ///    "name",
-    ///    "size",
-    ///    "time_created",
-    ///    "time_modified",
-    ///    "version"
-    ///  ],
-    ///  "properties": {
-    ///    "block_size": {
-    ///      "description": "size of blocks in bytes",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/ByteCount"
-    ///        }
-    ///      ]
-    ///    },
-    ///    "description": {
-    ///      "description": "human-readable free-form text about a resource",
-    ///      "type": "string"
-    ///    },
-    ///    "digest": {
-    ///      "description": "Hash of the image contents, if applicable",
-    ///      "oneOf": [
-    ///        {
-    ///          "type": "null"
-    ///        },
-    ///        {
-    ///          "allOf": [
-    ///            {
-    ///              "$ref": "#/components/schemas/Digest"
-    ///            }
-    ///          ]
-    ///        }
-    ///      ]
-    ///    },
-    ///    "distribution": {
-    ///      "description": "Image distribution",
-    ///      "type": "string"
-    ///    },
-    ///    "id": {
-    ///      "description": "unique, immutable, system-controlled identifier for
-    /// each resource",
-    ///      "type": "string",
-    ///      "format": "uuid"
-    ///    },
-    ///    "name": {
-    ///      "description": "unique, mutable, user-controlled identifier for
-    /// each resource",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/Name"
-    ///        }
-    ///      ]
-    ///    },
-    ///    "size": {
-    ///      "description": "total size in bytes",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/ByteCount"
-    ///        }
-    ///      ]
-    ///    },
-    ///    "time_created": {
-    ///      "description": "timestamp when this resource was created",
-    ///      "type": "string",
-    ///      "format": "date-time"
-    ///    },
-    ///    "time_modified": {
-    ///      "description": "timestamp when this resource was last modified",
-    ///      "type": "string",
-    ///      "format": "date-time"
-    ///    },
-    ///    "url": {
-    ///      "description": "URL source of this image, if any",
-    ///      "type": [
-    ///        "string",
-    ///        "null"
-    ///      ]
-    ///    },
-    ///    "version": {
-    ///      "description": "Image version",
-    ///      "type": "string"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Client view of global Images"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Client view of global Images\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"block_size\","]
+    #[doc = "    \"description\","]
+    #[doc = "    \"distribution\","]
+    #[doc = "    \"id\","]
+    #[doc = "    \"name\","]
+    #[doc = "    \"size\","]
+    #[doc = "    \"time_created\","]
+    #[doc = "    \"time_modified\","]
+    #[doc = "    \"version\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"block_size\": {"]
+    #[doc = "      \"description\": \"size of blocks in bytes\","]
+    #[doc = "      \"allOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/ByteCount\""]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"description\": {"]
+    #[doc = "      \"description\": \"human-readable free-form text about a resource\","]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"digest\": {"]
+    #[doc = "      \"description\": \"Hash of the image contents, if applicable\","]
+    #[doc = "      \"oneOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"type\": \"null\""]
+    #[doc = "        },"]
+    #[doc = "        {"]
+    #[doc = "          \"allOf\": ["]
+    #[doc = "            {"]
+    #[doc = "              \"$ref\": \"#/components/schemas/Digest\""]
+    #[doc = "            }"]
+    #[doc = "          ]"]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"distribution\": {"]
+    #[doc = "      \"description\": \"Image distribution\","]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"id\": {"]
+    #[doc = "      \"description\": \"unique, immutable, system-controlled identifier for each resource\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"uuid\""]
+    #[doc = "    },"]
+    #[doc = "    \"name\": {"]
+    #[doc = "      \"description\": \"unique, mutable, user-controlled identifier for each resource\","]
+    #[doc = "      \"allOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/Name\""]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"size\": {"]
+    #[doc = "      \"description\": \"total size in bytes\","]
+    #[doc = "      \"allOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/ByteCount\""]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"time_created\": {"]
+    #[doc = "      \"description\": \"timestamp when this resource was created\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"date-time\""]
+    #[doc = "    },"]
+    #[doc = "    \"time_modified\": {"]
+    #[doc = "      \"description\": \"timestamp when this resource was last modified\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"date-time\""]
+    #[doc = "    },"]
+    #[doc = "    \"url\": {"]
+    #[doc = "      \"description\": \"URL source of this image, if any\","]
+    #[doc = "      \"type\": ["]
+    #[doc = "        \"string\","]
+    #[doc = "        \"null\""]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"version\": {"]
+    #[doc = "      \"description\": \"Image version\","]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct GlobalImage {
-        ///size of blocks in bytes
+        #[doc = "size of blocks in bytes"]
         pub block_size: ByteCount,
-        ///human-readable free-form text about a resource
+        #[doc = "human-readable free-form text about a resource"]
         pub description: ::std::string::String,
-        ///Hash of the image contents, if applicable
+        #[doc = "Hash of the image contents, if applicable"]
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
         pub digest: ::std::option::Option<Digest>,
-        ///Image distribution
+        #[doc = "Image distribution"]
         pub distribution: ::std::string::String,
-        ///unique, immutable, system-controlled identifier for each resource
+        #[doc = "unique, immutable, system-controlled identifier for each resource"]
         pub id: ::uuid::Uuid,
-        ///unique, mutable, user-controlled identifier for each resource
+        #[doc = "unique, mutable, user-controlled identifier for each resource"]
         pub name: Name,
-        ///total size in bytes
+        #[doc = "total size in bytes"]
         pub size: ByteCount,
-        ///timestamp when this resource was created
+        #[doc = "timestamp when this resource was created"]
         pub time_created: ::chrono::DateTime<::chrono::offset::Utc>,
-        ///timestamp when this resource was last modified
+        #[doc = "timestamp when this resource was last modified"]
         pub time_modified: ::chrono::DateTime<::chrono::offset::Utc>,
-        ///URL source of this image, if any
+        #[doc = "URL source of this image, if any"]
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
         pub url: ::std::option::Option<::std::string::String>,
-        ///Image version
+        #[doc = "Image version"]
         pub version: ::std::string::String,
     }
 
@@ -2906,67 +2816,65 @@ pub mod types {
         }
     }
 
-    ///Create-time parameters for an
-    /// [`GlobalImage`](crate::external_api::views::GlobalImage)
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Create-time parameters for an
-    /// [`GlobalImage`](crate::external_api::views::GlobalImage)",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "block_size",
-    ///    "description",
-    ///    "distribution",
-    ///    "name",
-    ///    "source"
-    ///  ],
-    ///  "properties": {
-    ///    "block_size": {
-    ///      "description": "block size in bytes",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/BlockSize"
-    ///        }
-    ///      ]
-    ///    },
-    ///    "description": {
-    ///      "type": "string"
-    ///    },
-    ///    "distribution": {
-    ///      "description": "OS image distribution",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/Distribution"
-    ///        }
-    ///      ]
-    ///    },
-    ///    "name": {
-    ///      "$ref": "#/components/schemas/Name"
-    ///    },
-    ///    "source": {
-    ///      "description": "The source of the image's contents.",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/ImageSource"
-    ///        }
-    ///      ]
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Create-time parameters for an [`GlobalImage`](crate::external_api::views::GlobalImage)"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Create-time parameters for an [`GlobalImage`](crate::external_api::views::GlobalImage)\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"block_size\","]
+    #[doc = "    \"description\","]
+    #[doc = "    \"distribution\","]
+    #[doc = "    \"name\","]
+    #[doc = "    \"source\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"block_size\": {"]
+    #[doc = "      \"description\": \"block size in bytes\","]
+    #[doc = "      \"allOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/BlockSize\""]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"description\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"distribution\": {"]
+    #[doc = "      \"description\": \"OS image distribution\","]
+    #[doc = "      \"allOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/Distribution\""]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"name\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/Name\""]
+    #[doc = "    },"]
+    #[doc = "    \"source\": {"]
+    #[doc = "      \"description\": \"The source of the image's contents.\","]
+    #[doc = "      \"allOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/ImageSource\""]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct GlobalImageCreate {
-        ///block size in bytes
+        #[doc = "block size in bytes"]
         pub block_size: BlockSize,
         pub description: ::std::string::String,
-        ///OS image distribution
+        #[doc = "OS image distribution"]
         pub distribution: Distribution,
         pub name: Name,
-        ///The source of the image's contents.
+        #[doc = "The source of the image's contents."]
         pub source: ImageSource,
     }
 
@@ -2976,42 +2884,41 @@ pub mod types {
         }
     }
 
-    ///A single page of results
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "A single page of results",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "items"
-    ///  ],
-    ///  "properties": {
-    ///    "items": {
-    ///      "description": "list of items on this page of results",
-    ///      "type": "array",
-    ///      "items": {
-    ///        "$ref": "#/components/schemas/GlobalImage"
-    ///      }
-    ///    },
-    ///    "next_page": {
-    ///      "description": "token used to fetch the next page of results (if
-    /// any)",
-    ///      "type": [
-    ///        "string",
-    ///        "null"
-    ///      ]
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "A single page of results"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"A single page of results\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"items\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"items\": {"]
+    #[doc = "      \"description\": \"list of items on this page of results\","]
+    #[doc = "      \"type\": \"array\","]
+    #[doc = "      \"items\": {"]
+    #[doc = "        \"$ref\": \"#/components/schemas/GlobalImage\""]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    \"next_page\": {"]
+    #[doc = "      \"description\": \"token used to fetch the next page of results (if any)\","]
+    #[doc = "      \"type\": ["]
+    #[doc = "        \"string\","]
+    #[doc = "        \"null\""]
+    #[doc = "      ]"]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct GlobalImageResultsPage {
-        ///list of items on this page of results
+        #[doc = "list of items on this page of results"]
         pub items: ::std::vec::Vec<GlobalImage>,
-        ///token used to fetch the next page of results (if any)
+        #[doc = "token used to fetch the next page of results (if any)"]
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
         pub next_page: ::std::option::Option<::std::string::String>,
     }
@@ -3022,43 +2929,43 @@ pub mod types {
         }
     }
 
-    ///Client view of a [`Group`]
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Client view of a [`Group`]",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "display_name",
-    ///    "id",
-    ///    "silo_id"
-    ///  ],
-    ///  "properties": {
-    ///    "display_name": {
-    ///      "description": "Human-readable name that can identify the group",
-    ///      "type": "string"
-    ///    },
-    ///    "id": {
-    ///      "type": "string",
-    ///      "format": "uuid"
-    ///    },
-    ///    "silo_id": {
-    ///      "description": "Uuid of the silo to which this group belongs",
-    ///      "type": "string",
-    ///      "format": "uuid"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Client view of a [`Group`]"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Client view of a [`Group`]\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"display_name\","]
+    #[doc = "    \"id\","]
+    #[doc = "    \"silo_id\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"display_name\": {"]
+    #[doc = "      \"description\": \"Human-readable name that can identify the group\","]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"id\": {"]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"uuid\""]
+    #[doc = "    },"]
+    #[doc = "    \"silo_id\": {"]
+    #[doc = "      \"description\": \"Uuid of the silo to which this group belongs\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"uuid\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct Group {
-        ///Human-readable name that can identify the group
+        #[doc = "Human-readable name that can identify the group"]
         pub display_name: ::std::string::String,
         pub id: ::uuid::Uuid,
-        ///Uuid of the silo to which this group belongs
+        #[doc = "Uuid of the silo to which this group belongs"]
         pub silo_id: ::uuid::Uuid,
     }
 
@@ -3068,42 +2975,41 @@ pub mod types {
         }
     }
 
-    ///A single page of results
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "A single page of results",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "items"
-    ///  ],
-    ///  "properties": {
-    ///    "items": {
-    ///      "description": "list of items on this page of results",
-    ///      "type": "array",
-    ///      "items": {
-    ///        "$ref": "#/components/schemas/Group"
-    ///      }
-    ///    },
-    ///    "next_page": {
-    ///      "description": "token used to fetch the next page of results (if
-    /// any)",
-    ///      "type": [
-    ///        "string",
-    ///        "null"
-    ///      ]
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "A single page of results"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"A single page of results\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"items\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"items\": {"]
+    #[doc = "      \"description\": \"list of items on this page of results\","]
+    #[doc = "      \"type\": \"array\","]
+    #[doc = "      \"items\": {"]
+    #[doc = "        \"$ref\": \"#/components/schemas/Group\""]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    \"next_page\": {"]
+    #[doc = "      \"description\": \"token used to fetch the next page of results (if any)\","]
+    #[doc = "      \"type\": ["]
+    #[doc = "        \"string\","]
+    #[doc = "        \"null\""]
+    #[doc = "      ]"]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct GroupResultsPage {
-        ///list of items on this page of results
+        #[doc = "list of items on this page of results"]
         pub items: ::std::vec::Vec<Group>,
-        ///token used to fetch the next page of results (if any)
+        #[doc = "token used to fetch the next page of results (if any)"]
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
         pub next_page: ::std::option::Option<::std::string::String>,
     }
@@ -3114,111 +3020,39 @@ pub mod types {
         }
     }
 
-    ///A simple type for managing a histogram metric.
-    ///
-    ///A histogram maintains the count of any number of samples, over a set of
-    /// bins. Bins are specified on construction via their _left_ edges,
-    /// inclusive. There can't be any "gaps" in the bins, and an additional bin
-    /// may be added to the left, right, or both so that the bins extend to the
-    /// entire range of the support.
-    ///
-    ///Note that any gaps, unsorted bins, or non-finite values will result in
-    /// an error.
-    ///
-    ///Example ------- ```rust use oximeter::histogram::{BinRange, Histogram};
-    ///
-    ///let edges = [0i64, 10, 20]; let mut hist =
-    /// Histogram::new(&edges).unwrap(); assert_eq!(hist.n_bins(), 4); // One
-    /// additional bin for the range (20..) assert_eq!(hist.n_samples(), 0);
-    /// hist.sample(4); hist.sample(100); assert_eq!(hist.n_samples(), 2);
-    ///
-    ///let data = hist.iter().collect::<Vec<_>>(); assert_eq!(data[0].range,
-    /// BinRange::range(i64::MIN, 0)); // An additional bin for `..0`
-    /// assert_eq!(data[0].count, 0); // Nothing is in this bin
-    ///
-    ///assert_eq!(data[1].range, BinRange::range(0, 10)); // The range `0..10`
-    /// assert_eq!(data[1].count, 1); // 4 is sampled into this bin ```
-    ///
-    ///Notes -----
-    ///
-    ///Histograms may be constructed either from their left bin edges, or from
-    /// a sequence of ranges. In either case, the left-most bin may be converted
-    /// upon construction. In particular, if the left-most value is not equal to
-    /// the minimum of the support, a new bin will be added from the minimum to
-    /// that provided value. If the left-most value _is_ the support's minimum,
-    /// because the provided bin was unbounded below, such as `(..0)`, then that
-    /// bin will be converted into one bounded below, `(MIN..0)` in this case.
-    ///
-    ///The short of this is that, most of the time, it shouldn't matter. If one
-    /// specifies the extremes of the support as their bins, be aware that the
-    /// left-most may be converted from a `BinRange::RangeTo` into a
-    /// `BinRange::Range`. In other words, the first bin of a histogram is
-    /// _always_ a `Bin::Range` or a `Bin::RangeFrom` after construction. In
-    /// fact, every bin is one of those variants, the `BinRange::RangeTo` is
-    /// only provided as a convenience during construction.
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "A simple type for managing a histogram metric.\n\nA
-    /// histogram maintains the count of any number of samples, over a set of
-    /// bins. Bins are specified on construction via their _left_ edges,
-    /// inclusive. There can't be any \"gaps\" in the bins, and an additional
-    /// bin may be added to the left, right, or both so that the bins extend to
-    /// the entire range of the support.\n\nNote that any gaps, unsorted bins,
-    /// or non-finite values will result in an error.\n\nExample ------- ```rust
-    /// use oximeter::histogram::{BinRange, Histogram};\n\nlet edges = [0i64,
-    /// 10, 20]; let mut hist = Histogram::new(&edges).unwrap();
-    /// assert_eq!(hist.n_bins(), 4); // One additional bin for the range (20..)
-    /// assert_eq!(hist.n_samples(), 0); hist.sample(4); hist.sample(100);
-    /// assert_eq!(hist.n_samples(), 2);\n\nlet data =
-    /// hist.iter().collect::<Vec<_>>(); assert_eq!(data[0].range,
-    /// BinRange::range(i64::MIN, 0)); // An additional bin for `..0`
-    /// assert_eq!(data[0].count, 0); // Nothing is in this
-    /// bin\n\nassert_eq!(data[1].range, BinRange::range(0, 10)); // The range
-    /// `0..10` assert_eq!(data[1].count, 1); // 4 is sampled into this bin
-    /// ```\n\nNotes -----\n\nHistograms may be constructed either from their
-    /// left bin edges, or from a sequence of ranges. In either case, the
-    /// left-most bin may be converted upon construction. In particular, if the
-    /// left-most value is not equal to the minimum of the support, a new bin
-    /// will be added from the minimum to that provided value. If the left-most
-    /// value _is_ the support's minimum, because the provided bin was unbounded
-    /// below, such as `(..0)`, then that bin will be converted into one bounded
-    /// below, `(MIN..0)` in this case.\n\nThe short of this is that, most of
-    /// the time, it shouldn't matter. If one specifies the extremes of the
-    /// support as their bins, be aware that the left-most may be converted from
-    /// a `BinRange::RangeTo` into a `BinRange::Range`. In other words, the
-    /// first bin of a histogram is _always_ a `Bin::Range` or a
-    /// `Bin::RangeFrom` after construction. In fact, every bin is one of those
-    /// variants, the `BinRange::RangeTo` is only provided as a convenience
-    /// during construction.",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "bins",
-    ///    "n_samples",
-    ///    "start_time"
-    ///  ],
-    ///  "properties": {
-    ///    "bins": {
-    ///      "type": "array",
-    ///      "items": {
-    ///        "$ref": "#/components/schemas/Bindouble"
-    ///      }
-    ///    },
-    ///    "n_samples": {
-    ///      "type": "integer",
-    ///      "format": "uint64",
-    ///      "minimum": 0.0
-    ///    },
-    ///    "start_time": {
-    ///      "type": "string",
-    ///      "format": "date-time"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "A simple type for managing a histogram metric.\n\nA histogram maintains the count of any number of samples, over a set of bins. Bins are specified on construction via their _left_ edges, inclusive. There can't be any \"gaps\" in the bins, and an additional bin may be added to the left, right, or both so that the bins extend to the entire range of the support.\n\nNote that any gaps, unsorted bins, or non-finite values will result in an error.\n\nExample ------- ```rust use oximeter::histogram::{BinRange, Histogram};\n\nlet edges = [0i64, 10, 20]; let mut hist = Histogram::new(&edges).unwrap(); assert_eq!(hist.n_bins(), 4); // One additional bin for the range (20..) assert_eq!(hist.n_samples(), 0); hist.sample(4); hist.sample(100); assert_eq!(hist.n_samples(), 2);\n\nlet data = hist.iter().collect::<Vec<_>>(); assert_eq!(data[0].range, BinRange::range(i64::MIN, 0)); // An additional bin for `..0` assert_eq!(data[0].count, 0); // Nothing is in this bin\n\nassert_eq!(data[1].range, BinRange::range(0, 10)); // The range `0..10` assert_eq!(data[1].count, 1); // 4 is sampled into this bin ```\n\nNotes -----\n\nHistograms may be constructed either from their left bin edges, or from a sequence of ranges. In either case, the left-most bin may be converted upon construction. In particular, if the left-most value is not equal to the minimum of the support, a new bin will be added from the minimum to that provided value. If the left-most value _is_ the support's minimum, because the provided bin was unbounded below, such as `(..0)`, then that bin will be converted into one bounded below, `(MIN..0)` in this case.\n\nThe short of this is that, most of the time, it shouldn't matter. If one specifies the extremes of the support as their bins, be aware that the left-most may be converted from a `BinRange::RangeTo` into a `BinRange::Range`. In other words, the first bin of a histogram is _always_ a `Bin::Range` or a `Bin::RangeFrom` after construction. In fact, every bin is one of those variants, the `BinRange::RangeTo` is only provided as a convenience during construction."]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"A simple type for managing a histogram metric.\\n\\nA histogram maintains the count of any number of samples, over a set of bins. Bins are specified on construction via their _left_ edges, inclusive. There can't be any \\\"gaps\\\" in the bins, and an additional bin may be added to the left, right, or both so that the bins extend to the entire range of the support.\\n\\nNote that any gaps, unsorted bins, or non-finite values will result in an error.\\n\\nExample ------- ```rust use oximeter::histogram::{BinRange, Histogram};\\n\\nlet edges = [0i64, 10, 20]; let mut hist = Histogram::new(&edges).unwrap(); assert_eq!(hist.n_bins(), 4); // One additional bin for the range (20..) assert_eq!(hist.n_samples(), 0); hist.sample(4); hist.sample(100); assert_eq!(hist.n_samples(), 2);\\n\\nlet data = hist.iter().collect::<Vec<_>>(); assert_eq!(data[0].range, BinRange::range(i64::MIN, 0)); // An additional bin for `..0` assert_eq!(data[0].count, 0); // Nothing is in this bin\\n\\nassert_eq!(data[1].range, BinRange::range(0, 10)); // The range `0..10` assert_eq!(data[1].count, 1); // 4 is sampled into this bin ```\\n\\nNotes -----\\n\\nHistograms may be constructed either from their left bin edges, or from a sequence of ranges. In either case, the left-most bin may be converted upon construction. In particular, if the left-most value is not equal to the minimum of the support, a new bin will be added from the minimum to that provided value. If the left-most value _is_ the support's minimum, because the provided bin was unbounded below, such as `(..0)`, then that bin will be converted into one bounded below, `(MIN..0)` in this case.\\n\\nThe short of this is that, most of the time, it shouldn't matter. If one specifies the extremes of the support as their bins, be aware that the left-most may be converted from a `BinRange::RangeTo` into a `BinRange::Range`. In other words, the first bin of a histogram is _always_ a `Bin::Range` or a `Bin::RangeFrom` after construction. In fact, every bin is one of those variants, the `BinRange::RangeTo` is only provided as a convenience during construction.\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"bins\","]
+    #[doc = "    \"n_samples\","]
+    #[doc = "    \"start_time\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"bins\": {"]
+    #[doc = "      \"type\": \"array\","]
+    #[doc = "      \"items\": {"]
+    #[doc = "        \"$ref\": \"#/components/schemas/Bindouble\""]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    \"n_samples\": {"]
+    #[doc = "      \"type\": \"integer\","]
+    #[doc = "      \"format\": \"uint64\","]
+    #[doc = "      \"minimum\": 0.0"]
+    #[doc = "    },"]
+    #[doc = "    \"start_time\": {"]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"date-time\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct Histogramdouble {
         pub bins: ::std::vec::Vec<Bindouble>,
@@ -3232,111 +3066,39 @@ pub mod types {
         }
     }
 
-    ///A simple type for managing a histogram metric.
-    ///
-    ///A histogram maintains the count of any number of samples, over a set of
-    /// bins. Bins are specified on construction via their _left_ edges,
-    /// inclusive. There can't be any "gaps" in the bins, and an additional bin
-    /// may be added to the left, right, or both so that the bins extend to the
-    /// entire range of the support.
-    ///
-    ///Note that any gaps, unsorted bins, or non-finite values will result in
-    /// an error.
-    ///
-    ///Example ------- ```rust use oximeter::histogram::{BinRange, Histogram};
-    ///
-    ///let edges = [0i64, 10, 20]; let mut hist =
-    /// Histogram::new(&edges).unwrap(); assert_eq!(hist.n_bins(), 4); // One
-    /// additional bin for the range (20..) assert_eq!(hist.n_samples(), 0);
-    /// hist.sample(4); hist.sample(100); assert_eq!(hist.n_samples(), 2);
-    ///
-    ///let data = hist.iter().collect::<Vec<_>>(); assert_eq!(data[0].range,
-    /// BinRange::range(i64::MIN, 0)); // An additional bin for `..0`
-    /// assert_eq!(data[0].count, 0); // Nothing is in this bin
-    ///
-    ///assert_eq!(data[1].range, BinRange::range(0, 10)); // The range `0..10`
-    /// assert_eq!(data[1].count, 1); // 4 is sampled into this bin ```
-    ///
-    ///Notes -----
-    ///
-    ///Histograms may be constructed either from their left bin edges, or from
-    /// a sequence of ranges. In either case, the left-most bin may be converted
-    /// upon construction. In particular, if the left-most value is not equal to
-    /// the minimum of the support, a new bin will be added from the minimum to
-    /// that provided value. If the left-most value _is_ the support's minimum,
-    /// because the provided bin was unbounded below, such as `(..0)`, then that
-    /// bin will be converted into one bounded below, `(MIN..0)` in this case.
-    ///
-    ///The short of this is that, most of the time, it shouldn't matter. If one
-    /// specifies the extremes of the support as their bins, be aware that the
-    /// left-most may be converted from a `BinRange::RangeTo` into a
-    /// `BinRange::Range`. In other words, the first bin of a histogram is
-    /// _always_ a `Bin::Range` or a `Bin::RangeFrom` after construction. In
-    /// fact, every bin is one of those variants, the `BinRange::RangeTo` is
-    /// only provided as a convenience during construction.
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "A simple type for managing a histogram metric.\n\nA
-    /// histogram maintains the count of any number of samples, over a set of
-    /// bins. Bins are specified on construction via their _left_ edges,
-    /// inclusive. There can't be any \"gaps\" in the bins, and an additional
-    /// bin may be added to the left, right, or both so that the bins extend to
-    /// the entire range of the support.\n\nNote that any gaps, unsorted bins,
-    /// or non-finite values will result in an error.\n\nExample ------- ```rust
-    /// use oximeter::histogram::{BinRange, Histogram};\n\nlet edges = [0i64,
-    /// 10, 20]; let mut hist = Histogram::new(&edges).unwrap();
-    /// assert_eq!(hist.n_bins(), 4); // One additional bin for the range (20..)
-    /// assert_eq!(hist.n_samples(), 0); hist.sample(4); hist.sample(100);
-    /// assert_eq!(hist.n_samples(), 2);\n\nlet data =
-    /// hist.iter().collect::<Vec<_>>(); assert_eq!(data[0].range,
-    /// BinRange::range(i64::MIN, 0)); // An additional bin for `..0`
-    /// assert_eq!(data[0].count, 0); // Nothing is in this
-    /// bin\n\nassert_eq!(data[1].range, BinRange::range(0, 10)); // The range
-    /// `0..10` assert_eq!(data[1].count, 1); // 4 is sampled into this bin
-    /// ```\n\nNotes -----\n\nHistograms may be constructed either from their
-    /// left bin edges, or from a sequence of ranges. In either case, the
-    /// left-most bin may be converted upon construction. In particular, if the
-    /// left-most value is not equal to the minimum of the support, a new bin
-    /// will be added from the minimum to that provided value. If the left-most
-    /// value _is_ the support's minimum, because the provided bin was unbounded
-    /// below, such as `(..0)`, then that bin will be converted into one bounded
-    /// below, `(MIN..0)` in this case.\n\nThe short of this is that, most of
-    /// the time, it shouldn't matter. If one specifies the extremes of the
-    /// support as their bins, be aware that the left-most may be converted from
-    /// a `BinRange::RangeTo` into a `BinRange::Range`. In other words, the
-    /// first bin of a histogram is _always_ a `Bin::Range` or a
-    /// `Bin::RangeFrom` after construction. In fact, every bin is one of those
-    /// variants, the `BinRange::RangeTo` is only provided as a convenience
-    /// during construction.",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "bins",
-    ///    "n_samples",
-    ///    "start_time"
-    ///  ],
-    ///  "properties": {
-    ///    "bins": {
-    ///      "type": "array",
-    ///      "items": {
-    ///        "$ref": "#/components/schemas/Binint64"
-    ///      }
-    ///    },
-    ///    "n_samples": {
-    ///      "type": "integer",
-    ///      "format": "uint64",
-    ///      "minimum": 0.0
-    ///    },
-    ///    "start_time": {
-    ///      "type": "string",
-    ///      "format": "date-time"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "A simple type for managing a histogram metric.\n\nA histogram maintains the count of any number of samples, over a set of bins. Bins are specified on construction via their _left_ edges, inclusive. There can't be any \"gaps\" in the bins, and an additional bin may be added to the left, right, or both so that the bins extend to the entire range of the support.\n\nNote that any gaps, unsorted bins, or non-finite values will result in an error.\n\nExample ------- ```rust use oximeter::histogram::{BinRange, Histogram};\n\nlet edges = [0i64, 10, 20]; let mut hist = Histogram::new(&edges).unwrap(); assert_eq!(hist.n_bins(), 4); // One additional bin for the range (20..) assert_eq!(hist.n_samples(), 0); hist.sample(4); hist.sample(100); assert_eq!(hist.n_samples(), 2);\n\nlet data = hist.iter().collect::<Vec<_>>(); assert_eq!(data[0].range, BinRange::range(i64::MIN, 0)); // An additional bin for `..0` assert_eq!(data[0].count, 0); // Nothing is in this bin\n\nassert_eq!(data[1].range, BinRange::range(0, 10)); // The range `0..10` assert_eq!(data[1].count, 1); // 4 is sampled into this bin ```\n\nNotes -----\n\nHistograms may be constructed either from their left bin edges, or from a sequence of ranges. In either case, the left-most bin may be converted upon construction. In particular, if the left-most value is not equal to the minimum of the support, a new bin will be added from the minimum to that provided value. If the left-most value _is_ the support's minimum, because the provided bin was unbounded below, such as `(..0)`, then that bin will be converted into one bounded below, `(MIN..0)` in this case.\n\nThe short of this is that, most of the time, it shouldn't matter. If one specifies the extremes of the support as their bins, be aware that the left-most may be converted from a `BinRange::RangeTo` into a `BinRange::Range`. In other words, the first bin of a histogram is _always_ a `Bin::Range` or a `Bin::RangeFrom` after construction. In fact, every bin is one of those variants, the `BinRange::RangeTo` is only provided as a convenience during construction."]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"A simple type for managing a histogram metric.\\n\\nA histogram maintains the count of any number of samples, over a set of bins. Bins are specified on construction via their _left_ edges, inclusive. There can't be any \\\"gaps\\\" in the bins, and an additional bin may be added to the left, right, or both so that the bins extend to the entire range of the support.\\n\\nNote that any gaps, unsorted bins, or non-finite values will result in an error.\\n\\nExample ------- ```rust use oximeter::histogram::{BinRange, Histogram};\\n\\nlet edges = [0i64, 10, 20]; let mut hist = Histogram::new(&edges).unwrap(); assert_eq!(hist.n_bins(), 4); // One additional bin for the range (20..) assert_eq!(hist.n_samples(), 0); hist.sample(4); hist.sample(100); assert_eq!(hist.n_samples(), 2);\\n\\nlet data = hist.iter().collect::<Vec<_>>(); assert_eq!(data[0].range, BinRange::range(i64::MIN, 0)); // An additional bin for `..0` assert_eq!(data[0].count, 0); // Nothing is in this bin\\n\\nassert_eq!(data[1].range, BinRange::range(0, 10)); // The range `0..10` assert_eq!(data[1].count, 1); // 4 is sampled into this bin ```\\n\\nNotes -----\\n\\nHistograms may be constructed either from their left bin edges, or from a sequence of ranges. In either case, the left-most bin may be converted upon construction. In particular, if the left-most value is not equal to the minimum of the support, a new bin will be added from the minimum to that provided value. If the left-most value _is_ the support's minimum, because the provided bin was unbounded below, such as `(..0)`, then that bin will be converted into one bounded below, `(MIN..0)` in this case.\\n\\nThe short of this is that, most of the time, it shouldn't matter. If one specifies the extremes of the support as their bins, be aware that the left-most may be converted from a `BinRange::RangeTo` into a `BinRange::Range`. In other words, the first bin of a histogram is _always_ a `Bin::Range` or a `Bin::RangeFrom` after construction. In fact, every bin is one of those variants, the `BinRange::RangeTo` is only provided as a convenience during construction.\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"bins\","]
+    #[doc = "    \"n_samples\","]
+    #[doc = "    \"start_time\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"bins\": {"]
+    #[doc = "      \"type\": \"array\","]
+    #[doc = "      \"items\": {"]
+    #[doc = "        \"$ref\": \"#/components/schemas/Binint64\""]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    \"n_samples\": {"]
+    #[doc = "      \"type\": \"integer\","]
+    #[doc = "      \"format\": \"uint64\","]
+    #[doc = "      \"minimum\": 0.0"]
+    #[doc = "    },"]
+    #[doc = "    \"start_time\": {"]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"date-time\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct Histogramint64 {
         pub bins: ::std::vec::Vec<Binint64>,
@@ -3350,28 +3112,25 @@ pub mod types {
         }
     }
 
-    ///Supported set of sort modes for scanning by id only.
-    ///
-    ///Currently, we only support scanning in ascending order.
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Supported set of sort modes for scanning by id
-    /// only.\n\nCurrently, we only support scanning in ascending order.",
-    ///  "oneOf": [
-    ///    {
-    ///      "description": "sort in increasing order of \"id\"",
-    ///      "type": "string",
-    ///      "enum": [
-    ///        "id_ascending"
-    ///      ]
-    ///    }
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Supported set of sort modes for scanning by id only.\n\nCurrently, we only support scanning in ascending order."]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Supported set of sort modes for scanning by id only.\\n\\nCurrently, we only support scanning in ascending order.\","]
+    #[doc = "  \"oneOf\": ["]
+    #[doc = "    {"]
+    #[doc = "      \"description\": \"sort in increasing order of \\\"id\\\"\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"enum\": ["]
+    #[doc = "        \"id_ascending\""]
+    #[doc = "      ]"]
+    #[doc = "    }"]
+    #[doc = "  ]"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(
         :: serde :: Deserialize,
         :: serde :: Serialize,
@@ -3385,7 +3144,7 @@ pub mod types {
         PartialOrd,
     )]
     pub enum IdSortMode {
-        ///sort in increasing order of "id"
+        #[doc = "sort in increasing order of \"id\""]
         #[serde(rename = "id_ascending")]
         IdAscending,
     }
@@ -3439,77 +3198,75 @@ pub mod types {
         }
     }
 
-    ///Client view of an [`IdentityProvider`]
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Client view of an [`IdentityProvider`]",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "description",
-    ///    "id",
-    ///    "name",
-    ///    "provider_type",
-    ///    "time_created",
-    ///    "time_modified"
-    ///  ],
-    ///  "properties": {
-    ///    "description": {
-    ///      "description": "human-readable free-form text about a resource",
-    ///      "type": "string"
-    ///    },
-    ///    "id": {
-    ///      "description": "unique, immutable, system-controlled identifier for
-    /// each resource",
-    ///      "type": "string",
-    ///      "format": "uuid"
-    ///    },
-    ///    "name": {
-    ///      "description": "unique, mutable, user-controlled identifier for
-    /// each resource",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/Name"
-    ///        }
-    ///      ]
-    ///    },
-    ///    "provider_type": {
-    ///      "description": "Identity provider type",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/IdentityProviderType"
-    ///        }
-    ///      ]
-    ///    },
-    ///    "time_created": {
-    ///      "description": "timestamp when this resource was created",
-    ///      "type": "string",
-    ///      "format": "date-time"
-    ///    },
-    ///    "time_modified": {
-    ///      "description": "timestamp when this resource was last modified",
-    ///      "type": "string",
-    ///      "format": "date-time"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Client view of an [`IdentityProvider`]"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Client view of an [`IdentityProvider`]\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"description\","]
+    #[doc = "    \"id\","]
+    #[doc = "    \"name\","]
+    #[doc = "    \"provider_type\","]
+    #[doc = "    \"time_created\","]
+    #[doc = "    \"time_modified\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"description\": {"]
+    #[doc = "      \"description\": \"human-readable free-form text about a resource\","]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"id\": {"]
+    #[doc = "      \"description\": \"unique, immutable, system-controlled identifier for each resource\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"uuid\""]
+    #[doc = "    },"]
+    #[doc = "    \"name\": {"]
+    #[doc = "      \"description\": \"unique, mutable, user-controlled identifier for each resource\","]
+    #[doc = "      \"allOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/Name\""]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"provider_type\": {"]
+    #[doc = "      \"description\": \"Identity provider type\","]
+    #[doc = "      \"allOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/IdentityProviderType\""]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"time_created\": {"]
+    #[doc = "      \"description\": \"timestamp when this resource was created\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"date-time\""]
+    #[doc = "    },"]
+    #[doc = "    \"time_modified\": {"]
+    #[doc = "      \"description\": \"timestamp when this resource was last modified\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"date-time\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct IdentityProvider {
-        ///human-readable free-form text about a resource
+        #[doc = "human-readable free-form text about a resource"]
         pub description: ::std::string::String,
-        ///unique, immutable, system-controlled identifier for each resource
+        #[doc = "unique, immutable, system-controlled identifier for each resource"]
         pub id: ::uuid::Uuid,
-        ///unique, mutable, user-controlled identifier for each resource
+        #[doc = "unique, mutable, user-controlled identifier for each resource"]
         pub name: Name,
-        ///Identity provider type
+        #[doc = "Identity provider type"]
         pub provider_type: IdentityProviderType,
-        ///timestamp when this resource was created
+        #[doc = "timestamp when this resource was created"]
         pub time_created: ::chrono::DateTime<::chrono::offset::Utc>,
-        ///timestamp when this resource was last modified
+        #[doc = "timestamp when this resource was last modified"]
         pub time_modified: ::chrono::DateTime<::chrono::offset::Utc>,
     }
 
@@ -3519,42 +3276,41 @@ pub mod types {
         }
     }
 
-    ///A single page of results
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "A single page of results",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "items"
-    ///  ],
-    ///  "properties": {
-    ///    "items": {
-    ///      "description": "list of items on this page of results",
-    ///      "type": "array",
-    ///      "items": {
-    ///        "$ref": "#/components/schemas/IdentityProvider"
-    ///      }
-    ///    },
-    ///    "next_page": {
-    ///      "description": "token used to fetch the next page of results (if
-    /// any)",
-    ///      "type": [
-    ///        "string",
-    ///        "null"
-    ///      ]
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "A single page of results"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"A single page of results\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"items\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"items\": {"]
+    #[doc = "      \"description\": \"list of items on this page of results\","]
+    #[doc = "      \"type\": \"array\","]
+    #[doc = "      \"items\": {"]
+    #[doc = "        \"$ref\": \"#/components/schemas/IdentityProvider\""]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    \"next_page\": {"]
+    #[doc = "      \"description\": \"token used to fetch the next page of results (if any)\","]
+    #[doc = "      \"type\": ["]
+    #[doc = "        \"string\","]
+    #[doc = "        \"null\""]
+    #[doc = "      ]"]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct IdentityProviderResultsPage {
-        ///list of items on this page of results
+        #[doc = "list of items on this page of results"]
         pub items: ::std::vec::Vec<IdentityProvider>,
-        ///token used to fetch the next page of results (if any)
+        #[doc = "token used to fetch the next page of results (if any)"]
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
         pub next_page: ::std::option::Option<::std::string::String>,
     }
@@ -3565,24 +3321,24 @@ pub mod types {
         }
     }
 
-    ///`IdentityProviderType`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "oneOf": [
-    ///    {
-    ///      "description": "SAML identity provider",
-    ///      "type": "string",
-    ///      "enum": [
-    ///        "saml"
-    ///      ]
-    ///    }
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`IdentityProviderType`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"oneOf\": ["]
+    #[doc = "    {"]
+    #[doc = "      \"description\": \"SAML identity provider\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"enum\": ["]
+    #[doc = "        \"saml\""]
+    #[doc = "      ]"]
+    #[doc = "    }"]
+    #[doc = "  ]"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(
         :: serde :: Deserialize,
         :: serde :: Serialize,
@@ -3596,7 +3352,7 @@ pub mod types {
         PartialOrd,
     )]
     pub enum IdentityProviderType {
-        ///SAML identity provider
+        #[doc = "SAML identity provider"]
         #[serde(rename = "saml")]
         Saml,
     }
@@ -3650,21 +3406,21 @@ pub mod types {
         }
     }
 
-    ///Describes what kind of identity is described by an id
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Describes what kind of identity is described by an id",
-    ///  "type": "string",
-    ///  "enum": [
-    ///    "silo_user",
-    ///    "silo_group"
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Describes what kind of identity is described by an id"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Describes what kind of identity is described by an id\","]
+    #[doc = "  \"type\": \"string\","]
+    #[doc = "  \"enum\": ["]
+    #[doc = "    \"silo_user\","]
+    #[doc = "    \"silo_group\""]
+    #[doc = "  ]"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(
         :: serde :: Deserialize,
         :: serde :: Serialize,
@@ -3735,53 +3491,53 @@ pub mod types {
         }
     }
 
-    ///`IdpMetadataSource`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "oneOf": [
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "type",
-    ///        "url"
-    ///      ],
-    ///      "properties": {
-    ///        "type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "url"
-    ///          ]
-    ///        },
-    ///        "url": {
-    ///          "type": "string"
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "data",
-    ///        "type"
-    ///      ],
-    ///      "properties": {
-    ///        "data": {
-    ///          "type": "string"
-    ///        },
-    ///        "type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "base64_encoded_xml"
-    ///          ]
-    ///        }
-    ///      }
-    ///    }
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`IdpMetadataSource`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"oneOf\": ["]
+    #[doc = "    {"]
+    #[doc = "      \"type\": \"object\","]
+    #[doc = "      \"required\": ["]
+    #[doc = "        \"type\","]
+    #[doc = "        \"url\""]
+    #[doc = "      ],"]
+    #[doc = "      \"properties\": {"]
+    #[doc = "        \"type\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"enum\": ["]
+    #[doc = "            \"url\""]
+    #[doc = "          ]"]
+    #[doc = "        },"]
+    #[doc = "        \"url\": {"]
+    #[doc = "          \"type\": \"string\""]
+    #[doc = "        }"]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    {"]
+    #[doc = "      \"type\": \"object\","]
+    #[doc = "      \"required\": ["]
+    #[doc = "        \"data\","]
+    #[doc = "        \"type\""]
+    #[doc = "      ],"]
+    #[doc = "      \"properties\": {"]
+    #[doc = "        \"data\": {"]
+    #[doc = "          \"type\": \"string\""]
+    #[doc = "        },"]
+    #[doc = "        \"type\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"enum\": ["]
+    #[doc = "            \"base64_encoded_xml\""]
+    #[doc = "          ]"]
+    #[doc = "        }"]
+    #[doc = "      }"]
+    #[doc = "    }"]
+    #[doc = "  ]"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     #[serde(tag = "type")]
     pub enum IdpMetadataSource {
@@ -3797,133 +3553,131 @@ pub mod types {
         }
     }
 
-    ///Client view of project Images
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Client view of project Images",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "block_size",
-    ///    "description",
-    ///    "id",
-    ///    "name",
-    ///    "project_id",
-    ///    "size",
-    ///    "time_created",
-    ///    "time_modified"
-    ///  ],
-    ///  "properties": {
-    ///    "block_size": {
-    ///      "description": "size of blocks in bytes",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/ByteCount"
-    ///        }
-    ///      ]
-    ///    },
-    ///    "description": {
-    ///      "description": "human-readable free-form text about a resource",
-    ///      "type": "string"
-    ///    },
-    ///    "digest": {
-    ///      "description": "Hash of the image contents, if applicable",
-    ///      "oneOf": [
-    ///        {
-    ///          "type": "null"
-    ///        },
-    ///        {
-    ///          "allOf": [
-    ///            {
-    ///              "$ref": "#/components/schemas/Digest"
-    ///            }
-    ///          ]
-    ///        }
-    ///      ]
-    ///    },
-    ///    "id": {
-    ///      "description": "unique, immutable, system-controlled identifier for
-    /// each resource",
-    ///      "type": "string",
-    ///      "format": "uuid"
-    ///    },
-    ///    "name": {
-    ///      "description": "unique, mutable, user-controlled identifier for
-    /// each resource",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/Name"
-    ///        }
-    ///      ]
-    ///    },
-    ///    "project_id": {
-    ///      "description": "The project the disk belongs to",
-    ///      "type": "string",
-    ///      "format": "uuid"
-    ///    },
-    ///    "size": {
-    ///      "description": "total size in bytes",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/ByteCount"
-    ///        }
-    ///      ]
-    ///    },
-    ///    "time_created": {
-    ///      "description": "timestamp when this resource was created",
-    ///      "type": "string",
-    ///      "format": "date-time"
-    ///    },
-    ///    "time_modified": {
-    ///      "description": "timestamp when this resource was last modified",
-    ///      "type": "string",
-    ///      "format": "date-time"
-    ///    },
-    ///    "url": {
-    ///      "description": "URL source of this image, if any",
-    ///      "type": [
-    ///        "string",
-    ///        "null"
-    ///      ]
-    ///    },
-    ///    "version": {
-    ///      "description": "Version of this, if any",
-    ///      "type": [
-    ///        "string",
-    ///        "null"
-    ///      ]
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Client view of project Images"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Client view of project Images\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"block_size\","]
+    #[doc = "    \"description\","]
+    #[doc = "    \"id\","]
+    #[doc = "    \"name\","]
+    #[doc = "    \"project_id\","]
+    #[doc = "    \"size\","]
+    #[doc = "    \"time_created\","]
+    #[doc = "    \"time_modified\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"block_size\": {"]
+    #[doc = "      \"description\": \"size of blocks in bytes\","]
+    #[doc = "      \"allOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/ByteCount\""]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"description\": {"]
+    #[doc = "      \"description\": \"human-readable free-form text about a resource\","]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"digest\": {"]
+    #[doc = "      \"description\": \"Hash of the image contents, if applicable\","]
+    #[doc = "      \"oneOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"type\": \"null\""]
+    #[doc = "        },"]
+    #[doc = "        {"]
+    #[doc = "          \"allOf\": ["]
+    #[doc = "            {"]
+    #[doc = "              \"$ref\": \"#/components/schemas/Digest\""]
+    #[doc = "            }"]
+    #[doc = "          ]"]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"id\": {"]
+    #[doc = "      \"description\": \"unique, immutable, system-controlled identifier for each resource\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"uuid\""]
+    #[doc = "    },"]
+    #[doc = "    \"name\": {"]
+    #[doc = "      \"description\": \"unique, mutable, user-controlled identifier for each resource\","]
+    #[doc = "      \"allOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/Name\""]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"project_id\": {"]
+    #[doc = "      \"description\": \"The project the disk belongs to\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"uuid\""]
+    #[doc = "    },"]
+    #[doc = "    \"size\": {"]
+    #[doc = "      \"description\": \"total size in bytes\","]
+    #[doc = "      \"allOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/ByteCount\""]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"time_created\": {"]
+    #[doc = "      \"description\": \"timestamp when this resource was created\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"date-time\""]
+    #[doc = "    },"]
+    #[doc = "    \"time_modified\": {"]
+    #[doc = "      \"description\": \"timestamp when this resource was last modified\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"date-time\""]
+    #[doc = "    },"]
+    #[doc = "    \"url\": {"]
+    #[doc = "      \"description\": \"URL source of this image, if any\","]
+    #[doc = "      \"type\": ["]
+    #[doc = "        \"string\","]
+    #[doc = "        \"null\""]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"version\": {"]
+    #[doc = "      \"description\": \"Version of this, if any\","]
+    #[doc = "      \"type\": ["]
+    #[doc = "        \"string\","]
+    #[doc = "        \"null\""]
+    #[doc = "      ]"]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct Image {
-        ///size of blocks in bytes
+        #[doc = "size of blocks in bytes"]
         pub block_size: ByteCount,
-        ///human-readable free-form text about a resource
+        #[doc = "human-readable free-form text about a resource"]
         pub description: ::std::string::String,
-        ///Hash of the image contents, if applicable
+        #[doc = "Hash of the image contents, if applicable"]
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
         pub digest: ::std::option::Option<Digest>,
-        ///unique, immutable, system-controlled identifier for each resource
+        #[doc = "unique, immutable, system-controlled identifier for each resource"]
         pub id: ::uuid::Uuid,
-        ///unique, mutable, user-controlled identifier for each resource
+        #[doc = "unique, mutable, user-controlled identifier for each resource"]
         pub name: Name,
-        ///The project the disk belongs to
+        #[doc = "The project the disk belongs to"]
         pub project_id: ::uuid::Uuid,
-        ///total size in bytes
+        #[doc = "total size in bytes"]
         pub size: ByteCount,
-        ///timestamp when this resource was created
+        #[doc = "timestamp when this resource was created"]
         pub time_created: ::chrono::DateTime<::chrono::offset::Utc>,
-        ///timestamp when this resource was last modified
+        #[doc = "timestamp when this resource was last modified"]
         pub time_modified: ::chrono::DateTime<::chrono::offset::Utc>,
-        ///URL source of this image, if any
+        #[doc = "URL source of this image, if any"]
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
         pub url: ::std::option::Option<::std::string::String>,
-        ///Version of this, if any
+        #[doc = "Version of this, if any"]
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
         pub version: ::std::option::Option<::std::string::String>,
     }
@@ -3934,56 +3688,54 @@ pub mod types {
         }
     }
 
-    ///Create-time parameters for an
-    /// [`Image`](crate::external_api::views::Image)
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Create-time parameters for an
-    /// [`Image`](crate::external_api::views::Image)",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "block_size",
-    ///    "description",
-    ///    "name",
-    ///    "source"
-    ///  ],
-    ///  "properties": {
-    ///    "block_size": {
-    ///      "description": "block size in bytes",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/BlockSize"
-    ///        }
-    ///      ]
-    ///    },
-    ///    "description": {
-    ///      "type": "string"
-    ///    },
-    ///    "name": {
-    ///      "$ref": "#/components/schemas/Name"
-    ///    },
-    ///    "source": {
-    ///      "description": "The source of the image's contents.",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/ImageSource"
-    ///        }
-    ///      ]
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Create-time parameters for an [`Image`](crate::external_api::views::Image)"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Create-time parameters for an [`Image`](crate::external_api::views::Image)\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"block_size\","]
+    #[doc = "    \"description\","]
+    #[doc = "    \"name\","]
+    #[doc = "    \"source\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"block_size\": {"]
+    #[doc = "      \"description\": \"block size in bytes\","]
+    #[doc = "      \"allOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/BlockSize\""]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"description\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"name\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/Name\""]
+    #[doc = "    },"]
+    #[doc = "    \"source\": {"]
+    #[doc = "      \"description\": \"The source of the image's contents.\","]
+    #[doc = "      \"allOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/ImageSource\""]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct ImageCreate {
-        ///block size in bytes
+        #[doc = "block size in bytes"]
         pub block_size: BlockSize,
         pub description: ::std::string::String,
         pub name: Name,
-        ///The source of the image's contents.
+        #[doc = "The source of the image's contents."]
         pub source: ImageSource,
     }
 
@@ -3993,42 +3745,41 @@ pub mod types {
         }
     }
 
-    ///A single page of results
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "A single page of results",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "items"
-    ///  ],
-    ///  "properties": {
-    ///    "items": {
-    ///      "description": "list of items on this page of results",
-    ///      "type": "array",
-    ///      "items": {
-    ///        "$ref": "#/components/schemas/Image"
-    ///      }
-    ///    },
-    ///    "next_page": {
-    ///      "description": "token used to fetch the next page of results (if
-    /// any)",
-    ///      "type": [
-    ///        "string",
-    ///        "null"
-    ///      ]
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "A single page of results"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"A single page of results\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"items\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"items\": {"]
+    #[doc = "      \"description\": \"list of items on this page of results\","]
+    #[doc = "      \"type\": \"array\","]
+    #[doc = "      \"items\": {"]
+    #[doc = "        \"$ref\": \"#/components/schemas/Image\""]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    \"next_page\": {"]
+    #[doc = "      \"description\": \"token used to fetch the next page of results (if any)\","]
+    #[doc = "      \"type\": ["]
+    #[doc = "        \"string\","]
+    #[doc = "        \"null\""]
+    #[doc = "      ]"]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct ImageResultsPage {
-        ///list of items on this page of results
+        #[doc = "list of items on this page of results"]
         pub items: ::std::vec::Vec<Image>,
-        ///token used to fetch the next page of results (if any)
+        #[doc = "token used to fetch the next page of results (if any)"]
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
         pub next_page: ::std::option::Option<::std::string::String>,
     }
@@ -4039,71 +3790,70 @@ pub mod types {
         }
     }
 
-    ///The source of the underlying image.
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "The source of the underlying image.",
-    ///  "oneOf": [
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "type",
-    ///        "url"
-    ///      ],
-    ///      "properties": {
-    ///        "type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "url"
-    ///          ]
-    ///        },
-    ///        "url": {
-    ///          "type": "string"
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "id",
-    ///        "type"
-    ///      ],
-    ///      "properties": {
-    ///        "id": {
-    ///          "type": "string",
-    ///          "format": "uuid"
-    ///        },
-    ///        "type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "snapshot"
-    ///          ]
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "description": "Boot the Alpine ISO that ships with the Propolis
-    /// zone. Intended for development purposes only.",
-    ///      "type": "object",
-    ///      "required": [
-    ///        "type"
-    ///      ],
-    ///      "properties": {
-    ///        "type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "you_can_boot_anything_as_long_as_its_alpine"
-    ///          ]
-    ///        }
-    ///      }
-    ///    }
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "The source of the underlying image."]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"The source of the underlying image.\","]
+    #[doc = "  \"oneOf\": ["]
+    #[doc = "    {"]
+    #[doc = "      \"type\": \"object\","]
+    #[doc = "      \"required\": ["]
+    #[doc = "        \"type\","]
+    #[doc = "        \"url\""]
+    #[doc = "      ],"]
+    #[doc = "      \"properties\": {"]
+    #[doc = "        \"type\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"enum\": ["]
+    #[doc = "            \"url\""]
+    #[doc = "          ]"]
+    #[doc = "        },"]
+    #[doc = "        \"url\": {"]
+    #[doc = "          \"type\": \"string\""]
+    #[doc = "        }"]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    {"]
+    #[doc = "      \"type\": \"object\","]
+    #[doc = "      \"required\": ["]
+    #[doc = "        \"id\","]
+    #[doc = "        \"type\""]
+    #[doc = "      ],"]
+    #[doc = "      \"properties\": {"]
+    #[doc = "        \"id\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"format\": \"uuid\""]
+    #[doc = "        },"]
+    #[doc = "        \"type\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"enum\": ["]
+    #[doc = "            \"snapshot\""]
+    #[doc = "          ]"]
+    #[doc = "        }"]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    {"]
+    #[doc = "      \"description\": \"Boot the Alpine ISO that ships with the Propolis zone. Intended for development purposes only.\","]
+    #[doc = "      \"type\": \"object\","]
+    #[doc = "      \"required\": ["]
+    #[doc = "        \"type\""]
+    #[doc = "      ],"]
+    #[doc = "      \"properties\": {"]
+    #[doc = "        \"type\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"enum\": ["]
+    #[doc = "            \"you_can_boot_anything_as_long_as_its_alpine\""]
+    #[doc = "          ]"]
+    #[doc = "        }"]
+    #[doc = "      }"]
+    #[doc = "    }"]
+    #[doc = "  ]"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     #[serde(tag = "type")]
     pub enum ImageSource {
@@ -4121,113 +3871,111 @@ pub mod types {
         }
     }
 
-    ///Client view of an [`Instance`]
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Client view of an [`Instance`]",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "description",
-    ///    "hostname",
-    ///    "id",
-    ///    "memory",
-    ///    "name",
-    ///    "ncpus",
-    ///    "project_id",
-    ///    "run_state",
-    ///    "time_created",
-    ///    "time_modified",
-    ///    "time_run_state_updated"
-    ///  ],
-    ///  "properties": {
-    ///    "description": {
-    ///      "description": "human-readable free-form text about a resource",
-    ///      "type": "string"
-    ///    },
-    ///    "hostname": {
-    ///      "description": "RFC1035-compliant hostname for the Instance.",
-    ///      "type": "string"
-    ///    },
-    ///    "id": {
-    ///      "description": "unique, immutable, system-controlled identifier for
-    /// each resource",
-    ///      "type": "string",
-    ///      "format": "uuid"
-    ///    },
-    ///    "memory": {
-    ///      "description": "memory allocated for this Instance",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/ByteCount"
-    ///        }
-    ///      ]
-    ///    },
-    ///    "name": {
-    ///      "description": "unique, mutable, user-controlled identifier for
-    /// each resource",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/Name"
-    ///        }
-    ///      ]
-    ///    },
-    ///    "ncpus": {
-    ///      "description": "number of CPUs allocated for this Instance",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/InstanceCpuCount"
-    ///        }
-    ///      ]
-    ///    },
-    ///    "project_id": {
-    ///      "description": "id for the project containing this Instance",
-    ///      "type": "string",
-    ///      "format": "uuid"
-    ///    },
-    ///    "run_state": {
-    ///      "$ref": "#/components/schemas/InstanceState"
-    ///    },
-    ///    "time_created": {
-    ///      "description": "timestamp when this resource was created",
-    ///      "type": "string",
-    ///      "format": "date-time"
-    ///    },
-    ///    "time_modified": {
-    ///      "description": "timestamp when this resource was last modified",
-    ///      "type": "string",
-    ///      "format": "date-time"
-    ///    },
-    ///    "time_run_state_updated": {
-    ///      "type": "string",
-    ///      "format": "date-time"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Client view of an [`Instance`]"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Client view of an [`Instance`]\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"description\","]
+    #[doc = "    \"hostname\","]
+    #[doc = "    \"id\","]
+    #[doc = "    \"memory\","]
+    #[doc = "    \"name\","]
+    #[doc = "    \"ncpus\","]
+    #[doc = "    \"project_id\","]
+    #[doc = "    \"run_state\","]
+    #[doc = "    \"time_created\","]
+    #[doc = "    \"time_modified\","]
+    #[doc = "    \"time_run_state_updated\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"description\": {"]
+    #[doc = "      \"description\": \"human-readable free-form text about a resource\","]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"hostname\": {"]
+    #[doc = "      \"description\": \"RFC1035-compliant hostname for the Instance.\","]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"id\": {"]
+    #[doc = "      \"description\": \"unique, immutable, system-controlled identifier for each resource\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"uuid\""]
+    #[doc = "    },"]
+    #[doc = "    \"memory\": {"]
+    #[doc = "      \"description\": \"memory allocated for this Instance\","]
+    #[doc = "      \"allOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/ByteCount\""]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"name\": {"]
+    #[doc = "      \"description\": \"unique, mutable, user-controlled identifier for each resource\","]
+    #[doc = "      \"allOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/Name\""]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"ncpus\": {"]
+    #[doc = "      \"description\": \"number of CPUs allocated for this Instance\","]
+    #[doc = "      \"allOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/InstanceCpuCount\""]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"project_id\": {"]
+    #[doc = "      \"description\": \"id for the project containing this Instance\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"uuid\""]
+    #[doc = "    },"]
+    #[doc = "    \"run_state\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/InstanceState\""]
+    #[doc = "    },"]
+    #[doc = "    \"time_created\": {"]
+    #[doc = "      \"description\": \"timestamp when this resource was created\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"date-time\""]
+    #[doc = "    },"]
+    #[doc = "    \"time_modified\": {"]
+    #[doc = "      \"description\": \"timestamp when this resource was last modified\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"date-time\""]
+    #[doc = "    },"]
+    #[doc = "    \"time_run_state_updated\": {"]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"date-time\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct Instance {
-        ///human-readable free-form text about a resource
+        #[doc = "human-readable free-form text about a resource"]
         pub description: ::std::string::String,
-        ///RFC1035-compliant hostname for the Instance.
+        #[doc = "RFC1035-compliant hostname for the Instance."]
         pub hostname: ::std::string::String,
-        ///unique, immutable, system-controlled identifier for each resource
+        #[doc = "unique, immutable, system-controlled identifier for each resource"]
         pub id: ::uuid::Uuid,
-        ///memory allocated for this Instance
+        #[doc = "memory allocated for this Instance"]
         pub memory: ByteCount,
-        ///unique, mutable, user-controlled identifier for each resource
+        #[doc = "unique, mutable, user-controlled identifier for each resource"]
         pub name: Name,
-        ///number of CPUs allocated for this Instance
+        #[doc = "number of CPUs allocated for this Instance"]
         pub ncpus: InstanceCpuCount,
-        ///id for the project containing this Instance
+        #[doc = "id for the project containing this Instance"]
         pub project_id: ::uuid::Uuid,
         pub run_state: InstanceState,
-        ///timestamp when this resource was created
+        #[doc = "timestamp when this resource was created"]
         pub time_created: ::chrono::DateTime<::chrono::offset::Utc>,
-        ///timestamp when this resource was last modified
+        #[doc = "timestamp when this resource was last modified"]
         pub time_modified: ::chrono::DateTime<::chrono::offset::Utc>,
         pub time_run_state_updated: ::chrono::DateTime<::chrono::offset::Utc>,
     }
@@ -4238,19 +3986,19 @@ pub mod types {
         }
     }
 
-    ///The number of CPUs in an Instance
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "The number of CPUs in an Instance",
-    ///  "type": "integer",
-    ///  "format": "uint16",
-    ///  "minimum": 0.0
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "The number of CPUs in an Instance"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"The number of CPUs in an Instance\","]
+    #[doc = "  \"type\": \"integer\","]
+    #[doc = "  \"format\": \"uint16\","]
+    #[doc = "  \"minimum\": 0.0"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     #[serde(transparent)]
     pub struct InstanceCpuCount(pub u16);
@@ -4313,119 +4061,99 @@ pub mod types {
         }
     }
 
-    ///Create-time parameters for an
-    /// [`Instance`](omicron_common::api::external::Instance)
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Create-time parameters for an
-    /// [`Instance`](omicron_common::api::external::Instance)",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "description",
-    ///    "hostname",
-    ///    "memory",
-    ///    "name",
-    ///    "ncpus"
-    ///  ],
-    ///  "properties": {
-    ///    "description": {
-    ///      "type": "string"
-    ///    },
-    ///    "disks": {
-    ///      "description": "The disks to be created or attached for this
-    /// instance.",
-    ///      "default": [],
-    ///      "type": "array",
-    ///      "items": {
-    ///        "$ref": "#/components/schemas/InstanceDiskAttachment"
-    ///      }
-    ///    },
-    ///    "external_ips": {
-    ///      "description": "The external IP addresses provided to this
-    /// instance.\n\nBy default, all instances have outbound connectivity, but
-    /// no inbound connectivity. These external addresses can be used to provide
-    /// a fixed, known IP address for making inbound connections to the
-    /// instance.",
-    ///      "default": [],
-    ///      "type": "array",
-    ///      "items": {
-    ///        "$ref": "#/components/schemas/ExternalIpCreate"
-    ///      }
-    ///    },
-    ///    "hostname": {
-    ///      "type": "string"
-    ///    },
-    ///    "memory": {
-    ///      "$ref": "#/components/schemas/ByteCount"
-    ///    },
-    ///    "name": {
-    ///      "$ref": "#/components/schemas/Name"
-    ///    },
-    ///    "ncpus": {
-    ///      "$ref": "#/components/schemas/InstanceCpuCount"
-    ///    },
-    ///    "network_interfaces": {
-    ///      "description": "The network interfaces to be created for this
-    /// instance.",
-    ///      "default": {
-    ///        "type": "default"
-    ///      },
-    ///      "allOf": [
-    ///        {
-    ///          "$ref":
-    /// "#/components/schemas/InstanceNetworkInterfaceAttachment"
-    ///        }
-    ///      ]
-    ///    },
-    ///    "start": {
-    ///      "description": "Should this instance be started upon creation; true
-    /// by default.",
-    ///      "default": true,
-    ///      "type": "boolean"
-    ///    },
-    ///    "user_data": {
-    ///      "description": "User data for instance initialization systems (such
-    /// as cloud-init). Must be a Base64-encoded string, as specified in RFC
-    /// 4648 § 4 (+ and / characters with padding). Maximum 32 KiB unencoded
-    /// data.",
-    ///      "default": "",
-    ///      "type": "string",
-    ///      "format": "byte"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Create-time parameters for an [`Instance`](omicron_common::api::external::Instance)"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Create-time parameters for an [`Instance`](omicron_common::api::external::Instance)\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"description\","]
+    #[doc = "    \"hostname\","]
+    #[doc = "    \"memory\","]
+    #[doc = "    \"name\","]
+    #[doc = "    \"ncpus\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"description\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"disks\": {"]
+    #[doc = "      \"description\": \"The disks to be created or attached for this instance.\","]
+    #[doc = "      \"default\": [],"]
+    #[doc = "      \"type\": \"array\","]
+    #[doc = "      \"items\": {"]
+    #[doc = "        \"$ref\": \"#/components/schemas/InstanceDiskAttachment\""]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    \"external_ips\": {"]
+    #[doc = "      \"description\": \"The external IP addresses provided to this instance.\\n\\nBy default, all instances have outbound connectivity, but no inbound connectivity. These external addresses can be used to provide a fixed, known IP address for making inbound connections to the instance.\","]
+    #[doc = "      \"default\": [],"]
+    #[doc = "      \"type\": \"array\","]
+    #[doc = "      \"items\": {"]
+    #[doc = "        \"$ref\": \"#/components/schemas/ExternalIpCreate\""]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    \"hostname\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"memory\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/ByteCount\""]
+    #[doc = "    },"]
+    #[doc = "    \"name\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/Name\""]
+    #[doc = "    },"]
+    #[doc = "    \"ncpus\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/InstanceCpuCount\""]
+    #[doc = "    },"]
+    #[doc = "    \"network_interfaces\": {"]
+    #[doc = "      \"description\": \"The network interfaces to be created for this instance.\","]
+    #[doc = "      \"default\": {"]
+    #[doc = "        \"type\": \"default\""]
+    #[doc = "      },"]
+    #[doc = "      \"allOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/InstanceNetworkInterfaceAttachment\""]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"start\": {"]
+    #[doc = "      \"description\": \"Should this instance be started upon creation; true by default.\","]
+    #[doc = "      \"default\": true,"]
+    #[doc = "      \"type\": \"boolean\""]
+    #[doc = "    },"]
+    #[doc = "    \"user_data\": {"]
+    #[doc = "      \"description\": \"User data for instance initialization systems (such as cloud-init). Must be a Base64-encoded string, as specified in RFC 4648 § 4 (+ and / characters with padding). Maximum 32 KiB unencoded data.\","]
+    #[doc = "      \"default\": \"\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"byte\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct InstanceCreate {
         pub description: ::std::string::String,
-        ///The disks to be created or attached for this instance.
+        #[doc = "The disks to be created or attached for this instance."]
         #[serde(default, skip_serializing_if = "::std::vec::Vec::is_empty")]
         pub disks: ::std::vec::Vec<InstanceDiskAttachment>,
-        ///The external IP addresses provided to this instance.
-        ///
-        ///By default, all instances have outbound connectivity, but no inbound
-        /// connectivity. These external addresses can be used to provide a
-        /// fixed, known IP address for making inbound connections to the
-        /// instance.
+        #[doc = "The external IP addresses provided to this instance.\n\nBy default, all instances have outbound connectivity, but no inbound connectivity. These external addresses can be used to provide a fixed, known IP address for making inbound connections to the instance."]
         #[serde(default, skip_serializing_if = "::std::vec::Vec::is_empty")]
         pub external_ips: ::std::vec::Vec<ExternalIpCreate>,
         pub hostname: ::std::string::String,
         pub memory: ByteCount,
         pub name: Name,
         pub ncpus: InstanceCpuCount,
-        ///The network interfaces to be created for this instance.
+        #[doc = "The network interfaces to be created for this instance."]
         #[serde(default = "defaults::instance_create_network_interfaces")]
         pub network_interfaces: InstanceNetworkInterfaceAttachment,
-        ///Should this instance be started upon creation; true by default.
+        #[doc = "Should this instance be started upon creation; true by default."]
         #[serde(default = "defaults::default_bool::<true>")]
         pub start: bool,
-        ///User data for instance initialization systems (such as cloud-init).
-        /// Must be a Base64-encoded string, as specified in RFC 4648 § 4 (+ and
-        /// / characters with padding). Maximum 32 KiB unencoded data.
+        #[doc = "User data for instance initialization systems (such as cloud-init). Must be a Base64-encoded string, as specified in RFC 4648 § 4 (+ and / characters with padding). Maximum 32 KiB unencoded data."]
         #[serde(default)]
         pub user_data: ::std::string::String,
     }
@@ -4436,100 +4164,100 @@ pub mod types {
         }
     }
 
-    ///Describe the instance's disks at creation time
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Describe the instance's disks at creation time",
-    ///  "oneOf": [
-    ///    {
-    ///      "description": "During instance creation, create and attach disks",
-    ///      "type": "object",
-    ///      "required": [
-    ///        "description",
-    ///        "disk_source",
-    ///        "name",
-    ///        "size",
-    ///        "type"
-    ///      ],
-    ///      "properties": {
-    ///        "description": {
-    ///          "type": "string"
-    ///        },
-    ///        "disk_source": {
-    ///          "description": "initial source for this disk",
-    ///          "allOf": [
-    ///            {
-    ///              "$ref": "#/components/schemas/DiskSource"
-    ///            }
-    ///          ]
-    ///        },
-    ///        "name": {
-    ///          "$ref": "#/components/schemas/Name"
-    ///        },
-    ///        "size": {
-    ///          "description": "total size of the Disk in bytes",
-    ///          "allOf": [
-    ///            {
-    ///              "$ref": "#/components/schemas/ByteCount"
-    ///            }
-    ///          ]
-    ///        },
-    ///        "type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "create"
-    ///          ]
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "description": "During instance creation, attach this disk",
-    ///      "type": "object",
-    ///      "required": [
-    ///        "name",
-    ///        "type"
-    ///      ],
-    ///      "properties": {
-    ///        "name": {
-    ///          "description": "A disk name to attach",
-    ///          "allOf": [
-    ///            {
-    ///              "$ref": "#/components/schemas/Name"
-    ///            }
-    ///          ]
-    ///        },
-    ///        "type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "attach"
-    ///          ]
-    ///        }
-    ///      }
-    ///    }
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Describe the instance's disks at creation time"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Describe the instance's disks at creation time\","]
+    #[doc = "  \"oneOf\": ["]
+    #[doc = "    {"]
+    #[doc = "      \"description\": \"During instance creation, create and attach disks\","]
+    #[doc = "      \"type\": \"object\","]
+    #[doc = "      \"required\": ["]
+    #[doc = "        \"description\","]
+    #[doc = "        \"disk_source\","]
+    #[doc = "        \"name\","]
+    #[doc = "        \"size\","]
+    #[doc = "        \"type\""]
+    #[doc = "      ],"]
+    #[doc = "      \"properties\": {"]
+    #[doc = "        \"description\": {"]
+    #[doc = "          \"type\": \"string\""]
+    #[doc = "        },"]
+    #[doc = "        \"disk_source\": {"]
+    #[doc = "          \"description\": \"initial source for this disk\","]
+    #[doc = "          \"allOf\": ["]
+    #[doc = "            {"]
+    #[doc = "              \"$ref\": \"#/components/schemas/DiskSource\""]
+    #[doc = "            }"]
+    #[doc = "          ]"]
+    #[doc = "        },"]
+    #[doc = "        \"name\": {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/Name\""]
+    #[doc = "        },"]
+    #[doc = "        \"size\": {"]
+    #[doc = "          \"description\": \"total size of the Disk in bytes\","]
+    #[doc = "          \"allOf\": ["]
+    #[doc = "            {"]
+    #[doc = "              \"$ref\": \"#/components/schemas/ByteCount\""]
+    #[doc = "            }"]
+    #[doc = "          ]"]
+    #[doc = "        },"]
+    #[doc = "        \"type\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"enum\": ["]
+    #[doc = "            \"create\""]
+    #[doc = "          ]"]
+    #[doc = "        }"]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    {"]
+    #[doc = "      \"description\": \"During instance creation, attach this disk\","]
+    #[doc = "      \"type\": \"object\","]
+    #[doc = "      \"required\": ["]
+    #[doc = "        \"name\","]
+    #[doc = "        \"type\""]
+    #[doc = "      ],"]
+    #[doc = "      \"properties\": {"]
+    #[doc = "        \"name\": {"]
+    #[doc = "          \"description\": \"A disk name to attach\","]
+    #[doc = "          \"allOf\": ["]
+    #[doc = "            {"]
+    #[doc = "              \"$ref\": \"#/components/schemas/Name\""]
+    #[doc = "            }"]
+    #[doc = "          ]"]
+    #[doc = "        },"]
+    #[doc = "        \"type\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"enum\": ["]
+    #[doc = "            \"attach\""]
+    #[doc = "          ]"]
+    #[doc = "        }"]
+    #[doc = "      }"]
+    #[doc = "    }"]
+    #[doc = "  ]"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     #[serde(tag = "type")]
     pub enum InstanceDiskAttachment {
-        ///During instance creation, create and attach disks
+        #[doc = "During instance creation, create and attach disks"]
         #[serde(rename = "create")]
         Create {
             description: ::std::string::String,
-            ///initial source for this disk
+            #[doc = "initial source for this disk"]
             disk_source: DiskSource,
             name: Name,
-            ///total size of the Disk in bytes
+            #[doc = "total size of the Disk in bytes"]
             size: ByteCount,
         },
-        ///During instance creation, attach this disk
+        #[doc = "During instance creation, attach this disk"]
         #[serde(rename = "attach")]
         Attach {
-            ///A disk name to attach
+            #[doc = "A disk name to attach"]
             name: Name,
         },
     }
@@ -4540,28 +4268,26 @@ pub mod types {
         }
     }
 
-    ///Migration parameters for an
-    /// [`Instance`](omicron_common::api::external::Instance)
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Migration parameters for an
-    /// [`Instance`](omicron_common::api::external::Instance)",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "dst_sled_id"
-    ///  ],
-    ///  "properties": {
-    ///    "dst_sled_id": {
-    ///      "type": "string",
-    ///      "format": "uuid"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Migration parameters for an [`Instance`](omicron_common::api::external::Instance)"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Migration parameters for an [`Instance`](omicron_common::api::external::Instance)\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"dst_sled_id\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"dst_sled_id\": {"]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"uuid\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct InstanceMigrate {
         pub dst_sled_id: ::uuid::Uuid,
@@ -4573,85 +4299,74 @@ pub mod types {
         }
     }
 
-    ///Describes an attachment of a `NetworkInterface` to an `Instance`, at the
-    /// time the instance is created.
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Describes an attachment of a `NetworkInterface` to an
-    /// `Instance`, at the time the instance is created.",
-    ///  "oneOf": [
-    ///    {
-    ///      "description": "Create one or more `NetworkInterface`s for the
-    /// `Instance`.\n\nIf more than one interface is provided, then the first
-    /// will be designated the primary interface for the instance.",
-    ///      "type": "object",
-    ///      "required": [
-    ///        "params",
-    ///        "type"
-    ///      ],
-    ///      "properties": {
-    ///        "params": {
-    ///          "type": "array",
-    ///          "items": {
-    ///            "$ref": "#/components/schemas/NetworkInterfaceCreate"
-    ///          }
-    ///        },
-    ///        "type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "create"
-    ///          ]
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "description": "The default networking configuration for an
-    /// instance is to create a single primary interface with an
-    /// automatically-assigned IP address. The IP will be pulled from the
-    /// Project's default VPC / VPC Subnet.",
-    ///      "type": "object",
-    ///      "required": [
-    ///        "type"
-    ///      ],
-    ///      "properties": {
-    ///        "type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "default"
-    ///          ]
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "description": "No network interfaces at all will be created for
-    /// the instance.",
-    ///      "type": "object",
-    ///      "required": [
-    ///        "type"
-    ///      ],
-    ///      "properties": {
-    ///        "type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "none"
-    ///          ]
-    ///        }
-    ///      }
-    ///    }
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Describes an attachment of a `NetworkInterface` to an `Instance`, at the time the instance is created."]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Describes an attachment of a `NetworkInterface` to an `Instance`, at the time the instance is created.\","]
+    #[doc = "  \"oneOf\": ["]
+    #[doc = "    {"]
+    #[doc = "      \"description\": \"Create one or more `NetworkInterface`s for the `Instance`.\\n\\nIf more than one interface is provided, then the first will be designated the primary interface for the instance.\","]
+    #[doc = "      \"type\": \"object\","]
+    #[doc = "      \"required\": ["]
+    #[doc = "        \"params\","]
+    #[doc = "        \"type\""]
+    #[doc = "      ],"]
+    #[doc = "      \"properties\": {"]
+    #[doc = "        \"params\": {"]
+    #[doc = "          \"type\": \"array\","]
+    #[doc = "          \"items\": {"]
+    #[doc = "            \"$ref\": \"#/components/schemas/NetworkInterfaceCreate\""]
+    #[doc = "          }"]
+    #[doc = "        },"]
+    #[doc = "        \"type\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"enum\": ["]
+    #[doc = "            \"create\""]
+    #[doc = "          ]"]
+    #[doc = "        }"]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    {"]
+    #[doc = "      \"description\": \"The default networking configuration for an instance is to create a single primary interface with an automatically-assigned IP address. The IP will be pulled from the Project's default VPC / VPC Subnet.\","]
+    #[doc = "      \"type\": \"object\","]
+    #[doc = "      \"required\": ["]
+    #[doc = "        \"type\""]
+    #[doc = "      ],"]
+    #[doc = "      \"properties\": {"]
+    #[doc = "        \"type\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"enum\": ["]
+    #[doc = "            \"default\""]
+    #[doc = "          ]"]
+    #[doc = "        }"]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    {"]
+    #[doc = "      \"description\": \"No network interfaces at all will be created for the instance.\","]
+    #[doc = "      \"type\": \"object\","]
+    #[doc = "      \"required\": ["]
+    #[doc = "        \"type\""]
+    #[doc = "      ],"]
+    #[doc = "      \"properties\": {"]
+    #[doc = "        \"type\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"enum\": ["]
+    #[doc = "            \"none\""]
+    #[doc = "          ]"]
+    #[doc = "        }"]
+    #[doc = "      }"]
+    #[doc = "    }"]
+    #[doc = "  ]"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     #[serde(tag = "type", content = "params")]
     pub enum InstanceNetworkInterfaceAttachment {
-        ///Create one or more `NetworkInterface`s for the `Instance`.
-        ///
-        ///If more than one interface is provided, then the first will be
-        /// designated the primary interface for the instance.
+        #[doc = "Create one or more `NetworkInterface`s for the `Instance`.\n\nIf more than one interface is provided, then the first will be designated the primary interface for the instance."]
         #[serde(rename = "create")]
         Create(::std::vec::Vec<NetworkInterfaceCreate>),
         #[serde(rename = "default")]
@@ -4674,42 +4389,41 @@ pub mod types {
         }
     }
 
-    ///A single page of results
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "A single page of results",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "items"
-    ///  ],
-    ///  "properties": {
-    ///    "items": {
-    ///      "description": "list of items on this page of results",
-    ///      "type": "array",
-    ///      "items": {
-    ///        "$ref": "#/components/schemas/Instance"
-    ///      }
-    ///    },
-    ///    "next_page": {
-    ///      "description": "token used to fetch the next page of results (if
-    /// any)",
-    ///      "type": [
-    ///        "string",
-    ///        "null"
-    ///      ]
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "A single page of results"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"A single page of results\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"items\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"items\": {"]
+    #[doc = "      \"description\": \"list of items on this page of results\","]
+    #[doc = "      \"type\": \"array\","]
+    #[doc = "      \"items\": {"]
+    #[doc = "        \"$ref\": \"#/components/schemas/Instance\""]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    \"next_page\": {"]
+    #[doc = "      \"description\": \"token used to fetch the next page of results (if any)\","]
+    #[doc = "      \"type\": ["]
+    #[doc = "        \"string\","]
+    #[doc = "        \"null\""]
+    #[doc = "      ]"]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct InstanceResultsPage {
-        ///list of items on this page of results
+        #[doc = "list of items on this page of results"]
         pub items: ::std::vec::Vec<Instance>,
-        ///token used to fetch the next page of results (if any)
+        #[doc = "token used to fetch the next page of results (if any)"]
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
         pub next_page: ::std::option::Option<::std::string::String>,
     }
@@ -4720,50 +4434,43 @@ pub mod types {
         }
     }
 
-    ///Contents of an Instance's serial console buffer.
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Contents of an Instance's serial console buffer.",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "data",
-    ///    "last_byte_offset"
-    ///  ],
-    ///  "properties": {
-    ///    "data": {
-    ///      "description": "The bytes starting from the requested offset up to
-    /// either the end of the buffer or the request's `max_bytes`. Provided as a
-    /// u8 array rather than a string, as it may not be UTF-8.",
-    ///      "type": "array",
-    ///      "items": {
-    ///        "type": "integer",
-    ///        "format": "uint8",
-    ///        "minimum": 0.0
-    ///      }
-    ///    },
-    ///    "last_byte_offset": {
-    ///      "description": "The absolute offset since boot (suitable for use as
-    /// `byte_offset` in a subsequent request) of the last byte returned in
-    /// `data`.",
-    ///      "type": "integer",
-    ///      "format": "uint64",
-    ///      "minimum": 0.0
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Contents of an Instance's serial console buffer."]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Contents of an Instance's serial console buffer.\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"data\","]
+    #[doc = "    \"last_byte_offset\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"data\": {"]
+    #[doc = "      \"description\": \"The bytes starting from the requested offset up to either the end of the buffer or the request's `max_bytes`. Provided as a u8 array rather than a string, as it may not be UTF-8.\","]
+    #[doc = "      \"type\": \"array\","]
+    #[doc = "      \"items\": {"]
+    #[doc = "        \"type\": \"integer\","]
+    #[doc = "        \"format\": \"uint8\","]
+    #[doc = "        \"minimum\": 0.0"]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    \"last_byte_offset\": {"]
+    #[doc = "      \"description\": \"The absolute offset since boot (suitable for use as `byte_offset` in a subsequent request) of the last byte returned in `data`.\","]
+    #[doc = "      \"type\": \"integer\","]
+    #[doc = "      \"format\": \"uint64\","]
+    #[doc = "      \"minimum\": 0.0"]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct InstanceSerialConsoleData {
-        ///The bytes starting from the requested offset up to either the end of
-        /// the buffer or the request's `max_bytes`. Provided as a u8 array
-        /// rather than a string, as it may not be UTF-8.
+        #[doc = "The bytes starting from the requested offset up to either the end of the buffer or the request's `max_bytes`. Provided as a u8 array rather than a string, as it may not be UTF-8."]
         pub data: ::std::vec::Vec<u8>,
-        ///The absolute offset since boot (suitable for use as `byte_offset` in
-        /// a subsequent request) of the last byte returned in `data`.
+        #[doc = "The absolute offset since boot (suitable for use as `byte_offset` in a subsequent request) of the last byte returned in `data`."]
         pub last_byte_offset: u64,
     }
 
@@ -4773,98 +4480,88 @@ pub mod types {
         }
     }
 
-    ///Running state of an Instance (primarily: booted or stopped)
-    ///
-    ///This typically reflects whether it's starting, running, stopping, or
-    /// stopped, but also includes states related to the Instance's lifecycle
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Running state of an Instance (primarily: booted or
-    /// stopped)\n\nThis typically reflects whether it's starting, running,
-    /// stopping, or stopped, but also includes states related to the Instance's
-    /// lifecycle",
-    ///  "oneOf": [
-    ///    {
-    ///      "description": "The instance is being created.",
-    ///      "type": "string",
-    ///      "enum": [
-    ///        "creating"
-    ///      ]
-    ///    },
-    ///    {
-    ///      "description": "The instance is currently starting up.",
-    ///      "type": "string",
-    ///      "enum": [
-    ///        "starting"
-    ///      ]
-    ///    },
-    ///    {
-    ///      "description": "The instance is currently running.",
-    ///      "type": "string",
-    ///      "enum": [
-    ///        "running"
-    ///      ]
-    ///    },
-    ///    {
-    ///      "description": "The instance has been requested to stop and a
-    /// transition to \"Stopped\" is imminent.",
-    ///      "type": "string",
-    ///      "enum": [
-    ///        "stopping"
-    ///      ]
-    ///    },
-    ///    {
-    ///      "description": "The instance is currently stopped.",
-    ///      "type": "string",
-    ///      "enum": [
-    ///        "stopped"
-    ///      ]
-    ///    },
-    ///    {
-    ///      "description": "The instance is in the process of rebooting - it
-    /// will remain in the \"rebooting\" state until the VM is starting once
-    /// more.",
-    ///      "type": "string",
-    ///      "enum": [
-    ///        "rebooting"
-    ///      ]
-    ///    },
-    ///    {
-    ///      "description": "The instance is in the process of migrating - it will remain in the \"migrating\" state until the migration process is complete and the destination propolis is ready to continue execution.",
-    ///      "type": "string",
-    ///      "enum": [
-    ///        "migrating"
-    ///      ]
-    ///    },
-    ///    {
-    ///      "description": "The instance is attempting to recover from a
-    /// failure.",
-    ///      "type": "string",
-    ///      "enum": [
-    ///        "repairing"
-    ///      ]
-    ///    },
-    ///    {
-    ///      "description": "The instance has encountered a failure.",
-    ///      "type": "string",
-    ///      "enum": [
-    ///        "failed"
-    ///      ]
-    ///    },
-    ///    {
-    ///      "description": "The instance has been deleted.",
-    ///      "type": "string",
-    ///      "enum": [
-    ///        "destroyed"
-    ///      ]
-    ///    }
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Running state of an Instance (primarily: booted or stopped)\n\nThis typically reflects whether it's starting, running, stopping, or stopped, but also includes states related to the Instance's lifecycle"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Running state of an Instance (primarily: booted or stopped)\\n\\nThis typically reflects whether it's starting, running, stopping, or stopped, but also includes states related to the Instance's lifecycle\","]
+    #[doc = "  \"oneOf\": ["]
+    #[doc = "    {"]
+    #[doc = "      \"description\": \"The instance is being created.\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"enum\": ["]
+    #[doc = "        \"creating\""]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    {"]
+    #[doc = "      \"description\": \"The instance is currently starting up.\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"enum\": ["]
+    #[doc = "        \"starting\""]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    {"]
+    #[doc = "      \"description\": \"The instance is currently running.\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"enum\": ["]
+    #[doc = "        \"running\""]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    {"]
+    #[doc = "      \"description\": \"The instance has been requested to stop and a transition to \\\"Stopped\\\" is imminent.\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"enum\": ["]
+    #[doc = "        \"stopping\""]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    {"]
+    #[doc = "      \"description\": \"The instance is currently stopped.\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"enum\": ["]
+    #[doc = "        \"stopped\""]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    {"]
+    #[doc = "      \"description\": \"The instance is in the process of rebooting - it will remain in the \\\"rebooting\\\" state until the VM is starting once more.\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"enum\": ["]
+    #[doc = "        \"rebooting\""]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    {"]
+    #[doc = "      \"description\": \"The instance is in the process of migrating - it will remain in the \\\"migrating\\\" state until the migration process is complete and the destination propolis is ready to continue execution.\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"enum\": ["]
+    #[doc = "        \"migrating\""]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    {"]
+    #[doc = "      \"description\": \"The instance is attempting to recover from a failure.\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"enum\": ["]
+    #[doc = "        \"repairing\""]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    {"]
+    #[doc = "      \"description\": \"The instance has encountered a failure.\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"enum\": ["]
+    #[doc = "        \"failed\""]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    {"]
+    #[doc = "      \"description\": \"The instance has been deleted.\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"enum\": ["]
+    #[doc = "        \"destroyed\""]
+    #[doc = "      ]"]
+    #[doc = "    }"]
+    #[doc = "  ]"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(
         :: serde :: Deserialize,
         :: serde :: Serialize,
@@ -4878,38 +4575,34 @@ pub mod types {
         PartialOrd,
     )]
     pub enum InstanceState {
-        ///The instance is being created.
+        #[doc = "The instance is being created."]
         #[serde(rename = "creating")]
         Creating,
-        ///The instance is currently starting up.
+        #[doc = "The instance is currently starting up."]
         #[serde(rename = "starting")]
         Starting,
-        ///The instance is currently running.
+        #[doc = "The instance is currently running."]
         #[serde(rename = "running")]
         Running,
-        ///The instance has been requested to stop and a transition to
-        /// "Stopped" is imminent.
+        #[doc = "The instance has been requested to stop and a transition to \"Stopped\" is imminent."]
         #[serde(rename = "stopping")]
         Stopping,
-        ///The instance is currently stopped.
+        #[doc = "The instance is currently stopped."]
         #[serde(rename = "stopped")]
         Stopped,
-        ///The instance is in the process of rebooting - it will remain in the
-        /// "rebooting" state until the VM is starting once more.
+        #[doc = "The instance is in the process of rebooting - it will remain in the \"rebooting\" state until the VM is starting once more."]
         #[serde(rename = "rebooting")]
         Rebooting,
-        ///The instance is in the process of migrating - it will remain in the
-        /// "migrating" state until the migration process is complete and the
-        /// destination propolis is ready to continue execution.
+        #[doc = "The instance is in the process of migrating - it will remain in the \"migrating\" state until the migration process is complete and the destination propolis is ready to continue execution."]
         #[serde(rename = "migrating")]
         Migrating,
-        ///The instance is attempting to recover from a failure.
+        #[doc = "The instance is attempting to recover from a failure."]
         #[serde(rename = "repairing")]
         Repairing,
-        ///The instance has encountered a failure.
+        #[doc = "The instance has encountered a failure."]
         #[serde(rename = "failed")]
         Failed,
-        ///The instance has been deleted.
+        #[doc = "The instance has been deleted."]
         #[serde(rename = "destroyed")]
         Destroyed,
     }
@@ -4981,21 +4674,21 @@ pub mod types {
         }
     }
 
-    ///The kind of an external IP address for an instance
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "The kind of an external IP address for an instance",
-    ///  "type": "string",
-    ///  "enum": [
-    ///    "ephemeral",
-    ///    "floating"
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "The kind of an external IP address for an instance"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"The kind of an external IP address for an instance\","]
+    #[doc = "  \"type\": \"string\","]
+    #[doc = "  \"enum\": ["]
+    #[doc = "    \"ephemeral\","]
+    #[doc = "    \"floating\""]
+    #[doc = "  ]"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(
         :: serde :: Deserialize,
         :: serde :: Serialize,
@@ -5066,33 +4759,33 @@ pub mod types {
         }
     }
 
-    ///`IpNet`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "oneOf": [
-    ///    {
-    ///      "title": "v4",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/Ipv4Net"
-    ///        }
-    ///      ]
-    ///    },
-    ///    {
-    ///      "title": "v6",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/Ipv6Net"
-    ///        }
-    ///      ]
-    ///    }
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`IpNet`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"oneOf\": ["]
+    #[doc = "    {"]
+    #[doc = "      \"title\": \"v4\","]
+    #[doc = "      \"allOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/Ipv4Net\""]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    {"]
+    #[doc = "      \"title\": \"v6\","]
+    #[doc = "      \"allOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/Ipv6Net\""]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    }"]
+    #[doc = "  ]"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     #[serde(untagged)]
     pub enum IpNet {
@@ -5165,68 +4858,64 @@ pub mod types {
         }
     }
 
-    ///Identity-related metadata that's included in nearly all public API
-    /// objects
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Identity-related metadata that's included in nearly all
-    /// public API objects",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "description",
-    ///    "id",
-    ///    "name",
-    ///    "time_created",
-    ///    "time_modified"
-    ///  ],
-    ///  "properties": {
-    ///    "description": {
-    ///      "description": "human-readable free-form text about a resource",
-    ///      "type": "string"
-    ///    },
-    ///    "id": {
-    ///      "description": "unique, immutable, system-controlled identifier for
-    /// each resource",
-    ///      "type": "string",
-    ///      "format": "uuid"
-    ///    },
-    ///    "name": {
-    ///      "description": "unique, mutable, user-controlled identifier for
-    /// each resource",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/Name"
-    ///        }
-    ///      ]
-    ///    },
-    ///    "time_created": {
-    ///      "description": "timestamp when this resource was created",
-    ///      "type": "string",
-    ///      "format": "date-time"
-    ///    },
-    ///    "time_modified": {
-    ///      "description": "timestamp when this resource was last modified",
-    ///      "type": "string",
-    ///      "format": "date-time"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Identity-related metadata that's included in nearly all public API objects"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Identity-related metadata that's included in nearly all public API objects\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"description\","]
+    #[doc = "    \"id\","]
+    #[doc = "    \"name\","]
+    #[doc = "    \"time_created\","]
+    #[doc = "    \"time_modified\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"description\": {"]
+    #[doc = "      \"description\": \"human-readable free-form text about a resource\","]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"id\": {"]
+    #[doc = "      \"description\": \"unique, immutable, system-controlled identifier for each resource\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"uuid\""]
+    #[doc = "    },"]
+    #[doc = "    \"name\": {"]
+    #[doc = "      \"description\": \"unique, mutable, user-controlled identifier for each resource\","]
+    #[doc = "      \"allOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/Name\""]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"time_created\": {"]
+    #[doc = "      \"description\": \"timestamp when this resource was created\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"date-time\""]
+    #[doc = "    },"]
+    #[doc = "    \"time_modified\": {"]
+    #[doc = "      \"description\": \"timestamp when this resource was last modified\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"date-time\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct IpPool {
-        ///human-readable free-form text about a resource
+        #[doc = "human-readable free-form text about a resource"]
         pub description: ::std::string::String,
-        ///unique, immutable, system-controlled identifier for each resource
+        #[doc = "unique, immutable, system-controlled identifier for each resource"]
         pub id: ::uuid::Uuid,
-        ///unique, mutable, user-controlled identifier for each resource
+        #[doc = "unique, mutable, user-controlled identifier for each resource"]
         pub name: Name,
-        ///timestamp when this resource was created
+        #[doc = "timestamp when this resource was created"]
         pub time_created: ::chrono::DateTime<::chrono::offset::Utc>,
-        ///timestamp when this resource was last modified
+        #[doc = "timestamp when this resource was last modified"]
         pub time_modified: ::chrono::DateTime<::chrono::offset::Utc>,
     }
 
@@ -5236,32 +4925,29 @@ pub mod types {
         }
     }
 
-    ///Create-time parameters for an IP Pool.
-    ///
-    ///See [`IpPool`](crate::external_api::views::IpPool)
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Create-time parameters for an IP Pool.\n\nSee
-    /// [`IpPool`](crate::external_api::views::IpPool)",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "description",
-    ///    "name"
-    ///  ],
-    ///  "properties": {
-    ///    "description": {
-    ///      "type": "string"
-    ///    },
-    ///    "name": {
-    ///      "$ref": "#/components/schemas/Name"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Create-time parameters for an IP Pool.\n\nSee [`IpPool`](crate::external_api::views::IpPool)"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Create-time parameters for an IP Pool.\\n\\nSee [`IpPool`](crate::external_api::views::IpPool)\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"description\","]
+    #[doc = "    \"name\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"description\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"name\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/Name\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct IpPoolCreate {
         pub description: ::std::string::String,
@@ -5274,34 +4960,34 @@ pub mod types {
         }
     }
 
-    ///`IpPoolRange`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "required": [
-    ///    "id",
-    ///    "range",
-    ///    "time_created"
-    ///  ],
-    ///  "properties": {
-    ///    "id": {
-    ///      "type": "string",
-    ///      "format": "uuid"
-    ///    },
-    ///    "range": {
-    ///      "$ref": "#/components/schemas/IpRange"
-    ///    },
-    ///    "time_created": {
-    ///      "type": "string",
-    ///      "format": "date-time"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`IpPoolRange`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"id\","]
+    #[doc = "    \"range\","]
+    #[doc = "    \"time_created\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"id\": {"]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"uuid\""]
+    #[doc = "    },"]
+    #[doc = "    \"range\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/IpRange\""]
+    #[doc = "    },"]
+    #[doc = "    \"time_created\": {"]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"date-time\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct IpPoolRange {
         pub id: ::uuid::Uuid,
@@ -5315,42 +5001,41 @@ pub mod types {
         }
     }
 
-    ///A single page of results
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "A single page of results",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "items"
-    ///  ],
-    ///  "properties": {
-    ///    "items": {
-    ///      "description": "list of items on this page of results",
-    ///      "type": "array",
-    ///      "items": {
-    ///        "$ref": "#/components/schemas/IpPoolRange"
-    ///      }
-    ///    },
-    ///    "next_page": {
-    ///      "description": "token used to fetch the next page of results (if
-    /// any)",
-    ///      "type": [
-    ///        "string",
-    ///        "null"
-    ///      ]
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "A single page of results"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"A single page of results\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"items\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"items\": {"]
+    #[doc = "      \"description\": \"list of items on this page of results\","]
+    #[doc = "      \"type\": \"array\","]
+    #[doc = "      \"items\": {"]
+    #[doc = "        \"$ref\": \"#/components/schemas/IpPoolRange\""]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    \"next_page\": {"]
+    #[doc = "      \"description\": \"token used to fetch the next page of results (if any)\","]
+    #[doc = "      \"type\": ["]
+    #[doc = "        \"string\","]
+    #[doc = "        \"null\""]
+    #[doc = "      ]"]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct IpPoolRangeResultsPage {
-        ///list of items on this page of results
+        #[doc = "list of items on this page of results"]
         pub items: ::std::vec::Vec<IpPoolRange>,
-        ///token used to fetch the next page of results (if any)
+        #[doc = "token used to fetch the next page of results (if any)"]
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
         pub next_page: ::std::option::Option<::std::string::String>,
     }
@@ -5361,42 +5046,41 @@ pub mod types {
         }
     }
 
-    ///A single page of results
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "A single page of results",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "items"
-    ///  ],
-    ///  "properties": {
-    ///    "items": {
-    ///      "description": "list of items on this page of results",
-    ///      "type": "array",
-    ///      "items": {
-    ///        "$ref": "#/components/schemas/IpPool"
-    ///      }
-    ///    },
-    ///    "next_page": {
-    ///      "description": "token used to fetch the next page of results (if
-    /// any)",
-    ///      "type": [
-    ///        "string",
-    ///        "null"
-    ///      ]
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "A single page of results"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"A single page of results\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"items\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"items\": {"]
+    #[doc = "      \"description\": \"list of items on this page of results\","]
+    #[doc = "      \"type\": \"array\","]
+    #[doc = "      \"items\": {"]
+    #[doc = "        \"$ref\": \"#/components/schemas/IpPool\""]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    \"next_page\": {"]
+    #[doc = "      \"description\": \"token used to fetch the next page of results (if any)\","]
+    #[doc = "      \"type\": ["]
+    #[doc = "        \"string\","]
+    #[doc = "        \"null\""]
+    #[doc = "      ]"]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct IpPoolResultsPage {
-        ///list of items on this page of results
+        #[doc = "list of items on this page of results"]
         pub items: ::std::vec::Vec<IpPool>,
-        ///token used to fetch the next page of results (if any)
+        #[doc = "token used to fetch the next page of results (if any)"]
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
         pub next_page: ::std::option::Option<::std::string::String>,
     }
@@ -5407,39 +5091,39 @@ pub mod types {
         }
     }
 
-    ///Parameters for updating an IP Pool
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Parameters for updating an IP Pool",
-    ///  "type": "object",
-    ///  "properties": {
-    ///    "description": {
-    ///      "type": [
-    ///        "string",
-    ///        "null"
-    ///      ]
-    ///    },
-    ///    "name": {
-    ///      "oneOf": [
-    ///        {
-    ///          "type": "null"
-    ///        },
-    ///        {
-    ///          "allOf": [
-    ///            {
-    ///              "$ref": "#/components/schemas/Name"
-    ///            }
-    ///          ]
-    ///        }
-    ///      ]
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Parameters for updating an IP Pool"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Parameters for updating an IP Pool\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"description\": {"]
+    #[doc = "      \"type\": ["]
+    #[doc = "        \"string\","]
+    #[doc = "        \"null\""]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"name\": {"]
+    #[doc = "      \"oneOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"type\": \"null\""]
+    #[doc = "        },"]
+    #[doc = "        {"]
+    #[doc = "          \"allOf\": ["]
+    #[doc = "            {"]
+    #[doc = "              \"$ref\": \"#/components/schemas/Name\""]
+    #[doc = "            }"]
+    #[doc = "          ]"]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct IpPoolUpdate {
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
@@ -5463,33 +5147,33 @@ pub mod types {
         }
     }
 
-    ///`IpRange`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "oneOf": [
-    ///    {
-    ///      "title": "v4",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/Ipv4Range"
-    ///        }
-    ///      ]
-    ///    },
-    ///    {
-    ///      "title": "v6",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/Ipv6Range"
-    ///        }
-    ///      ]
-    ///    }
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`IpRange`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"oneOf\": ["]
+    #[doc = "    {"]
+    #[doc = "      \"title\": \"v4\","]
+    #[doc = "      \"allOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/Ipv4Range\""]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    {"]
+    #[doc = "      \"title\": \"v6\","]
+    #[doc = "      \"allOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/Ipv6Range\""]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    }"]
+    #[doc = "  ]"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     #[serde(untagged)]
     pub enum IpRange {
@@ -5515,25 +5199,22 @@ pub mod types {
         }
     }
 
-    ///An IPv4 subnet, including prefix and subnet mask
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "title": "An IPv4 subnet",
-    ///  "description": "An IPv4 subnet, including prefix and subnet mask",
-    ///  "examples": [
-    ///    "192.168.1.0/24"
-    ///  ],
-    ///  "type": "string",
-    ///  "pattern":
-    /// "^(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.
-    /// ){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])/
-    /// ([8-9]|1[0-9]|2[0-9]|3[0-2])$"
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "An IPv4 subnet, including prefix and subnet mask"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"title\": \"An IPv4 subnet\","]
+    #[doc = "  \"description\": \"An IPv4 subnet, including prefix and subnet mask\","]
+    #[doc = "  \"examples\": ["]
+    #[doc = "    \"192.168.1.0/24\""]
+    #[doc = "  ],"]
+    #[doc = "  \"type\": \"string\","]
+    #[doc = "  \"pattern\": \"^(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])/([8-9]|1[0-9]|2[0-9]|3[0-2])$\""]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Serialize, Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
     #[serde(transparent)]
     pub struct Ipv4Net(::std::string::String);
@@ -5559,21 +5240,13 @@ pub mod types {
     impl ::std::str::FromStr for Ipv4Net {
         type Err = self::error::ConversionError;
         fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
-            static PATTERN: ::std::sync::LazyLock<::regress::Regex> =
-                ::std::sync::LazyLock::new(|| {
-                    ::regress::Regex::new(
-                        "^(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.\
-                         ){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])/\
-                         ([8-9]|1[0-9]|2[0-9]|3[0-2])$",
-                    )
-                    .unwrap()
-                });
+            static PATTERN: ::std::sync::LazyLock<::regress::Regex> = ::std::sync::LazyLock::new(
+                || {
+                    :: regress :: Regex :: new ("^(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])/([8-9]|1[0-9]|2[0-9]|3[0-2])$") . unwrap ()
+                },
+            );
             if PATTERN.find(value).is_none() {
-                return Err("doesn't match pattern \
-                            \"^(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.\
-                            ){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])/\
-                            ([8-9]|1[0-9]|2[0-9]|3[0-2])$\""
-                    .into());
+                return Err ("doesn't match pattern \"^(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])/([8-9]|1[0-9]|2[0-9]|3[0-2])$\"" . into ()) ;
             }
             Ok(Self(value.to_string()))
         }
@@ -5617,35 +5290,31 @@ pub mod types {
         }
     }
 
-    ///A non-decreasing IPv4 address range, inclusive of both ends.
-    ///
-    ///The first address must be less than or equal to the last address.
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "A non-decreasing IPv4 address range, inclusive of both
-    /// ends.\n\nThe first address must be less than or equal to the last
-    /// address.",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "first",
-    ///    "last"
-    ///  ],
-    ///  "properties": {
-    ///    "first": {
-    ///      "type": "string",
-    ///      "format": "ipv4"
-    ///    },
-    ///    "last": {
-    ///      "type": "string",
-    ///      "format": "ipv4"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "A non-decreasing IPv4 address range, inclusive of both ends.\n\nThe first address must be less than or equal to the last address."]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"A non-decreasing IPv4 address range, inclusive of both ends.\\n\\nThe first address must be less than or equal to the last address.\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"first\","]
+    #[doc = "    \"last\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"first\": {"]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"ipv4\""]
+    #[doc = "    },"]
+    #[doc = "    \"last\": {"]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"ipv4\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct Ipv4Range {
         pub first: ::std::net::Ipv4Addr,
@@ -5658,24 +5327,22 @@ pub mod types {
         }
     }
 
-    ///An IPv6 subnet, including prefix and subnet mask
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "title": "An IPv6 subnet",
-    ///  "description": "An IPv6 subnet, including prefix and subnet mask",
-    ///  "examples": [
-    ///    "fd12:3456::/64"
-    ///  ],
-    ///  "type": "string",
-    ///  "pattern":
-    /// "^([fF][dD])[0-9a-fA-F]{2}:(([0-9a-fA-F]{1,4}:){6}[0-9a-fA-F]{1,
-    /// 4}|([0-9a-fA-F]{1,4}:){1,6}:)\\/([1-9]|[1-9][0-9]|1[0-1][0-9]|12[0-8])$"
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "An IPv6 subnet, including prefix and subnet mask"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"title\": \"An IPv6 subnet\","]
+    #[doc = "  \"description\": \"An IPv6 subnet, including prefix and subnet mask\","]
+    #[doc = "  \"examples\": ["]
+    #[doc = "    \"fd12:3456::/64\""]
+    #[doc = "  ],"]
+    #[doc = "  \"type\": \"string\","]
+    #[doc = "  \"pattern\": \"^([fF][dD])[0-9a-fA-F]{2}:(([0-9a-fA-F]{1,4}:){6}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,6}:)\\\\/([1-9]|[1-9][0-9]|1[0-1][0-9]|12[0-8])$\""]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Serialize, Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
     #[serde(transparent)]
     pub struct Ipv6Net(::std::string::String);
@@ -5701,20 +5368,13 @@ pub mod types {
     impl ::std::str::FromStr for Ipv6Net {
         type Err = self::error::ConversionError;
         fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
-            static PATTERN: ::std::sync::LazyLock<::regress::Regex> =
-                ::std::sync::LazyLock::new(|| {
-                    ::regress::Regex::new(
-                        "^([fF][dD])[0-9a-fA-F]{2}:(([0-9a-fA-F]{1,4}:){6}[0-9a-fA-F]{1,\
-                         4}|([0-9a-fA-F]{1,4}:){1,6}:)\\/([1-9]|[1-9][0-9]|1[0-1][0-9]|12[0-8])$",
-                    )
-                    .unwrap()
-                });
+            static PATTERN: ::std::sync::LazyLock<::regress::Regex> = ::std::sync::LazyLock::new(
+                || {
+                    :: regress :: Regex :: new ("^([fF][dD])[0-9a-fA-F]{2}:(([0-9a-fA-F]{1,4}:){6}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,6}:)\\/([1-9]|[1-9][0-9]|1[0-1][0-9]|12[0-8])$") . unwrap ()
+                },
+            );
             if PATTERN.find(value).is_none() {
-                return Err("doesn't match pattern \
-                            \"^([fF][dD])[0-9a-fA-F]{2}:(([0-9a-fA-F]{1,4}:){6}[0-9a-fA-F]{1,\
-                            4}|([0-9a-fA-F]{1,4}:){1,6}:)\\/\
-                            ([1-9]|[1-9][0-9]|1[0-1][0-9]|12[0-8])$\""
-                    .into());
+                return Err ("doesn't match pattern \"^([fF][dD])[0-9a-fA-F]{2}:(([0-9a-fA-F]{1,4}:){6}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,6}:)\\/([1-9]|[1-9][0-9]|1[0-1][0-9]|12[0-8])$\"" . into ()) ;
             }
             Ok(Self(value.to_string()))
         }
@@ -5758,35 +5418,31 @@ pub mod types {
         }
     }
 
-    ///A non-decreasing IPv6 address range, inclusive of both ends.
-    ///
-    ///The first address must be less than or equal to the last address.
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "A non-decreasing IPv6 address range, inclusive of both
-    /// ends.\n\nThe first address must be less than or equal to the last
-    /// address.",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "first",
-    ///    "last"
-    ///  ],
-    ///  "properties": {
-    ///    "first": {
-    ///      "type": "string",
-    ///      "format": "ipv6"
-    ///    },
-    ///    "last": {
-    ///      "type": "string",
-    ///      "format": "ipv6"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "A non-decreasing IPv6 address range, inclusive of both ends.\n\nThe first address must be less than or equal to the last address."]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"A non-decreasing IPv6 address range, inclusive of both ends.\\n\\nThe first address must be less than or equal to the last address.\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"first\","]
+    #[doc = "    \"last\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"first\": {"]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"ipv6\""]
+    #[doc = "    },"]
+    #[doc = "    \"last\": {"]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"ipv6\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct Ipv6Range {
         pub first: ::std::net::Ipv6Addr,
@@ -5799,26 +5455,24 @@ pub mod types {
         }
     }
 
-    ///An inclusive-inclusive range of IP ports. The second port may be omitted
-    /// to represent a single port
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "title": "A range of IP ports",
-    ///  "description": "An inclusive-inclusive range of IP ports. The second
-    /// port may be omitted to represent a single port",
-    ///  "examples": [
-    ///    "22"
-    ///  ],
-    ///  "type": "string",
-    ///  "maxLength": 11,
-    ///  "minLength": 1,
-    ///  "pattern": "^[0-9]{1,5}(-[0-9]{1,5})?$"
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "An inclusive-inclusive range of IP ports. The second port may be omitted to represent a single port"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"title\": \"A range of IP ports\","]
+    #[doc = "  \"description\": \"An inclusive-inclusive range of IP ports. The second port may be omitted to represent a single port\","]
+    #[doc = "  \"examples\": ["]
+    #[doc = "    \"22\""]
+    #[doc = "  ],"]
+    #[doc = "  \"type\": \"string\","]
+    #[doc = "  \"maxLength\": 11,"]
+    #[doc = "  \"minLength\": 1,"]
+    #[doc = "  \"pattern\": \"^[0-9]{1,5}(-[0-9]{1,5})?$\""]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Serialize, Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
     #[serde(transparent)]
     pub struct L4PortRange(::std::string::String);
@@ -5899,24 +5553,24 @@ pub mod types {
         }
     }
 
-    ///A Media Access Control address, in EUI-48 format
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "title": "A MAC address",
-    ///  "description": "A Media Access Control address, in EUI-48 format",
-    ///  "examples": [
-    ///    "ff:ff:ff:ff:ff:ff"
-    ///  ],
-    ///  "type": "string",
-    ///  "maxLength": 17,
-    ///  "minLength": 17,
-    ///  "pattern": "^([0-9a-fA-F]{2}:){5}[0-9a-fA-F]{2}$"
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "A Media Access Control address, in EUI-48 format"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"title\": \"A MAC address\","]
+    #[doc = "  \"description\": \"A Media Access Control address, in EUI-48 format\","]
+    #[doc = "  \"examples\": ["]
+    #[doc = "    \"ff:ff:ff:ff:ff:ff\""]
+    #[doc = "  ],"]
+    #[doc = "  \"type\": \"string\","]
+    #[doc = "  \"maxLength\": 17,"]
+    #[doc = "  \"minLength\": 17,"]
+    #[doc = "  \"pattern\": \"^([0-9a-fA-F]{2}:){5}[0-9a-fA-F]{2}$\""]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Serialize, Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
     #[serde(transparent)]
     pub struct MacAddr(::std::string::String);
@@ -5999,31 +5653,30 @@ pub mod types {
         }
     }
 
-    ///A `Measurement` is a timestamped datum from a single metric
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "A `Measurement` is a timestamped datum from a single
-    /// metric",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "datum",
-    ///    "timestamp"
-    ///  ],
-    ///  "properties": {
-    ///    "datum": {
-    ///      "$ref": "#/components/schemas/Datum"
-    ///    },
-    ///    "timestamp": {
-    ///      "type": "string",
-    ///      "format": "date-time"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "A `Measurement` is a timestamped datum from a single metric"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"A `Measurement` is a timestamped datum from a single metric\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"datum\","]
+    #[doc = "    \"timestamp\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"datum\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/Datum\""]
+    #[doc = "    },"]
+    #[doc = "    \"timestamp\": {"]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"date-time\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct Measurement {
         pub datum: Datum,
@@ -6036,42 +5689,41 @@ pub mod types {
         }
     }
 
-    ///A single page of results
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "A single page of results",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "items"
-    ///  ],
-    ///  "properties": {
-    ///    "items": {
-    ///      "description": "list of items on this page of results",
-    ///      "type": "array",
-    ///      "items": {
-    ///        "$ref": "#/components/schemas/Measurement"
-    ///      }
-    ///    },
-    ///    "next_page": {
-    ///      "description": "token used to fetch the next page of results (if
-    /// any)",
-    ///      "type": [
-    ///        "string",
-    ///        "null"
-    ///      ]
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "A single page of results"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"A single page of results\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"items\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"items\": {"]
+    #[doc = "      \"description\": \"list of items on this page of results\","]
+    #[doc = "      \"type\": \"array\","]
+    #[doc = "      \"items\": {"]
+    #[doc = "        \"$ref\": \"#/components/schemas/Measurement\""]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    \"next_page\": {"]
+    #[doc = "      \"description\": \"token used to fetch the next page of results (if any)\","]
+    #[doc = "      \"type\": ["]
+    #[doc = "        \"string\","]
+    #[doc = "        \"null\""]
+    #[doc = "      ]"]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct MeasurementResultsPage {
-        ///list of items on this page of results
+        #[doc = "list of items on this page of results"]
         pub items: ::std::vec::Vec<Measurement>,
-        ///token used to fetch the next page of results (if any)
+        #[doc = "token used to fetch the next page of results (if any)"]
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
         pub next_page: ::std::option::Option<::std::string::String>,
     }
@@ -6082,27 +5734,20 @@ pub mod types {
         }
     }
 
-    ///Names must begin with a lower case ASCII letter, be composed exclusively
-    /// of lowercase ASCII, uppercase ASCII, numbers, and '-', and may not end
-    /// with a '-'. Names cannot be a UUID though they may contain a UUID.
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "title": "A name unique within the parent collection",
-    ///  "description": "Names must begin with a lower case ASCII letter, be
-    /// composed exclusively of lowercase ASCII, uppercase ASCII, numbers, and
-    /// '-', and may not end with a '-'. Names cannot be a UUID though they may
-    /// contain a UUID.",
-    ///  "type": "string",
-    ///  "maxLength": 63,
-    ///  "pattern":
-    /// "^(?![0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$)^[a-z][a-z0-9-]*
-    /// [a-zA-Z0-9]$"
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Names must begin with a lower case ASCII letter, be composed exclusively of lowercase ASCII, uppercase ASCII, numbers, and '-', and may not end with a '-'. Names cannot be a UUID though they may contain a UUID."]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"title\": \"A name unique within the parent collection\","]
+    #[doc = "  \"description\": \"Names must begin with a lower case ASCII letter, be composed exclusively of lowercase ASCII, uppercase ASCII, numbers, and '-', and may not end with a '-'. Names cannot be a UUID though they may contain a UUID.\","]
+    #[doc = "  \"type\": \"string\","]
+    #[doc = "  \"maxLength\": 63,"]
+    #[doc = "  \"pattern\": \"^(?![0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$)^[a-z][a-z0-9-]*[a-zA-Z0-9]$\""]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Serialize, Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
     #[serde(transparent)]
     pub struct Name(::std::string::String);
@@ -6181,34 +5826,34 @@ pub mod types {
         }
     }
 
-    ///`NameOrId`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "oneOf": [
-    ///    {
-    ///      "title": "id",
-    ///      "allOf": [
-    ///        {
-    ///          "type": "string",
-    ///          "format": "uuid"
-    ///        }
-    ///      ]
-    ///    },
-    ///    {
-    ///      "title": "name",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/Name"
-    ///        }
-    ///      ]
-    ///    }
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`NameOrId`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"oneOf\": ["]
+    #[doc = "    {"]
+    #[doc = "      \"title\": \"id\","]
+    #[doc = "      \"allOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"format\": \"uuid\""]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    {"]
+    #[doc = "      \"title\": \"name\","]
+    #[doc = "      \"allOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/Name\""]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    }"]
+    #[doc = "  ]"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     #[serde(untagged)]
     pub enum NameOrId {
@@ -6281,40 +5926,39 @@ pub mod types {
         }
     }
 
-    ///Supported set of sort modes for scanning by name or id
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Supported set of sort modes for scanning by name or
-    /// id",
-    ///  "oneOf": [
-    ///    {
-    ///      "description": "sort in increasing order of \"name\"",
-    ///      "type": "string",
-    ///      "enum": [
-    ///        "name_ascending"
-    ///      ]
-    ///    },
-    ///    {
-    ///      "description": "sort in decreasing order of \"name\"",
-    ///      "type": "string",
-    ///      "enum": [
-    ///        "name_descending"
-    ///      ]
-    ///    },
-    ///    {
-    ///      "description": "sort in increasing order of \"id\"",
-    ///      "type": "string",
-    ///      "enum": [
-    ///        "id_ascending"
-    ///      ]
-    ///    }
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Supported set of sort modes for scanning by name or id"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Supported set of sort modes for scanning by name or id\","]
+    #[doc = "  \"oneOf\": ["]
+    #[doc = "    {"]
+    #[doc = "      \"description\": \"sort in increasing order of \\\"name\\\"\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"enum\": ["]
+    #[doc = "        \"name_ascending\""]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    {"]
+    #[doc = "      \"description\": \"sort in decreasing order of \\\"name\\\"\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"enum\": ["]
+    #[doc = "        \"name_descending\""]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    {"]
+    #[doc = "      \"description\": \"sort in increasing order of \\\"id\\\"\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"enum\": ["]
+    #[doc = "        \"id_ascending\""]
+    #[doc = "      ]"]
+    #[doc = "    }"]
+    #[doc = "  ]"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(
         :: serde :: Deserialize,
         :: serde :: Serialize,
@@ -6328,13 +5972,13 @@ pub mod types {
         PartialOrd,
     )]
     pub enum NameOrIdSortMode {
-        ///sort in increasing order of "name"
+        #[doc = "sort in increasing order of \"name\""]
         #[serde(rename = "name_ascending")]
         NameAscending,
-        ///sort in decreasing order of "name"
+        #[doc = "sort in decreasing order of \"name\""]
         #[serde(rename = "name_descending")]
         NameDescending,
-        ///sort in increasing order of "id"
+        #[doc = "sort in increasing order of \"id\""]
         #[serde(rename = "id_ascending")]
         IdAscending,
     }
@@ -6392,28 +6036,25 @@ pub mod types {
         }
     }
 
-    ///Supported set of sort modes for scanning by name only
-    ///
-    ///Currently, we only support scanning in ascending order.
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Supported set of sort modes for scanning by name
-    /// only\n\nCurrently, we only support scanning in ascending order.",
-    ///  "oneOf": [
-    ///    {
-    ///      "description": "sort in increasing order of \"name\"",
-    ///      "type": "string",
-    ///      "enum": [
-    ///        "name_ascending"
-    ///      ]
-    ///    }
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Supported set of sort modes for scanning by name only\n\nCurrently, we only support scanning in ascending order."]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Supported set of sort modes for scanning by name only\\n\\nCurrently, we only support scanning in ascending order.\","]
+    #[doc = "  \"oneOf\": ["]
+    #[doc = "    {"]
+    #[doc = "      \"description\": \"sort in increasing order of \\\"name\\\"\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"enum\": ["]
+    #[doc = "        \"name_ascending\""]
+    #[doc = "      ]"]
+    #[doc = "    }"]
+    #[doc = "  ]"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(
         :: serde :: Deserialize,
         :: serde :: Serialize,
@@ -6427,7 +6068,7 @@ pub mod types {
         PartialOrd,
     )]
     pub enum NameSortMode {
-        ///sort in increasing order of "name"
+        #[doc = "sort in increasing order of \"name\""]
         #[serde(rename = "name_ascending")]
         NameAscending,
     }
@@ -6481,119 +6122,114 @@ pub mod types {
         }
     }
 
-    ///A `NetworkInterface` represents a virtual network interface device.
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "A `NetworkInterface` represents a virtual network
-    /// interface device.",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "description",
-    ///    "id",
-    ///    "instance_id",
-    ///    "ip",
-    ///    "mac",
-    ///    "name",
-    ///    "primary",
-    ///    "subnet_id",
-    ///    "time_created",
-    ///    "time_modified",
-    ///    "vpc_id"
-    ///  ],
-    ///  "properties": {
-    ///    "description": {
-    ///      "description": "human-readable free-form text about a resource",
-    ///      "type": "string"
-    ///    },
-    ///    "id": {
-    ///      "description": "unique, immutable, system-controlled identifier for
-    /// each resource",
-    ///      "type": "string",
-    ///      "format": "uuid"
-    ///    },
-    ///    "instance_id": {
-    ///      "description": "The Instance to which the interface belongs.",
-    ///      "type": "string",
-    ///      "format": "uuid"
-    ///    },
-    ///    "ip": {
-    ///      "description": "The IP address assigned to this interface.",
-    ///      "type": "string",
-    ///      "format": "ip"
-    ///    },
-    ///    "mac": {
-    ///      "description": "The MAC address assigned to this interface.",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/MacAddr"
-    ///        }
-    ///      ]
-    ///    },
-    ///    "name": {
-    ///      "description": "unique, mutable, user-controlled identifier for
-    /// each resource",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/Name"
-    ///        }
-    ///      ]
-    ///    },
-    ///    "primary": {
-    ///      "description": "True if this interface is the primary for the
-    /// instance to which it's attached.",
-    ///      "type": "boolean"
-    ///    },
-    ///    "subnet_id": {
-    ///      "description": "The subnet to which the interface belongs.",
-    ///      "type": "string",
-    ///      "format": "uuid"
-    ///    },
-    ///    "time_created": {
-    ///      "description": "timestamp when this resource was created",
-    ///      "type": "string",
-    ///      "format": "date-time"
-    ///    },
-    ///    "time_modified": {
-    ///      "description": "timestamp when this resource was last modified",
-    ///      "type": "string",
-    ///      "format": "date-time"
-    ///    },
-    ///    "vpc_id": {
-    ///      "description": "The VPC to which the interface belongs.",
-    ///      "type": "string",
-    ///      "format": "uuid"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "A `NetworkInterface` represents a virtual network interface device."]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"A `NetworkInterface` represents a virtual network interface device.\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"description\","]
+    #[doc = "    \"id\","]
+    #[doc = "    \"instance_id\","]
+    #[doc = "    \"ip\","]
+    #[doc = "    \"mac\","]
+    #[doc = "    \"name\","]
+    #[doc = "    \"primary\","]
+    #[doc = "    \"subnet_id\","]
+    #[doc = "    \"time_created\","]
+    #[doc = "    \"time_modified\","]
+    #[doc = "    \"vpc_id\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"description\": {"]
+    #[doc = "      \"description\": \"human-readable free-form text about a resource\","]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"id\": {"]
+    #[doc = "      \"description\": \"unique, immutable, system-controlled identifier for each resource\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"uuid\""]
+    #[doc = "    },"]
+    #[doc = "    \"instance_id\": {"]
+    #[doc = "      \"description\": \"The Instance to which the interface belongs.\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"uuid\""]
+    #[doc = "    },"]
+    #[doc = "    \"ip\": {"]
+    #[doc = "      \"description\": \"The IP address assigned to this interface.\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"ip\""]
+    #[doc = "    },"]
+    #[doc = "    \"mac\": {"]
+    #[doc = "      \"description\": \"The MAC address assigned to this interface.\","]
+    #[doc = "      \"allOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/MacAddr\""]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"name\": {"]
+    #[doc = "      \"description\": \"unique, mutable, user-controlled identifier for each resource\","]
+    #[doc = "      \"allOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/Name\""]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"primary\": {"]
+    #[doc = "      \"description\": \"True if this interface is the primary for the instance to which it's attached.\","]
+    #[doc = "      \"type\": \"boolean\""]
+    #[doc = "    },"]
+    #[doc = "    \"subnet_id\": {"]
+    #[doc = "      \"description\": \"The subnet to which the interface belongs.\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"uuid\""]
+    #[doc = "    },"]
+    #[doc = "    \"time_created\": {"]
+    #[doc = "      \"description\": \"timestamp when this resource was created\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"date-time\""]
+    #[doc = "    },"]
+    #[doc = "    \"time_modified\": {"]
+    #[doc = "      \"description\": \"timestamp when this resource was last modified\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"date-time\""]
+    #[doc = "    },"]
+    #[doc = "    \"vpc_id\": {"]
+    #[doc = "      \"description\": \"The VPC to which the interface belongs.\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"uuid\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct NetworkInterface {
-        ///human-readable free-form text about a resource
+        #[doc = "human-readable free-form text about a resource"]
         pub description: ::std::string::String,
-        ///unique, immutable, system-controlled identifier for each resource
+        #[doc = "unique, immutable, system-controlled identifier for each resource"]
         pub id: ::uuid::Uuid,
-        ///The Instance to which the interface belongs.
+        #[doc = "The Instance to which the interface belongs."]
         pub instance_id: ::uuid::Uuid,
-        ///The IP address assigned to this interface.
+        #[doc = "The IP address assigned to this interface."]
         pub ip: ::std::net::IpAddr,
-        ///The MAC address assigned to this interface.
+        #[doc = "The MAC address assigned to this interface."]
         pub mac: MacAddr,
-        ///unique, mutable, user-controlled identifier for each resource
+        #[doc = "unique, mutable, user-controlled identifier for each resource"]
         pub name: Name,
-        ///True if this interface is the primary for the instance to which it's
-        /// attached.
+        #[doc = "True if this interface is the primary for the instance to which it's attached."]
         pub primary: bool,
-        ///The subnet to which the interface belongs.
+        #[doc = "The subnet to which the interface belongs."]
         pub subnet_id: ::uuid::Uuid,
-        ///timestamp when this resource was created
+        #[doc = "timestamp when this resource was created"]
         pub time_created: ::chrono::DateTime<::chrono::offset::Utc>,
-        ///timestamp when this resource was last modified
+        #[doc = "timestamp when this resource was last modified"]
         pub time_modified: ::chrono::DateTime<::chrono::offset::Utc>,
-        ///The VPC to which the interface belongs.
+        #[doc = "The VPC to which the interface belongs."]
         pub vpc_id: ::uuid::Uuid,
     }
 
@@ -6603,68 +6239,65 @@ pub mod types {
         }
     }
 
-    ///Create-time parameters for a
-    /// [`NetworkInterface`](omicron_common::api::external::NetworkInterface)
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Create-time parameters for a [`NetworkInterface`](omicron_common::api::external::NetworkInterface)",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "description",
-    ///    "name",
-    ///    "subnet_name",
-    ///    "vpc_name"
-    ///  ],
-    ///  "properties": {
-    ///    "description": {
-    ///      "type": "string"
-    ///    },
-    ///    "ip": {
-    ///      "description": "The IP address for the interface. One will be
-    /// auto-assigned if not provided.",
-    ///      "type": [
-    ///        "string",
-    ///        "null"
-    ///      ],
-    ///      "format": "ip"
-    ///    },
-    ///    "name": {
-    ///      "$ref": "#/components/schemas/Name"
-    ///    },
-    ///    "subnet_name": {
-    ///      "description": "The VPC Subnet in which to create the interface.",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/Name"
-    ///        }
-    ///      ]
-    ///    },
-    ///    "vpc_name": {
-    ///      "description": "The VPC in which to create the interface.",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/Name"
-    ///        }
-    ///      ]
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Create-time parameters for a [`NetworkInterface`](omicron_common::api::external::NetworkInterface)"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Create-time parameters for a [`NetworkInterface`](omicron_common::api::external::NetworkInterface)\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"description\","]
+    #[doc = "    \"name\","]
+    #[doc = "    \"subnet_name\","]
+    #[doc = "    \"vpc_name\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"description\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"ip\": {"]
+    #[doc = "      \"description\": \"The IP address for the interface. One will be auto-assigned if not provided.\","]
+    #[doc = "      \"type\": ["]
+    #[doc = "        \"string\","]
+    #[doc = "        \"null\""]
+    #[doc = "      ],"]
+    #[doc = "      \"format\": \"ip\""]
+    #[doc = "    },"]
+    #[doc = "    \"name\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/Name\""]
+    #[doc = "    },"]
+    #[doc = "    \"subnet_name\": {"]
+    #[doc = "      \"description\": \"The VPC Subnet in which to create the interface.\","]
+    #[doc = "      \"allOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/Name\""]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"vpc_name\": {"]
+    #[doc = "      \"description\": \"The VPC in which to create the interface.\","]
+    #[doc = "      \"allOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/Name\""]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct NetworkInterfaceCreate {
         pub description: ::std::string::String,
-        ///The IP address for the interface. One will be auto-assigned if not
-        /// provided.
+        #[doc = "The IP address for the interface. One will be auto-assigned if not provided."]
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
         pub ip: ::std::option::Option<::std::net::IpAddr>,
         pub name: Name,
-        ///The VPC Subnet in which to create the interface.
+        #[doc = "The VPC Subnet in which to create the interface."]
         pub subnet_name: Name,
-        ///The VPC in which to create the interface.
+        #[doc = "The VPC in which to create the interface."]
         pub vpc_name: Name,
     }
 
@@ -6674,42 +6307,41 @@ pub mod types {
         }
     }
 
-    ///A single page of results
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "A single page of results",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "items"
-    ///  ],
-    ///  "properties": {
-    ///    "items": {
-    ///      "description": "list of items on this page of results",
-    ///      "type": "array",
-    ///      "items": {
-    ///        "$ref": "#/components/schemas/NetworkInterface"
-    ///      }
-    ///    },
-    ///    "next_page": {
-    ///      "description": "token used to fetch the next page of results (if
-    /// any)",
-    ///      "type": [
-    ///        "string",
-    ///        "null"
-    ///      ]
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "A single page of results"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"A single page of results\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"items\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"items\": {"]
+    #[doc = "      \"description\": \"list of items on this page of results\","]
+    #[doc = "      \"type\": \"array\","]
+    #[doc = "      \"items\": {"]
+    #[doc = "        \"$ref\": \"#/components/schemas/NetworkInterface\""]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    \"next_page\": {"]
+    #[doc = "      \"description\": \"token used to fetch the next page of results (if any)\","]
+    #[doc = "      \"type\": ["]
+    #[doc = "        \"string\","]
+    #[doc = "        \"null\""]
+    #[doc = "      ]"]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct NetworkInterfaceResultsPage {
-        ///list of items on this page of results
+        #[doc = "list of items on this page of results"]
         pub items: ::std::vec::Vec<NetworkInterface>,
-        ///token used to fetch the next page of results (if any)
+        #[doc = "token used to fetch the next page of results (if any)"]
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
         pub next_page: ::std::option::Option<::std::string::String>,
     }
@@ -6720,75 +6352,51 @@ pub mod types {
         }
     }
 
-    ///Parameters for updating a
-    /// [`NetworkInterface`](omicron_common::api::external::NetworkInterface).
-    ///
-    ///Note that modifying IP addresses for an interface is not yet supported,
-    /// a new interface must be created instead.
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Parameters for updating a
-    /// [`NetworkInterface`](omicron_common::api::external::NetworkInterface).\
-    /// n\nNote that modifying IP addresses for an interface is not yet
-    /// supported, a new interface must be created instead.",
-    ///  "type": "object",
-    ///  "properties": {
-    ///    "description": {
-    ///      "type": [
-    ///        "string",
-    ///        "null"
-    ///      ]
-    ///    },
-    ///    "name": {
-    ///      "oneOf": [
-    ///        {
-    ///          "type": "null"
-    ///        },
-    ///        {
-    ///          "allOf": [
-    ///            {
-    ///              "$ref": "#/components/schemas/Name"
-    ///            }
-    ///          ]
-    ///        }
-    ///      ]
-    ///    },
-    ///    "primary": {
-    ///      "description": "Make a secondary interface the instance's primary
-    /// interface.\n\nIf applied to a secondary interface, that interface will
-    /// become the primary on the next reboot of the instance. Note that this
-    /// may have implications for routing between instances, as the new primary
-    /// interface will be on a distinct subnet from the previous primary
-    /// interface.\n\nNote that this can only be used to select a new primary
-    /// interface for an instance. Requests to change the primary interface into
-    /// a secondary will return an error.",
-    ///      "default": false,
-    ///      "type": "boolean"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Parameters for updating a [`NetworkInterface`](omicron_common::api::external::NetworkInterface).\n\nNote that modifying IP addresses for an interface is not yet supported, a new interface must be created instead."]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Parameters for updating a [`NetworkInterface`](omicron_common::api::external::NetworkInterface).\\n\\nNote that modifying IP addresses for an interface is not yet supported, a new interface must be created instead.\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"description\": {"]
+    #[doc = "      \"type\": ["]
+    #[doc = "        \"string\","]
+    #[doc = "        \"null\""]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"name\": {"]
+    #[doc = "      \"oneOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"type\": \"null\""]
+    #[doc = "        },"]
+    #[doc = "        {"]
+    #[doc = "          \"allOf\": ["]
+    #[doc = "            {"]
+    #[doc = "              \"$ref\": \"#/components/schemas/Name\""]
+    #[doc = "            }"]
+    #[doc = "          ]"]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"primary\": {"]
+    #[doc = "      \"description\": \"Make a secondary interface the instance's primary interface.\\n\\nIf applied to a secondary interface, that interface will become the primary on the next reboot of the instance. Note that this may have implications for routing between instances, as the new primary interface will be on a distinct subnet from the previous primary interface.\\n\\nNote that this can only be used to select a new primary interface for an instance. Requests to change the primary interface into a secondary will return an error.\","]
+    #[doc = "      \"default\": false,"]
+    #[doc = "      \"type\": \"boolean\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct NetworkInterfaceUpdate {
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
         pub description: ::std::option::Option<::std::string::String>,
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
         pub name: ::std::option::Option<Name>,
-        ///Make a secondary interface the instance's primary interface.
-        ///
-        ///If applied to a secondary interface, that interface will become the
-        /// primary on the next reboot of the instance. Note that this may have
-        /// implications for routing between instances, as the new primary
-        /// interface will be on a distinct subnet from the previous primary
-        /// interface.
-        ///
-        ///Note that this can only be used to select a new primary interface
-        /// for an instance. Requests to change the primary interface into a
-        /// secondary will return an error.
+        #[doc = "Make a secondary interface the instance's primary interface.\n\nIf applied to a secondary interface, that interface will become the primary on the next reboot of the instance. Note that this may have implications for routing between instances, as the new primary interface will be on a distinct subnet from the previous primary interface.\n\nNote that this can only be used to select a new primary interface for an instance. Requests to change the primary interface into a secondary will return an error."]
         #[serde(default)]
         pub primary: bool,
     }
@@ -6809,25 +6417,17 @@ pub mod types {
         }
     }
 
-    ///Unique name for a saga [`Node`]
-    ///
-    ///Each node requires a string name that's unique within its DAG.  The name
-    /// is used to identify its output.  Nodes that depend on a given node
-    /// (either directly or indirectly) can access the node's output using its
-    /// name.
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Unique name for a saga [`Node`]\n\nEach node requires a
-    /// string name that's unique within its DAG.  The name is used to identify
-    /// its output.  Nodes that depend on a given node (either directly or
-    /// indirectly) can access the node's output using its name.",
-    ///  "type": "string"
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Unique name for a saga [`Node`]\n\nEach node requires a string name that's unique within its DAG.  The name is used to identify its output.  Nodes that depend on a given node (either directly or indirectly) can access the node's output using its name."]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Unique name for a saga [`Node`]\\n\\nEach node requires a string name that's unique within its DAG.  The name is used to identify its output.  Nodes that depend on a given node (either directly or indirectly) can access the node's output using its name.\","]
+    #[doc = "  \"type\": \"string\""]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(
         :: serde :: Deserialize,
         :: serde :: Serialize,
@@ -6879,66 +6479,64 @@ pub mod types {
         }
     }
 
-    ///Client view of an [`Organization`]
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Client view of an [`Organization`]",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "description",
-    ///    "id",
-    ///    "name",
-    ///    "time_created",
-    ///    "time_modified"
-    ///  ],
-    ///  "properties": {
-    ///    "description": {
-    ///      "description": "human-readable free-form text about a resource",
-    ///      "type": "string"
-    ///    },
-    ///    "id": {
-    ///      "description": "unique, immutable, system-controlled identifier for
-    /// each resource",
-    ///      "type": "string",
-    ///      "format": "uuid"
-    ///    },
-    ///    "name": {
-    ///      "description": "unique, mutable, user-controlled identifier for
-    /// each resource",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/Name"
-    ///        }
-    ///      ]
-    ///    },
-    ///    "time_created": {
-    ///      "description": "timestamp when this resource was created",
-    ///      "type": "string",
-    ///      "format": "date-time"
-    ///    },
-    ///    "time_modified": {
-    ///      "description": "timestamp when this resource was last modified",
-    ///      "type": "string",
-    ///      "format": "date-time"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Client view of an [`Organization`]"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Client view of an [`Organization`]\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"description\","]
+    #[doc = "    \"id\","]
+    #[doc = "    \"name\","]
+    #[doc = "    \"time_created\","]
+    #[doc = "    \"time_modified\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"description\": {"]
+    #[doc = "      \"description\": \"human-readable free-form text about a resource\","]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"id\": {"]
+    #[doc = "      \"description\": \"unique, immutable, system-controlled identifier for each resource\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"uuid\""]
+    #[doc = "    },"]
+    #[doc = "    \"name\": {"]
+    #[doc = "      \"description\": \"unique, mutable, user-controlled identifier for each resource\","]
+    #[doc = "      \"allOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/Name\""]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"time_created\": {"]
+    #[doc = "      \"description\": \"timestamp when this resource was created\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"date-time\""]
+    #[doc = "    },"]
+    #[doc = "    \"time_modified\": {"]
+    #[doc = "      \"description\": \"timestamp when this resource was last modified\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"date-time\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct Organization {
-        ///human-readable free-form text about a resource
+        #[doc = "human-readable free-form text about a resource"]
         pub description: ::std::string::String,
-        ///unique, immutable, system-controlled identifier for each resource
+        #[doc = "unique, immutable, system-controlled identifier for each resource"]
         pub id: ::uuid::Uuid,
-        ///unique, mutable, user-controlled identifier for each resource
+        #[doc = "unique, mutable, user-controlled identifier for each resource"]
         pub name: Name,
-        ///timestamp when this resource was created
+        #[doc = "timestamp when this resource was created"]
         pub time_created: ::chrono::DateTime<::chrono::offset::Utc>,
-        ///timestamp when this resource was last modified
+        #[doc = "timestamp when this resource was last modified"]
         pub time_modified: ::chrono::DateTime<::chrono::offset::Utc>,
     }
 
@@ -6948,31 +6546,29 @@ pub mod types {
         }
     }
 
-    ///Create-time parameters for an
-    /// [`Organization`](crate::external_api::views::Organization)
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Create-time parameters for an
-    /// [`Organization`](crate::external_api::views::Organization)",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "description",
-    ///    "name"
-    ///  ],
-    ///  "properties": {
-    ///    "description": {
-    ///      "type": "string"
-    ///    },
-    ///    "name": {
-    ///      "$ref": "#/components/schemas/Name"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Create-time parameters for an [`Organization`](crate::external_api::views::Organization)"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Create-time parameters for an [`Organization`](crate::external_api::views::Organization)\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"description\","]
+    #[doc = "    \"name\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"description\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"name\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/Name\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct OrganizationCreate {
         pub description: ::std::string::String,
@@ -6985,42 +6581,41 @@ pub mod types {
         }
     }
 
-    ///A single page of results
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "A single page of results",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "items"
-    ///  ],
-    ///  "properties": {
-    ///    "items": {
-    ///      "description": "list of items on this page of results",
-    ///      "type": "array",
-    ///      "items": {
-    ///        "$ref": "#/components/schemas/Organization"
-    ///      }
-    ///    },
-    ///    "next_page": {
-    ///      "description": "token used to fetch the next page of results (if
-    /// any)",
-    ///      "type": [
-    ///        "string",
-    ///        "null"
-    ///      ]
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "A single page of results"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"A single page of results\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"items\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"items\": {"]
+    #[doc = "      \"description\": \"list of items on this page of results\","]
+    #[doc = "      \"type\": \"array\","]
+    #[doc = "      \"items\": {"]
+    #[doc = "        \"$ref\": \"#/components/schemas/Organization\""]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    \"next_page\": {"]
+    #[doc = "      \"description\": \"token used to fetch the next page of results (if any)\","]
+    #[doc = "      \"type\": ["]
+    #[doc = "        \"string\","]
+    #[doc = "        \"null\""]
+    #[doc = "      ]"]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct OrganizationResultsPage {
-        ///list of items on this page of results
+        #[doc = "list of items on this page of results"]
         pub items: ::std::vec::Vec<Organization>,
-        ///token used to fetch the next page of results (if any)
+        #[doc = "token used to fetch the next page of results (if any)"]
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
         pub next_page: ::std::option::Option<::std::string::String>,
     }
@@ -7031,21 +6626,21 @@ pub mod types {
         }
     }
 
-    ///`OrganizationRole`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "string",
-    ///  "enum": [
-    ///    "admin",
-    ///    "collaborator",
-    ///    "viewer"
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`OrganizationRole`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"string\","]
+    #[doc = "  \"enum\": ["]
+    #[doc = "    \"admin\","]
+    #[doc = "    \"collaborator\","]
+    #[doc = "    \"viewer\""]
+    #[doc = "  ]"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(
         :: serde :: Deserialize,
         :: serde :: Serialize,
@@ -7120,40 +6715,32 @@ pub mod types {
         }
     }
 
-    ///Client view of a [`Policy`], which describes how this resource may be
-    /// accessed
-    ///
-    ///Note that the Policy only describes access granted explicitly for this
-    /// resource.  The policies of parent resources can also cause a user to
-    /// have access to this resource.
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Client view of a [`Policy`], which describes how this
-    /// resource may be accessed\n\nNote that the Policy only describes access
-    /// granted explicitly for this resource.  The policies of parent resources
-    /// can also cause a user to have access to this resource.",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "role_assignments"
-    ///  ],
-    ///  "properties": {
-    ///    "role_assignments": {
-    ///      "description": "Roles directly assigned on this resource",
-    ///      "type": "array",
-    ///      "items": {
-    ///        "$ref": "#/components/schemas/OrganizationRoleRoleAssignment"
-    ///      }
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Client view of a [`Policy`], which describes how this resource may be accessed\n\nNote that the Policy only describes access granted explicitly for this resource.  The policies of parent resources can also cause a user to have access to this resource."]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Client view of a [`Policy`], which describes how this resource may be accessed\\n\\nNote that the Policy only describes access granted explicitly for this resource.  The policies of parent resources can also cause a user to have access to this resource.\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"role_assignments\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"role_assignments\": {"]
+    #[doc = "      \"description\": \"Roles directly assigned on this resource\","]
+    #[doc = "      \"type\": \"array\","]
+    #[doc = "      \"items\": {"]
+    #[doc = "        \"$ref\": \"#/components/schemas/OrganizationRoleRoleAssignment\""]
+    #[doc = "      }"]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct OrganizationRolePolicy {
-        ///Roles directly assigned on this resource
+        #[doc = "Roles directly assigned on this resource"]
         pub role_assignments: ::std::vec::Vec<OrganizationRoleRoleAssignment>,
     }
 
@@ -7163,43 +6750,34 @@ pub mod types {
         }
     }
 
-    ///Describes the assignment of a particular role on a particular resource
-    /// to a particular identity (user, group, etc.)
-    ///
-    ///The resource is not part of this structure.  Rather, [`RoleAssignment`]s
-    /// are put into a [`Policy`] and that Policy is applied to a particular
-    /// resource.
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Describes the assignment of a particular role on a
-    /// particular resource to a particular identity (user, group, etc.)\n\nThe
-    /// resource is not part of this structure.  Rather, [`RoleAssignment`]s are
-    /// put into a [`Policy`] and that Policy is applied to a particular
-    /// resource.",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "identity_id",
-    ///    "identity_type",
-    ///    "role_name"
-    ///  ],
-    ///  "properties": {
-    ///    "identity_id": {
-    ///      "type": "string",
-    ///      "format": "uuid"
-    ///    },
-    ///    "identity_type": {
-    ///      "$ref": "#/components/schemas/IdentityType"
-    ///    },
-    ///    "role_name": {
-    ///      "$ref": "#/components/schemas/OrganizationRole"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Describes the assignment of a particular role on a particular resource to a particular identity (user, group, etc.)\n\nThe resource is not part of this structure.  Rather, [`RoleAssignment`]s are put into a [`Policy`] and that Policy is applied to a particular resource."]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Describes the assignment of a particular role on a particular resource to a particular identity (user, group, etc.)\\n\\nThe resource is not part of this structure.  Rather, [`RoleAssignment`]s are put into a [`Policy`] and that Policy is applied to a particular resource.\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"identity_id\","]
+    #[doc = "    \"identity_type\","]
+    #[doc = "    \"role_name\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"identity_id\": {"]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"uuid\""]
+    #[doc = "    },"]
+    #[doc = "    \"identity_type\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/IdentityType\""]
+    #[doc = "    },"]
+    #[doc = "    \"role_name\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/OrganizationRole\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct OrganizationRoleRoleAssignment {
         pub identity_id: ::uuid::Uuid,
@@ -7213,41 +6791,39 @@ pub mod types {
         }
     }
 
-    ///Updateable properties of an
-    /// [`Organization`](crate::external_api::views::Organization)
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Updateable properties of an
-    /// [`Organization`](crate::external_api::views::Organization)",
-    ///  "type": "object",
-    ///  "properties": {
-    ///    "description": {
-    ///      "type": [
-    ///        "string",
-    ///        "null"
-    ///      ]
-    ///    },
-    ///    "name": {
-    ///      "oneOf": [
-    ///        {
-    ///          "type": "null"
-    ///        },
-    ///        {
-    ///          "allOf": [
-    ///            {
-    ///              "$ref": "#/components/schemas/Name"
-    ///            }
-    ///          ]
-    ///        }
-    ///      ]
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Updateable properties of an [`Organization`](crate::external_api::views::Organization)"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Updateable properties of an [`Organization`](crate::external_api::views::Organization)\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"description\": {"]
+    #[doc = "      \"type\": ["]
+    #[doc = "        \"string\","]
+    #[doc = "        \"null\""]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"name\": {"]
+    #[doc = "      \"oneOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"type\": \"null\""]
+    #[doc = "        },"]
+    #[doc = "        {"]
+    #[doc = "          \"allOf\": ["]
+    #[doc = "            {"]
+    #[doc = "              \"$ref\": \"#/components/schemas/Name\""]
+    #[doc = "            }"]
+    #[doc = "          ]"]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct OrganizationUpdate {
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
@@ -7271,19 +6847,19 @@ pub mod types {
         }
     }
 
-    ///Passwords may be subject to additional constraints.
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "title": "A password used to authenticate a user",
-    ///  "description": "Passwords may be subject to additional constraints.",
-    ///  "type": "string",
-    ///  "maxLength": 512
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Passwords may be subject to additional constraints."]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"title\": \"A password used to authenticate a user\","]
+    #[doc = "  \"description\": \"Passwords may be subject to additional constraints.\","]
+    #[doc = "  \"type\": \"string\","]
+    #[doc = "  \"maxLength\": 512"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Serialize, Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
     #[serde(transparent)]
     pub struct Password(::std::string::String);
@@ -7354,77 +6930,76 @@ pub mod types {
         }
     }
 
-    ///Client view of a [`PhysicalDisk`]
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Client view of a [`PhysicalDisk`]",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "disk_type",
-    ///    "id",
-    ///    "model",
-    ///    "serial",
-    ///    "time_created",
-    ///    "time_modified",
-    ///    "vendor"
-    ///  ],
-    ///  "properties": {
-    ///    "disk_type": {
-    ///      "$ref": "#/components/schemas/PhysicalDiskType"
-    ///    },
-    ///    "id": {
-    ///      "description": "unique, immutable, system-controlled identifier for
-    /// each resource",
-    ///      "type": "string",
-    ///      "format": "uuid"
-    ///    },
-    ///    "model": {
-    ///      "type": "string"
-    ///    },
-    ///    "serial": {
-    ///      "type": "string"
-    ///    },
-    ///    "sled_id": {
-    ///      "description": "The sled to which this disk is attached, if any.",
-    ///      "type": [
-    ///        "string",
-    ///        "null"
-    ///      ],
-    ///      "format": "uuid"
-    ///    },
-    ///    "time_created": {
-    ///      "description": "timestamp when this resource was created",
-    ///      "type": "string",
-    ///      "format": "date-time"
-    ///    },
-    ///    "time_modified": {
-    ///      "description": "timestamp when this resource was last modified",
-    ///      "type": "string",
-    ///      "format": "date-time"
-    ///    },
-    ///    "vendor": {
-    ///      "type": "string"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Client view of a [`PhysicalDisk`]"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Client view of a [`PhysicalDisk`]\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"disk_type\","]
+    #[doc = "    \"id\","]
+    #[doc = "    \"model\","]
+    #[doc = "    \"serial\","]
+    #[doc = "    \"time_created\","]
+    #[doc = "    \"time_modified\","]
+    #[doc = "    \"vendor\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"disk_type\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/PhysicalDiskType\""]
+    #[doc = "    },"]
+    #[doc = "    \"id\": {"]
+    #[doc = "      \"description\": \"unique, immutable, system-controlled identifier for each resource\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"uuid\""]
+    #[doc = "    },"]
+    #[doc = "    \"model\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"serial\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"sled_id\": {"]
+    #[doc = "      \"description\": \"The sled to which this disk is attached, if any.\","]
+    #[doc = "      \"type\": ["]
+    #[doc = "        \"string\","]
+    #[doc = "        \"null\""]
+    #[doc = "      ],"]
+    #[doc = "      \"format\": \"uuid\""]
+    #[doc = "    },"]
+    #[doc = "    \"time_created\": {"]
+    #[doc = "      \"description\": \"timestamp when this resource was created\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"date-time\""]
+    #[doc = "    },"]
+    #[doc = "    \"time_modified\": {"]
+    #[doc = "      \"description\": \"timestamp when this resource was last modified\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"date-time\""]
+    #[doc = "    },"]
+    #[doc = "    \"vendor\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct PhysicalDisk {
         pub disk_type: PhysicalDiskType,
-        ///unique, immutable, system-controlled identifier for each resource
+        #[doc = "unique, immutable, system-controlled identifier for each resource"]
         pub id: ::uuid::Uuid,
         pub model: ::std::string::String,
         pub serial: ::std::string::String,
-        ///The sled to which this disk is attached, if any.
+        #[doc = "The sled to which this disk is attached, if any."]
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
         pub sled_id: ::std::option::Option<::uuid::Uuid>,
-        ///timestamp when this resource was created
+        #[doc = "timestamp when this resource was created"]
         pub time_created: ::chrono::DateTime<::chrono::offset::Utc>,
-        ///timestamp when this resource was last modified
+        #[doc = "timestamp when this resource was last modified"]
         pub time_modified: ::chrono::DateTime<::chrono::offset::Utc>,
         pub vendor: ::std::string::String,
     }
@@ -7435,42 +7010,41 @@ pub mod types {
         }
     }
 
-    ///A single page of results
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "A single page of results",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "items"
-    ///  ],
-    ///  "properties": {
-    ///    "items": {
-    ///      "description": "list of items on this page of results",
-    ///      "type": "array",
-    ///      "items": {
-    ///        "$ref": "#/components/schemas/PhysicalDisk"
-    ///      }
-    ///    },
-    ///    "next_page": {
-    ///      "description": "token used to fetch the next page of results (if
-    /// any)",
-    ///      "type": [
-    ///        "string",
-    ///        "null"
-    ///      ]
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "A single page of results"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"A single page of results\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"items\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"items\": {"]
+    #[doc = "      \"description\": \"list of items on this page of results\","]
+    #[doc = "      \"type\": \"array\","]
+    #[doc = "      \"items\": {"]
+    #[doc = "        \"$ref\": \"#/components/schemas/PhysicalDisk\""]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    \"next_page\": {"]
+    #[doc = "      \"description\": \"token used to fetch the next page of results (if any)\","]
+    #[doc = "      \"type\": ["]
+    #[doc = "        \"string\","]
+    #[doc = "        \"null\""]
+    #[doc = "      ]"]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct PhysicalDiskResultsPage {
-        ///list of items on this page of results
+        #[doc = "list of items on this page of results"]
         pub items: ::std::vec::Vec<PhysicalDisk>,
-        ///token used to fetch the next page of results (if any)
+        #[doc = "token used to fetch the next page of results (if any)"]
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
         pub next_page: ::std::option::Option<::std::string::String>,
     }
@@ -7481,20 +7055,20 @@ pub mod types {
         }
     }
 
-    ///`PhysicalDiskType`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "string",
-    ///  "enum": [
-    ///    "internal",
-    ///    "external"
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`PhysicalDiskType`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"string\","]
+    #[doc = "  \"enum\": ["]
+    #[doc = "    \"internal\","]
+    #[doc = "    \"external\""]
+    #[doc = "  ]"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(
         :: serde :: Deserialize,
         :: serde :: Serialize,
@@ -7565,72 +7139,70 @@ pub mod types {
         }
     }
 
-    ///Client view of a [`Project`]
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Client view of a [`Project`]",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "description",
-    ///    "id",
-    ///    "name",
-    ///    "organization_id",
-    ///    "time_created",
-    ///    "time_modified"
-    ///  ],
-    ///  "properties": {
-    ///    "description": {
-    ///      "description": "human-readable free-form text about a resource",
-    ///      "type": "string"
-    ///    },
-    ///    "id": {
-    ///      "description": "unique, immutable, system-controlled identifier for
-    /// each resource",
-    ///      "type": "string",
-    ///      "format": "uuid"
-    ///    },
-    ///    "name": {
-    ///      "description": "unique, mutable, user-controlled identifier for
-    /// each resource",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/Name"
-    ///        }
-    ///      ]
-    ///    },
-    ///    "organization_id": {
-    ///      "type": "string",
-    ///      "format": "uuid"
-    ///    },
-    ///    "time_created": {
-    ///      "description": "timestamp when this resource was created",
-    ///      "type": "string",
-    ///      "format": "date-time"
-    ///    },
-    ///    "time_modified": {
-    ///      "description": "timestamp when this resource was last modified",
-    ///      "type": "string",
-    ///      "format": "date-time"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Client view of a [`Project`]"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Client view of a [`Project`]\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"description\","]
+    #[doc = "    \"id\","]
+    #[doc = "    \"name\","]
+    #[doc = "    \"organization_id\","]
+    #[doc = "    \"time_created\","]
+    #[doc = "    \"time_modified\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"description\": {"]
+    #[doc = "      \"description\": \"human-readable free-form text about a resource\","]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"id\": {"]
+    #[doc = "      \"description\": \"unique, immutable, system-controlled identifier for each resource\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"uuid\""]
+    #[doc = "    },"]
+    #[doc = "    \"name\": {"]
+    #[doc = "      \"description\": \"unique, mutable, user-controlled identifier for each resource\","]
+    #[doc = "      \"allOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/Name\""]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"organization_id\": {"]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"uuid\""]
+    #[doc = "    },"]
+    #[doc = "    \"time_created\": {"]
+    #[doc = "      \"description\": \"timestamp when this resource was created\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"date-time\""]
+    #[doc = "    },"]
+    #[doc = "    \"time_modified\": {"]
+    #[doc = "      \"description\": \"timestamp when this resource was last modified\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"date-time\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct Project {
-        ///human-readable free-form text about a resource
+        #[doc = "human-readable free-form text about a resource"]
         pub description: ::std::string::String,
-        ///unique, immutable, system-controlled identifier for each resource
+        #[doc = "unique, immutable, system-controlled identifier for each resource"]
         pub id: ::uuid::Uuid,
-        ///unique, mutable, user-controlled identifier for each resource
+        #[doc = "unique, mutable, user-controlled identifier for each resource"]
         pub name: Name,
         pub organization_id: ::uuid::Uuid,
-        ///timestamp when this resource was created
+        #[doc = "timestamp when this resource was created"]
         pub time_created: ::chrono::DateTime<::chrono::offset::Utc>,
-        ///timestamp when this resource was last modified
+        #[doc = "timestamp when this resource was last modified"]
         pub time_modified: ::chrono::DateTime<::chrono::offset::Utc>,
     }
 
@@ -7640,31 +7212,29 @@ pub mod types {
         }
     }
 
-    ///Create-time parameters for a
-    /// [`Project`](crate::external_api::views::Project)
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Create-time parameters for a
-    /// [`Project`](crate::external_api::views::Project)",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "description",
-    ///    "name"
-    ///  ],
-    ///  "properties": {
-    ///    "description": {
-    ///      "type": "string"
-    ///    },
-    ///    "name": {
-    ///      "$ref": "#/components/schemas/Name"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Create-time parameters for a [`Project`](crate::external_api::views::Project)"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Create-time parameters for a [`Project`](crate::external_api::views::Project)\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"description\","]
+    #[doc = "    \"name\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"description\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"name\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/Name\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct ProjectCreate {
         pub description: ::std::string::String,
@@ -7677,42 +7247,41 @@ pub mod types {
         }
     }
 
-    ///A single page of results
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "A single page of results",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "items"
-    ///  ],
-    ///  "properties": {
-    ///    "items": {
-    ///      "description": "list of items on this page of results",
-    ///      "type": "array",
-    ///      "items": {
-    ///        "$ref": "#/components/schemas/Project"
-    ///      }
-    ///    },
-    ///    "next_page": {
-    ///      "description": "token used to fetch the next page of results (if
-    /// any)",
-    ///      "type": [
-    ///        "string",
-    ///        "null"
-    ///      ]
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "A single page of results"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"A single page of results\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"items\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"items\": {"]
+    #[doc = "      \"description\": \"list of items on this page of results\","]
+    #[doc = "      \"type\": \"array\","]
+    #[doc = "      \"items\": {"]
+    #[doc = "        \"$ref\": \"#/components/schemas/Project\""]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    \"next_page\": {"]
+    #[doc = "      \"description\": \"token used to fetch the next page of results (if any)\","]
+    #[doc = "      \"type\": ["]
+    #[doc = "        \"string\","]
+    #[doc = "        \"null\""]
+    #[doc = "      ]"]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct ProjectResultsPage {
-        ///list of items on this page of results
+        #[doc = "list of items on this page of results"]
         pub items: ::std::vec::Vec<Project>,
-        ///token used to fetch the next page of results (if any)
+        #[doc = "token used to fetch the next page of results (if any)"]
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
         pub next_page: ::std::option::Option<::std::string::String>,
     }
@@ -7723,21 +7292,21 @@ pub mod types {
         }
     }
 
-    ///`ProjectRole`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "string",
-    ///  "enum": [
-    ///    "admin",
-    ///    "collaborator",
-    ///    "viewer"
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`ProjectRole`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"string\","]
+    #[doc = "  \"enum\": ["]
+    #[doc = "    \"admin\","]
+    #[doc = "    \"collaborator\","]
+    #[doc = "    \"viewer\""]
+    #[doc = "  ]"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(
         :: serde :: Deserialize,
         :: serde :: Serialize,
@@ -7812,40 +7381,32 @@ pub mod types {
         }
     }
 
-    ///Client view of a [`Policy`], which describes how this resource may be
-    /// accessed
-    ///
-    ///Note that the Policy only describes access granted explicitly for this
-    /// resource.  The policies of parent resources can also cause a user to
-    /// have access to this resource.
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Client view of a [`Policy`], which describes how this
-    /// resource may be accessed\n\nNote that the Policy only describes access
-    /// granted explicitly for this resource.  The policies of parent resources
-    /// can also cause a user to have access to this resource.",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "role_assignments"
-    ///  ],
-    ///  "properties": {
-    ///    "role_assignments": {
-    ///      "description": "Roles directly assigned on this resource",
-    ///      "type": "array",
-    ///      "items": {
-    ///        "$ref": "#/components/schemas/ProjectRoleRoleAssignment"
-    ///      }
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Client view of a [`Policy`], which describes how this resource may be accessed\n\nNote that the Policy only describes access granted explicitly for this resource.  The policies of parent resources can also cause a user to have access to this resource."]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Client view of a [`Policy`], which describes how this resource may be accessed\\n\\nNote that the Policy only describes access granted explicitly for this resource.  The policies of parent resources can also cause a user to have access to this resource.\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"role_assignments\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"role_assignments\": {"]
+    #[doc = "      \"description\": \"Roles directly assigned on this resource\","]
+    #[doc = "      \"type\": \"array\","]
+    #[doc = "      \"items\": {"]
+    #[doc = "        \"$ref\": \"#/components/schemas/ProjectRoleRoleAssignment\""]
+    #[doc = "      }"]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct ProjectRolePolicy {
-        ///Roles directly assigned on this resource
+        #[doc = "Roles directly assigned on this resource"]
         pub role_assignments: ::std::vec::Vec<ProjectRoleRoleAssignment>,
     }
 
@@ -7855,43 +7416,34 @@ pub mod types {
         }
     }
 
-    ///Describes the assignment of a particular role on a particular resource
-    /// to a particular identity (user, group, etc.)
-    ///
-    ///The resource is not part of this structure.  Rather, [`RoleAssignment`]s
-    /// are put into a [`Policy`] and that Policy is applied to a particular
-    /// resource.
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Describes the assignment of a particular role on a
-    /// particular resource to a particular identity (user, group, etc.)\n\nThe
-    /// resource is not part of this structure.  Rather, [`RoleAssignment`]s are
-    /// put into a [`Policy`] and that Policy is applied to a particular
-    /// resource.",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "identity_id",
-    ///    "identity_type",
-    ///    "role_name"
-    ///  ],
-    ///  "properties": {
-    ///    "identity_id": {
-    ///      "type": "string",
-    ///      "format": "uuid"
-    ///    },
-    ///    "identity_type": {
-    ///      "$ref": "#/components/schemas/IdentityType"
-    ///    },
-    ///    "role_name": {
-    ///      "$ref": "#/components/schemas/ProjectRole"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Describes the assignment of a particular role on a particular resource to a particular identity (user, group, etc.)\n\nThe resource is not part of this structure.  Rather, [`RoleAssignment`]s are put into a [`Policy`] and that Policy is applied to a particular resource."]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Describes the assignment of a particular role on a particular resource to a particular identity (user, group, etc.)\\n\\nThe resource is not part of this structure.  Rather, [`RoleAssignment`]s are put into a [`Policy`] and that Policy is applied to a particular resource.\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"identity_id\","]
+    #[doc = "    \"identity_type\","]
+    #[doc = "    \"role_name\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"identity_id\": {"]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"uuid\""]
+    #[doc = "    },"]
+    #[doc = "    \"identity_type\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/IdentityType\""]
+    #[doc = "    },"]
+    #[doc = "    \"role_name\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/ProjectRole\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct ProjectRoleRoleAssignment {
         pub identity_id: ::uuid::Uuid,
@@ -7905,41 +7457,39 @@ pub mod types {
         }
     }
 
-    ///Updateable properties of a
-    /// [`Project`](crate::external_api::views::Project)
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Updateable properties of a
-    /// [`Project`](crate::external_api::views::Project)",
-    ///  "type": "object",
-    ///  "properties": {
-    ///    "description": {
-    ///      "type": [
-    ///        "string",
-    ///        "null"
-    ///      ]
-    ///    },
-    ///    "name": {
-    ///      "oneOf": [
-    ///        {
-    ///          "type": "null"
-    ///        },
-    ///        {
-    ///          "allOf": [
-    ///            {
-    ///              "$ref": "#/components/schemas/Name"
-    ///            }
-    ///          ]
-    ///        }
-    ///      ]
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Updateable properties of a [`Project`](crate::external_api::views::Project)"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Updateable properties of a [`Project`](crate::external_api::views::Project)\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"description\": {"]
+    #[doc = "      \"type\": ["]
+    #[doc = "        \"string\","]
+    #[doc = "        \"null\""]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"name\": {"]
+    #[doc = "      \"oneOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"type\": \"null\""]
+    #[doc = "        },"]
+    #[doc = "        {"]
+    #[doc = "          \"allOf\": ["]
+    #[doc = "            {"]
+    #[doc = "              \"$ref\": \"#/components/schemas/Name\""]
+    #[doc = "            }"]
+    #[doc = "          ]"]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct ProjectUpdate {
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
@@ -7963,47 +7513,46 @@ pub mod types {
         }
     }
 
-    ///Client view of an [`Rack`]
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Client view of an [`Rack`]",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "id",
-    ///    "time_created",
-    ///    "time_modified"
-    ///  ],
-    ///  "properties": {
-    ///    "id": {
-    ///      "description": "unique, immutable, system-controlled identifier for
-    /// each resource",
-    ///      "type": "string",
-    ///      "format": "uuid"
-    ///    },
-    ///    "time_created": {
-    ///      "description": "timestamp when this resource was created",
-    ///      "type": "string",
-    ///      "format": "date-time"
-    ///    },
-    ///    "time_modified": {
-    ///      "description": "timestamp when this resource was last modified",
-    ///      "type": "string",
-    ///      "format": "date-time"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Client view of an [`Rack`]"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Client view of an [`Rack`]\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"id\","]
+    #[doc = "    \"time_created\","]
+    #[doc = "    \"time_modified\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"id\": {"]
+    #[doc = "      \"description\": \"unique, immutable, system-controlled identifier for each resource\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"uuid\""]
+    #[doc = "    },"]
+    #[doc = "    \"time_created\": {"]
+    #[doc = "      \"description\": \"timestamp when this resource was created\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"date-time\""]
+    #[doc = "    },"]
+    #[doc = "    \"time_modified\": {"]
+    #[doc = "      \"description\": \"timestamp when this resource was last modified\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"date-time\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct Rack {
-        ///unique, immutable, system-controlled identifier for each resource
+        #[doc = "unique, immutable, system-controlled identifier for each resource"]
         pub id: ::uuid::Uuid,
-        ///timestamp when this resource was created
+        #[doc = "timestamp when this resource was created"]
         pub time_created: ::chrono::DateTime<::chrono::offset::Utc>,
-        ///timestamp when this resource was last modified
+        #[doc = "timestamp when this resource was last modified"]
         pub time_modified: ::chrono::DateTime<::chrono::offset::Utc>,
     }
 
@@ -8013,42 +7562,41 @@ pub mod types {
         }
     }
 
-    ///A single page of results
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "A single page of results",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "items"
-    ///  ],
-    ///  "properties": {
-    ///    "items": {
-    ///      "description": "list of items on this page of results",
-    ///      "type": "array",
-    ///      "items": {
-    ///        "$ref": "#/components/schemas/Rack"
-    ///      }
-    ///    },
-    ///    "next_page": {
-    ///      "description": "token used to fetch the next page of results (if
-    /// any)",
-    ///      "type": [
-    ///        "string",
-    ///        "null"
-    ///      ]
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "A single page of results"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"A single page of results\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"items\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"items\": {"]
+    #[doc = "      \"description\": \"list of items on this page of results\","]
+    #[doc = "      \"type\": \"array\","]
+    #[doc = "      \"items\": {"]
+    #[doc = "        \"$ref\": \"#/components/schemas/Rack\""]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    \"next_page\": {"]
+    #[doc = "      \"description\": \"token used to fetch the next page of results (if any)\","]
+    #[doc = "      \"type\": ["]
+    #[doc = "        \"string\","]
+    #[doc = "        \"null\""]
+    #[doc = "      ]"]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct RackResultsPage {
-        ///list of items on this page of results
+        #[doc = "list of items on this page of results"]
         pub items: ::std::vec::Vec<Rack>,
-        ///token used to fetch the next page of results (if any)
+        #[doc = "token used to fetch the next page of results (if any)"]
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
         pub next_page: ::std::option::Option<::std::string::String>,
     }
@@ -8059,29 +7607,29 @@ pub mod types {
         }
     }
 
-    ///Client view of a [`Role`]
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Client view of a [`Role`]",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "description",
-    ///    "name"
-    ///  ],
-    ///  "properties": {
-    ///    "description": {
-    ///      "type": "string"
-    ///    },
-    ///    "name": {
-    ///      "$ref": "#/components/schemas/RoleName"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Client view of a [`Role`]"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Client view of a [`Role`]\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"description\","]
+    #[doc = "    \"name\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"description\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"name\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/RoleName\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct Role {
         pub description: ::std::string::String,
@@ -8094,21 +7642,20 @@ pub mod types {
         }
     }
 
-    ///Role names consist of two string components separated by dot (".").
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "title": "A name for a built-in role",
-    ///  "description": "Role names consist of two string components separated
-    /// by dot (\".\").",
-    ///  "type": "string",
-    ///  "maxLength": 63,
-    ///  "pattern": "[a-z-]+\\.[a-z-]+"
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Role names consist of two string components separated by dot (\".\")."]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"title\": \"A name for a built-in role\","]
+    #[doc = "  \"description\": \"Role names consist of two string components separated by dot (\\\".\\\").\","]
+    #[doc = "  \"type\": \"string\","]
+    #[doc = "  \"maxLength\": 63,"]
+    #[doc = "  \"pattern\": \"[a-z-]+\\\\.[a-z-]+\""]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Serialize, Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
     #[serde(transparent)]
     pub struct RoleName(::std::string::String);
@@ -8184,42 +7731,41 @@ pub mod types {
         }
     }
 
-    ///A single page of results
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "A single page of results",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "items"
-    ///  ],
-    ///  "properties": {
-    ///    "items": {
-    ///      "description": "list of items on this page of results",
-    ///      "type": "array",
-    ///      "items": {
-    ///        "$ref": "#/components/schemas/Role"
-    ///      }
-    ///    },
-    ///    "next_page": {
-    ///      "description": "token used to fetch the next page of results (if
-    /// any)",
-    ///      "type": [
-    ///        "string",
-    ///        "null"
-    ///      ]
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "A single page of results"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"A single page of results\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"items\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"items\": {"]
+    #[doc = "      \"description\": \"list of items on this page of results\","]
+    #[doc = "      \"type\": \"array\","]
+    #[doc = "      \"items\": {"]
+    #[doc = "        \"$ref\": \"#/components/schemas/Role\""]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    \"next_page\": {"]
+    #[doc = "      \"description\": \"token used to fetch the next page of results (if any)\","]
+    #[doc = "      \"type\": ["]
+    #[doc = "        \"string\","]
+    #[doc = "        \"null\""]
+    #[doc = "      ]"]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct RoleResultsPage {
-        ///list of items on this page of results
+        #[doc = "list of items on this page of results"]
         pub items: ::std::vec::Vec<Role>,
-        ///token used to fetch the next page of results (if any)
+        #[doc = "token used to fetch the next page of results (if any)"]
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
         pub next_page: ::std::option::Option<::std::string::String>,
     }
@@ -8230,120 +7776,108 @@ pub mod types {
         }
     }
 
-    ///A `RouteDestination` is used to match traffic with a routing rule, on
-    /// the destination of that traffic.
-    ///
-    ///When traffic is to be sent to a destination that is within a given
-    /// `RouteDestination`, the corresponding [`RouterRoute`] applies, and
-    /// traffic will be forward to the [`RouteTarget`] for that rule.
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "A `RouteDestination` is used to match traffic with a
-    /// routing rule, on the destination of that traffic.\n\nWhen traffic is to
-    /// be sent to a destination that is within a given `RouteDestination`, the
-    /// corresponding [`RouterRoute`] applies, and traffic will be forward to
-    /// the [`RouteTarget`] for that rule.",
-    ///  "oneOf": [
-    ///    {
-    ///      "description": "Route applies to traffic destined for a specific IP
-    /// address",
-    ///      "type": "object",
-    ///      "required": [
-    ///        "type",
-    ///        "value"
-    ///      ],
-    ///      "properties": {
-    ///        "type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "ip"
-    ///          ]
-    ///        },
-    ///        "value": {
-    ///          "type": "string",
-    ///          "format": "ip"
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "description": "Route applies to traffic destined for a specific IP
-    /// subnet",
-    ///      "type": "object",
-    ///      "required": [
-    ///        "type",
-    ///        "value"
-    ///      ],
-    ///      "properties": {
-    ///        "type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "ip_net"
-    ///          ]
-    ///        },
-    ///        "value": {
-    ///          "$ref": "#/components/schemas/IpNet"
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "description": "Route applies to traffic destined for the given
-    /// VPC.",
-    ///      "type": "object",
-    ///      "required": [
-    ///        "type",
-    ///        "value"
-    ///      ],
-    ///      "properties": {
-    ///        "type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "vpc"
-    ///          ]
-    ///        },
-    ///        "value": {
-    ///          "$ref": "#/components/schemas/Name"
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "description": "Route applies to traffic",
-    ///      "type": "object",
-    ///      "required": [
-    ///        "type",
-    ///        "value"
-    ///      ],
-    ///      "properties": {
-    ///        "type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "subnet"
-    ///          ]
-    ///        },
-    ///        "value": {
-    ///          "$ref": "#/components/schemas/Name"
-    ///        }
-    ///      }
-    ///    }
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "A `RouteDestination` is used to match traffic with a routing rule, on the destination of that traffic.\n\nWhen traffic is to be sent to a destination that is within a given `RouteDestination`, the corresponding [`RouterRoute`] applies, and traffic will be forward to the [`RouteTarget`] for that rule."]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"A `RouteDestination` is used to match traffic with a routing rule, on the destination of that traffic.\\n\\nWhen traffic is to be sent to a destination that is within a given `RouteDestination`, the corresponding [`RouterRoute`] applies, and traffic will be forward to the [`RouteTarget`] for that rule.\","]
+    #[doc = "  \"oneOf\": ["]
+    #[doc = "    {"]
+    #[doc = "      \"description\": \"Route applies to traffic destined for a specific IP address\","]
+    #[doc = "      \"type\": \"object\","]
+    #[doc = "      \"required\": ["]
+    #[doc = "        \"type\","]
+    #[doc = "        \"value\""]
+    #[doc = "      ],"]
+    #[doc = "      \"properties\": {"]
+    #[doc = "        \"type\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"enum\": ["]
+    #[doc = "            \"ip\""]
+    #[doc = "          ]"]
+    #[doc = "        },"]
+    #[doc = "        \"value\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"format\": \"ip\""]
+    #[doc = "        }"]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    {"]
+    #[doc = "      \"description\": \"Route applies to traffic destined for a specific IP subnet\","]
+    #[doc = "      \"type\": \"object\","]
+    #[doc = "      \"required\": ["]
+    #[doc = "        \"type\","]
+    #[doc = "        \"value\""]
+    #[doc = "      ],"]
+    #[doc = "      \"properties\": {"]
+    #[doc = "        \"type\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"enum\": ["]
+    #[doc = "            \"ip_net\""]
+    #[doc = "          ]"]
+    #[doc = "        },"]
+    #[doc = "        \"value\": {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/IpNet\""]
+    #[doc = "        }"]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    {"]
+    #[doc = "      \"description\": \"Route applies to traffic destined for the given VPC.\","]
+    #[doc = "      \"type\": \"object\","]
+    #[doc = "      \"required\": ["]
+    #[doc = "        \"type\","]
+    #[doc = "        \"value\""]
+    #[doc = "      ],"]
+    #[doc = "      \"properties\": {"]
+    #[doc = "        \"type\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"enum\": ["]
+    #[doc = "            \"vpc\""]
+    #[doc = "          ]"]
+    #[doc = "        },"]
+    #[doc = "        \"value\": {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/Name\""]
+    #[doc = "        }"]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    {"]
+    #[doc = "      \"description\": \"Route applies to traffic\","]
+    #[doc = "      \"type\": \"object\","]
+    #[doc = "      \"required\": ["]
+    #[doc = "        \"type\","]
+    #[doc = "        \"value\""]
+    #[doc = "      ],"]
+    #[doc = "      \"properties\": {"]
+    #[doc = "        \"type\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"enum\": ["]
+    #[doc = "            \"subnet\""]
+    #[doc = "          ]"]
+    #[doc = "        },"]
+    #[doc = "        \"value\": {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/Name\""]
+    #[doc = "        }"]
+    #[doc = "      }"]
+    #[doc = "    }"]
+    #[doc = "  ]"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     #[serde(tag = "type", content = "value")]
     pub enum RouteDestination {
-        ///Route applies to traffic destined for a specific IP address
+        #[doc = "Route applies to traffic destined for a specific IP address"]
         #[serde(rename = "ip")]
         Ip(::std::net::IpAddr),
-        ///Route applies to traffic destined for a specific IP subnet
+        #[doc = "Route applies to traffic destined for a specific IP subnet"]
         #[serde(rename = "ip_net")]
         IpNet(IpNet),
-        ///Route applies to traffic destined for the given VPC.
+        #[doc = "Route applies to traffic destined for the given VPC."]
         #[serde(rename = "vpc")]
         Vpc(Name),
-        ///Route applies to traffic
+        #[doc = "Route applies to traffic"]
         #[serde(rename = "subnet")]
         Subnet(Name),
     }
@@ -8366,132 +7900,130 @@ pub mod types {
         }
     }
 
-    ///A `RouteTarget` describes the possible locations that traffic matching a
-    /// route destination can be sent.
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "A `RouteTarget` describes the possible locations that
-    /// traffic matching a route destination can be sent.",
-    ///  "oneOf": [
-    ///    {
-    ///      "description": "Forward traffic to a particular IP address.",
-    ///      "type": "object",
-    ///      "required": [
-    ///        "type",
-    ///        "value"
-    ///      ],
-    ///      "properties": {
-    ///        "type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "ip"
-    ///          ]
-    ///        },
-    ///        "value": {
-    ///          "type": "string",
-    ///          "format": "ip"
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "description": "Forward traffic to a VPC",
-    ///      "type": "object",
-    ///      "required": [
-    ///        "type",
-    ///        "value"
-    ///      ],
-    ///      "properties": {
-    ///        "type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "vpc"
-    ///          ]
-    ///        },
-    ///        "value": {
-    ///          "$ref": "#/components/schemas/Name"
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "description": "Forward traffic to a VPC Subnet",
-    ///      "type": "object",
-    ///      "required": [
-    ///        "type",
-    ///        "value"
-    ///      ],
-    ///      "properties": {
-    ///        "type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "subnet"
-    ///          ]
-    ///        },
-    ///        "value": {
-    ///          "$ref": "#/components/schemas/Name"
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "description": "Forward traffic to a specific instance",
-    ///      "type": "object",
-    ///      "required": [
-    ///        "type",
-    ///        "value"
-    ///      ],
-    ///      "properties": {
-    ///        "type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "instance"
-    ///          ]
-    ///        },
-    ///        "value": {
-    ///          "$ref": "#/components/schemas/Name"
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "description": "Forward traffic to an internet gateway",
-    ///      "type": "object",
-    ///      "required": [
-    ///        "type",
-    ///        "value"
-    ///      ],
-    ///      "properties": {
-    ///        "type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "internet_gateway"
-    ///          ]
-    ///        },
-    ///        "value": {
-    ///          "$ref": "#/components/schemas/Name"
-    ///        }
-    ///      }
-    ///    }
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "A `RouteTarget` describes the possible locations that traffic matching a route destination can be sent."]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"A `RouteTarget` describes the possible locations that traffic matching a route destination can be sent.\","]
+    #[doc = "  \"oneOf\": ["]
+    #[doc = "    {"]
+    #[doc = "      \"description\": \"Forward traffic to a particular IP address.\","]
+    #[doc = "      \"type\": \"object\","]
+    #[doc = "      \"required\": ["]
+    #[doc = "        \"type\","]
+    #[doc = "        \"value\""]
+    #[doc = "      ],"]
+    #[doc = "      \"properties\": {"]
+    #[doc = "        \"type\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"enum\": ["]
+    #[doc = "            \"ip\""]
+    #[doc = "          ]"]
+    #[doc = "        },"]
+    #[doc = "        \"value\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"format\": \"ip\""]
+    #[doc = "        }"]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    {"]
+    #[doc = "      \"description\": \"Forward traffic to a VPC\","]
+    #[doc = "      \"type\": \"object\","]
+    #[doc = "      \"required\": ["]
+    #[doc = "        \"type\","]
+    #[doc = "        \"value\""]
+    #[doc = "      ],"]
+    #[doc = "      \"properties\": {"]
+    #[doc = "        \"type\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"enum\": ["]
+    #[doc = "            \"vpc\""]
+    #[doc = "          ]"]
+    #[doc = "        },"]
+    #[doc = "        \"value\": {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/Name\""]
+    #[doc = "        }"]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    {"]
+    #[doc = "      \"description\": \"Forward traffic to a VPC Subnet\","]
+    #[doc = "      \"type\": \"object\","]
+    #[doc = "      \"required\": ["]
+    #[doc = "        \"type\","]
+    #[doc = "        \"value\""]
+    #[doc = "      ],"]
+    #[doc = "      \"properties\": {"]
+    #[doc = "        \"type\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"enum\": ["]
+    #[doc = "            \"subnet\""]
+    #[doc = "          ]"]
+    #[doc = "        },"]
+    #[doc = "        \"value\": {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/Name\""]
+    #[doc = "        }"]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    {"]
+    #[doc = "      \"description\": \"Forward traffic to a specific instance\","]
+    #[doc = "      \"type\": \"object\","]
+    #[doc = "      \"required\": ["]
+    #[doc = "        \"type\","]
+    #[doc = "        \"value\""]
+    #[doc = "      ],"]
+    #[doc = "      \"properties\": {"]
+    #[doc = "        \"type\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"enum\": ["]
+    #[doc = "            \"instance\""]
+    #[doc = "          ]"]
+    #[doc = "        },"]
+    #[doc = "        \"value\": {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/Name\""]
+    #[doc = "        }"]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    {"]
+    #[doc = "      \"description\": \"Forward traffic to an internet gateway\","]
+    #[doc = "      \"type\": \"object\","]
+    #[doc = "      \"required\": ["]
+    #[doc = "        \"type\","]
+    #[doc = "        \"value\""]
+    #[doc = "      ],"]
+    #[doc = "      \"properties\": {"]
+    #[doc = "        \"type\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"enum\": ["]
+    #[doc = "            \"internet_gateway\""]
+    #[doc = "          ]"]
+    #[doc = "        },"]
+    #[doc = "        \"value\": {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/Name\""]
+    #[doc = "        }"]
+    #[doc = "      }"]
+    #[doc = "    }"]
+    #[doc = "  ]"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     #[serde(tag = "type", content = "value")]
     pub enum RouteTarget {
-        ///Forward traffic to a particular IP address.
+        #[doc = "Forward traffic to a particular IP address."]
         #[serde(rename = "ip")]
         Ip(::std::net::IpAddr),
-        ///Forward traffic to a VPC
+        #[doc = "Forward traffic to a VPC"]
         #[serde(rename = "vpc")]
         Vpc(Name),
-        ///Forward traffic to a VPC Subnet
+        #[doc = "Forward traffic to a VPC Subnet"]
         #[serde(rename = "subnet")]
         Subnet(Name),
-        ///Forward traffic to a specific instance
+        #[doc = "Forward traffic to a specific instance"]
         #[serde(rename = "instance")]
         Instance(Name),
-        ///Forward traffic to an internet gateway
+        #[doc = "Forward traffic to an internet gateway"]
         #[serde(rename = "internet_gateway")]
         InternetGateway(Name),
     }
@@ -8508,98 +8040,93 @@ pub mod types {
         }
     }
 
-    ///A route defines a rule that governs where traffic should be sent based
-    /// on its destination.
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "A route defines a rule that governs where traffic
-    /// should be sent based on its destination.",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "description",
-    ///    "destination",
-    ///    "id",
-    ///    "kind",
-    ///    "name",
-    ///    "target",
-    ///    "time_created",
-    ///    "time_modified",
-    ///    "vpc_router_id"
-    ///  ],
-    ///  "properties": {
-    ///    "description": {
-    ///      "description": "human-readable free-form text about a resource",
-    ///      "type": "string"
-    ///    },
-    ///    "destination": {
-    ///      "$ref": "#/components/schemas/RouteDestination"
-    ///    },
-    ///    "id": {
-    ///      "description": "unique, immutable, system-controlled identifier for
-    /// each resource",
-    ///      "type": "string",
-    ///      "format": "uuid"
-    ///    },
-    ///    "kind": {
-    ///      "description": "Describes the kind of router. Set at creation.
-    /// `read-only`",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/RouterRouteKind"
-    ///        }
-    ///      ]
-    ///    },
-    ///    "name": {
-    ///      "description": "unique, mutable, user-controlled identifier for
-    /// each resource",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/Name"
-    ///        }
-    ///      ]
-    ///    },
-    ///    "target": {
-    ///      "$ref": "#/components/schemas/RouteTarget"
-    ///    },
-    ///    "time_created": {
-    ///      "description": "timestamp when this resource was created",
-    ///      "type": "string",
-    ///      "format": "date-time"
-    ///    },
-    ///    "time_modified": {
-    ///      "description": "timestamp when this resource was last modified",
-    ///      "type": "string",
-    ///      "format": "date-time"
-    ///    },
-    ///    "vpc_router_id": {
-    ///      "description": "The VPC Router to which the route belongs.",
-    ///      "type": "string",
-    ///      "format": "uuid"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "A route defines a rule that governs where traffic should be sent based on its destination."]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"A route defines a rule that governs where traffic should be sent based on its destination.\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"description\","]
+    #[doc = "    \"destination\","]
+    #[doc = "    \"id\","]
+    #[doc = "    \"kind\","]
+    #[doc = "    \"name\","]
+    #[doc = "    \"target\","]
+    #[doc = "    \"time_created\","]
+    #[doc = "    \"time_modified\","]
+    #[doc = "    \"vpc_router_id\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"description\": {"]
+    #[doc = "      \"description\": \"human-readable free-form text about a resource\","]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"destination\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/RouteDestination\""]
+    #[doc = "    },"]
+    #[doc = "    \"id\": {"]
+    #[doc = "      \"description\": \"unique, immutable, system-controlled identifier for each resource\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"uuid\""]
+    #[doc = "    },"]
+    #[doc = "    \"kind\": {"]
+    #[doc = "      \"description\": \"Describes the kind of router. Set at creation. `read-only`\","]
+    #[doc = "      \"allOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/RouterRouteKind\""]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"name\": {"]
+    #[doc = "      \"description\": \"unique, mutable, user-controlled identifier for each resource\","]
+    #[doc = "      \"allOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/Name\""]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"target\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/RouteTarget\""]
+    #[doc = "    },"]
+    #[doc = "    \"time_created\": {"]
+    #[doc = "      \"description\": \"timestamp when this resource was created\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"date-time\""]
+    #[doc = "    },"]
+    #[doc = "    \"time_modified\": {"]
+    #[doc = "      \"description\": \"timestamp when this resource was last modified\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"date-time\""]
+    #[doc = "    },"]
+    #[doc = "    \"vpc_router_id\": {"]
+    #[doc = "      \"description\": \"The VPC Router to which the route belongs.\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"uuid\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct RouterRoute {
-        ///human-readable free-form text about a resource
+        #[doc = "human-readable free-form text about a resource"]
         pub description: ::std::string::String,
         pub destination: RouteDestination,
-        ///unique, immutable, system-controlled identifier for each resource
+        #[doc = "unique, immutable, system-controlled identifier for each resource"]
         pub id: ::uuid::Uuid,
-        ///Describes the kind of router. Set at creation. `read-only`
+        #[doc = "Describes the kind of router. Set at creation. `read-only`"]
         pub kind: RouterRouteKind,
-        ///unique, mutable, user-controlled identifier for each resource
+        #[doc = "unique, mutable, user-controlled identifier for each resource"]
         pub name: Name,
         pub target: RouteTarget,
-        ///timestamp when this resource was created
+        #[doc = "timestamp when this resource was created"]
         pub time_created: ::chrono::DateTime<::chrono::offset::Utc>,
-        ///timestamp when this resource was last modified
+        #[doc = "timestamp when this resource was last modified"]
         pub time_modified: ::chrono::DateTime<::chrono::offset::Utc>,
-        ///The VPC Router to which the route belongs.
+        #[doc = "The VPC Router to which the route belongs."]
         pub vpc_router_id: ::uuid::Uuid,
     }
 
@@ -8609,37 +8136,37 @@ pub mod types {
         }
     }
 
-    ///Create-time parameters for a [`RouterRoute`]
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Create-time parameters for a [`RouterRoute`]",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "description",
-    ///    "destination",
-    ///    "name",
-    ///    "target"
-    ///  ],
-    ///  "properties": {
-    ///    "description": {
-    ///      "type": "string"
-    ///    },
-    ///    "destination": {
-    ///      "$ref": "#/components/schemas/RouteDestination"
-    ///    },
-    ///    "name": {
-    ///      "$ref": "#/components/schemas/Name"
-    ///    },
-    ///    "target": {
-    ///      "$ref": "#/components/schemas/RouteTarget"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Create-time parameters for a [`RouterRoute`]"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Create-time parameters for a [`RouterRoute`]\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"description\","]
+    #[doc = "    \"destination\","]
+    #[doc = "    \"name\","]
+    #[doc = "    \"target\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"description\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"destination\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/RouteDestination\""]
+    #[doc = "    },"]
+    #[doc = "    \"name\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/Name\""]
+    #[doc = "    },"]
+    #[doc = "    \"target\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/RouteTarget\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct RouterRouteCreateParams {
         pub description: ::std::string::String,
@@ -8654,55 +8181,46 @@ pub mod types {
         }
     }
 
-    ///The classification of a [`RouterRoute`] as defined by the system. The
-    /// kind determines certain attributes such as if the route is modifiable
-    /// and describes how or where the route was created.
-    ///
-    ///See [RFD-21](https://rfd.shared.oxide.computer/rfd/0021#concept-router) for more context
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "The classification of a [`RouterRoute`] as defined by the system. The kind determines certain attributes such as if the route is modifiable and describes how or where the route was created.\n\nSee [RFD-21](https://rfd.shared.oxide.computer/rfd/0021#concept-router) for more context",
-    ///  "oneOf": [
-    ///    {
-    ///      "description": "Determines the default destination of traffic, such
-    /// as whether it goes to the internet or not.\n\n`Destination: An Internet
-    /// Gateway` `Modifiable: true`",
-    ///      "type": "string",
-    ///      "enum": [
-    ///        "default"
-    ///      ]
-    ///    },
-    ///    {
-    ///      "description": "Automatically added for each VPC Subnet in the
-    /// VPC\n\n`Destination: A VPC Subnet` `Modifiable: false`",
-    ///      "type": "string",
-    ///      "enum": [
-    ///        "vpc_subnet"
-    ///      ]
-    ///    },
-    ///    {
-    ///      "description": "Automatically added when VPC peering is
-    /// established\n\n`Destination: A different VPC` `Modifiable: false`",
-    ///      "type": "string",
-    ///      "enum": [
-    ///        "vpc_peering"
-    ///      ]
-    ///    },
-    ///    {
-    ///      "description": "Created by a user See
-    /// [`RouteTarget`]\n\n`Destination: User defined` `Modifiable: true`",
-    ///      "type": "string",
-    ///      "enum": [
-    ///        "custom"
-    ///      ]
-    ///    }
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "The classification of a [`RouterRoute`] as defined by the system. The kind determines certain attributes such as if the route is modifiable and describes how or where the route was created.\n\nSee [RFD-21](https://rfd.shared.oxide.computer/rfd/0021#concept-router) for more context"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"The classification of a [`RouterRoute`] as defined by the system. The kind determines certain attributes such as if the route is modifiable and describes how or where the route was created.\\n\\nSee [RFD-21](https://rfd.shared.oxide.computer/rfd/0021#concept-router) for more context\","]
+    #[doc = "  \"oneOf\": ["]
+    #[doc = "    {"]
+    #[doc = "      \"description\": \"Determines the default destination of traffic, such as whether it goes to the internet or not.\\n\\n`Destination: An Internet Gateway` `Modifiable: true`\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"enum\": ["]
+    #[doc = "        \"default\""]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    {"]
+    #[doc = "      \"description\": \"Automatically added for each VPC Subnet in the VPC\\n\\n`Destination: A VPC Subnet` `Modifiable: false`\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"enum\": ["]
+    #[doc = "        \"vpc_subnet\""]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    {"]
+    #[doc = "      \"description\": \"Automatically added when VPC peering is established\\n\\n`Destination: A different VPC` `Modifiable: false`\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"enum\": ["]
+    #[doc = "        \"vpc_peering\""]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    {"]
+    #[doc = "      \"description\": \"Created by a user See [`RouteTarget`]\\n\\n`Destination: User defined` `Modifiable: true`\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"enum\": ["]
+    #[doc = "        \"custom\""]
+    #[doc = "      ]"]
+    #[doc = "    }"]
+    #[doc = "  ]"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(
         :: serde :: Deserialize,
         :: serde :: Serialize,
@@ -8716,25 +8234,16 @@ pub mod types {
         PartialOrd,
     )]
     pub enum RouterRouteKind {
-        ///Determines the default destination of traffic, such as whether it
-        /// goes to the internet or not.
-        ///
-        ///`Destination: An Internet Gateway` `Modifiable: true`
+        #[doc = "Determines the default destination of traffic, such as whether it goes to the internet or not.\n\n`Destination: An Internet Gateway` `Modifiable: true`"]
         #[serde(rename = "default")]
         Default,
-        ///Automatically added for each VPC Subnet in the VPC
-        ///
-        ///`Destination: A VPC Subnet` `Modifiable: false`
+        #[doc = "Automatically added for each VPC Subnet in the VPC\n\n`Destination: A VPC Subnet` `Modifiable: false`"]
         #[serde(rename = "vpc_subnet")]
         VpcSubnet,
-        ///Automatically added when VPC peering is established
-        ///
-        ///`Destination: A different VPC` `Modifiable: false`
+        #[doc = "Automatically added when VPC peering is established\n\n`Destination: A different VPC` `Modifiable: false`"]
         #[serde(rename = "vpc_peering")]
         VpcPeering,
-        ///Created by a user See [`RouteTarget`]
-        ///
-        ///`Destination: User defined` `Modifiable: true`
+        #[doc = "Created by a user See [`RouteTarget`]\n\n`Destination: User defined` `Modifiable: true`"]
         #[serde(rename = "custom")]
         Custom,
     }
@@ -8794,42 +8303,41 @@ pub mod types {
         }
     }
 
-    ///A single page of results
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "A single page of results",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "items"
-    ///  ],
-    ///  "properties": {
-    ///    "items": {
-    ///      "description": "list of items on this page of results",
-    ///      "type": "array",
-    ///      "items": {
-    ///        "$ref": "#/components/schemas/RouterRoute"
-    ///      }
-    ///    },
-    ///    "next_page": {
-    ///      "description": "token used to fetch the next page of results (if
-    /// any)",
-    ///      "type": [
-    ///        "string",
-    ///        "null"
-    ///      ]
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "A single page of results"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"A single page of results\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"items\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"items\": {"]
+    #[doc = "      \"description\": \"list of items on this page of results\","]
+    #[doc = "      \"type\": \"array\","]
+    #[doc = "      \"items\": {"]
+    #[doc = "        \"$ref\": \"#/components/schemas/RouterRoute\""]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    \"next_page\": {"]
+    #[doc = "      \"description\": \"token used to fetch the next page of results (if any)\","]
+    #[doc = "      \"type\": ["]
+    #[doc = "        \"string\","]
+    #[doc = "        \"null\""]
+    #[doc = "      ]"]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct RouterRouteResultsPage {
-        ///list of items on this page of results
+        #[doc = "list of items on this page of results"]
         pub items: ::std::vec::Vec<RouterRoute>,
-        ///token used to fetch the next page of results (if any)
+        #[doc = "token used to fetch the next page of results (if any)"]
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
         pub next_page: ::std::option::Option<::std::string::String>,
     }
@@ -8840,49 +8348,49 @@ pub mod types {
         }
     }
 
-    ///Updateable properties of a [`RouterRoute`]
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Updateable properties of a [`RouterRoute`]",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "destination",
-    ///    "target"
-    ///  ],
-    ///  "properties": {
-    ///    "description": {
-    ///      "type": [
-    ///        "string",
-    ///        "null"
-    ///      ]
-    ///    },
-    ///    "destination": {
-    ///      "$ref": "#/components/schemas/RouteDestination"
-    ///    },
-    ///    "name": {
-    ///      "oneOf": [
-    ///        {
-    ///          "type": "null"
-    ///        },
-    ///        {
-    ///          "allOf": [
-    ///            {
-    ///              "$ref": "#/components/schemas/Name"
-    ///            }
-    ///          ]
-    ///        }
-    ///      ]
-    ///    },
-    ///    "target": {
-    ///      "$ref": "#/components/schemas/RouteTarget"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Updateable properties of a [`RouterRoute`]"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Updateable properties of a [`RouterRoute`]\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"destination\","]
+    #[doc = "    \"target\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"description\": {"]
+    #[doc = "      \"type\": ["]
+    #[doc = "        \"string\","]
+    #[doc = "        \"null\""]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"destination\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/RouteDestination\""]
+    #[doc = "    },"]
+    #[doc = "    \"name\": {"]
+    #[doc = "      \"oneOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"type\": \"null\""]
+    #[doc = "        },"]
+    #[doc = "        {"]
+    #[doc = "          \"allOf\": ["]
+    #[doc = "            {"]
+    #[doc = "              \"$ref\": \"#/components/schemas/Name\""]
+    #[doc = "            }"]
+    #[doc = "          ]"]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"target\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/RouteTarget\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct RouterRouteUpdateParams {
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
@@ -8899,29 +8407,29 @@ pub mod types {
         }
     }
 
-    ///`Saga`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "required": [
-    ///    "id",
-    ///    "state"
-    ///  ],
-    ///  "properties": {
-    ///    "id": {
-    ///      "type": "string",
-    ///      "format": "uuid"
-    ///    },
-    ///    "state": {
-    ///      "$ref": "#/components/schemas/SagaState"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`Saga`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"id\","]
+    #[doc = "    \"state\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"id\": {"]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"uuid\""]
+    #[doc = "    },"]
+    #[doc = "    \"state\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/SagaState\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct Saga {
         pub id: ::uuid::Uuid,
@@ -8934,101 +8442,101 @@ pub mod types {
         }
     }
 
-    ///`SagaErrorInfo`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "oneOf": [
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "error",
-    ///        "source_error"
-    ///      ],
-    ///      "properties": {
-    ///        "error": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "action_failed"
-    ///          ]
-    ///        },
-    ///        "source_error": {}
-    ///      }
-    ///    },
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "error",
-    ///        "message"
-    ///      ],
-    ///      "properties": {
-    ///        "error": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "deserialize_failed"
-    ///          ]
-    ///        },
-    ///        "message": {
-    ///          "type": "string"
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "error"
-    ///      ],
-    ///      "properties": {
-    ///        "error": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "injected_error"
-    ///          ]
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "error",
-    ///        "message"
-    ///      ],
-    ///      "properties": {
-    ///        "error": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "serialize_failed"
-    ///          ]
-    ///        },
-    ///        "message": {
-    ///          "type": "string"
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "error",
-    ///        "message"
-    ///      ],
-    ///      "properties": {
-    ///        "error": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "subsaga_create_failed"
-    ///          ]
-    ///        },
-    ///        "message": {
-    ///          "type": "string"
-    ///        }
-    ///      }
-    ///    }
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`SagaErrorInfo`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"oneOf\": ["]
+    #[doc = "    {"]
+    #[doc = "      \"type\": \"object\","]
+    #[doc = "      \"required\": ["]
+    #[doc = "        \"error\","]
+    #[doc = "        \"source_error\""]
+    #[doc = "      ],"]
+    #[doc = "      \"properties\": {"]
+    #[doc = "        \"error\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"enum\": ["]
+    #[doc = "            \"action_failed\""]
+    #[doc = "          ]"]
+    #[doc = "        },"]
+    #[doc = "        \"source_error\": {}"]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    {"]
+    #[doc = "      \"type\": \"object\","]
+    #[doc = "      \"required\": ["]
+    #[doc = "        \"error\","]
+    #[doc = "        \"message\""]
+    #[doc = "      ],"]
+    #[doc = "      \"properties\": {"]
+    #[doc = "        \"error\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"enum\": ["]
+    #[doc = "            \"deserialize_failed\""]
+    #[doc = "          ]"]
+    #[doc = "        },"]
+    #[doc = "        \"message\": {"]
+    #[doc = "          \"type\": \"string\""]
+    #[doc = "        }"]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    {"]
+    #[doc = "      \"type\": \"object\","]
+    #[doc = "      \"required\": ["]
+    #[doc = "        \"error\""]
+    #[doc = "      ],"]
+    #[doc = "      \"properties\": {"]
+    #[doc = "        \"error\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"enum\": ["]
+    #[doc = "            \"injected_error\""]
+    #[doc = "          ]"]
+    #[doc = "        }"]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    {"]
+    #[doc = "      \"type\": \"object\","]
+    #[doc = "      \"required\": ["]
+    #[doc = "        \"error\","]
+    #[doc = "        \"message\""]
+    #[doc = "      ],"]
+    #[doc = "      \"properties\": {"]
+    #[doc = "        \"error\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"enum\": ["]
+    #[doc = "            \"serialize_failed\""]
+    #[doc = "          ]"]
+    #[doc = "        },"]
+    #[doc = "        \"message\": {"]
+    #[doc = "          \"type\": \"string\""]
+    #[doc = "        }"]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    {"]
+    #[doc = "      \"type\": \"object\","]
+    #[doc = "      \"required\": ["]
+    #[doc = "        \"error\","]
+    #[doc = "        \"message\""]
+    #[doc = "      ],"]
+    #[doc = "      \"properties\": {"]
+    #[doc = "        \"error\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"enum\": ["]
+    #[doc = "            \"subsaga_create_failed\""]
+    #[doc = "          ]"]
+    #[doc = "        },"]
+    #[doc = "        \"message\": {"]
+    #[doc = "          \"type\": \"string\""]
+    #[doc = "        }"]
+    #[doc = "      }"]
+    #[doc = "    }"]
+    #[doc = "  ]"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     #[serde(tag = "error")]
     pub enum SagaErrorInfo {
@@ -9050,42 +8558,41 @@ pub mod types {
         }
     }
 
-    ///A single page of results
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "A single page of results",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "items"
-    ///  ],
-    ///  "properties": {
-    ///    "items": {
-    ///      "description": "list of items on this page of results",
-    ///      "type": "array",
-    ///      "items": {
-    ///        "$ref": "#/components/schemas/Saga"
-    ///      }
-    ///    },
-    ///    "next_page": {
-    ///      "description": "token used to fetch the next page of results (if
-    /// any)",
-    ///      "type": [
-    ///        "string",
-    ///        "null"
-    ///      ]
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "A single page of results"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"A single page of results\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"items\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"items\": {"]
+    #[doc = "      \"description\": \"list of items on this page of results\","]
+    #[doc = "      \"type\": \"array\","]
+    #[doc = "      \"items\": {"]
+    #[doc = "        \"$ref\": \"#/components/schemas/Saga\""]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    \"next_page\": {"]
+    #[doc = "      \"description\": \"token used to fetch the next page of results (if any)\","]
+    #[doc = "      \"type\": ["]
+    #[doc = "        \"string\","]
+    #[doc = "        \"null\""]
+    #[doc = "      ]"]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct SagaResultsPage {
-        ///list of items on this page of results
+        #[doc = "list of items on this page of results"]
         pub items: ::std::vec::Vec<Saga>,
-        ///token used to fetch the next page of results (if any)
+        #[doc = "token used to fetch the next page of results (if any)"]
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
         pub next_page: ::std::option::Option<::std::string::String>,
     }
@@ -9096,67 +8603,67 @@ pub mod types {
         }
     }
 
-    ///`SagaState`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "oneOf": [
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "state"
-    ///      ],
-    ///      "properties": {
-    ///        "state": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "running"
-    ///          ]
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "state"
-    ///      ],
-    ///      "properties": {
-    ///        "state": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "succeeded"
-    ///          ]
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "error_info",
-    ///        "error_node_name",
-    ///        "state"
-    ///      ],
-    ///      "properties": {
-    ///        "error_info": {
-    ///          "$ref": "#/components/schemas/SagaErrorInfo"
-    ///        },
-    ///        "error_node_name": {
-    ///          "$ref": "#/components/schemas/NodeName"
-    ///        },
-    ///        "state": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "failed"
-    ///          ]
-    ///        }
-    ///      }
-    ///    }
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`SagaState`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"oneOf\": ["]
+    #[doc = "    {"]
+    #[doc = "      \"type\": \"object\","]
+    #[doc = "      \"required\": ["]
+    #[doc = "        \"state\""]
+    #[doc = "      ],"]
+    #[doc = "      \"properties\": {"]
+    #[doc = "        \"state\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"enum\": ["]
+    #[doc = "            \"running\""]
+    #[doc = "          ]"]
+    #[doc = "        }"]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    {"]
+    #[doc = "      \"type\": \"object\","]
+    #[doc = "      \"required\": ["]
+    #[doc = "        \"state\""]
+    #[doc = "      ],"]
+    #[doc = "      \"properties\": {"]
+    #[doc = "        \"state\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"enum\": ["]
+    #[doc = "            \"succeeded\""]
+    #[doc = "          ]"]
+    #[doc = "        }"]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    {"]
+    #[doc = "      \"type\": \"object\","]
+    #[doc = "      \"required\": ["]
+    #[doc = "        \"error_info\","]
+    #[doc = "        \"error_node_name\","]
+    #[doc = "        \"state\""]
+    #[doc = "      ],"]
+    #[doc = "      \"properties\": {"]
+    #[doc = "        \"error_info\": {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/SagaErrorInfo\""]
+    #[doc = "        },"]
+    #[doc = "        \"error_node_name\": {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/NodeName\""]
+    #[doc = "        },"]
+    #[doc = "        \"state\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"enum\": ["]
+    #[doc = "            \"failed\""]
+    #[doc = "          ]"]
+    #[doc = "        }"]
+    #[doc = "      }"]
+    #[doc = "    }"]
+    #[doc = "  ]"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     #[serde(tag = "state")]
     pub enum SagaState {
@@ -9177,118 +8684,109 @@ pub mod types {
         }
     }
 
-    ///Identity-related metadata that's included in nearly all public API
-    /// objects
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Identity-related metadata that's included in nearly all
-    /// public API objects",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "acs_url",
-    ///    "description",
-    ///    "id",
-    ///    "idp_entity_id",
-    ///    "name",
-    ///    "slo_url",
-    ///    "sp_client_id",
-    ///    "technical_contact_email",
-    ///    "time_created",
-    ///    "time_modified"
-    ///  ],
-    ///  "properties": {
-    ///    "acs_url": {
-    ///      "description": "service provider endpoint where the response will
-    /// be sent",
-    ///      "type": "string"
-    ///    },
-    ///    "description": {
-    ///      "description": "human-readable free-form text about a resource",
-    ///      "type": "string"
-    ///    },
-    ///    "id": {
-    ///      "description": "unique, immutable, system-controlled identifier for
-    /// each resource",
-    ///      "type": "string",
-    ///      "format": "uuid"
-    ///    },
-    ///    "idp_entity_id": {
-    ///      "description": "idp's entity id",
-    ///      "type": "string"
-    ///    },
-    ///    "name": {
-    ///      "description": "unique, mutable, user-controlled identifier for
-    /// each resource",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/Name"
-    ///        }
-    ///      ]
-    ///    },
-    ///    "public_cert": {
-    ///      "description": "optional request signing public certificate (base64
-    /// encoded der file)",
-    ///      "type": [
-    ///        "string",
-    ///        "null"
-    ///      ]
-    ///    },
-    ///    "slo_url": {
-    ///      "description": "service provider endpoint where the idp should send
-    /// log out requests",
-    ///      "type": "string"
-    ///    },
-    ///    "sp_client_id": {
-    ///      "description": "sp's client id",
-    ///      "type": "string"
-    ///    },
-    ///    "technical_contact_email": {
-    ///      "description": "customer's technical contact for saml
-    /// configuration",
-    ///      "type": "string"
-    ///    },
-    ///    "time_created": {
-    ///      "description": "timestamp when this resource was created",
-    ///      "type": "string",
-    ///      "format": "date-time"
-    ///    },
-    ///    "time_modified": {
-    ///      "description": "timestamp when this resource was last modified",
-    ///      "type": "string",
-    ///      "format": "date-time"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Identity-related metadata that's included in nearly all public API objects"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Identity-related metadata that's included in nearly all public API objects\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"acs_url\","]
+    #[doc = "    \"description\","]
+    #[doc = "    \"id\","]
+    #[doc = "    \"idp_entity_id\","]
+    #[doc = "    \"name\","]
+    #[doc = "    \"slo_url\","]
+    #[doc = "    \"sp_client_id\","]
+    #[doc = "    \"technical_contact_email\","]
+    #[doc = "    \"time_created\","]
+    #[doc = "    \"time_modified\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"acs_url\": {"]
+    #[doc = "      \"description\": \"service provider endpoint where the response will be sent\","]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"description\": {"]
+    #[doc = "      \"description\": \"human-readable free-form text about a resource\","]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"id\": {"]
+    #[doc = "      \"description\": \"unique, immutable, system-controlled identifier for each resource\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"uuid\""]
+    #[doc = "    },"]
+    #[doc = "    \"idp_entity_id\": {"]
+    #[doc = "      \"description\": \"idp's entity id\","]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"name\": {"]
+    #[doc = "      \"description\": \"unique, mutable, user-controlled identifier for each resource\","]
+    #[doc = "      \"allOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/Name\""]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"public_cert\": {"]
+    #[doc = "      \"description\": \"optional request signing public certificate (base64 encoded der file)\","]
+    #[doc = "      \"type\": ["]
+    #[doc = "        \"string\","]
+    #[doc = "        \"null\""]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"slo_url\": {"]
+    #[doc = "      \"description\": \"service provider endpoint where the idp should send log out requests\","]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"sp_client_id\": {"]
+    #[doc = "      \"description\": \"sp's client id\","]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"technical_contact_email\": {"]
+    #[doc = "      \"description\": \"customer's technical contact for saml configuration\","]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"time_created\": {"]
+    #[doc = "      \"description\": \"timestamp when this resource was created\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"date-time\""]
+    #[doc = "    },"]
+    #[doc = "    \"time_modified\": {"]
+    #[doc = "      \"description\": \"timestamp when this resource was last modified\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"date-time\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct SamlIdentityProvider {
-        ///service provider endpoint where the response will be sent
+        #[doc = "service provider endpoint where the response will be sent"]
         pub acs_url: ::std::string::String,
-        ///human-readable free-form text about a resource
+        #[doc = "human-readable free-form text about a resource"]
         pub description: ::std::string::String,
-        ///unique, immutable, system-controlled identifier for each resource
+        #[doc = "unique, immutable, system-controlled identifier for each resource"]
         pub id: ::uuid::Uuid,
-        ///idp's entity id
+        #[doc = "idp's entity id"]
         pub idp_entity_id: ::std::string::String,
-        ///unique, mutable, user-controlled identifier for each resource
+        #[doc = "unique, mutable, user-controlled identifier for each resource"]
         pub name: Name,
-        ///optional request signing public certificate (base64 encoded der
-        /// file)
+        #[doc = "optional request signing public certificate (base64 encoded der file)"]
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
         pub public_cert: ::std::option::Option<::std::string::String>,
-        ///service provider endpoint where the idp should send log out requests
+        #[doc = "service provider endpoint where the idp should send log out requests"]
         pub slo_url: ::std::string::String,
-        ///sp's client id
+        #[doc = "sp's client id"]
         pub sp_client_id: ::std::string::String,
-        ///customer's technical contact for saml configuration
+        #[doc = "customer's technical contact for saml configuration"]
         pub technical_contact_email: ::std::string::String,
-        ///timestamp when this resource was created
+        #[doc = "timestamp when this resource was created"]
         pub time_created: ::chrono::DateTime<::chrono::offset::Utc>,
-        ///timestamp when this resource was last modified
+        #[doc = "timestamp when this resource was last modified"]
         pub time_modified: ::chrono::DateTime<::chrono::offset::Utc>,
     }
 
@@ -9298,114 +8796,106 @@ pub mod types {
         }
     }
 
-    ///Create-time identity-related parameters
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Create-time identity-related parameters",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "acs_url",
-    ///    "description",
-    ///    "idp_entity_id",
-    ///    "idp_metadata_source",
-    ///    "name",
-    ///    "slo_url",
-    ///    "sp_client_id",
-    ///    "technical_contact_email"
-    ///  ],
-    ///  "properties": {
-    ///    "acs_url": {
-    ///      "description": "service provider endpoint where the response will
-    /// be sent",
-    ///      "type": "string"
-    ///    },
-    ///    "description": {
-    ///      "type": "string"
-    ///    },
-    ///    "group_attribute_name": {
-    ///      "description": "If set, SAML attributes with this name will be
-    /// considered to denote a user's group membership, where the attribute
-    /// value(s) should be a comma-separated list of group names.",
-    ///      "type": [
-    ///        "string",
-    ///        "null"
-    ///      ]
-    ///    },
-    ///    "idp_entity_id": {
-    ///      "description": "idp's entity id",
-    ///      "type": "string"
-    ///    },
-    ///    "idp_metadata_source": {
-    ///      "description": "the source of an identity provider metadata
-    /// descriptor",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/IdpMetadataSource"
-    ///        }
-    ///      ]
-    ///    },
-    ///    "name": {
-    ///      "$ref": "#/components/schemas/Name"
-    ///    },
-    ///    "signing_keypair": {
-    ///      "description": "optional request signing key pair",
-    ///      "oneOf": [
-    ///        {
-    ///          "type": "null"
-    ///        },
-    ///        {
-    ///          "allOf": [
-    ///            {
-    ///              "$ref": "#/components/schemas/DerEncodedKeyPair"
-    ///            }
-    ///          ]
-    ///        }
-    ///      ]
-    ///    },
-    ///    "slo_url": {
-    ///      "description": "service provider endpoint where the idp should send
-    /// log out requests",
-    ///      "type": "string"
-    ///    },
-    ///    "sp_client_id": {
-    ///      "description": "sp's client id",
-    ///      "type": "string"
-    ///    },
-    ///    "technical_contact_email": {
-    ///      "description": "customer's technical contact for saml
-    /// configuration",
-    ///      "type": "string"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Create-time identity-related parameters"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Create-time identity-related parameters\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"acs_url\","]
+    #[doc = "    \"description\","]
+    #[doc = "    \"idp_entity_id\","]
+    #[doc = "    \"idp_metadata_source\","]
+    #[doc = "    \"name\","]
+    #[doc = "    \"slo_url\","]
+    #[doc = "    \"sp_client_id\","]
+    #[doc = "    \"technical_contact_email\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"acs_url\": {"]
+    #[doc = "      \"description\": \"service provider endpoint where the response will be sent\","]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"description\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"group_attribute_name\": {"]
+    #[doc = "      \"description\": \"If set, SAML attributes with this name will be considered to denote a user's group membership, where the attribute value(s) should be a comma-separated list of group names.\","]
+    #[doc = "      \"type\": ["]
+    #[doc = "        \"string\","]
+    #[doc = "        \"null\""]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"idp_entity_id\": {"]
+    #[doc = "      \"description\": \"idp's entity id\","]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"idp_metadata_source\": {"]
+    #[doc = "      \"description\": \"the source of an identity provider metadata descriptor\","]
+    #[doc = "      \"allOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/IdpMetadataSource\""]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"name\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/Name\""]
+    #[doc = "    },"]
+    #[doc = "    \"signing_keypair\": {"]
+    #[doc = "      \"description\": \"optional request signing key pair\","]
+    #[doc = "      \"oneOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"type\": \"null\""]
+    #[doc = "        },"]
+    #[doc = "        {"]
+    #[doc = "          \"allOf\": ["]
+    #[doc = "            {"]
+    #[doc = "              \"$ref\": \"#/components/schemas/DerEncodedKeyPair\""]
+    #[doc = "            }"]
+    #[doc = "          ]"]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"slo_url\": {"]
+    #[doc = "      \"description\": \"service provider endpoint where the idp should send log out requests\","]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"sp_client_id\": {"]
+    #[doc = "      \"description\": \"sp's client id\","]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"technical_contact_email\": {"]
+    #[doc = "      \"description\": \"customer's technical contact for saml configuration\","]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct SamlIdentityProviderCreate {
-        ///service provider endpoint where the response will be sent
+        #[doc = "service provider endpoint where the response will be sent"]
         pub acs_url: ::std::string::String,
         pub description: ::std::string::String,
-        ///If set, SAML attributes with this name will be considered to denote
-        /// a user's group membership, where the attribute value(s) should be a
-        /// comma-separated list of group names.
+        #[doc = "If set, SAML attributes with this name will be considered to denote a user's group membership, where the attribute value(s) should be a comma-separated list of group names."]
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
         pub group_attribute_name: ::std::option::Option<::std::string::String>,
-        ///idp's entity id
+        #[doc = "idp's entity id"]
         pub idp_entity_id: ::std::string::String,
-        ///the source of an identity provider metadata descriptor
+        #[doc = "the source of an identity provider metadata descriptor"]
         pub idp_metadata_source: IdpMetadataSource,
         pub name: Name,
-        ///optional request signing key pair
+        #[doc = "optional request signing key pair"]
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
         pub signing_keypair: ::std::option::Option<DerEncodedKeyPair>,
-        ///service provider endpoint where the idp should send log out requests
+        #[doc = "service provider endpoint where the idp should send log out requests"]
         pub slo_url: ::std::string::String,
-        ///sp's client id
+        #[doc = "sp's client id"]
         pub sp_client_id: ::std::string::String,
-        ///customer's technical contact for saml configuration
+        #[doc = "customer's technical contact for saml configuration"]
         pub technical_contact_email: ::std::string::String,
     }
 
@@ -9415,17 +8905,17 @@ pub mod types {
         }
     }
 
-    ///`SemverVersion`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "string",
-    ///  "pattern": "^\\d+\\.\\d+\\.\\d+([\\-\\+].+)?$"
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`SemverVersion`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"string\","]
+    #[doc = "  \"pattern\": \"^\\\\d+\\\\.\\\\d+\\\\.\\\\d+([\\\\-\\\\+].+)?$\""]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Serialize, Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
     #[serde(transparent)]
     pub struct SemverVersion(::std::string::String);
@@ -9500,26 +8990,25 @@ pub mod types {
         }
     }
 
-    ///The service intended to use this certificate.
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "The service intended to use this certificate.",
-    ///  "oneOf": [
-    ///    {
-    ///      "description": "This certificate is intended for access to the
-    /// external API.",
-    ///      "type": "string",
-    ///      "enum": [
-    ///        "external_api"
-    ///      ]
-    ///    }
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "The service intended to use this certificate."]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"The service intended to use this certificate.\","]
+    #[doc = "  \"oneOf\": ["]
+    #[doc = "    {"]
+    #[doc = "      \"description\": \"This certificate is intended for access to the external API.\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"enum\": ["]
+    #[doc = "        \"external_api\""]
+    #[doc = "      ]"]
+    #[doc = "    }"]
+    #[doc = "  ]"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(
         :: serde :: Deserialize,
         :: serde :: Serialize,
@@ -9533,7 +9022,7 @@ pub mod types {
         PartialOrd,
     )]
     pub enum ServiceUsingCertificate {
-        ///This certificate is intended for access to the external API.
+        #[doc = "This certificate is intended for access to the external API."]
         #[serde(rename = "external_api")]
         ExternalApi,
     }
@@ -9587,85 +9076,82 @@ pub mod types {
         }
     }
 
-    ///Client view of a ['Silo']
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Client view of a ['Silo']",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "description",
-    ///    "discoverable",
-    ///    "id",
-    ///    "identity_mode",
-    ///    "name",
-    ///    "time_created",
-    ///    "time_modified"
-    ///  ],
-    ///  "properties": {
-    ///    "description": {
-    ///      "description": "human-readable free-form text about a resource",
-    ///      "type": "string"
-    ///    },
-    ///    "discoverable": {
-    ///      "description": "A silo where discoverable is false can be retrieved only by its id - it will not be part of the \"list all silos\" output.",
-    ///      "type": "boolean"
-    ///    },
-    ///    "id": {
-    ///      "description": "unique, immutable, system-controlled identifier for
-    /// each resource",
-    ///      "type": "string",
-    ///      "format": "uuid"
-    ///    },
-    ///    "identity_mode": {
-    ///      "description": "How users and groups are managed in this Silo",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/SiloIdentityMode"
-    ///        }
-    ///      ]
-    ///    },
-    ///    "name": {
-    ///      "description": "unique, mutable, user-controlled identifier for
-    /// each resource",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/Name"
-    ///        }
-    ///      ]
-    ///    },
-    ///    "time_created": {
-    ///      "description": "timestamp when this resource was created",
-    ///      "type": "string",
-    ///      "format": "date-time"
-    ///    },
-    ///    "time_modified": {
-    ///      "description": "timestamp when this resource was last modified",
-    ///      "type": "string",
-    ///      "format": "date-time"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Client view of a ['Silo']"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Client view of a ['Silo']\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"description\","]
+    #[doc = "    \"discoverable\","]
+    #[doc = "    \"id\","]
+    #[doc = "    \"identity_mode\","]
+    #[doc = "    \"name\","]
+    #[doc = "    \"time_created\","]
+    #[doc = "    \"time_modified\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"description\": {"]
+    #[doc = "      \"description\": \"human-readable free-form text about a resource\","]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"discoverable\": {"]
+    #[doc = "      \"description\": \"A silo where discoverable is false can be retrieved only by its id - it will not be part of the \\\"list all silos\\\" output.\","]
+    #[doc = "      \"type\": \"boolean\""]
+    #[doc = "    },"]
+    #[doc = "    \"id\": {"]
+    #[doc = "      \"description\": \"unique, immutable, system-controlled identifier for each resource\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"uuid\""]
+    #[doc = "    },"]
+    #[doc = "    \"identity_mode\": {"]
+    #[doc = "      \"description\": \"How users and groups are managed in this Silo\","]
+    #[doc = "      \"allOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/SiloIdentityMode\""]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"name\": {"]
+    #[doc = "      \"description\": \"unique, mutable, user-controlled identifier for each resource\","]
+    #[doc = "      \"allOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/Name\""]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"time_created\": {"]
+    #[doc = "      \"description\": \"timestamp when this resource was created\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"date-time\""]
+    #[doc = "    },"]
+    #[doc = "    \"time_modified\": {"]
+    #[doc = "      \"description\": \"timestamp when this resource was last modified\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"date-time\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct Silo {
-        ///human-readable free-form text about a resource
+        #[doc = "human-readable free-form text about a resource"]
         pub description: ::std::string::String,
-        ///A silo where discoverable is false can be retrieved only by its id -
-        /// it will not be part of the "list all silos" output.
+        #[doc = "A silo where discoverable is false can be retrieved only by its id - it will not be part of the \"list all silos\" output."]
         pub discoverable: bool,
-        ///unique, immutable, system-controlled identifier for each resource
+        #[doc = "unique, immutable, system-controlled identifier for each resource"]
         pub id: ::uuid::Uuid,
-        ///How users and groups are managed in this Silo
+        #[doc = "How users and groups are managed in this Silo"]
         pub identity_mode: SiloIdentityMode,
-        ///unique, mutable, user-controlled identifier for each resource
+        #[doc = "unique, mutable, user-controlled identifier for each resource"]
         pub name: Name,
-        ///timestamp when this resource was created
+        #[doc = "timestamp when this resource was created"]
         pub time_created: ::chrono::DateTime<::chrono::offset::Utc>,
-        ///timestamp when this resource was last modified
+        #[doc = "timestamp when this resource was last modified"]
         pub time_modified: ::chrono::DateTime<::chrono::offset::Utc>,
     }
 
@@ -9675,61 +9161,47 @@ pub mod types {
         }
     }
 
-    ///Create-time parameters for a [`Silo`](crate::external_api::views::Silo)
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Create-time parameters for a
-    /// [`Silo`](crate::external_api::views::Silo)",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "description",
-    ///    "discoverable",
-    ///    "identity_mode",
-    ///    "name"
-    ///  ],
-    ///  "properties": {
-    ///    "admin_group_name": {
-    ///      "description": "If set, this group will be created during Silo
-    /// creation and granted the \"Silo Admin\" role. Identity providers can
-    /// assert that users belong to this group and those users can log in and
-    /// further initialize the Silo.\n\nNote that if configuring a SAML based
-    /// identity provider, group_attribute_name must be set for users to be
-    /// considered part of a group. See [`SamlIdentityProviderCreate`] for more
-    /// information.",
-    ///      "type": [
-    ///        "string",
-    ///        "null"
-    ///      ]
-    ///    },
-    ///    "description": {
-    ///      "type": "string"
-    ///    },
-    ///    "discoverable": {
-    ///      "type": "boolean"
-    ///    },
-    ///    "identity_mode": {
-    ///      "$ref": "#/components/schemas/SiloIdentityMode"
-    ///    },
-    ///    "name": {
-    ///      "$ref": "#/components/schemas/Name"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Create-time parameters for a [`Silo`](crate::external_api::views::Silo)"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Create-time parameters for a [`Silo`](crate::external_api::views::Silo)\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"description\","]
+    #[doc = "    \"discoverable\","]
+    #[doc = "    \"identity_mode\","]
+    #[doc = "    \"name\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"admin_group_name\": {"]
+    #[doc = "      \"description\": \"If set, this group will be created during Silo creation and granted the \\\"Silo Admin\\\" role. Identity providers can assert that users belong to this group and those users can log in and further initialize the Silo.\\n\\nNote that if configuring a SAML based identity provider, group_attribute_name must be set for users to be considered part of a group. See [`SamlIdentityProviderCreate`] for more information.\","]
+    #[doc = "      \"type\": ["]
+    #[doc = "        \"string\","]
+    #[doc = "        \"null\""]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"description\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"discoverable\": {"]
+    #[doc = "      \"type\": \"boolean\""]
+    #[doc = "    },"]
+    #[doc = "    \"identity_mode\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/SiloIdentityMode\""]
+    #[doc = "    },"]
+    #[doc = "    \"name\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/Name\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct SiloCreate {
-        ///If set, this group will be created during Silo creation and granted
-        /// the "Silo Admin" role. Identity providers can assert that users
-        /// belong to this group and those users can log in and further
-        /// initialize the Silo.
-        ///
-        ///Note that if configuring a SAML based identity provider,
-        /// group_attribute_name must be set for users to be considered part of
-        /// a group. See [`SamlIdentityProviderCreate`] for more information.
+        #[doc = "If set, this group will be created during Silo creation and granted the \"Silo Admin\" role. Identity providers can assert that users belong to this group and those users can log in and further initialize the Silo.\n\nNote that if configuring a SAML based identity provider, group_attribute_name must be set for users to be considered part of a group. See [`SamlIdentityProviderCreate`] for more information."]
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
         pub admin_group_name: ::std::option::Option<::std::string::String>,
         pub description: ::std::string::String,
@@ -9744,39 +9216,32 @@ pub mod types {
         }
     }
 
-    ///Describes how identities are managed and users are authenticated in this
-    /// Silo
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Describes how identities are managed and users are
-    /// authenticated in this Silo",
-    ///  "oneOf": [
-    ///    {
-    ///      "description": "Users are authenticated with SAML using an external
-    /// authentication provider.  The system updates information about users and
-    /// groups only during successful authentication (i.e,. \"JIT provisioning\"
-    /// of users and groups).",
-    ///      "type": "string",
-    ///      "enum": [
-    ///        "saml_jit"
-    ///      ]
-    ///    },
-    ///    {
-    ///      "description": "The system is the source of truth about users.
-    /// There is no linkage to an external authentication provider or identity
-    /// provider.",
-    ///      "type": "string",
-    ///      "enum": [
-    ///        "local_only"
-    ///      ]
-    ///    }
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Describes how identities are managed and users are authenticated in this Silo"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Describes how identities are managed and users are authenticated in this Silo\","]
+    #[doc = "  \"oneOf\": ["]
+    #[doc = "    {"]
+    #[doc = "      \"description\": \"Users are authenticated with SAML using an external authentication provider.  The system updates information about users and groups only during successful authentication (i.e,. \\\"JIT provisioning\\\" of users and groups).\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"enum\": ["]
+    #[doc = "        \"saml_jit\""]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    {"]
+    #[doc = "      \"description\": \"The system is the source of truth about users.  There is no linkage to an external authentication provider or identity provider.\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"enum\": ["]
+    #[doc = "        \"local_only\""]
+    #[doc = "      ]"]
+    #[doc = "    }"]
+    #[doc = "  ]"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(
         :: serde :: Deserialize,
         :: serde :: Serialize,
@@ -9790,14 +9255,10 @@ pub mod types {
         PartialOrd,
     )]
     pub enum SiloIdentityMode {
-        ///Users are authenticated with SAML using an external authentication
-        /// provider.  The system updates information about users and groups
-        /// only during successful authentication (i.e,. "JIT provisioning" of
-        /// users and groups).
+        #[doc = "Users are authenticated with SAML using an external authentication provider.  The system updates information about users and groups only during successful authentication (i.e,. \"JIT provisioning\" of users and groups)."]
         #[serde(rename = "saml_jit")]
         SamlJit,
-        ///The system is the source of truth about users.  There is no linkage
-        /// to an external authentication provider or identity provider.
+        #[doc = "The system is the source of truth about users.  There is no linkage to an external authentication provider or identity provider."]
         #[serde(rename = "local_only")]
         LocalOnly,
     }
@@ -9853,42 +9314,41 @@ pub mod types {
         }
     }
 
-    ///A single page of results
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "A single page of results",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "items"
-    ///  ],
-    ///  "properties": {
-    ///    "items": {
-    ///      "description": "list of items on this page of results",
-    ///      "type": "array",
-    ///      "items": {
-    ///        "$ref": "#/components/schemas/Silo"
-    ///      }
-    ///    },
-    ///    "next_page": {
-    ///      "description": "token used to fetch the next page of results (if
-    /// any)",
-    ///      "type": [
-    ///        "string",
-    ///        "null"
-    ///      ]
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "A single page of results"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"A single page of results\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"items\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"items\": {"]
+    #[doc = "      \"description\": \"list of items on this page of results\","]
+    #[doc = "      \"type\": \"array\","]
+    #[doc = "      \"items\": {"]
+    #[doc = "        \"$ref\": \"#/components/schemas/Silo\""]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    \"next_page\": {"]
+    #[doc = "      \"description\": \"token used to fetch the next page of results (if any)\","]
+    #[doc = "      \"type\": ["]
+    #[doc = "        \"string\","]
+    #[doc = "        \"null\""]
+    #[doc = "      ]"]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct SiloResultsPage {
-        ///list of items on this page of results
+        #[doc = "list of items on this page of results"]
         pub items: ::std::vec::Vec<Silo>,
-        ///token used to fetch the next page of results (if any)
+        #[doc = "token used to fetch the next page of results (if any)"]
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
         pub next_page: ::std::option::Option<::std::string::String>,
     }
@@ -9899,21 +9359,21 @@ pub mod types {
         }
     }
 
-    ///`SiloRole`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "string",
-    ///  "enum": [
-    ///    "admin",
-    ///    "collaborator",
-    ///    "viewer"
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`SiloRole`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"string\","]
+    #[doc = "  \"enum\": ["]
+    #[doc = "    \"admin\","]
+    #[doc = "    \"collaborator\","]
+    #[doc = "    \"viewer\""]
+    #[doc = "  ]"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(
         :: serde :: Deserialize,
         :: serde :: Serialize,
@@ -9988,40 +9448,32 @@ pub mod types {
         }
     }
 
-    ///Client view of a [`Policy`], which describes how this resource may be
-    /// accessed
-    ///
-    ///Note that the Policy only describes access granted explicitly for this
-    /// resource.  The policies of parent resources can also cause a user to
-    /// have access to this resource.
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Client view of a [`Policy`], which describes how this
-    /// resource may be accessed\n\nNote that the Policy only describes access
-    /// granted explicitly for this resource.  The policies of parent resources
-    /// can also cause a user to have access to this resource.",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "role_assignments"
-    ///  ],
-    ///  "properties": {
-    ///    "role_assignments": {
-    ///      "description": "Roles directly assigned on this resource",
-    ///      "type": "array",
-    ///      "items": {
-    ///        "$ref": "#/components/schemas/SiloRoleRoleAssignment"
-    ///      }
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Client view of a [`Policy`], which describes how this resource may be accessed\n\nNote that the Policy only describes access granted explicitly for this resource.  The policies of parent resources can also cause a user to have access to this resource."]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Client view of a [`Policy`], which describes how this resource may be accessed\\n\\nNote that the Policy only describes access granted explicitly for this resource.  The policies of parent resources can also cause a user to have access to this resource.\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"role_assignments\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"role_assignments\": {"]
+    #[doc = "      \"description\": \"Roles directly assigned on this resource\","]
+    #[doc = "      \"type\": \"array\","]
+    #[doc = "      \"items\": {"]
+    #[doc = "        \"$ref\": \"#/components/schemas/SiloRoleRoleAssignment\""]
+    #[doc = "      }"]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct SiloRolePolicy {
-        ///Roles directly assigned on this resource
+        #[doc = "Roles directly assigned on this resource"]
         pub role_assignments: ::std::vec::Vec<SiloRoleRoleAssignment>,
     }
 
@@ -10031,43 +9483,34 @@ pub mod types {
         }
     }
 
-    ///Describes the assignment of a particular role on a particular resource
-    /// to a particular identity (user, group, etc.)
-    ///
-    ///The resource is not part of this structure.  Rather, [`RoleAssignment`]s
-    /// are put into a [`Policy`] and that Policy is applied to a particular
-    /// resource.
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Describes the assignment of a particular role on a
-    /// particular resource to a particular identity (user, group, etc.)\n\nThe
-    /// resource is not part of this structure.  Rather, [`RoleAssignment`]s are
-    /// put into a [`Policy`] and that Policy is applied to a particular
-    /// resource.",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "identity_id",
-    ///    "identity_type",
-    ///    "role_name"
-    ///  ],
-    ///  "properties": {
-    ///    "identity_id": {
-    ///      "type": "string",
-    ///      "format": "uuid"
-    ///    },
-    ///    "identity_type": {
-    ///      "$ref": "#/components/schemas/IdentityType"
-    ///    },
-    ///    "role_name": {
-    ///      "$ref": "#/components/schemas/SiloRole"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Describes the assignment of a particular role on a particular resource to a particular identity (user, group, etc.)\n\nThe resource is not part of this structure.  Rather, [`RoleAssignment`]s are put into a [`Policy`] and that Policy is applied to a particular resource."]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Describes the assignment of a particular role on a particular resource to a particular identity (user, group, etc.)\\n\\nThe resource is not part of this structure.  Rather, [`RoleAssignment`]s are put into a [`Policy`] and that Policy is applied to a particular resource.\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"identity_id\","]
+    #[doc = "    \"identity_type\","]
+    #[doc = "    \"role_name\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"identity_id\": {"]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"uuid\""]
+    #[doc = "    },"]
+    #[doc = "    \"identity_type\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/IdentityType\""]
+    #[doc = "    },"]
+    #[doc = "    \"role_name\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/SiloRole\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct SiloRoleRoleAssignment {
         pub identity_id: ::uuid::Uuid,
@@ -10081,57 +9524,56 @@ pub mod types {
         }
     }
 
-    ///Client view of a [`Sled`]
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Client view of a [`Sled`]",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "baseboard",
-    ///    "id",
-    ///    "service_address",
-    ///    "time_created",
-    ///    "time_modified"
-    ///  ],
-    ///  "properties": {
-    ///    "baseboard": {
-    ///      "$ref": "#/components/schemas/Baseboard"
-    ///    },
-    ///    "id": {
-    ///      "description": "unique, immutable, system-controlled identifier for
-    /// each resource",
-    ///      "type": "string",
-    ///      "format": "uuid"
-    ///    },
-    ///    "service_address": {
-    ///      "type": "string"
-    ///    },
-    ///    "time_created": {
-    ///      "description": "timestamp when this resource was created",
-    ///      "type": "string",
-    ///      "format": "date-time"
-    ///    },
-    ///    "time_modified": {
-    ///      "description": "timestamp when this resource was last modified",
-    ///      "type": "string",
-    ///      "format": "date-time"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Client view of a [`Sled`]"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Client view of a [`Sled`]\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"baseboard\","]
+    #[doc = "    \"id\","]
+    #[doc = "    \"service_address\","]
+    #[doc = "    \"time_created\","]
+    #[doc = "    \"time_modified\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"baseboard\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/Baseboard\""]
+    #[doc = "    },"]
+    #[doc = "    \"id\": {"]
+    #[doc = "      \"description\": \"unique, immutable, system-controlled identifier for each resource\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"uuid\""]
+    #[doc = "    },"]
+    #[doc = "    \"service_address\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"time_created\": {"]
+    #[doc = "      \"description\": \"timestamp when this resource was created\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"date-time\""]
+    #[doc = "    },"]
+    #[doc = "    \"time_modified\": {"]
+    #[doc = "      \"description\": \"timestamp when this resource was last modified\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"date-time\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct Sled {
         pub baseboard: Baseboard,
-        ///unique, immutable, system-controlled identifier for each resource
+        #[doc = "unique, immutable, system-controlled identifier for each resource"]
         pub id: ::uuid::Uuid,
         pub service_address: ::std::string::String,
-        ///timestamp when this resource was created
+        #[doc = "timestamp when this resource was created"]
         pub time_created: ::chrono::DateTime<::chrono::offset::Utc>,
-        ///timestamp when this resource was last modified
+        #[doc = "timestamp when this resource was last modified"]
         pub time_modified: ::chrono::DateTime<::chrono::offset::Utc>,
     }
 
@@ -10141,42 +9583,41 @@ pub mod types {
         }
     }
 
-    ///A single page of results
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "A single page of results",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "items"
-    ///  ],
-    ///  "properties": {
-    ///    "items": {
-    ///      "description": "list of items on this page of results",
-    ///      "type": "array",
-    ///      "items": {
-    ///        "$ref": "#/components/schemas/Sled"
-    ///      }
-    ///    },
-    ///    "next_page": {
-    ///      "description": "token used to fetch the next page of results (if
-    /// any)",
-    ///      "type": [
-    ///        "string",
-    ///        "null"
-    ///      ]
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "A single page of results"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"A single page of results\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"items\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"items\": {"]
+    #[doc = "      \"description\": \"list of items on this page of results\","]
+    #[doc = "      \"type\": \"array\","]
+    #[doc = "      \"items\": {"]
+    #[doc = "        \"$ref\": \"#/components/schemas/Sled\""]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    \"next_page\": {"]
+    #[doc = "      \"description\": \"token used to fetch the next page of results (if any)\","]
+    #[doc = "      \"type\": ["]
+    #[doc = "        \"string\","]
+    #[doc = "        \"null\""]
+    #[doc = "      ]"]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct SledResultsPage {
-        ///list of items on this page of results
+        #[doc = "list of items on this page of results"]
         pub items: ::std::vec::Vec<Sled>,
-        ///token used to fetch the next page of results (if any)
+        #[doc = "token used to fetch the next page of results (if any)"]
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
         pub next_page: ::std::option::Option<::std::string::String>,
     }
@@ -10187,88 +9628,86 @@ pub mod types {
         }
     }
 
-    ///Client view of a Snapshot
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Client view of a Snapshot",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "description",
-    ///    "disk_id",
-    ///    "id",
-    ///    "name",
-    ///    "project_id",
-    ///    "size",
-    ///    "state",
-    ///    "time_created",
-    ///    "time_modified"
-    ///  ],
-    ///  "properties": {
-    ///    "description": {
-    ///      "description": "human-readable free-form text about a resource",
-    ///      "type": "string"
-    ///    },
-    ///    "disk_id": {
-    ///      "type": "string",
-    ///      "format": "uuid"
-    ///    },
-    ///    "id": {
-    ///      "description": "unique, immutable, system-controlled identifier for
-    /// each resource",
-    ///      "type": "string",
-    ///      "format": "uuid"
-    ///    },
-    ///    "name": {
-    ///      "description": "unique, mutable, user-controlled identifier for
-    /// each resource",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/Name"
-    ///        }
-    ///      ]
-    ///    },
-    ///    "project_id": {
-    ///      "type": "string",
-    ///      "format": "uuid"
-    ///    },
-    ///    "size": {
-    ///      "$ref": "#/components/schemas/ByteCount"
-    ///    },
-    ///    "state": {
-    ///      "$ref": "#/components/schemas/SnapshotState"
-    ///    },
-    ///    "time_created": {
-    ///      "description": "timestamp when this resource was created",
-    ///      "type": "string",
-    ///      "format": "date-time"
-    ///    },
-    ///    "time_modified": {
-    ///      "description": "timestamp when this resource was last modified",
-    ///      "type": "string",
-    ///      "format": "date-time"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Client view of a Snapshot"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Client view of a Snapshot\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"description\","]
+    #[doc = "    \"disk_id\","]
+    #[doc = "    \"id\","]
+    #[doc = "    \"name\","]
+    #[doc = "    \"project_id\","]
+    #[doc = "    \"size\","]
+    #[doc = "    \"state\","]
+    #[doc = "    \"time_created\","]
+    #[doc = "    \"time_modified\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"description\": {"]
+    #[doc = "      \"description\": \"human-readable free-form text about a resource\","]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"disk_id\": {"]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"uuid\""]
+    #[doc = "    },"]
+    #[doc = "    \"id\": {"]
+    #[doc = "      \"description\": \"unique, immutable, system-controlled identifier for each resource\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"uuid\""]
+    #[doc = "    },"]
+    #[doc = "    \"name\": {"]
+    #[doc = "      \"description\": \"unique, mutable, user-controlled identifier for each resource\","]
+    #[doc = "      \"allOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/Name\""]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"project_id\": {"]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"uuid\""]
+    #[doc = "    },"]
+    #[doc = "    \"size\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/ByteCount\""]
+    #[doc = "    },"]
+    #[doc = "    \"state\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/SnapshotState\""]
+    #[doc = "    },"]
+    #[doc = "    \"time_created\": {"]
+    #[doc = "      \"description\": \"timestamp when this resource was created\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"date-time\""]
+    #[doc = "    },"]
+    #[doc = "    \"time_modified\": {"]
+    #[doc = "      \"description\": \"timestamp when this resource was last modified\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"date-time\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct Snapshot {
-        ///human-readable free-form text about a resource
+        #[doc = "human-readable free-form text about a resource"]
         pub description: ::std::string::String,
         pub disk_id: ::uuid::Uuid,
-        ///unique, immutable, system-controlled identifier for each resource
+        #[doc = "unique, immutable, system-controlled identifier for each resource"]
         pub id: ::uuid::Uuid,
-        ///unique, mutable, user-controlled identifier for each resource
+        #[doc = "unique, mutable, user-controlled identifier for each resource"]
         pub name: Name,
         pub project_id: ::uuid::Uuid,
         pub size: ByteCount,
         pub state: SnapshotState,
-        ///timestamp when this resource was created
+        #[doc = "timestamp when this resource was created"]
         pub time_created: ::chrono::DateTime<::chrono::offset::Utc>,
-        ///timestamp when this resource was last modified
+        #[doc = "timestamp when this resource was last modified"]
         pub time_modified: ::chrono::DateTime<::chrono::offset::Utc>,
     }
 
@@ -10278,44 +9717,42 @@ pub mod types {
         }
     }
 
-    ///Create-time parameters for a
-    /// [`Snapshot`](crate::external_api::views::Snapshot)
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Create-time parameters for a
-    /// [`Snapshot`](crate::external_api::views::Snapshot)",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "description",
-    ///    "disk",
-    ///    "name"
-    ///  ],
-    ///  "properties": {
-    ///    "description": {
-    ///      "type": "string"
-    ///    },
-    ///    "disk": {
-    ///      "description": "The name of the disk to be snapshotted",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/Name"
-    ///        }
-    ///      ]
-    ///    },
-    ///    "name": {
-    ///      "$ref": "#/components/schemas/Name"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Create-time parameters for a [`Snapshot`](crate::external_api::views::Snapshot)"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Create-time parameters for a [`Snapshot`](crate::external_api::views::Snapshot)\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"description\","]
+    #[doc = "    \"disk\","]
+    #[doc = "    \"name\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"description\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"disk\": {"]
+    #[doc = "      \"description\": \"The name of the disk to be snapshotted\","]
+    #[doc = "      \"allOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/Name\""]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"name\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/Name\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct SnapshotCreate {
         pub description: ::std::string::String,
-        ///The name of the disk to be snapshotted
+        #[doc = "The name of the disk to be snapshotted"]
         pub disk: Name,
         pub name: Name,
     }
@@ -10326,42 +9763,41 @@ pub mod types {
         }
     }
 
-    ///A single page of results
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "A single page of results",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "items"
-    ///  ],
-    ///  "properties": {
-    ///    "items": {
-    ///      "description": "list of items on this page of results",
-    ///      "type": "array",
-    ///      "items": {
-    ///        "$ref": "#/components/schemas/Snapshot"
-    ///      }
-    ///    },
-    ///    "next_page": {
-    ///      "description": "token used to fetch the next page of results (if
-    /// any)",
-    ///      "type": [
-    ///        "string",
-    ///        "null"
-    ///      ]
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "A single page of results"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"A single page of results\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"items\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"items\": {"]
+    #[doc = "      \"description\": \"list of items on this page of results\","]
+    #[doc = "      \"type\": \"array\","]
+    #[doc = "      \"items\": {"]
+    #[doc = "        \"$ref\": \"#/components/schemas/Snapshot\""]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    \"next_page\": {"]
+    #[doc = "      \"description\": \"token used to fetch the next page of results (if any)\","]
+    #[doc = "      \"type\": ["]
+    #[doc = "        \"string\","]
+    #[doc = "        \"null\""]
+    #[doc = "      ]"]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct SnapshotResultsPage {
-        ///list of items on this page of results
+        #[doc = "list of items on this page of results"]
         pub items: ::std::vec::Vec<Snapshot>,
-        ///token used to fetch the next page of results (if any)
+        #[doc = "token used to fetch the next page of results (if any)"]
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
         pub next_page: ::std::option::Option<::std::string::String>,
     }
@@ -10372,22 +9808,22 @@ pub mod types {
         }
     }
 
-    ///`SnapshotState`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "string",
-    ///  "enum": [
-    ///    "creating",
-    ///    "ready",
-    ///    "faulted",
-    ///    "destroyed"
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`SnapshotState`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"string\","]
+    #[doc = "  \"enum\": ["]
+    #[doc = "    \"creating\","]
+    #[doc = "    \"ready\","]
+    #[doc = "    \"faulted\","]
+    #[doc = "    \"destroyed\""]
+    #[doc = "  ]"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(
         :: serde :: Deserialize,
         :: serde :: Serialize,
@@ -10466,24 +9902,24 @@ pub mod types {
         }
     }
 
-    ///`SpoofLoginBody`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "required": [
-    ///    "username"
-    ///  ],
-    ///  "properties": {
-    ///    "username": {
-    ///      "type": "string"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`SpoofLoginBody`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"username\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"username\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct SpoofLoginBody {
         pub username: ::std::string::String,
@@ -10495,82 +9931,79 @@ pub mod types {
         }
     }
 
-    ///Client view of a [`SshKey`]
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Client view of a [`SshKey`]",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "description",
-    ///    "id",
-    ///    "name",
-    ///    "public_key",
-    ///    "silo_user_id",
-    ///    "time_created",
-    ///    "time_modified"
-    ///  ],
-    ///  "properties": {
-    ///    "description": {
-    ///      "description": "human-readable free-form text about a resource",
-    ///      "type": "string"
-    ///    },
-    ///    "id": {
-    ///      "description": "unique, immutable, system-controlled identifier for
-    /// each resource",
-    ///      "type": "string",
-    ///      "format": "uuid"
-    ///    },
-    ///    "name": {
-    ///      "description": "unique, mutable, user-controlled identifier for
-    /// each resource",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/Name"
-    ///        }
-    ///      ]
-    ///    },
-    ///    "public_key": {
-    ///      "description": "SSH public key, e.g., `\"ssh-ed25519
-    /// AAAAC3NzaC...\"`",
-    ///      "type": "string"
-    ///    },
-    ///    "silo_user_id": {
-    ///      "description": "The user to whom this key belongs",
-    ///      "type": "string",
-    ///      "format": "uuid"
-    ///    },
-    ///    "time_created": {
-    ///      "description": "timestamp when this resource was created",
-    ///      "type": "string",
-    ///      "format": "date-time"
-    ///    },
-    ///    "time_modified": {
-    ///      "description": "timestamp when this resource was last modified",
-    ///      "type": "string",
-    ///      "format": "date-time"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Client view of a [`SshKey`]"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Client view of a [`SshKey`]\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"description\","]
+    #[doc = "    \"id\","]
+    #[doc = "    \"name\","]
+    #[doc = "    \"public_key\","]
+    #[doc = "    \"silo_user_id\","]
+    #[doc = "    \"time_created\","]
+    #[doc = "    \"time_modified\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"description\": {"]
+    #[doc = "      \"description\": \"human-readable free-form text about a resource\","]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"id\": {"]
+    #[doc = "      \"description\": \"unique, immutable, system-controlled identifier for each resource\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"uuid\""]
+    #[doc = "    },"]
+    #[doc = "    \"name\": {"]
+    #[doc = "      \"description\": \"unique, mutable, user-controlled identifier for each resource\","]
+    #[doc = "      \"allOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/Name\""]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"public_key\": {"]
+    #[doc = "      \"description\": \"SSH public key, e.g., `\\\"ssh-ed25519 AAAAC3NzaC...\\\"`\","]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"silo_user_id\": {"]
+    #[doc = "      \"description\": \"The user to whom this key belongs\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"uuid\""]
+    #[doc = "    },"]
+    #[doc = "    \"time_created\": {"]
+    #[doc = "      \"description\": \"timestamp when this resource was created\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"date-time\""]
+    #[doc = "    },"]
+    #[doc = "    \"time_modified\": {"]
+    #[doc = "      \"description\": \"timestamp when this resource was last modified\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"date-time\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct SshKey {
-        ///human-readable free-form text about a resource
+        #[doc = "human-readable free-form text about a resource"]
         pub description: ::std::string::String,
-        ///unique, immutable, system-controlled identifier for each resource
+        #[doc = "unique, immutable, system-controlled identifier for each resource"]
         pub id: ::uuid::Uuid,
-        ///unique, mutable, user-controlled identifier for each resource
+        #[doc = "unique, mutable, user-controlled identifier for each resource"]
         pub name: Name,
-        ///SSH public key, e.g., `"ssh-ed25519 AAAAC3NzaC..."`
+        #[doc = "SSH public key, e.g., `\"ssh-ed25519 AAAAC3NzaC...\"`"]
         pub public_key: ::std::string::String,
-        ///The user to whom this key belongs
+        #[doc = "The user to whom this key belongs"]
         pub silo_user_id: ::uuid::Uuid,
-        ///timestamp when this resource was created
+        #[doc = "timestamp when this resource was created"]
         pub time_created: ::chrono::DateTime<::chrono::offset::Utc>,
-        ///timestamp when this resource was last modified
+        #[doc = "timestamp when this resource was last modified"]
         pub time_modified: ::chrono::DateTime<::chrono::offset::Utc>,
     }
 
@@ -10580,42 +10013,39 @@ pub mod types {
         }
     }
 
-    ///Create-time parameters for an
-    /// [`SshKey`](crate::external_api::views::SshKey)
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Create-time parameters for an
-    /// [`SshKey`](crate::external_api::views::SshKey)",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "description",
-    ///    "name",
-    ///    "public_key"
-    ///  ],
-    ///  "properties": {
-    ///    "description": {
-    ///      "type": "string"
-    ///    },
-    ///    "name": {
-    ///      "$ref": "#/components/schemas/Name"
-    ///    },
-    ///    "public_key": {
-    ///      "description": "SSH public key, e.g., `\"ssh-ed25519
-    /// AAAAC3NzaC...\"`",
-    ///      "type": "string"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Create-time parameters for an [`SshKey`](crate::external_api::views::SshKey)"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Create-time parameters for an [`SshKey`](crate::external_api::views::SshKey)\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"description\","]
+    #[doc = "    \"name\","]
+    #[doc = "    \"public_key\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"description\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"name\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/Name\""]
+    #[doc = "    },"]
+    #[doc = "    \"public_key\": {"]
+    #[doc = "      \"description\": \"SSH public key, e.g., `\\\"ssh-ed25519 AAAAC3NzaC...\\\"`\","]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct SshKeyCreate {
         pub description: ::std::string::String,
         pub name: Name,
-        ///SSH public key, e.g., `"ssh-ed25519 AAAAC3NzaC..."`
+        #[doc = "SSH public key, e.g., `\"ssh-ed25519 AAAAC3NzaC...\"`"]
         pub public_key: ::std::string::String,
     }
 
@@ -10625,42 +10055,41 @@ pub mod types {
         }
     }
 
-    ///A single page of results
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "A single page of results",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "items"
-    ///  ],
-    ///  "properties": {
-    ///    "items": {
-    ///      "description": "list of items on this page of results",
-    ///      "type": "array",
-    ///      "items": {
-    ///        "$ref": "#/components/schemas/SshKey"
-    ///      }
-    ///    },
-    ///    "next_page": {
-    ///      "description": "token used to fetch the next page of results (if
-    /// any)",
-    ///      "type": [
-    ///        "string",
-    ///        "null"
-    ///      ]
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "A single page of results"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"A single page of results\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"items\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"items\": {"]
+    #[doc = "      \"description\": \"list of items on this page of results\","]
+    #[doc = "      \"type\": \"array\","]
+    #[doc = "      \"items\": {"]
+    #[doc = "        \"$ref\": \"#/components/schemas/SshKey\""]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    \"next_page\": {"]
+    #[doc = "      \"description\": \"token used to fetch the next page of results (if any)\","]
+    #[doc = "      \"type\": ["]
+    #[doc = "        \"string\","]
+    #[doc = "        \"null\""]
+    #[doc = "      ]"]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct SshKeyResultsPage {
-        ///list of items on this page of results
+        #[doc = "list of items on this page of results"]
         pub items: ::std::vec::Vec<SshKey>,
-        ///token used to fetch the next page of results (if any)
+        #[doc = "token used to fetch the next page of results (if any)"]
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
         pub next_page: ::std::option::Option<::std::string::String>,
     }
@@ -10671,21 +10100,21 @@ pub mod types {
         }
     }
 
-    ///`SystemMetricName`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "string",
-    ///  "enum": [
-    ///    "virtual_disk_space_provisioned",
-    ///    "cpus_provisioned",
-    ///    "ram_provisioned"
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`SystemMetricName`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"string\","]
+    #[doc = "  \"enum\": ["]
+    #[doc = "    \"virtual_disk_space_provisioned\","]
+    #[doc = "    \"cpus_provisioned\","]
+    #[doc = "    \"ram_provisioned\""]
+    #[doc = "  ]"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(
         :: serde :: Deserialize,
         :: serde :: Serialize,
@@ -10760,53 +10189,50 @@ pub mod types {
         }
     }
 
-    ///Identity-related metadata that's included in "asset" public API objects
-    /// (which generally have no name or description)
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Identity-related metadata that's included in \"asset\"
-    /// public API objects (which generally have no name or description)",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "id",
-    ///    "time_created",
-    ///    "time_modified",
-    ///    "version"
-    ///  ],
-    ///  "properties": {
-    ///    "id": {
-    ///      "description": "unique, immutable, system-controlled identifier for
-    /// each resource",
-    ///      "type": "string",
-    ///      "format": "uuid"
-    ///    },
-    ///    "time_created": {
-    ///      "description": "timestamp when this resource was created",
-    ///      "type": "string",
-    ///      "format": "date-time"
-    ///    },
-    ///    "time_modified": {
-    ///      "description": "timestamp when this resource was last modified",
-    ///      "type": "string",
-    ///      "format": "date-time"
-    ///    },
-    ///    "version": {
-    ///      "$ref": "#/components/schemas/SemverVersion"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Identity-related metadata that's included in \"asset\" public API objects (which generally have no name or description)"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Identity-related metadata that's included in \\\"asset\\\" public API objects (which generally have no name or description)\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"id\","]
+    #[doc = "    \"time_created\","]
+    #[doc = "    \"time_modified\","]
+    #[doc = "    \"version\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"id\": {"]
+    #[doc = "      \"description\": \"unique, immutable, system-controlled identifier for each resource\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"uuid\""]
+    #[doc = "    },"]
+    #[doc = "    \"time_created\": {"]
+    #[doc = "      \"description\": \"timestamp when this resource was created\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"date-time\""]
+    #[doc = "    },"]
+    #[doc = "    \"time_modified\": {"]
+    #[doc = "      \"description\": \"timestamp when this resource was last modified\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"date-time\""]
+    #[doc = "    },"]
+    #[doc = "    \"version\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/SemverVersion\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct SystemUpdate {
-        ///unique, immutable, system-controlled identifier for each resource
+        #[doc = "unique, immutable, system-controlled identifier for each resource"]
         pub id: ::uuid::Uuid,
-        ///timestamp when this resource was created
+        #[doc = "timestamp when this resource was created"]
         pub time_created: ::chrono::DateTime<::chrono::offset::Utc>,
-        ///timestamp when this resource was last modified
+        #[doc = "timestamp when this resource was last modified"]
         pub time_modified: ::chrono::DateTime<::chrono::offset::Utc>,
         pub version: SemverVersion,
     }
@@ -10817,42 +10243,41 @@ pub mod types {
         }
     }
 
-    ///A single page of results
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "A single page of results",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "items"
-    ///  ],
-    ///  "properties": {
-    ///    "items": {
-    ///      "description": "list of items on this page of results",
-    ///      "type": "array",
-    ///      "items": {
-    ///        "$ref": "#/components/schemas/SystemUpdate"
-    ///      }
-    ///    },
-    ///    "next_page": {
-    ///      "description": "token used to fetch the next page of results (if
-    /// any)",
-    ///      "type": [
-    ///        "string",
-    ///        "null"
-    ///      ]
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "A single page of results"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"A single page of results\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"items\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"items\": {"]
+    #[doc = "      \"description\": \"list of items on this page of results\","]
+    #[doc = "      \"type\": \"array\","]
+    #[doc = "      \"items\": {"]
+    #[doc = "        \"$ref\": \"#/components/schemas/SystemUpdate\""]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    \"next_page\": {"]
+    #[doc = "      \"description\": \"token used to fetch the next page of results (if any)\","]
+    #[doc = "      \"type\": ["]
+    #[doc = "        \"string\","]
+    #[doc = "        \"null\""]
+    #[doc = "      ]"]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct SystemUpdateResultsPage {
-        ///list of items on this page of results
+        #[doc = "list of items on this page of results"]
         pub items: ::std::vec::Vec<SystemUpdate>,
-        ///token used to fetch the next page of results (if any)
+        #[doc = "token used to fetch the next page of results (if any)"]
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
         pub next_page: ::std::option::Option<::std::string::String>,
     }
@@ -10863,24 +10288,24 @@ pub mod types {
         }
     }
 
-    ///`SystemUpdateStart`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "required": [
-    ///    "version"
-    ///  ],
-    ///  "properties": {
-    ///    "version": {
-    ///      "$ref": "#/components/schemas/SemverVersion"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`SystemUpdateStart`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"version\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"version\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/SemverVersion\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct SystemUpdateStart {
         pub version: SemverVersion,
@@ -10892,28 +10317,28 @@ pub mod types {
         }
     }
 
-    ///`SystemVersion`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "required": [
-    ///    "status",
-    ///    "version_range"
-    ///  ],
-    ///  "properties": {
-    ///    "status": {
-    ///      "$ref": "#/components/schemas/UpdateStatus"
-    ///    },
-    ///    "version_range": {
-    ///      "$ref": "#/components/schemas/VersionRange"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`SystemVersion`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"status\","]
+    #[doc = "    \"version_range\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"status\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/UpdateStatus\""]
+    #[doc = "    },"]
+    #[doc = "    \"version_range\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/VersionRange\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct SystemVersion {
         pub status: UpdateStatus,
@@ -10926,24 +10351,19 @@ pub mod types {
         }
     }
 
-    ///Names are constructed by concatenating the target and metric names with
-    /// ':'. Target and metric names must be lowercase alphanumeric characters
-    /// with '_' separating words.
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "title": "The name of a timeseries",
-    ///  "description": "Names are constructed by concatenating the target and
-    /// metric names with ':'. Target and metric names must be lowercase
-    /// alphanumeric characters with '_' separating words.",
-    ///  "type": "string",
-    ///  "pattern":
-    /// "(([a-z]+[a-z0-9]*)(_([a-z0-9]+))*):(([a-z]+[a-z0-9]*)(_([a-z0-9]+))*)"
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Names are constructed by concatenating the target and metric names with ':'. Target and metric names must be lowercase alphanumeric characters with '_' separating words."]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"title\": \"The name of a timeseries\","]
+    #[doc = "  \"description\": \"Names are constructed by concatenating the target and metric names with ':'. Target and metric names must be lowercase alphanumeric characters with '_' separating words.\","]
+    #[doc = "  \"type\": \"string\","]
+    #[doc = "  \"pattern\": \"(([a-z]+[a-z0-9]*)(_([a-z0-9]+))*):(([a-z]+[a-z0-9]*)(_([a-z0-9]+))*)\""]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Serialize, Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
     #[serde(transparent)]
     pub struct TimeseriesName(::std::string::String);
@@ -10977,10 +10397,7 @@ pub mod types {
                     .unwrap()
                 });
             if PATTERN.find(value).is_none() {
-                return Err("doesn't match pattern \
-                            \"(([a-z]+[a-z0-9]*)(_([a-z0-9]+))*):(([a-z]+[a-z0-9]*\
-                            )(_([a-z0-9]+))*)\""
-                    .into());
+                return Err ("doesn't match pattern \"(([a-z]+[a-z0-9]*)(_([a-z0-9]+))*):(([a-z]+[a-z0-9]*)(_([a-z0-9]+))*)\"" . into ()) ;
             }
             Ok(Self(value.to_string()))
         }
@@ -11024,46 +10441,41 @@ pub mod types {
         }
     }
 
-    ///The schema for a timeseries.
-    ///
-    ///This includes the name of the timeseries, as well as the datum type of
-    /// its metric and the schema for each field.
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "The schema for a timeseries.\n\nThis includes the name
-    /// of the timeseries, as well as the datum type of its metric and the
-    /// schema for each field.",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "created",
-    ///    "datum_type",
-    ///    "field_schema",
-    ///    "timeseries_name"
-    ///  ],
-    ///  "properties": {
-    ///    "created": {
-    ///      "type": "string",
-    ///      "format": "date-time"
-    ///    },
-    ///    "datum_type": {
-    ///      "$ref": "#/components/schemas/DatumType"
-    ///    },
-    ///    "field_schema": {
-    ///      "type": "array",
-    ///      "items": {
-    ///        "$ref": "#/components/schemas/FieldSchema"
-    ///      }
-    ///    },
-    ///    "timeseries_name": {
-    ///      "$ref": "#/components/schemas/TimeseriesName"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "The schema for a timeseries.\n\nThis includes the name of the timeseries, as well as the datum type of its metric and the schema for each field."]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"The schema for a timeseries.\\n\\nThis includes the name of the timeseries, as well as the datum type of its metric and the schema for each field.\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"created\","]
+    #[doc = "    \"datum_type\","]
+    #[doc = "    \"field_schema\","]
+    #[doc = "    \"timeseries_name\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"created\": {"]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"date-time\""]
+    #[doc = "    },"]
+    #[doc = "    \"datum_type\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/DatumType\""]
+    #[doc = "    },"]
+    #[doc = "    \"field_schema\": {"]
+    #[doc = "      \"type\": \"array\","]
+    #[doc = "      \"items\": {"]
+    #[doc = "        \"$ref\": \"#/components/schemas/FieldSchema\""]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    \"timeseries_name\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/TimeseriesName\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct TimeseriesSchema {
         pub created: ::chrono::DateTime<::chrono::offset::Utc>,
@@ -11078,42 +10490,41 @@ pub mod types {
         }
     }
 
-    ///A single page of results
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "A single page of results",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "items"
-    ///  ],
-    ///  "properties": {
-    ///    "items": {
-    ///      "description": "list of items on this page of results",
-    ///      "type": "array",
-    ///      "items": {
-    ///        "$ref": "#/components/schemas/TimeseriesSchema"
-    ///      }
-    ///    },
-    ///    "next_page": {
-    ///      "description": "token used to fetch the next page of results (if
-    /// any)",
-    ///      "type": [
-    ///        "string",
-    ///        "null"
-    ///      ]
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "A single page of results"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"A single page of results\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"items\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"items\": {"]
+    #[doc = "      \"description\": \"list of items on this page of results\","]
+    #[doc = "      \"type\": \"array\","]
+    #[doc = "      \"items\": {"]
+    #[doc = "        \"$ref\": \"#/components/schemas/TimeseriesSchema\""]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    \"next_page\": {"]
+    #[doc = "      \"description\": \"token used to fetch the next page of results (if any)\","]
+    #[doc = "      \"type\": ["]
+    #[doc = "        \"string\","]
+    #[doc = "        \"null\""]
+    #[doc = "      ]"]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct TimeseriesSchemaResultsPage {
-        ///list of items on this page of results
+        #[doc = "list of items on this page of results"]
         pub items: ::std::vec::Vec<TimeseriesSchema>,
-        ///token used to fetch the next page of results (if any)
+        #[doc = "token used to fetch the next page of results (if any)"]
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
         pub next_page: ::std::option::Option<::std::string::String>,
     }
@@ -11124,58 +10535,55 @@ pub mod types {
         }
     }
 
-    ///Identity-related metadata that's included in "asset" public API objects
-    /// (which generally have no name or description)
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Identity-related metadata that's included in \"asset\"
-    /// public API objects (which generally have no name or description)",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "id",
-    ///    "status",
-    ///    "time_created",
-    ///    "time_modified",
-    ///    "version"
-    ///  ],
-    ///  "properties": {
-    ///    "id": {
-    ///      "description": "unique, immutable, system-controlled identifier for
-    /// each resource",
-    ///      "type": "string",
-    ///      "format": "uuid"
-    ///    },
-    ///    "status": {
-    ///      "$ref": "#/components/schemas/UpdateStatus"
-    ///    },
-    ///    "time_created": {
-    ///      "description": "timestamp when this resource was created",
-    ///      "type": "string",
-    ///      "format": "date-time"
-    ///    },
-    ///    "time_modified": {
-    ///      "description": "timestamp when this resource was last modified",
-    ///      "type": "string",
-    ///      "format": "date-time"
-    ///    },
-    ///    "version": {
-    ///      "$ref": "#/components/schemas/SemverVersion"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Identity-related metadata that's included in \"asset\" public API objects (which generally have no name or description)"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Identity-related metadata that's included in \\\"asset\\\" public API objects (which generally have no name or description)\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"id\","]
+    #[doc = "    \"status\","]
+    #[doc = "    \"time_created\","]
+    #[doc = "    \"time_modified\","]
+    #[doc = "    \"version\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"id\": {"]
+    #[doc = "      \"description\": \"unique, immutable, system-controlled identifier for each resource\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"uuid\""]
+    #[doc = "    },"]
+    #[doc = "    \"status\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/UpdateStatus\""]
+    #[doc = "    },"]
+    #[doc = "    \"time_created\": {"]
+    #[doc = "      \"description\": \"timestamp when this resource was created\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"date-time\""]
+    #[doc = "    },"]
+    #[doc = "    \"time_modified\": {"]
+    #[doc = "      \"description\": \"timestamp when this resource was last modified\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"date-time\""]
+    #[doc = "    },"]
+    #[doc = "    \"version\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/SemverVersion\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct UpdateDeployment {
-        ///unique, immutable, system-controlled identifier for each resource
+        #[doc = "unique, immutable, system-controlled identifier for each resource"]
         pub id: ::uuid::Uuid,
         pub status: UpdateStatus,
-        ///timestamp when this resource was created
+        #[doc = "timestamp when this resource was created"]
         pub time_created: ::chrono::DateTime<::chrono::offset::Utc>,
-        ///timestamp when this resource was last modified
+        #[doc = "timestamp when this resource was last modified"]
         pub time_modified: ::chrono::DateTime<::chrono::offset::Utc>,
         pub version: SemverVersion,
     }
@@ -11186,42 +10594,41 @@ pub mod types {
         }
     }
 
-    ///A single page of results
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "A single page of results",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "items"
-    ///  ],
-    ///  "properties": {
-    ///    "items": {
-    ///      "description": "list of items on this page of results",
-    ///      "type": "array",
-    ///      "items": {
-    ///        "$ref": "#/components/schemas/UpdateDeployment"
-    ///      }
-    ///    },
-    ///    "next_page": {
-    ///      "description": "token used to fetch the next page of results (if
-    /// any)",
-    ///      "type": [
-    ///        "string",
-    ///        "null"
-    ///      ]
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "A single page of results"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"A single page of results\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"items\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"items\": {"]
+    #[doc = "      \"description\": \"list of items on this page of results\","]
+    #[doc = "      \"type\": \"array\","]
+    #[doc = "      \"items\": {"]
+    #[doc = "        \"$ref\": \"#/components/schemas/UpdateDeployment\""]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    \"next_page\": {"]
+    #[doc = "      \"description\": \"token used to fetch the next page of results (if any)\","]
+    #[doc = "      \"type\": ["]
+    #[doc = "        \"string\","]
+    #[doc = "        \"null\""]
+    #[doc = "      ]"]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct UpdateDeploymentResultsPage {
-        ///list of items on this page of results
+        #[doc = "list of items on this page of results"]
         pub items: ::std::vec::Vec<UpdateDeployment>,
-        ///token used to fetch the next page of results (if any)
+        #[doc = "token used to fetch the next page of results (if any)"]
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
         pub next_page: ::std::option::Option<::std::string::String>,
     }
@@ -11232,45 +10639,45 @@ pub mod types {
         }
     }
 
-    ///`UpdateStatus`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "oneOf": [
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "status"
-    ///      ],
-    ///      "properties": {
-    ///        "status": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "updating"
-    ///          ]
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "status"
-    ///      ],
-    ///      "properties": {
-    ///        "status": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "steady"
-    ///          ]
-    ///        }
-    ///      }
-    ///    }
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`UpdateStatus`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"oneOf\": ["]
+    #[doc = "    {"]
+    #[doc = "      \"type\": \"object\","]
+    #[doc = "      \"required\": ["]
+    #[doc = "        \"status\""]
+    #[doc = "      ],"]
+    #[doc = "      \"properties\": {"]
+    #[doc = "        \"status\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"enum\": ["]
+    #[doc = "            \"updating\""]
+    #[doc = "          ]"]
+    #[doc = "        }"]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    {"]
+    #[doc = "      \"type\": \"object\","]
+    #[doc = "      \"required\": ["]
+    #[doc = "        \"status\""]
+    #[doc = "      ],"]
+    #[doc = "      \"properties\": {"]
+    #[doc = "        \"status\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"enum\": ["]
+    #[doc = "            \"steady\""]
+    #[doc = "          ]"]
+    #[doc = "        }"]
+    #[doc = "      }"]
+    #[doc = "    }"]
+    #[doc = "  ]"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(
         :: serde :: Deserialize,
         :: serde :: Serialize,
@@ -11342,73 +10749,70 @@ pub mod types {
         }
     }
 
-    ///Identity-related metadata that's included in "asset" public API objects
-    /// (which generally have no name or description)
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Identity-related metadata that's included in \"asset\"
-    /// public API objects (which generally have no name or description)",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "component_type",
-    ///    "device_id",
-    ///    "id",
-    ///    "status",
-    ///    "system_version",
-    ///    "time_created",
-    ///    "time_modified",
-    ///    "version"
-    ///  ],
-    ///  "properties": {
-    ///    "component_type": {
-    ///      "$ref": "#/components/schemas/UpdateableComponentType"
-    ///    },
-    ///    "device_id": {
-    ///      "type": "string"
-    ///    },
-    ///    "id": {
-    ///      "description": "unique, immutable, system-controlled identifier for
-    /// each resource",
-    ///      "type": "string",
-    ///      "format": "uuid"
-    ///    },
-    ///    "status": {
-    ///      "$ref": "#/components/schemas/UpdateStatus"
-    ///    },
-    ///    "system_version": {
-    ///      "$ref": "#/components/schemas/SemverVersion"
-    ///    },
-    ///    "time_created": {
-    ///      "description": "timestamp when this resource was created",
-    ///      "type": "string",
-    ///      "format": "date-time"
-    ///    },
-    ///    "time_modified": {
-    ///      "description": "timestamp when this resource was last modified",
-    ///      "type": "string",
-    ///      "format": "date-time"
-    ///    },
-    ///    "version": {
-    ///      "$ref": "#/components/schemas/SemverVersion"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Identity-related metadata that's included in \"asset\" public API objects (which generally have no name or description)"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Identity-related metadata that's included in \\\"asset\\\" public API objects (which generally have no name or description)\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"component_type\","]
+    #[doc = "    \"device_id\","]
+    #[doc = "    \"id\","]
+    #[doc = "    \"status\","]
+    #[doc = "    \"system_version\","]
+    #[doc = "    \"time_created\","]
+    #[doc = "    \"time_modified\","]
+    #[doc = "    \"version\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"component_type\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/UpdateableComponentType\""]
+    #[doc = "    },"]
+    #[doc = "    \"device_id\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"id\": {"]
+    #[doc = "      \"description\": \"unique, immutable, system-controlled identifier for each resource\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"uuid\""]
+    #[doc = "    },"]
+    #[doc = "    \"status\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/UpdateStatus\""]
+    #[doc = "    },"]
+    #[doc = "    \"system_version\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/SemverVersion\""]
+    #[doc = "    },"]
+    #[doc = "    \"time_created\": {"]
+    #[doc = "      \"description\": \"timestamp when this resource was created\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"date-time\""]
+    #[doc = "    },"]
+    #[doc = "    \"time_modified\": {"]
+    #[doc = "      \"description\": \"timestamp when this resource was last modified\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"date-time\""]
+    #[doc = "    },"]
+    #[doc = "    \"version\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/SemverVersion\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct UpdateableComponent {
         pub component_type: UpdateableComponentType,
         pub device_id: ::std::string::String,
-        ///unique, immutable, system-controlled identifier for each resource
+        #[doc = "unique, immutable, system-controlled identifier for each resource"]
         pub id: ::uuid::Uuid,
         pub status: UpdateStatus,
         pub system_version: SemverVersion,
-        ///timestamp when this resource was created
+        #[doc = "timestamp when this resource was created"]
         pub time_created: ::chrono::DateTime<::chrono::offset::Utc>,
-        ///timestamp when this resource was last modified
+        #[doc = "timestamp when this resource was last modified"]
         pub time_modified: ::chrono::DateTime<::chrono::offset::Utc>,
         pub version: SemverVersion,
     }
@@ -11419,42 +10823,41 @@ pub mod types {
         }
     }
 
-    ///A single page of results
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "A single page of results",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "items"
-    ///  ],
-    ///  "properties": {
-    ///    "items": {
-    ///      "description": "list of items on this page of results",
-    ///      "type": "array",
-    ///      "items": {
-    ///        "$ref": "#/components/schemas/UpdateableComponent"
-    ///      }
-    ///    },
-    ///    "next_page": {
-    ///      "description": "token used to fetch the next page of results (if
-    /// any)",
-    ///      "type": [
-    ///        "string",
-    ///        "null"
-    ///      ]
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "A single page of results"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"A single page of results\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"items\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"items\": {"]
+    #[doc = "      \"description\": \"list of items on this page of results\","]
+    #[doc = "      \"type\": \"array\","]
+    #[doc = "      \"items\": {"]
+    #[doc = "        \"$ref\": \"#/components/schemas/UpdateableComponent\""]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    \"next_page\": {"]
+    #[doc = "      \"description\": \"token used to fetch the next page of results (if any)\","]
+    #[doc = "      \"type\": ["]
+    #[doc = "        \"string\","]
+    #[doc = "        \"null\""]
+    #[doc = "      ]"]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct UpdateableComponentResultsPage {
-        ///list of items on this page of results
+        #[doc = "list of items on this page of results"]
         pub items: ::std::vec::Vec<UpdateableComponent>,
-        ///token used to fetch the next page of results (if any)
+        #[doc = "token used to fetch the next page of results (if any)"]
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
         pub next_page: ::std::option::Option<::std::string::String>,
     }
@@ -11465,30 +10868,30 @@ pub mod types {
         }
     }
 
-    ///`UpdateableComponentType`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "string",
-    ///  "enum": [
-    ///    "bootloader_for_rot",
-    ///    "bootloader_for_sp",
-    ///    "bootloader_for_host_proc",
-    ///    "hubris_for_psc_rot",
-    ///    "hubris_for_psc_sp",
-    ///    "hubris_for_sidecar_rot",
-    ///    "hubris_for_sidecar_sp",
-    ///    "hubris_for_gimlet_rot",
-    ///    "hubris_for_gimlet_sp",
-    ///    "helios_host_phase1",
-    ///    "helios_host_phase2",
-    ///    "host_omicron"
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`UpdateableComponentType`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"string\","]
+    #[doc = "  \"enum\": ["]
+    #[doc = "    \"bootloader_for_rot\","]
+    #[doc = "    \"bootloader_for_sp\","]
+    #[doc = "    \"bootloader_for_host_proc\","]
+    #[doc = "    \"hubris_for_psc_rot\","]
+    #[doc = "    \"hubris_for_psc_sp\","]
+    #[doc = "    \"hubris_for_sidecar_rot\","]
+    #[doc = "    \"hubris_for_sidecar_sp\","]
+    #[doc = "    \"hubris_for_gimlet_rot\","]
+    #[doc = "    \"hubris_for_gimlet_sp\","]
+    #[doc = "    \"helios_host_phase1\","]
+    #[doc = "    \"helios_host_phase2\","]
+    #[doc = "    \"host_omicron\""]
+    #[doc = "  ]"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(
         :: serde :: Deserialize,
         :: serde :: Serialize,
@@ -11599,43 +11002,43 @@ pub mod types {
         }
     }
 
-    ///Client view of a [`User`]
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Client view of a [`User`]",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "display_name",
-    ///    "id",
-    ///    "silo_id"
-    ///  ],
-    ///  "properties": {
-    ///    "display_name": {
-    ///      "description": "Human-readable name that can identify the user",
-    ///      "type": "string"
-    ///    },
-    ///    "id": {
-    ///      "type": "string",
-    ///      "format": "uuid"
-    ///    },
-    ///    "silo_id": {
-    ///      "description": "Uuid of the silo to which this user belongs",
-    ///      "type": "string",
-    ///      "format": "uuid"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Client view of a [`User`]"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Client view of a [`User`]\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"display_name\","]
+    #[doc = "    \"id\","]
+    #[doc = "    \"silo_id\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"display_name\": {"]
+    #[doc = "      \"description\": \"Human-readable name that can identify the user\","]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"id\": {"]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"uuid\""]
+    #[doc = "    },"]
+    #[doc = "    \"silo_id\": {"]
+    #[doc = "      \"description\": \"Uuid of the silo to which this user belongs\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"uuid\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct User {
-        ///Human-readable name that can identify the user
+        #[doc = "Human-readable name that can identify the user"]
         pub display_name: ::std::string::String,
         pub id: ::uuid::Uuid,
-        ///Uuid of the silo to which this user belongs
+        #[doc = "Uuid of the silo to which this user belongs"]
         pub silo_id: ::uuid::Uuid,
     }
 
@@ -11645,66 +11048,64 @@ pub mod types {
         }
     }
 
-    ///Client view of a [`UserBuiltin`]
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Client view of a [`UserBuiltin`]",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "description",
-    ///    "id",
-    ///    "name",
-    ///    "time_created",
-    ///    "time_modified"
-    ///  ],
-    ///  "properties": {
-    ///    "description": {
-    ///      "description": "human-readable free-form text about a resource",
-    ///      "type": "string"
-    ///    },
-    ///    "id": {
-    ///      "description": "unique, immutable, system-controlled identifier for
-    /// each resource",
-    ///      "type": "string",
-    ///      "format": "uuid"
-    ///    },
-    ///    "name": {
-    ///      "description": "unique, mutable, user-controlled identifier for
-    /// each resource",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/Name"
-    ///        }
-    ///      ]
-    ///    },
-    ///    "time_created": {
-    ///      "description": "timestamp when this resource was created",
-    ///      "type": "string",
-    ///      "format": "date-time"
-    ///    },
-    ///    "time_modified": {
-    ///      "description": "timestamp when this resource was last modified",
-    ///      "type": "string",
-    ///      "format": "date-time"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Client view of a [`UserBuiltin`]"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Client view of a [`UserBuiltin`]\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"description\","]
+    #[doc = "    \"id\","]
+    #[doc = "    \"name\","]
+    #[doc = "    \"time_created\","]
+    #[doc = "    \"time_modified\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"description\": {"]
+    #[doc = "      \"description\": \"human-readable free-form text about a resource\","]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"id\": {"]
+    #[doc = "      \"description\": \"unique, immutable, system-controlled identifier for each resource\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"uuid\""]
+    #[doc = "    },"]
+    #[doc = "    \"name\": {"]
+    #[doc = "      \"description\": \"unique, mutable, user-controlled identifier for each resource\","]
+    #[doc = "      \"allOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/Name\""]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"time_created\": {"]
+    #[doc = "      \"description\": \"timestamp when this resource was created\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"date-time\""]
+    #[doc = "    },"]
+    #[doc = "    \"time_modified\": {"]
+    #[doc = "      \"description\": \"timestamp when this resource was last modified\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"date-time\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct UserBuiltin {
-        ///human-readable free-form text about a resource
+        #[doc = "human-readable free-form text about a resource"]
         pub description: ::std::string::String,
-        ///unique, immutable, system-controlled identifier for each resource
+        #[doc = "unique, immutable, system-controlled identifier for each resource"]
         pub id: ::uuid::Uuid,
-        ///unique, mutable, user-controlled identifier for each resource
+        #[doc = "unique, mutable, user-controlled identifier for each resource"]
         pub name: Name,
-        ///timestamp when this resource was created
+        #[doc = "timestamp when this resource was created"]
         pub time_created: ::chrono::DateTime<::chrono::offset::Utc>,
-        ///timestamp when this resource was last modified
+        #[doc = "timestamp when this resource was last modified"]
         pub time_modified: ::chrono::DateTime<::chrono::offset::Utc>,
     }
 
@@ -11714,42 +11115,41 @@ pub mod types {
         }
     }
 
-    ///A single page of results
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "A single page of results",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "items"
-    ///  ],
-    ///  "properties": {
-    ///    "items": {
-    ///      "description": "list of items on this page of results",
-    ///      "type": "array",
-    ///      "items": {
-    ///        "$ref": "#/components/schemas/UserBuiltin"
-    ///      }
-    ///    },
-    ///    "next_page": {
-    ///      "description": "token used to fetch the next page of results (if
-    /// any)",
-    ///      "type": [
-    ///        "string",
-    ///        "null"
-    ///      ]
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "A single page of results"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"A single page of results\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"items\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"items\": {"]
+    #[doc = "      \"description\": \"list of items on this page of results\","]
+    #[doc = "      \"type\": \"array\","]
+    #[doc = "      \"items\": {"]
+    #[doc = "        \"$ref\": \"#/components/schemas/UserBuiltin\""]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    \"next_page\": {"]
+    #[doc = "      \"description\": \"token used to fetch the next page of results (if any)\","]
+    #[doc = "      \"type\": ["]
+    #[doc = "        \"string\","]
+    #[doc = "        \"null\""]
+    #[doc = "      ]"]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct UserBuiltinResultsPage {
-        ///list of items on this page of results
+        #[doc = "list of items on this page of results"]
         pub items: ::std::vec::Vec<UserBuiltin>,
-        ///token used to fetch the next page of results (if any)
+        #[doc = "token used to fetch the next page of results (if any)"]
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
         pub next_page: ::std::option::Option<::std::string::String>,
     }
@@ -11760,45 +11160,44 @@ pub mod types {
         }
     }
 
-    ///Create-time parameters for a [`User`](crate::external_api::views::User)
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Create-time parameters for a
-    /// [`User`](crate::external_api::views::User)",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "external_id",
-    ///    "password"
-    ///  ],
-    ///  "properties": {
-    ///    "external_id": {
-    ///      "description": "username used to log in",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/UserId"
-    ///        }
-    ///      ]
-    ///    },
-    ///    "password": {
-    ///      "description": "password used to log in",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/UserPassword"
-    ///        }
-    ///      ]
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Create-time parameters for a [`User`](crate::external_api::views::User)"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Create-time parameters for a [`User`](crate::external_api::views::User)\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"external_id\","]
+    #[doc = "    \"password\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"external_id\": {"]
+    #[doc = "      \"description\": \"username used to log in\","]
+    #[doc = "      \"allOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/UserId\""]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"password\": {"]
+    #[doc = "      \"description\": \"password used to log in\","]
+    #[doc = "      \"allOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/UserPassword\""]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct UserCreate {
-        ///username used to log in
+        #[doc = "username used to log in"]
         pub external_id: UserId,
-        ///password used to log in
+        #[doc = "password used to log in"]
         pub password: UserPassword,
     }
 
@@ -11808,27 +11207,20 @@ pub mod types {
         }
     }
 
-    ///Names must begin with a lower case ASCII letter, be composed exclusively
-    /// of lowercase ASCII, uppercase ASCII, numbers, and '-', and may not end
-    /// with a '-'. Names cannot be a UUID though they may contain a UUID.
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "title": "A name unique within the parent collection",
-    ///  "description": "Names must begin with a lower case ASCII letter, be
-    /// composed exclusively of lowercase ASCII, uppercase ASCII, numbers, and
-    /// '-', and may not end with a '-'. Names cannot be a UUID though they may
-    /// contain a UUID.",
-    ///  "type": "string",
-    ///  "maxLength": 63,
-    ///  "pattern":
-    /// "^(?![0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$)^[a-z][a-z0-9-]*
-    /// [a-zA-Z0-9]$"
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Names must begin with a lower case ASCII letter, be composed exclusively of lowercase ASCII, uppercase ASCII, numbers, and '-', and may not end with a '-'. Names cannot be a UUID though they may contain a UUID."]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"title\": \"A name unique within the parent collection\","]
+    #[doc = "  \"description\": \"Names must begin with a lower case ASCII letter, be composed exclusively of lowercase ASCII, uppercase ASCII, numbers, and '-', and may not end with a '-'. Names cannot be a UUID though they may contain a UUID.\","]
+    #[doc = "  \"type\": \"string\","]
+    #[doc = "  \"maxLength\": 63,"]
+    #[doc = "  \"pattern\": \"^(?![0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$)^[a-z][a-z0-9-]*[a-zA-Z0-9]$\""]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Serialize, Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
     #[serde(transparent)]
     pub struct UserId(::std::string::String);
@@ -11907,57 +11299,56 @@ pub mod types {
         }
     }
 
-    ///Parameters for setting a user's password
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Parameters for setting a user's password",
-    ///  "oneOf": [
-    ///    {
-    ///      "description": "Sets the user's password to the provided value",
-    ///      "type": "object",
-    ///      "required": [
-    ///        "details",
-    ///        "user_password_value"
-    ///      ],
-    ///      "properties": {
-    ///        "details": {
-    ///          "$ref": "#/components/schemas/Password"
-    ///        },
-    ///        "user_password_value": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "password"
-    ///          ]
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "description": "Invalidates any current password (disabling
-    /// password authentication)",
-    ///      "type": "object",
-    ///      "required": [
-    ///        "user_password_value"
-    ///      ],
-    ///      "properties": {
-    ///        "user_password_value": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "invalid_password"
-    ///          ]
-    ///        }
-    ///      }
-    ///    }
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Parameters for setting a user's password"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Parameters for setting a user's password\","]
+    #[doc = "  \"oneOf\": ["]
+    #[doc = "    {"]
+    #[doc = "      \"description\": \"Sets the user's password to the provided value\","]
+    #[doc = "      \"type\": \"object\","]
+    #[doc = "      \"required\": ["]
+    #[doc = "        \"details\","]
+    #[doc = "        \"user_password_value\""]
+    #[doc = "      ],"]
+    #[doc = "      \"properties\": {"]
+    #[doc = "        \"details\": {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/Password\""]
+    #[doc = "        },"]
+    #[doc = "        \"user_password_value\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"enum\": ["]
+    #[doc = "            \"password\""]
+    #[doc = "          ]"]
+    #[doc = "        }"]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    {"]
+    #[doc = "      \"description\": \"Invalidates any current password (disabling password authentication)\","]
+    #[doc = "      \"type\": \"object\","]
+    #[doc = "      \"required\": ["]
+    #[doc = "        \"user_password_value\""]
+    #[doc = "      ],"]
+    #[doc = "      \"properties\": {"]
+    #[doc = "        \"user_password_value\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"enum\": ["]
+    #[doc = "            \"invalid_password\""]
+    #[doc = "          ]"]
+    #[doc = "        }"]
+    #[doc = "      }"]
+    #[doc = "    }"]
+    #[doc = "  ]"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     #[serde(tag = "user_password_value", content = "details")]
     pub enum UserPassword {
-        ///Sets the user's password to the provided value
+        #[doc = "Sets the user's password to the provided value"]
         #[serde(rename = "password")]
         Password(Password),
         #[serde(rename = "invalid_password")]
@@ -11976,42 +11367,41 @@ pub mod types {
         }
     }
 
-    ///A single page of results
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "A single page of results",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "items"
-    ///  ],
-    ///  "properties": {
-    ///    "items": {
-    ///      "description": "list of items on this page of results",
-    ///      "type": "array",
-    ///      "items": {
-    ///        "$ref": "#/components/schemas/User"
-    ///      }
-    ///    },
-    ///    "next_page": {
-    ///      "description": "token used to fetch the next page of results (if
-    /// any)",
-    ///      "type": [
-    ///        "string",
-    ///        "null"
-    ///      ]
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "A single page of results"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"A single page of results\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"items\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"items\": {"]
+    #[doc = "      \"description\": \"list of items on this page of results\","]
+    #[doc = "      \"type\": \"array\","]
+    #[doc = "      \"items\": {"]
+    #[doc = "        \"$ref\": \"#/components/schemas/User\""]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    \"next_page\": {"]
+    #[doc = "      \"description\": \"token used to fetch the next page of results (if any)\","]
+    #[doc = "      \"type\": ["]
+    #[doc = "        \"string\","]
+    #[doc = "        \"null\""]
+    #[doc = "      ]"]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct UserResultsPage {
-        ///list of items on this page of results
+        #[doc = "list of items on this page of results"]
         pub items: ::std::vec::Vec<User>,
-        ///token used to fetch the next page of results (if any)
+        #[doc = "token used to fetch the next page of results (if any)"]
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
         pub next_page: ::std::option::Option<::std::string::String>,
     }
@@ -12022,29 +11412,29 @@ pub mod types {
         }
     }
 
-    ///Credentials for local user login
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Credentials for local user login",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "password",
-    ///    "username"
-    ///  ],
-    ///  "properties": {
-    ///    "password": {
-    ///      "$ref": "#/components/schemas/Password"
-    ///    },
-    ///    "username": {
-    ///      "$ref": "#/components/schemas/UserId"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Credentials for local user login"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Credentials for local user login\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"password\","]
+    #[doc = "    \"username\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"password\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/Password\""]
+    #[doc = "    },"]
+    #[doc = "    \"username\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/UserId\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct UsernamePasswordCredentials {
         pub password: Password,
@@ -12057,28 +11447,28 @@ pub mod types {
         }
     }
 
-    ///`VersionRange`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "required": [
-    ///    "high",
-    ///    "low"
-    ///  ],
-    ///  "properties": {
-    ///    "high": {
-    ///      "$ref": "#/components/schemas/SemverVersion"
-    ///    },
-    ///    "low": {
-    ///      "$ref": "#/components/schemas/SemverVersion"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`VersionRange`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"high\","]
+    #[doc = "    \"low\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"high\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/SemverVersion\""]
+    #[doc = "    },"]
+    #[doc = "    \"low\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/SemverVersion\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct VersionRange {
         pub high: SemverVersion,
@@ -12091,106 +11481,102 @@ pub mod types {
         }
     }
 
-    ///Client view of a [`Vpc`]
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Client view of a [`Vpc`]",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "description",
-    ///    "dns_name",
-    ///    "id",
-    ///    "ipv6_prefix",
-    ///    "name",
-    ///    "project_id",
-    ///    "system_router_id",
-    ///    "time_created",
-    ///    "time_modified"
-    ///  ],
-    ///  "properties": {
-    ///    "description": {
-    ///      "description": "human-readable free-form text about a resource",
-    ///      "type": "string"
-    ///    },
-    ///    "dns_name": {
-    ///      "description": "The name used for the VPC in DNS.",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/Name"
-    ///        }
-    ///      ]
-    ///    },
-    ///    "id": {
-    ///      "description": "unique, immutable, system-controlled identifier for
-    /// each resource",
-    ///      "type": "string",
-    ///      "format": "uuid"
-    ///    },
-    ///    "ipv6_prefix": {
-    ///      "description": "The unique local IPv6 address range for subnets in
-    /// this VPC",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/Ipv6Net"
-    ///        }
-    ///      ]
-    ///    },
-    ///    "name": {
-    ///      "description": "unique, mutable, user-controlled identifier for
-    /// each resource",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/Name"
-    ///        }
-    ///      ]
-    ///    },
-    ///    "project_id": {
-    ///      "description": "id for the project containing this VPC",
-    ///      "type": "string",
-    ///      "format": "uuid"
-    ///    },
-    ///    "system_router_id": {
-    ///      "description": "id for the system router where subnet default
-    /// routes are registered",
-    ///      "type": "string",
-    ///      "format": "uuid"
-    ///    },
-    ///    "time_created": {
-    ///      "description": "timestamp when this resource was created",
-    ///      "type": "string",
-    ///      "format": "date-time"
-    ///    },
-    ///    "time_modified": {
-    ///      "description": "timestamp when this resource was last modified",
-    ///      "type": "string",
-    ///      "format": "date-time"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Client view of a [`Vpc`]"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Client view of a [`Vpc`]\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"description\","]
+    #[doc = "    \"dns_name\","]
+    #[doc = "    \"id\","]
+    #[doc = "    \"ipv6_prefix\","]
+    #[doc = "    \"name\","]
+    #[doc = "    \"project_id\","]
+    #[doc = "    \"system_router_id\","]
+    #[doc = "    \"time_created\","]
+    #[doc = "    \"time_modified\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"description\": {"]
+    #[doc = "      \"description\": \"human-readable free-form text about a resource\","]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"dns_name\": {"]
+    #[doc = "      \"description\": \"The name used for the VPC in DNS.\","]
+    #[doc = "      \"allOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/Name\""]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"id\": {"]
+    #[doc = "      \"description\": \"unique, immutable, system-controlled identifier for each resource\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"uuid\""]
+    #[doc = "    },"]
+    #[doc = "    \"ipv6_prefix\": {"]
+    #[doc = "      \"description\": \"The unique local IPv6 address range for subnets in this VPC\","]
+    #[doc = "      \"allOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/Ipv6Net\""]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"name\": {"]
+    #[doc = "      \"description\": \"unique, mutable, user-controlled identifier for each resource\","]
+    #[doc = "      \"allOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/Name\""]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"project_id\": {"]
+    #[doc = "      \"description\": \"id for the project containing this VPC\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"uuid\""]
+    #[doc = "    },"]
+    #[doc = "    \"system_router_id\": {"]
+    #[doc = "      \"description\": \"id for the system router where subnet default routes are registered\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"uuid\""]
+    #[doc = "    },"]
+    #[doc = "    \"time_created\": {"]
+    #[doc = "      \"description\": \"timestamp when this resource was created\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"date-time\""]
+    #[doc = "    },"]
+    #[doc = "    \"time_modified\": {"]
+    #[doc = "      \"description\": \"timestamp when this resource was last modified\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"date-time\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct Vpc {
-        ///human-readable free-form text about a resource
+        #[doc = "human-readable free-form text about a resource"]
         pub description: ::std::string::String,
-        ///The name used for the VPC in DNS.
+        #[doc = "The name used for the VPC in DNS."]
         pub dns_name: Name,
-        ///unique, immutable, system-controlled identifier for each resource
+        #[doc = "unique, immutable, system-controlled identifier for each resource"]
         pub id: ::uuid::Uuid,
-        ///The unique local IPv6 address range for subnets in this VPC
+        #[doc = "The unique local IPv6 address range for subnets in this VPC"]
         pub ipv6_prefix: Ipv6Net,
-        ///unique, mutable, user-controlled identifier for each resource
+        #[doc = "unique, mutable, user-controlled identifier for each resource"]
         pub name: Name,
-        ///id for the project containing this VPC
+        #[doc = "id for the project containing this VPC"]
         pub project_id: ::uuid::Uuid,
-        ///id for the system router where subnet default routes are registered
+        #[doc = "id for the system router where subnet default routes are registered"]
         pub system_router_id: ::uuid::Uuid,
-        ///timestamp when this resource was created
+        #[doc = "timestamp when this resource was created"]
         pub time_created: ::chrono::DateTime<::chrono::offset::Utc>,
-        ///timestamp when this resource was last modified
+        #[doc = "timestamp when this resource was last modified"]
         pub time_modified: ::chrono::DateTime<::chrono::offset::Utc>,
     }
 
@@ -12200,62 +11586,53 @@ pub mod types {
         }
     }
 
-    ///Create-time parameters for a [`Vpc`](crate::external_api::views::Vpc)
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Create-time parameters for a
-    /// [`Vpc`](crate::external_api::views::Vpc)",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "description",
-    ///    "dns_name",
-    ///    "name"
-    ///  ],
-    ///  "properties": {
-    ///    "description": {
-    ///      "type": "string"
-    ///    },
-    ///    "dns_name": {
-    ///      "$ref": "#/components/schemas/Name"
-    ///    },
-    ///    "ipv6_prefix": {
-    ///      "description": "The IPv6 prefix for this VPC.\n\nAll IPv6 subnets
-    /// created from this VPC must be taken from this range, which sould be a
-    /// Unique Local Address in the range `fd00::/48`. The default VPC Subnet
-    /// will have the first `/64` range from this prefix.",
-    ///      "oneOf": [
-    ///        {
-    ///          "type": "null"
-    ///        },
-    ///        {
-    ///          "allOf": [
-    ///            {
-    ///              "$ref": "#/components/schemas/Ipv6Net"
-    ///            }
-    ///          ]
-    ///        }
-    ///      ]
-    ///    },
-    ///    "name": {
-    ///      "$ref": "#/components/schemas/Name"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Create-time parameters for a [`Vpc`](crate::external_api::views::Vpc)"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Create-time parameters for a [`Vpc`](crate::external_api::views::Vpc)\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"description\","]
+    #[doc = "    \"dns_name\","]
+    #[doc = "    \"name\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"description\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"dns_name\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/Name\""]
+    #[doc = "    },"]
+    #[doc = "    \"ipv6_prefix\": {"]
+    #[doc = "      \"description\": \"The IPv6 prefix for this VPC.\\n\\nAll IPv6 subnets created from this VPC must be taken from this range, which sould be a Unique Local Address in the range `fd00::/48`. The default VPC Subnet will have the first `/64` range from this prefix.\","]
+    #[doc = "      \"oneOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"type\": \"null\""]
+    #[doc = "        },"]
+    #[doc = "        {"]
+    #[doc = "          \"allOf\": ["]
+    #[doc = "            {"]
+    #[doc = "              \"$ref\": \"#/components/schemas/Ipv6Net\""]
+    #[doc = "            }"]
+    #[doc = "          ]"]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"name\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/Name\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct VpcCreate {
         pub description: ::std::string::String,
         pub dns_name: Name,
-        ///The IPv6 prefix for this VPC.
-        ///
-        ///All IPv6 subnets created from this VPC must be taken from this
-        /// range, which sould be a Unique Local Address in the range
-        /// `fd00::/48`. The default VPC Subnet will have the first `/64` range
-        /// from this prefix.
+        #[doc = "The IPv6 prefix for this VPC.\n\nAll IPv6 subnets created from this VPC must be taken from this range, which sould be a Unique Local Address in the range `fd00::/48`. The default VPC Subnet will have the first `/64` range from this prefix."]
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
         pub ipv6_prefix: ::std::option::Option<Ipv6Net>,
         pub name: Name,
@@ -12267,140 +11644,135 @@ pub mod types {
         }
     }
 
-    ///A single rule in a VPC firewall
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "A single rule in a VPC firewall",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "action",
-    ///    "description",
-    ///    "direction",
-    ///    "filters",
-    ///    "id",
-    ///    "name",
-    ///    "priority",
-    ///    "status",
-    ///    "targets",
-    ///    "time_created",
-    ///    "time_modified",
-    ///    "vpc_id"
-    ///  ],
-    ///  "properties": {
-    ///    "action": {
-    ///      "description": "whether traffic matching the rule should be allowed
-    /// or dropped",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/VpcFirewallRuleAction"
-    ///        }
-    ///      ]
-    ///    },
-    ///    "description": {
-    ///      "description": "human-readable free-form text about a resource",
-    ///      "type": "string"
-    ///    },
-    ///    "direction": {
-    ///      "description": "whether this rule is for incoming or outgoing
-    /// traffic",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/VpcFirewallRuleDirection"
-    ///        }
-    ///      ]
-    ///    },
-    ///    "filters": {
-    ///      "description": "reductions on the scope of the rule",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/VpcFirewallRuleFilter"
-    ///        }
-    ///      ]
-    ///    },
-    ///    "id": {
-    ///      "description": "unique, immutable, system-controlled identifier for
-    /// each resource",
-    ///      "type": "string",
-    ///      "format": "uuid"
-    ///    },
-    ///    "name": {
-    ///      "description": "unique, mutable, user-controlled identifier for
-    /// each resource",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/Name"
-    ///        }
-    ///      ]
-    ///    },
-    ///    "priority": {
-    ///      "description": "the relative priority of this rule",
-    ///      "type": "integer",
-    ///      "format": "uint16",
-    ///      "minimum": 0.0
-    ///    },
-    ///    "status": {
-    ///      "description": "whether this rule is in effect",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/VpcFirewallRuleStatus"
-    ///        }
-    ///      ]
-    ///    },
-    ///    "targets": {
-    ///      "description": "list of sets of instances that the rule applies
-    /// to",
-    ///      "type": "array",
-    ///      "items": {
-    ///        "$ref": "#/components/schemas/VpcFirewallRuleTarget"
-    ///      }
-    ///    },
-    ///    "time_created": {
-    ///      "description": "timestamp when this resource was created",
-    ///      "type": "string",
-    ///      "format": "date-time"
-    ///    },
-    ///    "time_modified": {
-    ///      "description": "timestamp when this resource was last modified",
-    ///      "type": "string",
-    ///      "format": "date-time"
-    ///    },
-    ///    "vpc_id": {
-    ///      "description": "the VPC to which this rule belongs",
-    ///      "type": "string",
-    ///      "format": "uuid"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "A single rule in a VPC firewall"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"A single rule in a VPC firewall\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"action\","]
+    #[doc = "    \"description\","]
+    #[doc = "    \"direction\","]
+    #[doc = "    \"filters\","]
+    #[doc = "    \"id\","]
+    #[doc = "    \"name\","]
+    #[doc = "    \"priority\","]
+    #[doc = "    \"status\","]
+    #[doc = "    \"targets\","]
+    #[doc = "    \"time_created\","]
+    #[doc = "    \"time_modified\","]
+    #[doc = "    \"vpc_id\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"action\": {"]
+    #[doc = "      \"description\": \"whether traffic matching the rule should be allowed or dropped\","]
+    #[doc = "      \"allOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/VpcFirewallRuleAction\""]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"description\": {"]
+    #[doc = "      \"description\": \"human-readable free-form text about a resource\","]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"direction\": {"]
+    #[doc = "      \"description\": \"whether this rule is for incoming or outgoing traffic\","]
+    #[doc = "      \"allOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/VpcFirewallRuleDirection\""]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"filters\": {"]
+    #[doc = "      \"description\": \"reductions on the scope of the rule\","]
+    #[doc = "      \"allOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/VpcFirewallRuleFilter\""]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"id\": {"]
+    #[doc = "      \"description\": \"unique, immutable, system-controlled identifier for each resource\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"uuid\""]
+    #[doc = "    },"]
+    #[doc = "    \"name\": {"]
+    #[doc = "      \"description\": \"unique, mutable, user-controlled identifier for each resource\","]
+    #[doc = "      \"allOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/Name\""]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"priority\": {"]
+    #[doc = "      \"description\": \"the relative priority of this rule\","]
+    #[doc = "      \"type\": \"integer\","]
+    #[doc = "      \"format\": \"uint16\","]
+    #[doc = "      \"minimum\": 0.0"]
+    #[doc = "    },"]
+    #[doc = "    \"status\": {"]
+    #[doc = "      \"description\": \"whether this rule is in effect\","]
+    #[doc = "      \"allOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/VpcFirewallRuleStatus\""]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"targets\": {"]
+    #[doc = "      \"description\": \"list of sets of instances that the rule applies to\","]
+    #[doc = "      \"type\": \"array\","]
+    #[doc = "      \"items\": {"]
+    #[doc = "        \"$ref\": \"#/components/schemas/VpcFirewallRuleTarget\""]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    \"time_created\": {"]
+    #[doc = "      \"description\": \"timestamp when this resource was created\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"date-time\""]
+    #[doc = "    },"]
+    #[doc = "    \"time_modified\": {"]
+    #[doc = "      \"description\": \"timestamp when this resource was last modified\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"date-time\""]
+    #[doc = "    },"]
+    #[doc = "    \"vpc_id\": {"]
+    #[doc = "      \"description\": \"the VPC to which this rule belongs\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"uuid\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct VpcFirewallRule {
-        ///whether traffic matching the rule should be allowed or dropped
+        #[doc = "whether traffic matching the rule should be allowed or dropped"]
         pub action: VpcFirewallRuleAction,
-        ///human-readable free-form text about a resource
+        #[doc = "human-readable free-form text about a resource"]
         pub description: ::std::string::String,
-        ///whether this rule is for incoming or outgoing traffic
+        #[doc = "whether this rule is for incoming or outgoing traffic"]
         pub direction: VpcFirewallRuleDirection,
-        ///reductions on the scope of the rule
+        #[doc = "reductions on the scope of the rule"]
         pub filters: VpcFirewallRuleFilter,
-        ///unique, immutable, system-controlled identifier for each resource
+        #[doc = "unique, immutable, system-controlled identifier for each resource"]
         pub id: ::uuid::Uuid,
-        ///unique, mutable, user-controlled identifier for each resource
+        #[doc = "unique, mutable, user-controlled identifier for each resource"]
         pub name: Name,
-        ///the relative priority of this rule
+        #[doc = "the relative priority of this rule"]
         pub priority: u16,
-        ///whether this rule is in effect
+        #[doc = "whether this rule is in effect"]
         pub status: VpcFirewallRuleStatus,
-        ///list of sets of instances that the rule applies to
+        #[doc = "list of sets of instances that the rule applies to"]
         pub targets: ::std::vec::Vec<VpcFirewallRuleTarget>,
-        ///timestamp when this resource was created
+        #[doc = "timestamp when this resource was created"]
         pub time_created: ::chrono::DateTime<::chrono::offset::Utc>,
-        ///timestamp when this resource was last modified
+        #[doc = "timestamp when this resource was last modified"]
         pub time_modified: ::chrono::DateTime<::chrono::offset::Utc>,
-        ///the VPC to which this rule belongs
+        #[doc = "the VPC to which this rule belongs"]
         pub vpc_id: ::uuid::Uuid,
     }
 
@@ -12410,20 +11782,20 @@ pub mod types {
         }
     }
 
-    ///`VpcFirewallRuleAction`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "string",
-    ///  "enum": [
-    ///    "allow",
-    ///    "deny"
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`VpcFirewallRuleAction`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"string\","]
+    #[doc = "  \"enum\": ["]
+    #[doc = "    \"allow\","]
+    #[doc = "    \"deny\""]
+    #[doc = "  ]"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(
         :: serde :: Deserialize,
         :: serde :: Serialize,
@@ -12494,20 +11866,20 @@ pub mod types {
         }
     }
 
-    ///`VpcFirewallRuleDirection`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "string",
-    ///  "enum": [
-    ///    "inbound",
-    ///    "outbound"
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`VpcFirewallRuleDirection`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"string\","]
+    #[doc = "  \"enum\": ["]
+    #[doc = "    \"inbound\","]
+    #[doc = "    \"outbound\""]
+    #[doc = "  ]"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(
         :: serde :: Deserialize,
         :: serde :: Serialize,
@@ -12578,66 +11950,58 @@ pub mod types {
         }
     }
 
-    ///Filter for a firewall rule. A given packet must match every field that
-    /// is present for the rule to apply to it. A packet matches a field if any
-    /// entry in that field matches the packet.
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Filter for a firewall rule. A given packet must match
-    /// every field that is present for the rule to apply to it. A packet
-    /// matches a field if any entry in that field matches the packet.",
-    ///  "type": "object",
-    ///  "properties": {
-    ///    "hosts": {
-    ///      "description": "If present, the sources (if incoming) or
-    /// destinations (if outgoing) this rule applies to.",
-    ///      "type": [
-    ///        "array",
-    ///        "null"
-    ///      ],
-    ///      "items": {
-    ///        "$ref": "#/components/schemas/VpcFirewallRuleHostFilter"
-    ///      }
-    ///    },
-    ///    "ports": {
-    ///      "description": "If present, the destination ports this rule applies
-    /// to.",
-    ///      "type": [
-    ///        "array",
-    ///        "null"
-    ///      ],
-    ///      "items": {
-    ///        "$ref": "#/components/schemas/L4PortRange"
-    ///      }
-    ///    },
-    ///    "protocols": {
-    ///      "description": "If present, the networking protocols this rule
-    /// applies to.",
-    ///      "type": [
-    ///        "array",
-    ///        "null"
-    ///      ],
-    ///      "items": {
-    ///        "$ref": "#/components/schemas/VpcFirewallRuleProtocol"
-    ///      }
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Filter for a firewall rule. A given packet must match every field that is present for the rule to apply to it. A packet matches a field if any entry in that field matches the packet."]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Filter for a firewall rule. A given packet must match every field that is present for the rule to apply to it. A packet matches a field if any entry in that field matches the packet.\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"hosts\": {"]
+    #[doc = "      \"description\": \"If present, the sources (if incoming) or destinations (if outgoing) this rule applies to.\","]
+    #[doc = "      \"type\": ["]
+    #[doc = "        \"array\","]
+    #[doc = "        \"null\""]
+    #[doc = "      ],"]
+    #[doc = "      \"items\": {"]
+    #[doc = "        \"$ref\": \"#/components/schemas/VpcFirewallRuleHostFilter\""]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    \"ports\": {"]
+    #[doc = "      \"description\": \"If present, the destination ports this rule applies to.\","]
+    #[doc = "      \"type\": ["]
+    #[doc = "        \"array\","]
+    #[doc = "        \"null\""]
+    #[doc = "      ],"]
+    #[doc = "      \"items\": {"]
+    #[doc = "        \"$ref\": \"#/components/schemas/L4PortRange\""]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    \"protocols\": {"]
+    #[doc = "      \"description\": \"If present, the networking protocols this rule applies to.\","]
+    #[doc = "      \"type\": ["]
+    #[doc = "        \"array\","]
+    #[doc = "        \"null\""]
+    #[doc = "      ],"]
+    #[doc = "      \"items\": {"]
+    #[doc = "        \"$ref\": \"#/components/schemas/VpcFirewallRuleProtocol\""]
+    #[doc = "      }"]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct VpcFirewallRuleFilter {
-        ///If present, the sources (if incoming) or destinations (if outgoing)
-        /// this rule applies to.
+        #[doc = "If present, the sources (if incoming) or destinations (if outgoing) this rule applies to."]
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
         pub hosts: ::std::option::Option<::std::vec::Vec<VpcFirewallRuleHostFilter>>,
-        ///If present, the destination ports this rule applies to.
+        #[doc = "If present, the destination ports this rule applies to."]
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
         pub ports: ::std::option::Option<::std::vec::Vec<L4PortRange>>,
-        ///If present, the networking protocols this rule applies to.
+        #[doc = "If present, the networking protocols this rule applies to."]
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
         pub protocols: ::std::option::Option<::std::vec::Vec<VpcFirewallRuleProtocol>>,
     }
@@ -12658,137 +12022,130 @@ pub mod types {
         }
     }
 
-    ///The `VpcFirewallRuleHostFilter` is used to filter traffic on the basis
-    /// of its source or destination host.
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "The `VpcFirewallRuleHostFilter` is used to filter
-    /// traffic on the basis of its source or destination host.",
-    ///  "oneOf": [
-    ///    {
-    ///      "description": "The rule applies to traffic from/to all instances
-    /// in the VPC",
-    ///      "type": "object",
-    ///      "required": [
-    ///        "type",
-    ///        "value"
-    ///      ],
-    ///      "properties": {
-    ///        "type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "vpc"
-    ///          ]
-    ///        },
-    ///        "value": {
-    ///          "$ref": "#/components/schemas/Name"
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "description": "The rule applies to traffic from/to all instances
-    /// in the VPC Subnet",
-    ///      "type": "object",
-    ///      "required": [
-    ///        "type",
-    ///        "value"
-    ///      ],
-    ///      "properties": {
-    ///        "type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "subnet"
-    ///          ]
-    ///        },
-    ///        "value": {
-    ///          "$ref": "#/components/schemas/Name"
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "description": "The rule applies to traffic from/to this specific
-    /// instance",
-    ///      "type": "object",
-    ///      "required": [
-    ///        "type",
-    ///        "value"
-    ///      ],
-    ///      "properties": {
-    ///        "type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "instance"
-    ///          ]
-    ///        },
-    ///        "value": {
-    ///          "$ref": "#/components/schemas/Name"
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "description": "The rule applies to traffic from/to a specific IP
-    /// address",
-    ///      "type": "object",
-    ///      "required": [
-    ///        "type",
-    ///        "value"
-    ///      ],
-    ///      "properties": {
-    ///        "type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "ip"
-    ///          ]
-    ///        },
-    ///        "value": {
-    ///          "type": "string",
-    ///          "format": "ip"
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "description": "The rule applies to traffic from/to a specific IP
-    /// subnet",
-    ///      "type": "object",
-    ///      "required": [
-    ///        "type",
-    ///        "value"
-    ///      ],
-    ///      "properties": {
-    ///        "type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "ip_net"
-    ///          ]
-    ///        },
-    ///        "value": {
-    ///          "$ref": "#/components/schemas/IpNet"
-    ///        }
-    ///      }
-    ///    }
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "The `VpcFirewallRuleHostFilter` is used to filter traffic on the basis of its source or destination host."]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"The `VpcFirewallRuleHostFilter` is used to filter traffic on the basis of its source or destination host.\","]
+    #[doc = "  \"oneOf\": ["]
+    #[doc = "    {"]
+    #[doc = "      \"description\": \"The rule applies to traffic from/to all instances in the VPC\","]
+    #[doc = "      \"type\": \"object\","]
+    #[doc = "      \"required\": ["]
+    #[doc = "        \"type\","]
+    #[doc = "        \"value\""]
+    #[doc = "      ],"]
+    #[doc = "      \"properties\": {"]
+    #[doc = "        \"type\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"enum\": ["]
+    #[doc = "            \"vpc\""]
+    #[doc = "          ]"]
+    #[doc = "        },"]
+    #[doc = "        \"value\": {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/Name\""]
+    #[doc = "        }"]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    {"]
+    #[doc = "      \"description\": \"The rule applies to traffic from/to all instances in the VPC Subnet\","]
+    #[doc = "      \"type\": \"object\","]
+    #[doc = "      \"required\": ["]
+    #[doc = "        \"type\","]
+    #[doc = "        \"value\""]
+    #[doc = "      ],"]
+    #[doc = "      \"properties\": {"]
+    #[doc = "        \"type\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"enum\": ["]
+    #[doc = "            \"subnet\""]
+    #[doc = "          ]"]
+    #[doc = "        },"]
+    #[doc = "        \"value\": {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/Name\""]
+    #[doc = "        }"]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    {"]
+    #[doc = "      \"description\": \"The rule applies to traffic from/to this specific instance\","]
+    #[doc = "      \"type\": \"object\","]
+    #[doc = "      \"required\": ["]
+    #[doc = "        \"type\","]
+    #[doc = "        \"value\""]
+    #[doc = "      ],"]
+    #[doc = "      \"properties\": {"]
+    #[doc = "        \"type\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"enum\": ["]
+    #[doc = "            \"instance\""]
+    #[doc = "          ]"]
+    #[doc = "        },"]
+    #[doc = "        \"value\": {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/Name\""]
+    #[doc = "        }"]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    {"]
+    #[doc = "      \"description\": \"The rule applies to traffic from/to a specific IP address\","]
+    #[doc = "      \"type\": \"object\","]
+    #[doc = "      \"required\": ["]
+    #[doc = "        \"type\","]
+    #[doc = "        \"value\""]
+    #[doc = "      ],"]
+    #[doc = "      \"properties\": {"]
+    #[doc = "        \"type\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"enum\": ["]
+    #[doc = "            \"ip\""]
+    #[doc = "          ]"]
+    #[doc = "        },"]
+    #[doc = "        \"value\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"format\": \"ip\""]
+    #[doc = "        }"]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    {"]
+    #[doc = "      \"description\": \"The rule applies to traffic from/to a specific IP subnet\","]
+    #[doc = "      \"type\": \"object\","]
+    #[doc = "      \"required\": ["]
+    #[doc = "        \"type\","]
+    #[doc = "        \"value\""]
+    #[doc = "      ],"]
+    #[doc = "      \"properties\": {"]
+    #[doc = "        \"type\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"enum\": ["]
+    #[doc = "            \"ip_net\""]
+    #[doc = "          ]"]
+    #[doc = "        },"]
+    #[doc = "        \"value\": {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/IpNet\""]
+    #[doc = "        }"]
+    #[doc = "      }"]
+    #[doc = "    }"]
+    #[doc = "  ]"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     #[serde(tag = "type", content = "value")]
     pub enum VpcFirewallRuleHostFilter {
-        ///The rule applies to traffic from/to all instances in the VPC
+        #[doc = "The rule applies to traffic from/to all instances in the VPC"]
         #[serde(rename = "vpc")]
         Vpc(Name),
-        ///The rule applies to traffic from/to all instances in the VPC Subnet
+        #[doc = "The rule applies to traffic from/to all instances in the VPC Subnet"]
         #[serde(rename = "subnet")]
         Subnet(Name),
-        ///The rule applies to traffic from/to this specific instance
+        #[doc = "The rule applies to traffic from/to this specific instance"]
         #[serde(rename = "instance")]
         Instance(Name),
-        ///The rule applies to traffic from/to a specific IP address
+        #[doc = "The rule applies to traffic from/to a specific IP address"]
         #[serde(rename = "ip")]
         Ip(::std::net::IpAddr),
-        ///The rule applies to traffic from/to a specific IP subnet
+        #[doc = "The rule applies to traffic from/to a specific IP subnet"]
         #[serde(rename = "ip_net")]
         IpNet(IpNet),
     }
@@ -12811,23 +12168,22 @@ pub mod types {
         }
     }
 
-    ///The protocols that may be specified in a firewall rule's filter
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "The protocols that may be specified in a firewall
-    /// rule's filter",
-    ///  "type": "string",
-    ///  "enum": [
-    ///    "TCP",
-    ///    "UDP",
-    ///    "ICMP"
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "The protocols that may be specified in a firewall rule's filter"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"The protocols that may be specified in a firewall rule's filter\","]
+    #[doc = "  \"type\": \"string\","]
+    #[doc = "  \"enum\": ["]
+    #[doc = "    \"TCP\","]
+    #[doc = "    \"UDP\","]
+    #[doc = "    \"ICMP\""]
+    #[doc = "  ]"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(
         :: serde :: Deserialize,
         :: serde :: Serialize,
@@ -12902,20 +12258,20 @@ pub mod types {
         }
     }
 
-    ///`VpcFirewallRuleStatus`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "string",
-    ///  "enum": [
-    ///    "disabled",
-    ///    "enabled"
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`VpcFirewallRuleStatus`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"string\","]
+    #[doc = "  \"enum\": ["]
+    #[doc = "    \"disabled\","]
+    #[doc = "    \"enabled\""]
+    #[doc = "  ]"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(
         :: serde :: Deserialize,
         :: serde :: Serialize,
@@ -12986,133 +12342,130 @@ pub mod types {
         }
     }
 
-    ///A `VpcFirewallRuleTarget` is used to specify the set of [`Instance`]s to
-    /// which a firewall rule applies.
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "A `VpcFirewallRuleTarget` is used to specify the set of
-    /// [`Instance`]s to which a firewall rule applies.",
-    ///  "oneOf": [
-    ///    {
-    ///      "description": "The rule applies to all instances in the VPC",
-    ///      "type": "object",
-    ///      "required": [
-    ///        "type",
-    ///        "value"
-    ///      ],
-    ///      "properties": {
-    ///        "type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "vpc"
-    ///          ]
-    ///        },
-    ///        "value": {
-    ///          "$ref": "#/components/schemas/Name"
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "description": "The rule applies to all instances in the VPC
-    /// Subnet",
-    ///      "type": "object",
-    ///      "required": [
-    ///        "type",
-    ///        "value"
-    ///      ],
-    ///      "properties": {
-    ///        "type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "subnet"
-    ///          ]
-    ///        },
-    ///        "value": {
-    ///          "$ref": "#/components/schemas/Name"
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "description": "The rule applies to this specific instance",
-    ///      "type": "object",
-    ///      "required": [
-    ///        "type",
-    ///        "value"
-    ///      ],
-    ///      "properties": {
-    ///        "type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "instance"
-    ///          ]
-    ///        },
-    ///        "value": {
-    ///          "$ref": "#/components/schemas/Name"
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "description": "The rule applies to a specific IP address",
-    ///      "type": "object",
-    ///      "required": [
-    ///        "type",
-    ///        "value"
-    ///      ],
-    ///      "properties": {
-    ///        "type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "ip"
-    ///          ]
-    ///        },
-    ///        "value": {
-    ///          "type": "string",
-    ///          "format": "ip"
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "description": "The rule applies to a specific IP subnet",
-    ///      "type": "object",
-    ///      "required": [
-    ///        "type",
-    ///        "value"
-    ///      ],
-    ///      "properties": {
-    ///        "type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "ip_net"
-    ///          ]
-    ///        },
-    ///        "value": {
-    ///          "$ref": "#/components/schemas/IpNet"
-    ///        }
-    ///      }
-    ///    }
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "A `VpcFirewallRuleTarget` is used to specify the set of [`Instance`]s to which a firewall rule applies."]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"A `VpcFirewallRuleTarget` is used to specify the set of [`Instance`]s to which a firewall rule applies.\","]
+    #[doc = "  \"oneOf\": ["]
+    #[doc = "    {"]
+    #[doc = "      \"description\": \"The rule applies to all instances in the VPC\","]
+    #[doc = "      \"type\": \"object\","]
+    #[doc = "      \"required\": ["]
+    #[doc = "        \"type\","]
+    #[doc = "        \"value\""]
+    #[doc = "      ],"]
+    #[doc = "      \"properties\": {"]
+    #[doc = "        \"type\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"enum\": ["]
+    #[doc = "            \"vpc\""]
+    #[doc = "          ]"]
+    #[doc = "        },"]
+    #[doc = "        \"value\": {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/Name\""]
+    #[doc = "        }"]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    {"]
+    #[doc = "      \"description\": \"The rule applies to all instances in the VPC Subnet\","]
+    #[doc = "      \"type\": \"object\","]
+    #[doc = "      \"required\": ["]
+    #[doc = "        \"type\","]
+    #[doc = "        \"value\""]
+    #[doc = "      ],"]
+    #[doc = "      \"properties\": {"]
+    #[doc = "        \"type\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"enum\": ["]
+    #[doc = "            \"subnet\""]
+    #[doc = "          ]"]
+    #[doc = "        },"]
+    #[doc = "        \"value\": {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/Name\""]
+    #[doc = "        }"]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    {"]
+    #[doc = "      \"description\": \"The rule applies to this specific instance\","]
+    #[doc = "      \"type\": \"object\","]
+    #[doc = "      \"required\": ["]
+    #[doc = "        \"type\","]
+    #[doc = "        \"value\""]
+    #[doc = "      ],"]
+    #[doc = "      \"properties\": {"]
+    #[doc = "        \"type\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"enum\": ["]
+    #[doc = "            \"instance\""]
+    #[doc = "          ]"]
+    #[doc = "        },"]
+    #[doc = "        \"value\": {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/Name\""]
+    #[doc = "        }"]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    {"]
+    #[doc = "      \"description\": \"The rule applies to a specific IP address\","]
+    #[doc = "      \"type\": \"object\","]
+    #[doc = "      \"required\": ["]
+    #[doc = "        \"type\","]
+    #[doc = "        \"value\""]
+    #[doc = "      ],"]
+    #[doc = "      \"properties\": {"]
+    #[doc = "        \"type\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"enum\": ["]
+    #[doc = "            \"ip\""]
+    #[doc = "          ]"]
+    #[doc = "        },"]
+    #[doc = "        \"value\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"format\": \"ip\""]
+    #[doc = "        }"]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    {"]
+    #[doc = "      \"description\": \"The rule applies to a specific IP subnet\","]
+    #[doc = "      \"type\": \"object\","]
+    #[doc = "      \"required\": ["]
+    #[doc = "        \"type\","]
+    #[doc = "        \"value\""]
+    #[doc = "      ],"]
+    #[doc = "      \"properties\": {"]
+    #[doc = "        \"type\": {"]
+    #[doc = "          \"type\": \"string\","]
+    #[doc = "          \"enum\": ["]
+    #[doc = "            \"ip_net\""]
+    #[doc = "          ]"]
+    #[doc = "        },"]
+    #[doc = "        \"value\": {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/IpNet\""]
+    #[doc = "        }"]
+    #[doc = "      }"]
+    #[doc = "    }"]
+    #[doc = "  ]"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     #[serde(tag = "type", content = "value")]
     pub enum VpcFirewallRuleTarget {
-        ///The rule applies to all instances in the VPC
+        #[doc = "The rule applies to all instances in the VPC"]
         #[serde(rename = "vpc")]
         Vpc(Name),
-        ///The rule applies to all instances in the VPC Subnet
+        #[doc = "The rule applies to all instances in the VPC Subnet"]
         #[serde(rename = "subnet")]
         Subnet(Name),
-        ///The rule applies to this specific instance
+        #[doc = "The rule applies to this specific instance"]
         #[serde(rename = "instance")]
         Instance(Name),
-        ///The rule applies to a specific IP address
+        #[doc = "The rule applies to a specific IP address"]
         #[serde(rename = "ip")]
         Ip(::std::net::IpAddr),
-        ///The rule applies to a specific IP subnet
+        #[doc = "The rule applies to a specific IP subnet"]
         #[serde(rename = "ip_net")]
         IpNet(IpNet),
     }
@@ -13135,106 +12488,103 @@ pub mod types {
         }
     }
 
-    ///A single rule in a VPC firewall
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "A single rule in a VPC firewall",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "action",
-    ///    "description",
-    ///    "direction",
-    ///    "filters",
-    ///    "name",
-    ///    "priority",
-    ///    "status",
-    ///    "targets"
-    ///  ],
-    ///  "properties": {
-    ///    "action": {
-    ///      "description": "whether traffic matching the rule should be allowed
-    /// or dropped",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/VpcFirewallRuleAction"
-    ///        }
-    ///      ]
-    ///    },
-    ///    "description": {
-    ///      "description": "human-readable free-form text about a resource",
-    ///      "type": "string"
-    ///    },
-    ///    "direction": {
-    ///      "description": "whether this rule is for incoming or outgoing
-    /// traffic",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/VpcFirewallRuleDirection"
-    ///        }
-    ///      ]
-    ///    },
-    ///    "filters": {
-    ///      "description": "reductions on the scope of the rule",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/VpcFirewallRuleFilter"
-    ///        }
-    ///      ]
-    ///    },
-    ///    "name": {
-    ///      "description": "name of the rule, unique to this VPC",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/Name"
-    ///        }
-    ///      ]
-    ///    },
-    ///    "priority": {
-    ///      "description": "the relative priority of this rule",
-    ///      "type": "integer",
-    ///      "format": "uint16",
-    ///      "minimum": 0.0
-    ///    },
-    ///    "status": {
-    ///      "description": "whether this rule is in effect",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/VpcFirewallRuleStatus"
-    ///        }
-    ///      ]
-    ///    },
-    ///    "targets": {
-    ///      "description": "list of sets of instances that the rule applies
-    /// to",
-    ///      "type": "array",
-    ///      "items": {
-    ///        "$ref": "#/components/schemas/VpcFirewallRuleTarget"
-    ///      }
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "A single rule in a VPC firewall"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"A single rule in a VPC firewall\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"action\","]
+    #[doc = "    \"description\","]
+    #[doc = "    \"direction\","]
+    #[doc = "    \"filters\","]
+    #[doc = "    \"name\","]
+    #[doc = "    \"priority\","]
+    #[doc = "    \"status\","]
+    #[doc = "    \"targets\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"action\": {"]
+    #[doc = "      \"description\": \"whether traffic matching the rule should be allowed or dropped\","]
+    #[doc = "      \"allOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/VpcFirewallRuleAction\""]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"description\": {"]
+    #[doc = "      \"description\": \"human-readable free-form text about a resource\","]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"direction\": {"]
+    #[doc = "      \"description\": \"whether this rule is for incoming or outgoing traffic\","]
+    #[doc = "      \"allOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/VpcFirewallRuleDirection\""]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"filters\": {"]
+    #[doc = "      \"description\": \"reductions on the scope of the rule\","]
+    #[doc = "      \"allOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/VpcFirewallRuleFilter\""]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"name\": {"]
+    #[doc = "      \"description\": \"name of the rule, unique to this VPC\","]
+    #[doc = "      \"allOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/Name\""]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"priority\": {"]
+    #[doc = "      \"description\": \"the relative priority of this rule\","]
+    #[doc = "      \"type\": \"integer\","]
+    #[doc = "      \"format\": \"uint16\","]
+    #[doc = "      \"minimum\": 0.0"]
+    #[doc = "    },"]
+    #[doc = "    \"status\": {"]
+    #[doc = "      \"description\": \"whether this rule is in effect\","]
+    #[doc = "      \"allOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/VpcFirewallRuleStatus\""]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"targets\": {"]
+    #[doc = "      \"description\": \"list of sets of instances that the rule applies to\","]
+    #[doc = "      \"type\": \"array\","]
+    #[doc = "      \"items\": {"]
+    #[doc = "        \"$ref\": \"#/components/schemas/VpcFirewallRuleTarget\""]
+    #[doc = "      }"]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct VpcFirewallRuleUpdate {
-        ///whether traffic matching the rule should be allowed or dropped
+        #[doc = "whether traffic matching the rule should be allowed or dropped"]
         pub action: VpcFirewallRuleAction,
-        ///human-readable free-form text about a resource
+        #[doc = "human-readable free-form text about a resource"]
         pub description: ::std::string::String,
-        ///whether this rule is for incoming or outgoing traffic
+        #[doc = "whether this rule is for incoming or outgoing traffic"]
         pub direction: VpcFirewallRuleDirection,
-        ///reductions on the scope of the rule
+        #[doc = "reductions on the scope of the rule"]
         pub filters: VpcFirewallRuleFilter,
-        ///name of the rule, unique to this VPC
+        #[doc = "name of the rule, unique to this VPC"]
         pub name: Name,
-        ///the relative priority of this rule
+        #[doc = "the relative priority of this rule"]
         pub priority: u16,
-        ///whether this rule is in effect
+        #[doc = "whether this rule is in effect"]
         pub status: VpcFirewallRuleStatus,
-        ///list of sets of instances that the rule applies to
+        #[doc = "list of sets of instances that the rule applies to"]
         pub targets: ::std::vec::Vec<VpcFirewallRuleTarget>,
     }
 
@@ -13244,32 +12594,28 @@ pub mod types {
         }
     }
 
-    ///Updateable properties of a `Vpc`'s firewall Note that VpcFirewallRules
-    /// are implicitly created along with a Vpc, so there is no explicit
-    /// creation.
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Updateable properties of a `Vpc`'s firewall Note that
-    /// VpcFirewallRules are implicitly created along with a Vpc, so there is no
-    /// explicit creation.",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "rules"
-    ///  ],
-    ///  "properties": {
-    ///    "rules": {
-    ///      "type": "array",
-    ///      "items": {
-    ///        "$ref": "#/components/schemas/VpcFirewallRuleUpdate"
-    ///      }
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Updateable properties of a `Vpc`'s firewall Note that VpcFirewallRules are implicitly created along with a Vpc, so there is no explicit creation."]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Updateable properties of a `Vpc`'s firewall Note that VpcFirewallRules are implicitly created along with a Vpc, so there is no explicit creation.\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"rules\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"rules\": {"]
+    #[doc = "      \"type\": \"array\","]
+    #[doc = "      \"items\": {"]
+    #[doc = "        \"$ref\": \"#/components/schemas/VpcFirewallRuleUpdate\""]
+    #[doc = "      }"]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct VpcFirewallRuleUpdateParams {
         pub rules: ::std::vec::Vec<VpcFirewallRuleUpdate>,
@@ -13281,28 +12627,28 @@ pub mod types {
         }
     }
 
-    ///Collection of a Vpc's firewall rules
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Collection of a Vpc's firewall rules",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "rules"
-    ///  ],
-    ///  "properties": {
-    ///    "rules": {
-    ///      "type": "array",
-    ///      "items": {
-    ///        "$ref": "#/components/schemas/VpcFirewallRule"
-    ///      }
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Collection of a Vpc's firewall rules"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Collection of a Vpc's firewall rules\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"rules\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"rules\": {"]
+    #[doc = "      \"type\": \"array\","]
+    #[doc = "      \"items\": {"]
+    #[doc = "        \"$ref\": \"#/components/schemas/VpcFirewallRule\""]
+    #[doc = "      }"]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct VpcFirewallRules {
         pub rules: ::std::vec::Vec<VpcFirewallRule>,
@@ -13314,42 +12660,41 @@ pub mod types {
         }
     }
 
-    ///A single page of results
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "A single page of results",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "items"
-    ///  ],
-    ///  "properties": {
-    ///    "items": {
-    ///      "description": "list of items on this page of results",
-    ///      "type": "array",
-    ///      "items": {
-    ///        "$ref": "#/components/schemas/Vpc"
-    ///      }
-    ///    },
-    ///    "next_page": {
-    ///      "description": "token used to fetch the next page of results (if
-    /// any)",
-    ///      "type": [
-    ///        "string",
-    ///        "null"
-    ///      ]
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "A single page of results"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"A single page of results\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"items\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"items\": {"]
+    #[doc = "      \"description\": \"list of items on this page of results\","]
+    #[doc = "      \"type\": \"array\","]
+    #[doc = "      \"items\": {"]
+    #[doc = "        \"$ref\": \"#/components/schemas/Vpc\""]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    \"next_page\": {"]
+    #[doc = "      \"description\": \"token used to fetch the next page of results (if any)\","]
+    #[doc = "      \"type\": ["]
+    #[doc = "        \"string\","]
+    #[doc = "        \"null\""]
+    #[doc = "      ]"]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct VpcResultsPage {
-        ///list of items on this page of results
+        #[doc = "list of items on this page of results"]
         pub items: ::std::vec::Vec<Vpc>,
-        ///token used to fetch the next page of results (if any)
+        #[doc = "token used to fetch the next page of results (if any)"]
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
         pub next_page: ::std::option::Option<::std::string::String>,
     }
@@ -13360,81 +12705,77 @@ pub mod types {
         }
     }
 
-    ///A VPC router defines a series of rules that indicate where traffic
-    /// should be sent depending on its destination.
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "A VPC router defines a series of rules that indicate
-    /// where traffic should be sent depending on its destination.",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "description",
-    ///    "id",
-    ///    "kind",
-    ///    "name",
-    ///    "time_created",
-    ///    "time_modified",
-    ///    "vpc_id"
-    ///  ],
-    ///  "properties": {
-    ///    "description": {
-    ///      "description": "human-readable free-form text about a resource",
-    ///      "type": "string"
-    ///    },
-    ///    "id": {
-    ///      "description": "unique, immutable, system-controlled identifier for
-    /// each resource",
-    ///      "type": "string",
-    ///      "format": "uuid"
-    ///    },
-    ///    "kind": {
-    ///      "$ref": "#/components/schemas/VpcRouterKind"
-    ///    },
-    ///    "name": {
-    ///      "description": "unique, mutable, user-controlled identifier for
-    /// each resource",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/Name"
-    ///        }
-    ///      ]
-    ///    },
-    ///    "time_created": {
-    ///      "description": "timestamp when this resource was created",
-    ///      "type": "string",
-    ///      "format": "date-time"
-    ///    },
-    ///    "time_modified": {
-    ///      "description": "timestamp when this resource was last modified",
-    ///      "type": "string",
-    ///      "format": "date-time"
-    ///    },
-    ///    "vpc_id": {
-    ///      "description": "The VPC to which the router belongs.",
-    ///      "type": "string",
-    ///      "format": "uuid"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "A VPC router defines a series of rules that indicate where traffic should be sent depending on its destination."]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"A VPC router defines a series of rules that indicate where traffic should be sent depending on its destination.\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"description\","]
+    #[doc = "    \"id\","]
+    #[doc = "    \"kind\","]
+    #[doc = "    \"name\","]
+    #[doc = "    \"time_created\","]
+    #[doc = "    \"time_modified\","]
+    #[doc = "    \"vpc_id\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"description\": {"]
+    #[doc = "      \"description\": \"human-readable free-form text about a resource\","]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"id\": {"]
+    #[doc = "      \"description\": \"unique, immutable, system-controlled identifier for each resource\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"uuid\""]
+    #[doc = "    },"]
+    #[doc = "    \"kind\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/VpcRouterKind\""]
+    #[doc = "    },"]
+    #[doc = "    \"name\": {"]
+    #[doc = "      \"description\": \"unique, mutable, user-controlled identifier for each resource\","]
+    #[doc = "      \"allOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/Name\""]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"time_created\": {"]
+    #[doc = "      \"description\": \"timestamp when this resource was created\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"date-time\""]
+    #[doc = "    },"]
+    #[doc = "    \"time_modified\": {"]
+    #[doc = "      \"description\": \"timestamp when this resource was last modified\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"date-time\""]
+    #[doc = "    },"]
+    #[doc = "    \"vpc_id\": {"]
+    #[doc = "      \"description\": \"The VPC to which the router belongs.\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"uuid\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct VpcRouter {
-        ///human-readable free-form text about a resource
+        #[doc = "human-readable free-form text about a resource"]
         pub description: ::std::string::String,
-        ///unique, immutable, system-controlled identifier for each resource
+        #[doc = "unique, immutable, system-controlled identifier for each resource"]
         pub id: ::uuid::Uuid,
         pub kind: VpcRouterKind,
-        ///unique, mutable, user-controlled identifier for each resource
+        #[doc = "unique, mutable, user-controlled identifier for each resource"]
         pub name: Name,
-        ///timestamp when this resource was created
+        #[doc = "timestamp when this resource was created"]
         pub time_created: ::chrono::DateTime<::chrono::offset::Utc>,
-        ///timestamp when this resource was last modified
+        #[doc = "timestamp when this resource was last modified"]
         pub time_modified: ::chrono::DateTime<::chrono::offset::Utc>,
-        ///The VPC to which the router belongs.
+        #[doc = "The VPC to which the router belongs."]
         pub vpc_id: ::uuid::Uuid,
     }
 
@@ -13444,31 +12785,29 @@ pub mod types {
         }
     }
 
-    ///Create-time parameters for a
-    /// [`VpcRouter`](crate::external_api::views::VpcRouter)
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Create-time parameters for a
-    /// [`VpcRouter`](crate::external_api::views::VpcRouter)",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "description",
-    ///    "name"
-    ///  ],
-    ///  "properties": {
-    ///    "description": {
-    ///      "type": "string"
-    ///    },
-    ///    "name": {
-    ///      "$ref": "#/components/schemas/Name"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Create-time parameters for a [`VpcRouter`](crate::external_api::views::VpcRouter)"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Create-time parameters for a [`VpcRouter`](crate::external_api::views::VpcRouter)\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"description\","]
+    #[doc = "    \"name\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"description\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"name\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/Name\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct VpcRouterCreate {
         pub description: ::std::string::String,
@@ -13481,20 +12820,20 @@ pub mod types {
         }
     }
 
-    ///`VpcRouterKind`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "string",
-    ///  "enum": [
-    ///    "system",
-    ///    "custom"
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`VpcRouterKind`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"string\","]
+    #[doc = "  \"enum\": ["]
+    #[doc = "    \"system\","]
+    #[doc = "    \"custom\""]
+    #[doc = "  ]"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(
         :: serde :: Deserialize,
         :: serde :: Serialize,
@@ -13565,42 +12904,41 @@ pub mod types {
         }
     }
 
-    ///A single page of results
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "A single page of results",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "items"
-    ///  ],
-    ///  "properties": {
-    ///    "items": {
-    ///      "description": "list of items on this page of results",
-    ///      "type": "array",
-    ///      "items": {
-    ///        "$ref": "#/components/schemas/VpcRouter"
-    ///      }
-    ///    },
-    ///    "next_page": {
-    ///      "description": "token used to fetch the next page of results (if
-    /// any)",
-    ///      "type": [
-    ///        "string",
-    ///        "null"
-    ///      ]
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "A single page of results"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"A single page of results\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"items\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"items\": {"]
+    #[doc = "      \"description\": \"list of items on this page of results\","]
+    #[doc = "      \"type\": \"array\","]
+    #[doc = "      \"items\": {"]
+    #[doc = "        \"$ref\": \"#/components/schemas/VpcRouter\""]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    \"next_page\": {"]
+    #[doc = "      \"description\": \"token used to fetch the next page of results (if any)\","]
+    #[doc = "      \"type\": ["]
+    #[doc = "        \"string\","]
+    #[doc = "        \"null\""]
+    #[doc = "      ]"]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct VpcRouterResultsPage {
-        ///list of items on this page of results
+        #[doc = "list of items on this page of results"]
         pub items: ::std::vec::Vec<VpcRouter>,
-        ///token used to fetch the next page of results (if any)
+        #[doc = "token used to fetch the next page of results (if any)"]
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
         pub next_page: ::std::option::Option<::std::string::String>,
     }
@@ -13611,41 +12949,39 @@ pub mod types {
         }
     }
 
-    ///Updateable properties of a
-    /// [`VpcRouter`](crate::external_api::views::VpcRouter)
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Updateable properties of a
-    /// [`VpcRouter`](crate::external_api::views::VpcRouter)",
-    ///  "type": "object",
-    ///  "properties": {
-    ///    "description": {
-    ///      "type": [
-    ///        "string",
-    ///        "null"
-    ///      ]
-    ///    },
-    ///    "name": {
-    ///      "oneOf": [
-    ///        {
-    ///          "type": "null"
-    ///        },
-    ///        {
-    ///          "allOf": [
-    ///            {
-    ///              "$ref": "#/components/schemas/Name"
-    ///            }
-    ///          ]
-    ///        }
-    ///      ]
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Updateable properties of a [`VpcRouter`](crate::external_api::views::VpcRouter)"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Updateable properties of a [`VpcRouter`](crate::external_api::views::VpcRouter)\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"description\": {"]
+    #[doc = "      \"type\": ["]
+    #[doc = "        \"string\","]
+    #[doc = "        \"null\""]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"name\": {"]
+    #[doc = "      \"oneOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"type\": \"null\""]
+    #[doc = "        },"]
+    #[doc = "        {"]
+    #[doc = "          \"allOf\": ["]
+    #[doc = "            {"]
+    #[doc = "              \"$ref\": \"#/components/schemas/Name\""]
+    #[doc = "            }"]
+    #[doc = "          ]"]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct VpcRouterUpdate {
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
@@ -13669,100 +13005,94 @@ pub mod types {
         }
     }
 
-    ///A VPC subnet represents a logical grouping for instances that allows
-    /// network traffic between them, within a IPv4 subnetwork or optionall an
-    /// IPv6 subnetwork.
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "A VPC subnet represents a logical grouping for
-    /// instances that allows network traffic between them, within a IPv4
-    /// subnetwork or optionall an IPv6 subnetwork.",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "description",
-    ///    "id",
-    ///    "ipv4_block",
-    ///    "ipv6_block",
-    ///    "name",
-    ///    "time_created",
-    ///    "time_modified",
-    ///    "vpc_id"
-    ///  ],
-    ///  "properties": {
-    ///    "description": {
-    ///      "description": "human-readable free-form text about a resource",
-    ///      "type": "string"
-    ///    },
-    ///    "id": {
-    ///      "description": "unique, immutable, system-controlled identifier for
-    /// each resource",
-    ///      "type": "string",
-    ///      "format": "uuid"
-    ///    },
-    ///    "ipv4_block": {
-    ///      "description": "The IPv4 subnet CIDR block.",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/Ipv4Net"
-    ///        }
-    ///      ]
-    ///    },
-    ///    "ipv6_block": {
-    ///      "description": "The IPv6 subnet CIDR block.",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/Ipv6Net"
-    ///        }
-    ///      ]
-    ///    },
-    ///    "name": {
-    ///      "description": "unique, mutable, user-controlled identifier for
-    /// each resource",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/Name"
-    ///        }
-    ///      ]
-    ///    },
-    ///    "time_created": {
-    ///      "description": "timestamp when this resource was created",
-    ///      "type": "string",
-    ///      "format": "date-time"
-    ///    },
-    ///    "time_modified": {
-    ///      "description": "timestamp when this resource was last modified",
-    ///      "type": "string",
-    ///      "format": "date-time"
-    ///    },
-    ///    "vpc_id": {
-    ///      "description": "The VPC to which the subnet belongs.",
-    ///      "type": "string",
-    ///      "format": "uuid"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "A VPC subnet represents a logical grouping for instances that allows network traffic between them, within a IPv4 subnetwork or optionall an IPv6 subnetwork."]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"A VPC subnet represents a logical grouping for instances that allows network traffic between them, within a IPv4 subnetwork or optionall an IPv6 subnetwork.\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"description\","]
+    #[doc = "    \"id\","]
+    #[doc = "    \"ipv4_block\","]
+    #[doc = "    \"ipv6_block\","]
+    #[doc = "    \"name\","]
+    #[doc = "    \"time_created\","]
+    #[doc = "    \"time_modified\","]
+    #[doc = "    \"vpc_id\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"description\": {"]
+    #[doc = "      \"description\": \"human-readable free-form text about a resource\","]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"id\": {"]
+    #[doc = "      \"description\": \"unique, immutable, system-controlled identifier for each resource\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"uuid\""]
+    #[doc = "    },"]
+    #[doc = "    \"ipv4_block\": {"]
+    #[doc = "      \"description\": \"The IPv4 subnet CIDR block.\","]
+    #[doc = "      \"allOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/Ipv4Net\""]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"ipv6_block\": {"]
+    #[doc = "      \"description\": \"The IPv6 subnet CIDR block.\","]
+    #[doc = "      \"allOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/Ipv6Net\""]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"name\": {"]
+    #[doc = "      \"description\": \"unique, mutable, user-controlled identifier for each resource\","]
+    #[doc = "      \"allOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/Name\""]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"time_created\": {"]
+    #[doc = "      \"description\": \"timestamp when this resource was created\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"date-time\""]
+    #[doc = "    },"]
+    #[doc = "    \"time_modified\": {"]
+    #[doc = "      \"description\": \"timestamp when this resource was last modified\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"date-time\""]
+    #[doc = "    },"]
+    #[doc = "    \"vpc_id\": {"]
+    #[doc = "      \"description\": \"The VPC to which the subnet belongs.\","]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"uuid\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct VpcSubnet {
-        ///human-readable free-form text about a resource
+        #[doc = "human-readable free-form text about a resource"]
         pub description: ::std::string::String,
-        ///unique, immutable, system-controlled identifier for each resource
+        #[doc = "unique, immutable, system-controlled identifier for each resource"]
         pub id: ::uuid::Uuid,
-        ///The IPv4 subnet CIDR block.
+        #[doc = "The IPv4 subnet CIDR block."]
         pub ipv4_block: Ipv4Net,
-        ///The IPv6 subnet CIDR block.
+        #[doc = "The IPv6 subnet CIDR block."]
         pub ipv6_block: Ipv6Net,
-        ///unique, mutable, user-controlled identifier for each resource
+        #[doc = "unique, mutable, user-controlled identifier for each resource"]
         pub name: Name,
-        ///timestamp when this resource was created
+        #[doc = "timestamp when this resource was created"]
         pub time_created: ::chrono::DateTime<::chrono::offset::Utc>,
-        ///timestamp when this resource was last modified
+        #[doc = "timestamp when this resource was last modified"]
         pub time_modified: ::chrono::DateTime<::chrono::offset::Utc>,
-        ///The VPC to which the subnet belongs.
+        #[doc = "The VPC to which the subnet belongs."]
         pub vpc_id: ::uuid::Uuid,
     }
 
@@ -13772,75 +13102,59 @@ pub mod types {
         }
     }
 
-    ///Create-time parameters for a
-    /// [`VpcSubnet`](crate::external_api::views::VpcSubnet)
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Create-time parameters for a
-    /// [`VpcSubnet`](crate::external_api::views::VpcSubnet)",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "description",
-    ///    "ipv4_block",
-    ///    "name"
-    ///  ],
-    ///  "properties": {
-    ///    "description": {
-    ///      "type": "string"
-    ///    },
-    ///    "ipv4_block": {
-    ///      "description": "The IPv4 address range for this subnet.\n\nIt must
-    /// be allocated from an RFC 1918 private address range, and must not
-    /// overlap with any other existing subnet in the VPC.",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/Ipv4Net"
-    ///        }
-    ///      ]
-    ///    },
-    ///    "ipv6_block": {
-    ///      "description": "The IPv6 address range for this subnet.\n\nIt must
-    /// be allocated from the RFC 4193 Unique Local Address range, with the
-    /// prefix equal to the parent VPC's prefix. A random `/64` block will be
-    /// assigned if one is not provided. It must not overlap with any existing
-    /// subnet in the VPC.",
-    ///      "oneOf": [
-    ///        {
-    ///          "type": "null"
-    ///        },
-    ///        {
-    ///          "allOf": [
-    ///            {
-    ///              "$ref": "#/components/schemas/Ipv6Net"
-    ///            }
-    ///          ]
-    ///        }
-    ///      ]
-    ///    },
-    ///    "name": {
-    ///      "$ref": "#/components/schemas/Name"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Create-time parameters for a [`VpcSubnet`](crate::external_api::views::VpcSubnet)"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Create-time parameters for a [`VpcSubnet`](crate::external_api::views::VpcSubnet)\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"description\","]
+    #[doc = "    \"ipv4_block\","]
+    #[doc = "    \"name\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"description\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"ipv4_block\": {"]
+    #[doc = "      \"description\": \"The IPv4 address range for this subnet.\\n\\nIt must be allocated from an RFC 1918 private address range, and must not overlap with any other existing subnet in the VPC.\","]
+    #[doc = "      \"allOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"$ref\": \"#/components/schemas/Ipv4Net\""]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"ipv6_block\": {"]
+    #[doc = "      \"description\": \"The IPv6 address range for this subnet.\\n\\nIt must be allocated from the RFC 4193 Unique Local Address range, with the prefix equal to the parent VPC's prefix. A random `/64` block will be assigned if one is not provided. It must not overlap with any existing subnet in the VPC.\","]
+    #[doc = "      \"oneOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"type\": \"null\""]
+    #[doc = "        },"]
+    #[doc = "        {"]
+    #[doc = "          \"allOf\": ["]
+    #[doc = "            {"]
+    #[doc = "              \"$ref\": \"#/components/schemas/Ipv6Net\""]
+    #[doc = "            }"]
+    #[doc = "          ]"]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"name\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/Name\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct VpcSubnetCreate {
         pub description: ::std::string::String,
-        ///The IPv4 address range for this subnet.
-        ///
-        ///It must be allocated from an RFC 1918 private address range, and
-        /// must not overlap with any other existing subnet in the VPC.
+        #[doc = "The IPv4 address range for this subnet.\n\nIt must be allocated from an RFC 1918 private address range, and must not overlap with any other existing subnet in the VPC."]
         pub ipv4_block: Ipv4Net,
-        ///The IPv6 address range for this subnet.
-        ///
-        ///It must be allocated from the RFC 4193 Unique Local Address range,
-        /// with the prefix equal to the parent VPC's prefix. A random `/64`
-        /// block will be assigned if one is not provided. It must not overlap
-        /// with any existing subnet in the VPC.
+        #[doc = "The IPv6 address range for this subnet.\n\nIt must be allocated from the RFC 4193 Unique Local Address range, with the prefix equal to the parent VPC's prefix. A random `/64` block will be assigned if one is not provided. It must not overlap with any existing subnet in the VPC."]
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
         pub ipv6_block: ::std::option::Option<Ipv6Net>,
         pub name: Name,
@@ -13852,42 +13166,41 @@ pub mod types {
         }
     }
 
-    ///A single page of results
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "A single page of results",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "items"
-    ///  ],
-    ///  "properties": {
-    ///    "items": {
-    ///      "description": "list of items on this page of results",
-    ///      "type": "array",
-    ///      "items": {
-    ///        "$ref": "#/components/schemas/VpcSubnet"
-    ///      }
-    ///    },
-    ///    "next_page": {
-    ///      "description": "token used to fetch the next page of results (if
-    /// any)",
-    ///      "type": [
-    ///        "string",
-    ///        "null"
-    ///      ]
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "A single page of results"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"A single page of results\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"items\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"items\": {"]
+    #[doc = "      \"description\": \"list of items on this page of results\","]
+    #[doc = "      \"type\": \"array\","]
+    #[doc = "      \"items\": {"]
+    #[doc = "        \"$ref\": \"#/components/schemas/VpcSubnet\""]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    \"next_page\": {"]
+    #[doc = "      \"description\": \"token used to fetch the next page of results (if any)\","]
+    #[doc = "      \"type\": ["]
+    #[doc = "        \"string\","]
+    #[doc = "        \"null\""]
+    #[doc = "      ]"]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct VpcSubnetResultsPage {
-        ///list of items on this page of results
+        #[doc = "list of items on this page of results"]
         pub items: ::std::vec::Vec<VpcSubnet>,
-        ///token used to fetch the next page of results (if any)
+        #[doc = "token used to fetch the next page of results (if any)"]
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
         pub next_page: ::std::option::Option<::std::string::String>,
     }
@@ -13898,41 +13211,39 @@ pub mod types {
         }
     }
 
-    ///Updateable properties of a
-    /// [`VpcSubnet`](crate::external_api::views::VpcSubnet)
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Updateable properties of a
-    /// [`VpcSubnet`](crate::external_api::views::VpcSubnet)",
-    ///  "type": "object",
-    ///  "properties": {
-    ///    "description": {
-    ///      "type": [
-    ///        "string",
-    ///        "null"
-    ///      ]
-    ///    },
-    ///    "name": {
-    ///      "oneOf": [
-    ///        {
-    ///          "type": "null"
-    ///        },
-    ///        {
-    ///          "allOf": [
-    ///            {
-    ///              "$ref": "#/components/schemas/Name"
-    ///            }
-    ///          ]
-    ///        }
-    ///      ]
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Updateable properties of a [`VpcSubnet`](crate::external_api::views::VpcSubnet)"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Updateable properties of a [`VpcSubnet`](crate::external_api::views::VpcSubnet)\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"description\": {"]
+    #[doc = "      \"type\": ["]
+    #[doc = "        \"string\","]
+    #[doc = "        \"null\""]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"name\": {"]
+    #[doc = "      \"oneOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"type\": \"null\""]
+    #[doc = "        },"]
+    #[doc = "        {"]
+    #[doc = "          \"allOf\": ["]
+    #[doc = "            {"]
+    #[doc = "              \"$ref\": \"#/components/schemas/Name\""]
+    #[doc = "            }"]
+    #[doc = "          ]"]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct VpcSubnetUpdate {
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
@@ -13956,54 +13267,53 @@ pub mod types {
         }
     }
 
-    ///Updateable properties of a [`Vpc`](crate::external_api::views::Vpc)
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "description": "Updateable properties of a
-    /// [`Vpc`](crate::external_api::views::Vpc)",
-    ///  "type": "object",
-    ///  "properties": {
-    ///    "description": {
-    ///      "type": [
-    ///        "string",
-    ///        "null"
-    ///      ]
-    ///    },
-    ///    "dns_name": {
-    ///      "oneOf": [
-    ///        {
-    ///          "type": "null"
-    ///        },
-    ///        {
-    ///          "allOf": [
-    ///            {
-    ///              "$ref": "#/components/schemas/Name"
-    ///            }
-    ///          ]
-    ///        }
-    ///      ]
-    ///    },
-    ///    "name": {
-    ///      "oneOf": [
-    ///        {
-    ///          "type": "null"
-    ///        },
-    ///        {
-    ///          "allOf": [
-    ///            {
-    ///              "$ref": "#/components/schemas/Name"
-    ///            }
-    ///          ]
-    ///        }
-    ///      ]
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "Updateable properties of a [`Vpc`](crate::external_api::views::Vpc)"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"description\": \"Updateable properties of a [`Vpc`](crate::external_api::views::Vpc)\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"description\": {"]
+    #[doc = "      \"type\": ["]
+    #[doc = "        \"string\","]
+    #[doc = "        \"null\""]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"dns_name\": {"]
+    #[doc = "      \"oneOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"type\": \"null\""]
+    #[doc = "        },"]
+    #[doc = "        {"]
+    #[doc = "          \"allOf\": ["]
+    #[doc = "            {"]
+    #[doc = "              \"$ref\": \"#/components/schemas/Name\""]
+    #[doc = "            }"]
+    #[doc = "          ]"]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    },"]
+    #[doc = "    \"name\": {"]
+    #[doc = "      \"oneOf\": ["]
+    #[doc = "        {"]
+    #[doc = "          \"type\": \"null\""]
+    #[doc = "        },"]
+    #[doc = "        {"]
+    #[doc = "          \"allOf\": ["]
+    #[doc = "            {"]
+    #[doc = "              \"$ref\": \"#/components/schemas/Name\""]
+    #[doc = "            }"]
+    #[doc = "          ]"]
+    #[doc = "        }"]
+    #[doc = "      ]"]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct VpcUpdate {
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
@@ -14030,7 +13340,7 @@ pub mod types {
         }
     }
 
-    /// Generation of default values for serde.
+    #[doc = r" Generation of default values for serde."]
     pub mod defaults {
         pub(super) fn default_bool<const V: bool>() -> bool {
             V
@@ -14044,42 +13354,47 @@ pub mod types {
 }
 
 #[derive(Clone, Debug)]
-///Client for Oxide Region API
-///
-///API for interacting with the Oxide control plane
-///
-///Version: 0.0.1
+#[doc = "Client for Oxide Region API\n\nAPI for interacting with the Oxide control plane\n\nVersion: 0.0.1"]
 pub struct Client {
     pub(crate) baseurl: String,
-    pub(crate) client: reqwest::Client,
+    pub(crate) client: reqwest_middleware::ClientWithMiddleware,
 }
 
 impl Client {
-    /// Create a new client.
-    ///
-    /// `baseurl` is the base URL provided to the internal
-    /// `reqwest::Client`, and should include a scheme and hostname,
-    /// as well as port and a path stem if applicable.
+    #[doc = r" Create a new client."]
+    #[doc = r""]
+    #[doc = r" `baseurl` is the base URL provided to the internal"]
+    #[doc = r" `reqwest::Client`, and should include a scheme and hostname,"]
+    #[doc = r" as well as port and a path stem if applicable."]
     pub fn new(baseurl: &str) -> Self {
         #[cfg(not(target_arch = "wasm32"))]
         let client = {
             let dur = std::time::Duration::from_secs(15);
-            reqwest::ClientBuilder::new()
+            let reqwest_client = reqwest::ClientBuilder::new()
                 .connect_timeout(dur)
                 .timeout(dur)
+                .build()
+                .unwrap();
+            reqwest_middleware::ClientBuilder::new(reqwest_client).build()
         };
         #[cfg(target_arch = "wasm32")]
-        let client = reqwest::ClientBuilder::new();
-        Self::new_with_client(baseurl, client.build().unwrap())
+        let client = {
+            let reqwest_client = reqwest::ClientBuilder::new().build().unwrap();
+            reqwest_middleware::ClientBuilder::new(reqwest_client).build()
+        };
+        Self::new_with_client(baseurl, client)
     }
 
-    /// Construct a new client with an existing `reqwest::Client`,
-    /// allowing more control over its configuration.
-    ///
-    /// `baseurl` is the base URL provided to the internal
-    /// `reqwest::Client`, and should include a scheme and hostname,
-    /// as well as port and a path stem if applicable.
-    pub fn new_with_client(baseurl: &str, client: reqwest::Client) -> Self {
+    #[doc = r" Construct a new client with an existing `reqwest_middleware::ClientWithMiddleware`,"]
+    #[doc = r" allowing more control over its configuration."]
+    #[doc = r""]
+    #[doc = r" `baseurl` is the base URL provided to the internal"]
+    #[doc = r" `reqwest_middleware::ClientWithMiddleware`, and should include a scheme and hostname,"]
+    #[doc = r" as well as port and a path stem if applicable."]
+    pub fn new_with_client(
+        baseurl: &str,
+        client: reqwest_middleware::ClientWithMiddleware,
+    ) -> Self {
         Self {
             baseurl: baseurl.to_string(),
             client,
@@ -14096,7 +13411,7 @@ impl ClientInfo<()> for Client {
         self.baseurl.as_str()
     }
 
-    fn client(&self) -> &reqwest::Client {
+    fn client(&self) -> &reqwest_middleware::ClientWithMiddleware {
         &self.client
     }
 
@@ -14108,11 +13423,7 @@ impl ClientInfo<()> for Client {
 impl ClientHooks<()> for &Client {}
 #[allow(clippy::all)]
 impl Client {
-    ///Fetch a disk by id
-    ///
-    ///Use `GET /v1/disks/{disk}` instead
-    ///
-    ///Sends a `GET` request to `/by-id/disks/{id}`
+    #[doc = "Fetch a disk by id\n\nUse `GET /v1/disks/{disk}` instead\n\nSends a `GET` request to `/by-id/disks/{id}`\n\n"]
     pub async fn disk_view_by_id<'a>(
         &'a self,
         id: &'a ::uuid::Uuid,
@@ -14156,9 +13467,7 @@ impl Client {
         }
     }
 
-    ///Fetch an image by id
-    ///
-    ///Sends a `GET` request to `/by-id/images/{id}`
+    #[doc = "Fetch an image by id\n\nSends a `GET` request to `/by-id/images/{id}`\n\n"]
     pub async fn image_view_by_id<'a>(
         &'a self,
         id: &'a ::uuid::Uuid,
@@ -14202,9 +13511,7 @@ impl Client {
         }
     }
 
-    ///Fetch an instance by id
-    ///
-    ///Sends a `GET` request to `/by-id/instances/{id}`
+    #[doc = "Fetch an instance by id\n\nSends a `GET` request to `/by-id/instances/{id}`\n\n"]
     pub async fn instance_view_by_id<'a>(
         &'a self,
         id: &'a ::uuid::Uuid,
@@ -14248,9 +13555,7 @@ impl Client {
         }
     }
 
-    ///Fetch a network interface by id
-    ///
-    ///Sends a `GET` request to `/by-id/network-interfaces/{id}`
+    #[doc = "Fetch a network interface by id\n\nSends a `GET` request to `/by-id/network-interfaces/{id}`\n\n"]
     pub async fn instance_network_interface_view_by_id<'a>(
         &'a self,
         id: &'a ::uuid::Uuid,
@@ -14294,11 +13599,7 @@ impl Client {
         }
     }
 
-    ///Fetch an organization by id
-    ///
-    ///Use `GET /v1/organizations/{organization}` instead
-    ///
-    ///Sends a `GET` request to `/by-id/organizations/{id}`
+    #[doc = "Fetch an organization by id\n\nUse `GET /v1/organizations/{organization}` instead\n\nSends a `GET` request to `/by-id/organizations/{id}`\n\n"]
     pub async fn organization_view_by_id<'a>(
         &'a self,
         id: &'a ::uuid::Uuid,
@@ -14342,11 +13643,7 @@ impl Client {
         }
     }
 
-    ///Fetch a project by id
-    ///
-    ///Use `GET /v1/projects/{project}` instead
-    ///
-    ///Sends a `GET` request to `/by-id/projects/{id}`
+    #[doc = "Fetch a project by id\n\nUse `GET /v1/projects/{project}` instead\n\nSends a `GET` request to `/by-id/projects/{id}`\n\n"]
     pub async fn project_view_by_id<'a>(
         &'a self,
         id: &'a ::uuid::Uuid,
@@ -14390,9 +13687,7 @@ impl Client {
         }
     }
 
-    ///Fetch a snapshot by id
-    ///
-    ///Sends a `GET` request to `/by-id/snapshots/{id}`
+    #[doc = "Fetch a snapshot by id\n\nSends a `GET` request to `/by-id/snapshots/{id}`\n\n"]
     pub async fn snapshot_view_by_id<'a>(
         &'a self,
         id: &'a ::uuid::Uuid,
@@ -14436,9 +13731,7 @@ impl Client {
         }
     }
 
-    ///Fetch a route by id
-    ///
-    ///Sends a `GET` request to `/by-id/vpc-router-routes/{id}`
+    #[doc = "Fetch a route by id\n\nSends a `GET` request to `/by-id/vpc-router-routes/{id}`\n\n"]
     pub async fn vpc_router_route_view_by_id<'a>(
         &'a self,
         id: &'a ::uuid::Uuid,
@@ -14482,9 +13775,7 @@ impl Client {
         }
     }
 
-    ///Get a router by id
-    ///
-    ///Sends a `GET` request to `/by-id/vpc-routers/{id}`
+    #[doc = "Get a router by id\n\nSends a `GET` request to `/by-id/vpc-routers/{id}`\n\n"]
     pub async fn vpc_router_view_by_id<'a>(
         &'a self,
         id: &'a ::uuid::Uuid,
@@ -14528,9 +13819,7 @@ impl Client {
         }
     }
 
-    ///Fetch a subnet by id
-    ///
-    ///Sends a `GET` request to `/by-id/vpc-subnets/{id}`
+    #[doc = "Fetch a subnet by id\n\nSends a `GET` request to `/by-id/vpc-subnets/{id}`\n\n"]
     pub async fn vpc_subnet_view_by_id<'a>(
         &'a self,
         id: &'a ::uuid::Uuid,
@@ -14574,9 +13863,7 @@ impl Client {
         }
     }
 
-    ///Fetch a VPC
-    ///
-    ///Sends a `GET` request to `/by-id/vpcs/{id}`
+    #[doc = "Fetch a VPC\n\nSends a `GET` request to `/by-id/vpcs/{id}`\n\n"]
     pub async fn vpc_view_by_id<'a>(
         &'a self,
         id: &'a ::uuid::Uuid,
@@ -14620,13 +13907,7 @@ impl Client {
         }
     }
 
-    ///Start an OAuth 2.0 Device Authorization Grant
-    ///
-    ///This endpoint is designed to be accessed from an *unauthenticated* API
-    /// client. It generates and records a `device_code` and `user_code` which
-    /// must be verified and confirmed prior to a token being granted.
-    ///
-    ///Sends a `POST` request to `/device/auth`
+    #[doc = "Start an OAuth 2.0 Device Authorization Grant\n\nThis endpoint is designed to be accessed from an *unauthenticated* API client. It generates and records a `device_code` and `user_code` which must be verified and confirmed prior to a token being granted.\n\nSends a `POST` request to `/device/auth`\n\n"]
     pub async fn device_auth_request<'a>(
         &'a self,
         body: &'a types::DeviceAuthRequest,
@@ -14657,14 +13938,7 @@ impl Client {
         }
     }
 
-    ///Confirm an OAuth 2.0 Device Authorization Grant
-    ///
-    ///This endpoint is designed to be accessed by the user agent (browser),
-    /// not the client requesting the token. So we do not actually return the
-    /// token here; it will be returned in response to the poll on
-    /// `/device/token`.
-    ///
-    ///Sends a `POST` request to `/device/confirm`
+    #[doc = "Confirm an OAuth 2.0 Device Authorization Grant\n\nThis endpoint is designed to be accessed by the user agent (browser), not the client requesting the token. So we do not actually return the token here; it will be returned in response to the poll on `/device/token`.\n\nSends a `POST` request to `/device/confirm`\n\n"]
     pub async fn device_auth_confirm<'a>(
         &'a self,
         body: &'a types::DeviceAuthVerify,
@@ -14705,12 +13979,7 @@ impl Client {
         }
     }
 
-    ///Request a device access token
-    ///
-    ///This endpoint should be polled by the client until the user code is
-    /// verified and the grant is confirmed.
-    ///
-    ///Sends a `POST` request to `/device/token`
+    #[doc = "Request a device access token\n\nThis endpoint should be polled by the client until the user code is verified and the grant is confirmed.\n\nSends a `POST` request to `/device/token`\n\n"]
     pub async fn device_access_token<'a>(
         &'a self,
         body: &'a types::DeviceAccessTokenRequest,
@@ -14741,15 +14010,7 @@ impl Client {
         }
     }
 
-    ///List groups
-    ///
-    ///Sends a `GET` request to `/groups`
-    ///
-    ///Arguments:
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `page_token`: Token returned by previous call to retrieve the
-    ///   subsequent page
-    /// - `sort_by`
+    #[doc = "List groups\n\nSends a `GET` request to `/groups`\n\nArguments:\n- `limit`: Maximum number of items returned by a single call\n- `page_token`: Token returned by previous call to retrieve the subsequent page\n- `sort_by`\n"]
     pub async fn group_list<'a>(
         &'a self,
         limit: Option<::std::num::NonZeroU32>,
@@ -14797,14 +14058,7 @@ impl Client {
         }
     }
 
-    ///List groups as a Stream
-    ///
-    ///Sends repeated `GET` requests to `/groups` until there are no more
-    /// results.
-    ///
-    ///Arguments:
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `sort_by`
+    #[doc = "List groups as a Stream\n\nSends repeated `GET` requests to `/groups` until there are no more results.\n\nArguments:\n- `limit`: Maximum number of items returned by a single call\n- `sort_by`\n"]
     pub fn group_list_stream<'a>(
         &'a self,
         limit: Option<::std::num::NonZeroU32>,
@@ -14836,7 +14090,7 @@ impl Client {
             .boxed()
     }
 
-    ///Sends a `POST` request to `/login`
+    #[doc = "Sends a `POST` request to `/login`\n\n"]
     pub async fn login_spoof<'a>(
         &'a self,
         body: &'a types::SpoofLoginBody,
@@ -14877,9 +14131,7 @@ impl Client {
         }
     }
 
-    ///Authenticate a user (i.e., log in) via username and password
-    ///
-    ///Sends a `POST` request to `/login/{silo_name}/local`
+    #[doc = "Authenticate a user (i.e., log in) via username and password\n\nSends a `POST` request to `/login/{silo_name}/local`\n\n"]
     pub async fn login_local<'a>(
         &'a self,
         silo_name: &'a types::Name,
@@ -14921,12 +14173,7 @@ impl Client {
         }
     }
 
-    ///Prompt user login
-    ///
-    ///Either display a page asking a user for their credentials, or redirect
-    /// them to their identity provider.
-    ///
-    ///Sends a `GET` request to `/login/{silo_name}/saml/{provider_name}`
+    #[doc = "Prompt user login\n\nEither display a page asking a user for their credentials, or redirect them to their identity provider.\n\nSends a `GET` request to `/login/{silo_name}/saml/{provider_name}`\n\n"]
     pub async fn login_saml_begin<'a>(
         &'a self,
         silo_name: &'a types::Name,
@@ -14964,9 +14211,7 @@ impl Client {
         }
     }
 
-    ///Authenticate a user (i.e., log in) via SAML
-    ///
-    ///Sends a `POST` request to `/login/{silo_name}/saml/{provider_name}`
+    #[doc = "Authenticate a user (i.e., log in) via SAML\n\nSends a `POST` request to `/login/{silo_name}/saml/{provider_name}`\n\n"]
     pub async fn login_saml<'a, B: Into<reqwest::Body>>(
         &'a self,
         silo_name: &'a types::Name,
@@ -15014,7 +14259,7 @@ impl Client {
         }
     }
 
-    ///Sends a `POST` request to `/logout`
+    #[doc = "Sends a `POST` request to `/logout`\n\n"]
     pub async fn logout<'a>(&'a self) -> Result<ResponseValue<()>, Error<types::Error>> {
         let url = format!("{}/logout", self.baseurl,);
         let mut header_map = ::reqwest::header::HeaderMap::with_capacity(1usize);
@@ -15051,17 +14296,7 @@ impl Client {
         }
     }
 
-    ///List organizations
-    ///
-    ///Use `GET /v1/organizations` instead
-    ///
-    ///Sends a `GET` request to `/organizations`
-    ///
-    ///Arguments:
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `page_token`: Token returned by previous call to retrieve the
-    ///   subsequent page
-    /// - `sort_by`
+    #[doc = "List organizations\n\nUse `GET /v1/organizations` instead\n\nSends a `GET` request to `/organizations`\n\nArguments:\n- `limit`: Maximum number of items returned by a single call\n- `page_token`: Token returned by previous call to retrieve the subsequent page\n- `sort_by`\n"]
     pub async fn organization_list<'a>(
         &'a self,
         limit: Option<::std::num::NonZeroU32>,
@@ -15109,16 +14344,7 @@ impl Client {
         }
     }
 
-    ///List organizations as a Stream
-    ///
-    ///Use `GET /v1/organizations` instead
-    ///
-    ///Sends repeated `GET` requests to `/organizations` until there are no
-    /// more results.
-    ///
-    ///Arguments:
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `sort_by`
+    #[doc = "List organizations as a Stream\n\nUse `GET /v1/organizations` instead\n\nSends repeated `GET` requests to `/organizations` until there are no more results.\n\nArguments:\n- `limit`: Maximum number of items returned by a single call\n- `sort_by`\n"]
     pub fn organization_list_stream<'a>(
         &'a self,
         limit: Option<::std::num::NonZeroU32>,
@@ -15151,11 +14377,7 @@ impl Client {
             .boxed()
     }
 
-    ///Create an organization
-    ///
-    ///Use `POST /v1/organizations` instead
-    ///
-    ///Sends a `POST` request to `/organizations`
+    #[doc = "Create an organization\n\nUse `POST /v1/organizations` instead\n\nSends a `POST` request to `/organizations`\n\n"]
     pub async fn organization_create<'a>(
         &'a self,
         body: &'a types::OrganizationCreate,
@@ -15196,14 +14418,7 @@ impl Client {
         }
     }
 
-    ///Fetch an organization
-    ///
-    ///Use `GET /v1/organizations/{organization}` instead
-    ///
-    ///Sends a `GET` request to `/organizations/{organization_name}`
-    ///
-    ///Arguments:
-    /// - `organization_name`: The organization's unique name.
+    #[doc = "Fetch an organization\n\nUse `GET /v1/organizations/{organization}` instead\n\nSends a `GET` request to `/organizations/{organization_name}`\n\nArguments:\n- `organization_name`: The organization's unique name.\n"]
     pub async fn organization_view<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -15247,15 +14462,7 @@ impl Client {
         }
     }
 
-    ///Update an organization
-    ///
-    ///Use `PUT /v1/organizations/{organization}` instead
-    ///
-    ///Sends a `PUT` request to `/organizations/{organization_name}`
-    ///
-    ///Arguments:
-    /// - `organization_name`: The organization's unique name.
-    /// - `body`
+    #[doc = "Update an organization\n\nUse `PUT /v1/organizations/{organization}` instead\n\nSends a `PUT` request to `/organizations/{organization_name}`\n\nArguments:\n- `organization_name`: The organization's unique name.\n- `body`\n"]
     pub async fn organization_update<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -15301,14 +14508,7 @@ impl Client {
         }
     }
 
-    ///Delete an organization
-    ///
-    ///Use `DELETE /v1/organizations/{organization}` instead
-    ///
-    ///Sends a `DELETE` request to `/organizations/{organization_name}`
-    ///
-    ///Arguments:
-    /// - `organization_name`: The organization's unique name.
+    #[doc = "Delete an organization\n\nUse `DELETE /v1/organizations/{organization}` instead\n\nSends a `DELETE` request to `/organizations/{organization_name}`\n\nArguments:\n- `organization_name`: The organization's unique name.\n"]
     pub async fn organization_delete<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -15352,14 +14552,7 @@ impl Client {
         }
     }
 
-    ///Fetch an organization's IAM policy
-    ///
-    ///Use `GET /v1/organizations/{organization}/policy` instead
-    ///
-    ///Sends a `GET` request to `/organizations/{organization_name}/policy`
-    ///
-    ///Arguments:
-    /// - `organization_name`: The organization's unique name.
+    #[doc = "Fetch an organization's IAM policy\n\nUse `GET /v1/organizations/{organization}/policy` instead\n\nSends a `GET` request to `/organizations/{organization_name}/policy`\n\nArguments:\n- `organization_name`: The organization's unique name.\n"]
     pub async fn organization_policy_view<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -15403,15 +14596,7 @@ impl Client {
         }
     }
 
-    ///Update an organization's IAM policy
-    ///
-    ///Use `PUT /v1/organizations/{organization}/policy` instead
-    ///
-    ///Sends a `PUT` request to `/organizations/{organization_name}/policy`
-    ///
-    ///Arguments:
-    /// - `organization_name`: The organization's unique name.
-    /// - `body`
+    #[doc = "Update an organization's IAM policy\n\nUse `PUT /v1/organizations/{organization}/policy` instead\n\nSends a `PUT` request to `/organizations/{organization_name}/policy`\n\nArguments:\n- `organization_name`: The organization's unique name.\n- `body`\n"]
     pub async fn organization_policy_update<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -15457,18 +14642,7 @@ impl Client {
         }
     }
 
-    ///List projects
-    ///
-    ///Use `GET /v1/projects` instead
-    ///
-    ///Sends a `GET` request to `/organizations/{organization_name}/projects`
-    ///
-    ///Arguments:
-    /// - `organization_name`: The organization's unique name.
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `page_token`: Token returned by previous call to retrieve the
-    ///   subsequent page
-    /// - `sort_by`
+    #[doc = "List projects\n\nUse `GET /v1/projects` instead\n\nSends a `GET` request to `/organizations/{organization_name}/projects`\n\nArguments:\n- `organization_name`: The organization's unique name.\n- `limit`: Maximum number of items returned by a single call\n- `page_token`: Token returned by previous call to retrieve the subsequent page\n- `sort_by`\n"]
     pub async fn project_list<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -15521,18 +14695,7 @@ impl Client {
         }
     }
 
-    ///List projects as a Stream
-    ///
-    ///Use `GET /v1/projects` instead
-    ///
-    ///Sends repeated `GET` requests to
-    /// `/organizations/{organization_name}/projects` until there are no more
-    /// results.
-    ///
-    ///Arguments:
-    /// - `organization_name`: The organization's unique name.
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `sort_by`
+    #[doc = "List projects as a Stream\n\nUse `GET /v1/projects` instead\n\nSends repeated `GET` requests to `/organizations/{organization_name}/projects` until there are no more results.\n\nArguments:\n- `organization_name`: The organization's unique name.\n- `limit`: Maximum number of items returned by a single call\n- `sort_by`\n"]
     pub fn project_list_stream<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -15565,15 +14728,7 @@ impl Client {
             .boxed()
     }
 
-    ///Create a project
-    ///
-    ///Use `POST /v1/projects` instead
-    ///
-    ///Sends a `POST` request to `/organizations/{organization_name}/projects`
-    ///
-    ///Arguments:
-    /// - `organization_name`: The organization's unique name.
-    /// - `body`
+    #[doc = "Create a project\n\nUse `POST /v1/projects` instead\n\nSends a `POST` request to `/organizations/{organization_name}/projects`\n\nArguments:\n- `organization_name`: The organization's unique name.\n- `body`\n"]
     pub async fn project_create<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -15619,16 +14774,7 @@ impl Client {
         }
     }
 
-    ///Fetch a project
-    ///
-    ///Use `GET /v1/projects/{project}` instead
-    ///
-    ///Sends a `GET` request to
-    /// `/organizations/{organization_name}/projects/{project_name}`
-    ///
-    ///Arguments:
-    /// - `organization_name`: The organization's unique name.
-    /// - `project_name`: The project's unique name within the organization.
+    #[doc = "Fetch a project\n\nUse `GET /v1/projects/{project}` instead\n\nSends a `GET` request to `/organizations/{organization_name}/projects/{project_name}`\n\nArguments:\n- `organization_name`: The organization's unique name.\n- `project_name`: The project's unique name within the organization.\n"]
     pub async fn project_view<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -15674,17 +14820,7 @@ impl Client {
         }
     }
 
-    ///Update a project
-    ///
-    ///Use `PUT /v1/projects/{project}` instead
-    ///
-    ///Sends a `PUT` request to
-    /// `/organizations/{organization_name}/projects/{project_name}`
-    ///
-    ///Arguments:
-    /// - `organization_name`: The organization's unique name.
-    /// - `project_name`: The project's unique name within the organization.
-    /// - `body`
+    #[doc = "Update a project\n\nUse `PUT /v1/projects/{project}` instead\n\nSends a `PUT` request to `/organizations/{organization_name}/projects/{project_name}`\n\nArguments:\n- `organization_name`: The organization's unique name.\n- `project_name`: The project's unique name within the organization.\n- `body`\n"]
     pub async fn project_update<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -15732,16 +14868,7 @@ impl Client {
         }
     }
 
-    ///Delete a project
-    ///
-    ///Use `DELETE /v1/projects/{project}` instead
-    ///
-    ///Sends a `DELETE` request to
-    /// `/organizations/{organization_name}/projects/{project_name}`
-    ///
-    ///Arguments:
-    /// - `organization_name`: The organization's unique name.
-    /// - `project_name`: The project's unique name within the organization.
+    #[doc = "Delete a project\n\nUse `DELETE /v1/projects/{project}` instead\n\nSends a `DELETE` request to `/organizations/{organization_name}/projects/{project_name}`\n\nArguments:\n- `organization_name`: The organization's unique name.\n- `project_name`: The project's unique name within the organization.\n"]
     pub async fn project_delete<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -15787,20 +14914,7 @@ impl Client {
         }
     }
 
-    ///List disks
-    ///
-    ///Use `GET /v1/disks` instead
-    ///
-    ///Sends a `GET` request to
-    /// `/organizations/{organization_name}/projects/{project_name}/disks`
-    ///
-    ///Arguments:
-    /// - `organization_name`: The organization's unique name.
-    /// - `project_name`: The project's unique name within the organization.
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `page_token`: Token returned by previous call to retrieve the
-    ///   subsequent page
-    /// - `sort_by`
+    #[doc = "List disks\n\nUse `GET /v1/disks` instead\n\nSends a `GET` request to `/organizations/{organization_name}/projects/{project_name}/disks`\n\nArguments:\n- `organization_name`: The organization's unique name.\n- `project_name`: The project's unique name within the organization.\n- `limit`: Maximum number of items returned by a single call\n- `page_token`: Token returned by previous call to retrieve the subsequent page\n- `sort_by`\n"]
     pub async fn disk_list<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -15855,19 +14969,7 @@ impl Client {
         }
     }
 
-    ///List disks as a Stream
-    ///
-    ///Use `GET /v1/disks` instead
-    ///
-    ///Sends repeated `GET` requests to
-    /// `/organizations/{organization_name}/projects/{project_name}/disks` until
-    /// there are no more results.
-    ///
-    ///Arguments:
-    /// - `organization_name`: The organization's unique name.
-    /// - `project_name`: The project's unique name within the organization.
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `sort_by`
+    #[doc = "List disks as a Stream\n\nUse `GET /v1/disks` instead\n\nSends repeated `GET` requests to `/organizations/{organization_name}/projects/{project_name}/disks` until there are no more results.\n\nArguments:\n- `organization_name`: The organization's unique name.\n- `project_name`: The project's unique name within the organization.\n- `limit`: Maximum number of items returned by a single call\n- `sort_by`\n"]
     pub fn disk_list_stream<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -15907,15 +15009,7 @@ impl Client {
             .boxed()
     }
 
-    ///Use `POST /v1/disks` instead
-    ///
-    ///Sends a `POST` request to
-    /// `/organizations/{organization_name}/projects/{project_name}/disks`
-    ///
-    ///Arguments:
-    /// - `organization_name`: The organization's unique name.
-    /// - `project_name`: The project's unique name within the organization.
-    /// - `body`
+    #[doc = "Use `POST /v1/disks` instead\n\nSends a `POST` request to `/organizations/{organization_name}/projects/{project_name}/disks`\n\nArguments:\n- `organization_name`: The organization's unique name.\n- `project_name`: The project's unique name within the organization.\n- `body`\n"]
     pub async fn disk_create<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -15963,13 +15057,7 @@ impl Client {
         }
     }
 
-    ///Fetch a disk
-    ///
-    ///Use `GET /v1/disks/{disk}` instead
-    ///
-    ///Sends a `GET` request to
-    /// `/organizations/{organization_name}/projects/{project_name}/disks/
-    /// {disk_name}`
+    #[doc = "Fetch a disk\n\nUse `GET /v1/disks/{disk}` instead\n\nSends a `GET` request to `/organizations/{organization_name}/projects/{project_name}/disks/{disk_name}`\n\n"]
     pub async fn disk_view<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -16017,11 +15105,7 @@ impl Client {
         }
     }
 
-    ///Use `DELETE /v1/disks/{disk}` instead
-    ///
-    ///Sends a `DELETE` request to
-    /// `/organizations/{organization_name}/projects/{project_name}/disks/
-    /// {disk_name}`
+    #[doc = "Use `DELETE /v1/disks/{disk}` instead\n\nSends a `DELETE` request to `/organizations/{organization_name}/projects/{project_name}/disks/{disk_name}`\n\n"]
     pub async fn disk_delete<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -16069,22 +15153,7 @@ impl Client {
         }
     }
 
-    ///Fetch disk metrics
-    ///
-    ///Sends a `GET` request to
-    /// `/organizations/{organization_name}/projects/{project_name}/disks/
-    /// {disk_name}/metrics/{metric_name}`
-    ///
-    ///Arguments:
-    /// - `organization_name`
-    /// - `project_name`
-    /// - `disk_name`
-    /// - `metric_name`
-    /// - `end_time`: An exclusive end time of metrics.
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `page_token`: Token returned by previous call to retrieve the
-    ///   subsequent page
-    /// - `start_time`: An inclusive start time of metrics.
+    #[doc = "Fetch disk metrics\n\nSends a `GET` request to `/organizations/{organization_name}/projects/{project_name}/disks/{disk_name}/metrics/{metric_name}`\n\nArguments:\n- `organization_name`\n- `project_name`\n- `disk_name`\n- `metric_name`\n- `end_time`: An exclusive end time of metrics.\n- `limit`: Maximum number of items returned by a single call\n- `page_token`: Token returned by previous call to retrieve the subsequent page\n- `start_time`: An inclusive start time of metrics.\n"]
     pub async fn disk_metrics_list<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -16148,20 +15217,7 @@ impl Client {
         }
     }
 
-    ///Fetch disk metrics as a Stream
-    ///
-    ///Sends repeated `GET` requests to
-    /// `/organizations/{organization_name}/projects/{project_name}/disks/
-    /// {disk_name}/metrics/{metric_name}` until there are no more results.
-    ///
-    ///Arguments:
-    /// - `organization_name`
-    /// - `project_name`
-    /// - `disk_name`
-    /// - `metric_name`
-    /// - `end_time`: An exclusive end time of metrics.
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `start_time`: An inclusive start time of metrics.
+    #[doc = "Fetch disk metrics as a Stream\n\nSends repeated `GET` requests to `/organizations/{organization_name}/projects/{project_name}/disks/{disk_name}/metrics/{metric_name}` until there are no more results.\n\nArguments:\n- `organization_name`\n- `project_name`\n- `disk_name`\n- `metric_name`\n- `end_time`: An exclusive end time of metrics.\n- `limit`: Maximum number of items returned by a single call\n- `start_time`: An inclusive start time of metrics.\n"]
     pub fn disk_metrics_list_stream<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -16217,21 +15273,7 @@ impl Client {
         .boxed()
     }
 
-    ///List images
-    ///
-    ///List images in a project. The images are returned sorted by creation
-    /// date, with the most recent images appearing first.
-    ///
-    ///Sends a `GET` request to
-    /// `/organizations/{organization_name}/projects/{project_name}/images`
-    ///
-    ///Arguments:
-    /// - `organization_name`: The organization's unique name.
-    /// - `project_name`: The project's unique name within the organization.
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `page_token`: Token returned by previous call to retrieve the
-    ///   subsequent page
-    /// - `sort_by`
+    #[doc = "List images\n\nList images in a project. The images are returned sorted by creation date, with the most recent images appearing first.\n\nSends a `GET` request to `/organizations/{organization_name}/projects/{project_name}/images`\n\nArguments:\n- `organization_name`: The organization's unique name.\n- `project_name`: The project's unique name within the organization.\n- `limit`: Maximum number of items returned by a single call\n- `page_token`: Token returned by previous call to retrieve the subsequent page\n- `sort_by`\n"]
     pub async fn image_list<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -16286,20 +15328,7 @@ impl Client {
         }
     }
 
-    ///List images as a Stream
-    ///
-    ///List images in a project. The images are returned sorted by creation
-    /// date, with the most recent images appearing first.
-    ///
-    ///Sends repeated `GET` requests to
-    /// `/organizations/{organization_name}/projects/{project_name}/images`
-    /// until there are no more results.
-    ///
-    ///Arguments:
-    /// - `organization_name`: The organization's unique name.
-    /// - `project_name`: The project's unique name within the organization.
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `sort_by`
+    #[doc = "List images as a Stream\n\nList images in a project. The images are returned sorted by creation date, with the most recent images appearing first.\n\nSends repeated `GET` requests to `/organizations/{organization_name}/projects/{project_name}/images` until there are no more results.\n\nArguments:\n- `organization_name`: The organization's unique name.\n- `project_name`: The project's unique name within the organization.\n- `limit`: Maximum number of items returned by a single call\n- `sort_by`\n"]
     pub fn image_list_stream<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -16339,17 +15368,7 @@ impl Client {
             .boxed()
     }
 
-    ///Create an image
-    ///
-    ///Create a new image in a project.
-    ///
-    ///Sends a `POST` request to
-    /// `/organizations/{organization_name}/projects/{project_name}/images`
-    ///
-    ///Arguments:
-    /// - `organization_name`: The organization's unique name.
-    /// - `project_name`: The project's unique name within the organization.
-    /// - `body`
+    #[doc = "Create an image\n\nCreate a new image in a project.\n\nSends a `POST` request to `/organizations/{organization_name}/projects/{project_name}/images`\n\nArguments:\n- `organization_name`: The organization's unique name.\n- `project_name`: The project's unique name within the organization.\n- `body`\n"]
     pub async fn image_create<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -16397,13 +15416,7 @@ impl Client {
         }
     }
 
-    ///Fetch an image
-    ///
-    ///Fetch the details for a specific image in a project.
-    ///
-    ///Sends a `GET` request to
-    /// `/organizations/{organization_name}/projects/{project_name}/images/
-    /// {image_name}`
+    #[doc = "Fetch an image\n\nFetch the details for a specific image in a project.\n\nSends a `GET` request to `/organizations/{organization_name}/projects/{project_name}/images/{image_name}`\n\n"]
     pub async fn image_view<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -16451,15 +15464,7 @@ impl Client {
         }
     }
 
-    ///Delete an image
-    ///
-    ///Permanently delete an image from a project. This operation cannot be
-    /// undone. Any instances in the project using the image will continue to
-    /// run, however new instances can not be created with this image.
-    ///
-    ///Sends a `DELETE` request to
-    /// `/organizations/{organization_name}/projects/{project_name}/images/
-    /// {image_name}`
+    #[doc = "Delete an image\n\nPermanently delete an image from a project. This operation cannot be undone. Any instances in the project using the image will continue to run, however new instances can not be created with this image.\n\nSends a `DELETE` request to `/organizations/{organization_name}/projects/{project_name}/images/{image_name}`\n\n"]
     pub async fn image_delete<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -16507,18 +15512,7 @@ impl Client {
         }
     }
 
-    ///List instances
-    ///
-    ///Sends a `GET` request to
-    /// `/organizations/{organization_name}/projects/{project_name}/instances`
-    ///
-    ///Arguments:
-    /// - `organization_name`: The organization's unique name.
-    /// - `project_name`: The project's unique name within the organization.
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `page_token`: Token returned by previous call to retrieve the
-    ///   subsequent page
-    /// - `sort_by`
+    #[doc = "List instances\n\nSends a `GET` request to `/organizations/{organization_name}/projects/{project_name}/instances`\n\nArguments:\n- `organization_name`: The organization's unique name.\n- `project_name`: The project's unique name within the organization.\n- `limit`: Maximum number of items returned by a single call\n- `page_token`: Token returned by previous call to retrieve the subsequent page\n- `sort_by`\n"]
     pub async fn instance_list<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -16573,17 +15567,7 @@ impl Client {
         }
     }
 
-    ///List instances as a Stream
-    ///
-    ///Sends repeated `GET` requests to
-    /// `/organizations/{organization_name}/projects/{project_name}/instances`
-    /// until there are no more results.
-    ///
-    ///Arguments:
-    /// - `organization_name`: The organization's unique name.
-    /// - `project_name`: The project's unique name within the organization.
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `sort_by`
+    #[doc = "List instances as a Stream\n\nSends repeated `GET` requests to `/organizations/{organization_name}/projects/{project_name}/instances` until there are no more results.\n\nArguments:\n- `organization_name`: The organization's unique name.\n- `project_name`: The project's unique name within the organization.\n- `limit`: Maximum number of items returned by a single call\n- `sort_by`\n"]
     pub fn instance_list_stream<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -16624,17 +15608,7 @@ impl Client {
             .boxed()
     }
 
-    ///Create an instance
-    ///
-    ///Use `POST /v1/instances` instead
-    ///
-    ///Sends a `POST` request to
-    /// `/organizations/{organization_name}/projects/{project_name}/instances`
-    ///
-    ///Arguments:
-    /// - `organization_name`: The organization's unique name.
-    /// - `project_name`: The project's unique name within the organization.
-    /// - `body`
+    #[doc = "Create an instance\n\nUse `POST /v1/instances` instead\n\nSends a `POST` request to `/organizations/{organization_name}/projects/{project_name}/instances`\n\nArguments:\n- `organization_name`: The organization's unique name.\n- `project_name`: The project's unique name within the organization.\n- `body`\n"]
     pub async fn instance_create<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -16682,13 +15656,7 @@ impl Client {
         }
     }
 
-    ///Fetch an instance
-    ///
-    ///Use `GET /v1/instances/{instance}` instead
-    ///
-    ///Sends a `GET` request to
-    /// `/organizations/{organization_name}/projects/{project_name}/instances/
-    /// {instance_name}`
+    #[doc = "Fetch an instance\n\nUse `GET /v1/instances/{instance}` instead\n\nSends a `GET` request to `/organizations/{organization_name}/projects/{project_name}/instances/{instance_name}`\n\n"]
     pub async fn instance_view<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -16736,11 +15704,7 @@ impl Client {
         }
     }
 
-    ///Delete an instance
-    ///
-    ///Sends a `DELETE` request to
-    /// `/organizations/{organization_name}/projects/{project_name}/instances/
-    /// {instance_name}`
+    #[doc = "Delete an instance\n\nSends a `DELETE` request to `/organizations/{organization_name}/projects/{project_name}/instances/{instance_name}`\n\n"]
     pub async fn instance_delete<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -16788,22 +15752,7 @@ impl Client {
         }
     }
 
-    ///List an instance's disks
-    ///
-    ///Use `GET /v1/instances/{instance}/disks` instead
-    ///
-    ///Sends a `GET` request to
-    /// `/organizations/{organization_name}/projects/{project_name}/instances/
-    /// {instance_name}/disks`
-    ///
-    ///Arguments:
-    /// - `organization_name`
-    /// - `project_name`
-    /// - `instance_name`
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `page_token`: Token returned by previous call to retrieve the
-    ///   subsequent page
-    /// - `sort_by`
+    #[doc = "List an instance's disks\n\nUse `GET /v1/instances/{instance}/disks` instead\n\nSends a `GET` request to `/organizations/{organization_name}/projects/{project_name}/instances/{instance_name}/disks`\n\nArguments:\n- `organization_name`\n- `project_name`\n- `instance_name`\n- `limit`: Maximum number of items returned by a single call\n- `page_token`: Token returned by previous call to retrieve the subsequent page\n- `sort_by`\n"]
     pub async fn instance_disk_list<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -16860,20 +15809,7 @@ impl Client {
         }
     }
 
-    ///List an instance's disks as a Stream
-    ///
-    ///Use `GET /v1/instances/{instance}/disks` instead
-    ///
-    ///Sends repeated `GET` requests to
-    /// `/organizations/{organization_name}/projects/{project_name}/instances/
-    /// {instance_name}/disks` until there are no more results.
-    ///
-    ///Arguments:
-    /// - `organization_name`
-    /// - `project_name`
-    /// - `instance_name`
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `sort_by`
+    #[doc = "List an instance's disks as a Stream\n\nUse `GET /v1/instances/{instance}/disks` instead\n\nSends repeated `GET` requests to `/organizations/{organization_name}/projects/{project_name}/instances/{instance_name}/disks` until there are no more results.\n\nArguments:\n- `organization_name`\n- `project_name`\n- `instance_name`\n- `limit`: Maximum number of items returned by a single call\n- `sort_by`\n"]
     pub fn instance_disk_list_stream<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -16922,13 +15858,7 @@ impl Client {
         .boxed()
     }
 
-    ///Attach a disk to an instance
-    ///
-    ///Use `POST /v1/instances/{instance}/disks/attach` instead
-    ///
-    ///Sends a `POST` request to
-    /// `/organizations/{organization_name}/projects/{project_name}/instances/
-    /// {instance_name}/disks/attach`
+    #[doc = "Attach a disk to an instance\n\nUse `POST /v1/instances/{instance}/disks/attach` instead\n\nSends a `POST` request to `/organizations/{organization_name}/projects/{project_name}/instances/{instance_name}/disks/attach`\n\n"]
     pub async fn instance_disk_attach<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -16978,13 +15908,7 @@ impl Client {
         }
     }
 
-    ///Detach a disk from an instance
-    ///
-    ///Use `POST /v1/disks/{disk}/detach` instead
-    ///
-    ///Sends a `POST` request to
-    /// `/organizations/{organization_name}/projects/{project_name}/instances/
-    /// {instance_name}/disks/detach`
+    #[doc = "Detach a disk from an instance\n\nUse `POST /v1/disks/{disk}/detach` instead\n\nSends a `POST` request to `/organizations/{organization_name}/projects/{project_name}/instances/{instance_name}/disks/detach`\n\n"]
     pub async fn instance_disk_detach<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -17034,11 +15958,7 @@ impl Client {
         }
     }
 
-    ///List external IP addresses
-    ///
-    ///Sends a `GET` request to
-    /// `/organizations/{organization_name}/projects/{project_name}/instances/
-    /// {instance_name}/external-ips`
+    #[doc = "List external IP addresses\n\nSends a `GET` request to `/organizations/{organization_name}/projects/{project_name}/instances/{instance_name}/external-ips`\n\n"]
     pub async fn instance_external_ip_list<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -17086,13 +16006,7 @@ impl Client {
         }
     }
 
-    ///Migrate an instance
-    ///
-    ///Use `POST /v1/instances/{instance}/migrate` instead
-    ///
-    ///Sends a `POST` request to
-    /// `/organizations/{organization_name}/projects/{project_name}/instances/
-    /// {instance_name}/migrate`
+    #[doc = "Migrate an instance\n\nUse `POST /v1/instances/{instance}/migrate` instead\n\nSends a `POST` request to `/organizations/{organization_name}/projects/{project_name}/instances/{instance_name}/migrate`\n\n"]
     pub async fn instance_migrate<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -17142,20 +16056,7 @@ impl Client {
         }
     }
 
-    ///List network interfaces
-    ///
-    ///Sends a `GET` request to
-    /// `/organizations/{organization_name}/projects/{project_name}/instances/
-    /// {instance_name}/network-interfaces`
-    ///
-    ///Arguments:
-    /// - `organization_name`
-    /// - `project_name`
-    /// - `instance_name`
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `page_token`: Token returned by previous call to retrieve the
-    ///   subsequent page
-    /// - `sort_by`
+    #[doc = "List network interfaces\n\nSends a `GET` request to `/organizations/{organization_name}/projects/{project_name}/instances/{instance_name}/network-interfaces`\n\nArguments:\n- `organization_name`\n- `project_name`\n- `instance_name`\n- `limit`: Maximum number of items returned by a single call\n- `page_token`: Token returned by previous call to retrieve the subsequent page\n- `sort_by`\n"]
     pub async fn instance_network_interface_list<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -17212,18 +16113,7 @@ impl Client {
         }
     }
 
-    ///List network interfaces as a Stream
-    ///
-    ///Sends repeated `GET` requests to
-    /// `/organizations/{organization_name}/projects/{project_name}/instances/
-    /// {instance_name}/network-interfaces` until there are no more results.
-    ///
-    ///Arguments:
-    /// - `organization_name`
-    /// - `project_name`
-    /// - `instance_name`
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `sort_by`
+    #[doc = "List network interfaces as a Stream\n\nSends repeated `GET` requests to `/organizations/{organization_name}/projects/{project_name}/instances/{instance_name}/network-interfaces` until there are no more results.\n\nArguments:\n- `organization_name`\n- `project_name`\n- `instance_name`\n- `limit`: Maximum number of items returned by a single call\n- `sort_by`\n"]
     pub fn instance_network_interface_list_stream<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -17273,11 +16163,7 @@ impl Client {
         .boxed()
     }
 
-    ///Create a network interface
-    ///
-    ///Sends a `POST` request to
-    /// `/organizations/{organization_name}/projects/{project_name}/instances/
-    /// {instance_name}/network-interfaces`
+    #[doc = "Create a network interface\n\nSends a `POST` request to `/organizations/{organization_name}/projects/{project_name}/instances/{instance_name}/network-interfaces`\n\n"]
     pub async fn instance_network_interface_create<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -17327,11 +16213,7 @@ impl Client {
         }
     }
 
-    ///Fetch a network interface
-    ///
-    ///Sends a `GET` request to
-    /// `/organizations/{organization_name}/projects/{project_name}/instances/
-    /// {instance_name}/network-interfaces/{interface_name}`
+    #[doc = "Fetch a network interface\n\nSends a `GET` request to `/organizations/{organization_name}/projects/{project_name}/instances/{instance_name}/network-interfaces/{interface_name}`\n\n"]
     pub async fn instance_network_interface_view<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -17381,11 +16263,7 @@ impl Client {
         }
     }
 
-    ///Update a network interface
-    ///
-    ///Sends a `PUT` request to
-    /// `/organizations/{organization_name}/projects/{project_name}/instances/
-    /// {instance_name}/network-interfaces/{interface_name}`
+    #[doc = "Update a network interface\n\nSends a `PUT` request to `/organizations/{organization_name}/projects/{project_name}/instances/{instance_name}/network-interfaces/{interface_name}`\n\n"]
     pub async fn instance_network_interface_update<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -17437,16 +16315,7 @@ impl Client {
         }
     }
 
-    ///Delete a network interface
-    ///
-    ///Note that the primary interface for an instance cannot be deleted if
-    /// there are any secondary interfaces. A new primary interface must be
-    /// designated first. The primary interface can be deleted if there are no
-    /// secondary interfaces.
-    ///
-    ///Sends a `DELETE` request to
-    /// `/organizations/{organization_name}/projects/{project_name}/instances/
-    /// {instance_name}/network-interfaces/{interface_name}`
+    #[doc = "Delete a network interface\n\nNote that the primary interface for an instance cannot be deleted if there are any secondary interfaces. A new primary interface must be designated first. The primary interface can be deleted if there are no secondary interfaces.\n\nSends a `DELETE` request to `/organizations/{organization_name}/projects/{project_name}/instances/{instance_name}/network-interfaces/{interface_name}`\n\n"]
     pub async fn instance_network_interface_delete<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -17496,13 +16365,7 @@ impl Client {
         }
     }
 
-    ///Reboot an instance
-    ///
-    ///Use `POST /v1/instances/{instance}/reboot` instead
-    ///
-    ///Sends a `POST` request to
-    /// `/organizations/{organization_name}/projects/{project_name}/instances/
-    /// {instance_name}/reboot`
+    #[doc = "Reboot an instance\n\nUse `POST /v1/instances/{instance}/reboot` instead\n\nSends a `POST` request to `/organizations/{organization_name}/projects/{project_name}/instances/{instance_name}/reboot`\n\n"]
     pub async fn instance_reboot<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -17550,29 +16413,7 @@ impl Client {
         }
     }
 
-    ///Fetch an instance's serial console
-    ///
-    ///Use `GET /v1/instances/{instance}/serial-console` instead
-    ///
-    ///Sends a `GET` request to
-    /// `/organizations/{organization_name}/projects/{project_name}/instances/
-    /// {instance_name}/serial-console`
-    ///
-    ///Arguments:
-    /// - `organization_name`
-    /// - `project_name`
-    /// - `instance_name`
-    /// - `from_start`: Character index in the serial buffer from which to read,
-    ///   counting the bytes output since instance start. If this is not
-    ///   provided, `most_recent` must be provided, and if this *is* provided,
-    ///   `most_recent` must *not* be provided.
-    /// - `max_bytes`: Maximum number of bytes of buffered serial console
-    ///   contents to return. If the requested range runs to the end of the
-    ///   available buffer, the data returned will be shorter than `max_bytes`.
-    /// - `most_recent`: Character index in the serial buffer from which to
-    ///   read, counting *backward* from the most recently buffered data
-    ///   retrieved from the instance. (See note on `from_start` about mutual
-    ///   exclusivity)
+    #[doc = "Fetch an instance's serial console\n\nUse `GET /v1/instances/{instance}/serial-console` instead\n\nSends a `GET` request to `/organizations/{organization_name}/projects/{project_name}/instances/{instance_name}/serial-console`\n\nArguments:\n- `organization_name`\n- `project_name`\n- `instance_name`\n- `from_start`: Character index in the serial buffer from which to read, counting the bytes output since instance start. If this is not provided, `most_recent` must be provided, and if this *is* provided, `most_recent` must *not* be provided.\n- `max_bytes`: Maximum number of bytes of buffered serial console contents to return. If the requested range runs to the end of the available buffer, the data returned will be shorter than `max_bytes`.\n- `most_recent`: Character index in the serial buffer from which to read, counting *backward* from the most recently buffered data retrieved from the instance. (See note on `from_start` about mutual exclusivity)\n"]
     pub async fn instance_serial_console<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -17632,13 +16473,7 @@ impl Client {
         }
     }
 
-    ///Connect to an instance's serial console
-    ///
-    ///Use `GET /v1/instances/{instance}/serial-console/stream` instead
-    ///
-    ///Sends a `GET` request to
-    /// `/organizations/{organization_name}/projects/{project_name}/instances/
-    /// {instance_name}/serial-console/stream`
+    #[doc = "Connect to an instance's serial console\n\nUse `GET /v1/instances/{instance}/serial-console/stream` instead\n\nSends a `GET` request to `/organizations/{organization_name}/projects/{project_name}/instances/{instance_name}/serial-console/stream`\n\n"]
     pub async fn instance_serial_console_stream<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -17687,13 +16522,7 @@ impl Client {
         }
     }
 
-    ///Boot an instance
-    ///
-    ///Use `POST /v1/instances/{instance}/start` instead
-    ///
-    ///Sends a `POST` request to
-    /// `/organizations/{organization_name}/projects/{project_name}/instances/
-    /// {instance_name}/start`
+    #[doc = "Boot an instance\n\nUse `POST /v1/instances/{instance}/start` instead\n\nSends a `POST` request to `/organizations/{organization_name}/projects/{project_name}/instances/{instance_name}/start`\n\n"]
     pub async fn instance_start<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -17741,13 +16570,7 @@ impl Client {
         }
     }
 
-    ///Halt an instance
-    ///
-    ///Use `POST /v1/instances/{instance}/stop` instead
-    ///
-    ///Sends a `POST` request to
-    /// `/organizations/{organization_name}/projects/{project_name}/instances/
-    /// {instance_name}/stop`
+    #[doc = "Halt an instance\n\nUse `POST /v1/instances/{instance}/stop` instead\n\nSends a `POST` request to `/organizations/{organization_name}/projects/{project_name}/instances/{instance_name}/stop`\n\n"]
     pub async fn instance_stop<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -17795,16 +16618,7 @@ impl Client {
         }
     }
 
-    ///Fetch a project's IAM policy
-    ///
-    ///Use `GET /v1/projects/{project}/policy` instead
-    ///
-    ///Sends a `GET` request to
-    /// `/organizations/{organization_name}/projects/{project_name}/policy`
-    ///
-    ///Arguments:
-    /// - `organization_name`: The organization's unique name.
-    /// - `project_name`: The project's unique name within the organization.
+    #[doc = "Fetch a project's IAM policy\n\nUse `GET /v1/projects/{project}/policy` instead\n\nSends a `GET` request to `/organizations/{organization_name}/projects/{project_name}/policy`\n\nArguments:\n- `organization_name`: The organization's unique name.\n- `project_name`: The project's unique name within the organization.\n"]
     pub async fn project_policy_view<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -17850,15 +16664,7 @@ impl Client {
         }
     }
 
-    ///Update a project's IAM policy
-    ///
-    ///Sends a `PUT` request to
-    /// `/organizations/{organization_name}/projects/{project_name}/policy`
-    ///
-    ///Arguments:
-    /// - `organization_name`: The organization's unique name.
-    /// - `project_name`: The project's unique name within the organization.
-    /// - `body`
+    #[doc = "Update a project's IAM policy\n\nSends a `PUT` request to `/organizations/{organization_name}/projects/{project_name}/policy`\n\nArguments:\n- `organization_name`: The organization's unique name.\n- `project_name`: The project's unique name within the organization.\n- `body`\n"]
     pub async fn project_policy_update<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -17906,18 +16712,7 @@ impl Client {
         }
     }
 
-    ///List snapshots
-    ///
-    ///Sends a `GET` request to
-    /// `/organizations/{organization_name}/projects/{project_name}/snapshots`
-    ///
-    ///Arguments:
-    /// - `organization_name`: The organization's unique name.
-    /// - `project_name`: The project's unique name within the organization.
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `page_token`: Token returned by previous call to retrieve the
-    ///   subsequent page
-    /// - `sort_by`
+    #[doc = "List snapshots\n\nSends a `GET` request to `/organizations/{organization_name}/projects/{project_name}/snapshots`\n\nArguments:\n- `organization_name`: The organization's unique name.\n- `project_name`: The project's unique name within the organization.\n- `limit`: Maximum number of items returned by a single call\n- `page_token`: Token returned by previous call to retrieve the subsequent page\n- `sort_by`\n"]
     pub async fn snapshot_list<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -17972,17 +16767,7 @@ impl Client {
         }
     }
 
-    ///List snapshots as a Stream
-    ///
-    ///Sends repeated `GET` requests to
-    /// `/organizations/{organization_name}/projects/{project_name}/snapshots`
-    /// until there are no more results.
-    ///
-    ///Arguments:
-    /// - `organization_name`: The organization's unique name.
-    /// - `project_name`: The project's unique name within the organization.
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `sort_by`
+    #[doc = "List snapshots as a Stream\n\nSends repeated `GET` requests to `/organizations/{organization_name}/projects/{project_name}/snapshots` until there are no more results.\n\nArguments:\n- `organization_name`: The organization's unique name.\n- `project_name`: The project's unique name within the organization.\n- `limit`: Maximum number of items returned by a single call\n- `sort_by`\n"]
     pub fn snapshot_list_stream<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -18023,17 +16808,7 @@ impl Client {
             .boxed()
     }
 
-    ///Create a snapshot
-    ///
-    ///Creates a point-in-time snapshot from a disk.
-    ///
-    ///Sends a `POST` request to
-    /// `/organizations/{organization_name}/projects/{project_name}/snapshots`
-    ///
-    ///Arguments:
-    /// - `organization_name`: The organization's unique name.
-    /// - `project_name`: The project's unique name within the organization.
-    /// - `body`
+    #[doc = "Create a snapshot\n\nCreates a point-in-time snapshot from a disk.\n\nSends a `POST` request to `/organizations/{organization_name}/projects/{project_name}/snapshots`\n\nArguments:\n- `organization_name`: The organization's unique name.\n- `project_name`: The project's unique name within the organization.\n- `body`\n"]
     pub async fn snapshot_create<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -18081,11 +16856,7 @@ impl Client {
         }
     }
 
-    ///Fetch a snapshot
-    ///
-    ///Sends a `GET` request to
-    /// `/organizations/{organization_name}/projects/{project_name}/snapshots/
-    /// {snapshot_name}`
+    #[doc = "Fetch a snapshot\n\nSends a `GET` request to `/organizations/{organization_name}/projects/{project_name}/snapshots/{snapshot_name}`\n\n"]
     pub async fn snapshot_view<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -18133,11 +16904,7 @@ impl Client {
         }
     }
 
-    ///Delete a snapshot
-    ///
-    ///Sends a `DELETE` request to
-    /// `/organizations/{organization_name}/projects/{project_name}/snapshots/
-    /// {snapshot_name}`
+    #[doc = "Delete a snapshot\n\nSends a `DELETE` request to `/organizations/{organization_name}/projects/{project_name}/snapshots/{snapshot_name}`\n\n"]
     pub async fn snapshot_delete<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -18185,18 +16952,7 @@ impl Client {
         }
     }
 
-    ///List VPCs
-    ///
-    ///Sends a `GET` request to
-    /// `/organizations/{organization_name}/projects/{project_name}/vpcs`
-    ///
-    ///Arguments:
-    /// - `organization_name`: The organization's unique name.
-    /// - `project_name`: The project's unique name within the organization.
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `page_token`: Token returned by previous call to retrieve the
-    ///   subsequent page
-    /// - `sort_by`
+    #[doc = "List VPCs\n\nSends a `GET` request to `/organizations/{organization_name}/projects/{project_name}/vpcs`\n\nArguments:\n- `organization_name`: The organization's unique name.\n- `project_name`: The project's unique name within the organization.\n- `limit`: Maximum number of items returned by a single call\n- `page_token`: Token returned by previous call to retrieve the subsequent page\n- `sort_by`\n"]
     pub async fn vpc_list<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -18251,17 +17007,7 @@ impl Client {
         }
     }
 
-    ///List VPCs as a Stream
-    ///
-    ///Sends repeated `GET` requests to
-    /// `/organizations/{organization_name}/projects/{project_name}/vpcs` until
-    /// there are no more results.
-    ///
-    ///Arguments:
-    /// - `organization_name`: The organization's unique name.
-    /// - `project_name`: The project's unique name within the organization.
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `sort_by`
+    #[doc = "List VPCs as a Stream\n\nSends repeated `GET` requests to `/organizations/{organization_name}/projects/{project_name}/vpcs` until there are no more results.\n\nArguments:\n- `organization_name`: The organization's unique name.\n- `project_name`: The project's unique name within the organization.\n- `limit`: Maximum number of items returned by a single call\n- `sort_by`\n"]
     pub fn vpc_list_stream<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -18301,15 +17047,7 @@ impl Client {
             .boxed()
     }
 
-    ///Create a VPC
-    ///
-    ///Sends a `POST` request to
-    /// `/organizations/{organization_name}/projects/{project_name}/vpcs`
-    ///
-    ///Arguments:
-    /// - `organization_name`: The organization's unique name.
-    /// - `project_name`: The project's unique name within the organization.
-    /// - `body`
+    #[doc = "Create a VPC\n\nSends a `POST` request to `/organizations/{organization_name}/projects/{project_name}/vpcs`\n\nArguments:\n- `organization_name`: The organization's unique name.\n- `project_name`: The project's unique name within the organization.\n- `body`\n"]
     pub async fn vpc_create<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -18357,11 +17095,7 @@ impl Client {
         }
     }
 
-    ///Fetch a VPC
-    ///
-    ///Sends a `GET` request to
-    /// `/organizations/{organization_name}/projects/{project_name}/vpcs/
-    /// {vpc_name}`
+    #[doc = "Fetch a VPC\n\nSends a `GET` request to `/organizations/{organization_name}/projects/{project_name}/vpcs/{vpc_name}`\n\n"]
     pub async fn vpc_view<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -18409,11 +17143,7 @@ impl Client {
         }
     }
 
-    ///Update a VPC
-    ///
-    ///Sends a `PUT` request to
-    /// `/organizations/{organization_name}/projects/{project_name}/vpcs/
-    /// {vpc_name}`
+    #[doc = "Update a VPC\n\nSends a `PUT` request to `/organizations/{organization_name}/projects/{project_name}/vpcs/{vpc_name}`\n\n"]
     pub async fn vpc_update<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -18463,11 +17193,7 @@ impl Client {
         }
     }
 
-    ///Delete a VPC
-    ///
-    ///Sends a `DELETE` request to
-    /// `/organizations/{organization_name}/projects/{project_name}/vpcs/
-    /// {vpc_name}`
+    #[doc = "Delete a VPC\n\nSends a `DELETE` request to `/organizations/{organization_name}/projects/{project_name}/vpcs/{vpc_name}`\n\n"]
     pub async fn vpc_delete<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -18515,11 +17241,7 @@ impl Client {
         }
     }
 
-    ///List firewall rules
-    ///
-    ///Sends a `GET` request to
-    /// `/organizations/{organization_name}/projects/{project_name}/vpcs/
-    /// {vpc_name}/firewall/rules`
+    #[doc = "List firewall rules\n\nSends a `GET` request to `/organizations/{organization_name}/projects/{project_name}/vpcs/{vpc_name}/firewall/rules`\n\n"]
     pub async fn vpc_firewall_rules_view<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -18567,11 +17289,7 @@ impl Client {
         }
     }
 
-    ///Replace firewall rules
-    ///
-    ///Sends a `PUT` request to
-    /// `/organizations/{organization_name}/projects/{project_name}/vpcs/
-    /// {vpc_name}/firewall/rules`
+    #[doc = "Replace firewall rules\n\nSends a `PUT` request to `/organizations/{organization_name}/projects/{project_name}/vpcs/{vpc_name}/firewall/rules`\n\n"]
     pub async fn vpc_firewall_rules_update<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -18621,20 +17339,7 @@ impl Client {
         }
     }
 
-    ///List routers
-    ///
-    ///Sends a `GET` request to
-    /// `/organizations/{organization_name}/projects/{project_name}/vpcs/
-    /// {vpc_name}/routers`
-    ///
-    ///Arguments:
-    /// - `organization_name`
-    /// - `project_name`
-    /// - `vpc_name`
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `page_token`: Token returned by previous call to retrieve the
-    ///   subsequent page
-    /// - `sort_by`
+    #[doc = "List routers\n\nSends a `GET` request to `/organizations/{organization_name}/projects/{project_name}/vpcs/{vpc_name}/routers`\n\nArguments:\n- `organization_name`\n- `project_name`\n- `vpc_name`\n- `limit`: Maximum number of items returned by a single call\n- `page_token`: Token returned by previous call to retrieve the subsequent page\n- `sort_by`\n"]
     pub async fn vpc_router_list<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -18691,18 +17396,7 @@ impl Client {
         }
     }
 
-    ///List routers as a Stream
-    ///
-    ///Sends repeated `GET` requests to
-    /// `/organizations/{organization_name}/projects/{project_name}/vpcs/
-    /// {vpc_name}/routers` until there are no more results.
-    ///
-    ///Arguments:
-    /// - `organization_name`
-    /// - `project_name`
-    /// - `vpc_name`
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `sort_by`
+    #[doc = "List routers as a Stream\n\nSends repeated `GET` requests to `/organizations/{organization_name}/projects/{project_name}/vpcs/{vpc_name}/routers` until there are no more results.\n\nArguments:\n- `organization_name`\n- `project_name`\n- `vpc_name`\n- `limit`: Maximum number of items returned by a single call\n- `sort_by`\n"]
     pub fn vpc_router_list_stream<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -18752,11 +17446,7 @@ impl Client {
         .boxed()
     }
 
-    ///Create a router
-    ///
-    ///Sends a `POST` request to
-    /// `/organizations/{organization_name}/projects/{project_name}/vpcs/
-    /// {vpc_name}/routers`
+    #[doc = "Create a router\n\nSends a `POST` request to `/organizations/{organization_name}/projects/{project_name}/vpcs/{vpc_name}/routers`\n\n"]
     pub async fn vpc_router_create<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -18806,11 +17496,7 @@ impl Client {
         }
     }
 
-    ///Get a router
-    ///
-    ///Sends a `GET` request to
-    /// `/organizations/{organization_name}/projects/{project_name}/vpcs/
-    /// {vpc_name}/routers/{router_name}`
+    #[doc = "Get a router\n\nSends a `GET` request to `/organizations/{organization_name}/projects/{project_name}/vpcs/{vpc_name}/routers/{router_name}`\n\n"]
     pub async fn vpc_router_view<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -18860,11 +17546,7 @@ impl Client {
         }
     }
 
-    ///Update a router
-    ///
-    ///Sends a `PUT` request to
-    /// `/organizations/{organization_name}/projects/{project_name}/vpcs/
-    /// {vpc_name}/routers/{router_name}`
+    #[doc = "Update a router\n\nSends a `PUT` request to `/organizations/{organization_name}/projects/{project_name}/vpcs/{vpc_name}/routers/{router_name}`\n\n"]
     pub async fn vpc_router_update<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -18916,11 +17598,7 @@ impl Client {
         }
     }
 
-    ///Delete a router
-    ///
-    ///Sends a `DELETE` request to
-    /// `/organizations/{organization_name}/projects/{project_name}/vpcs/
-    /// {vpc_name}/routers/{router_name}`
+    #[doc = "Delete a router\n\nSends a `DELETE` request to `/organizations/{organization_name}/projects/{project_name}/vpcs/{vpc_name}/routers/{router_name}`\n\n"]
     pub async fn vpc_router_delete<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -18970,23 +17648,7 @@ impl Client {
         }
     }
 
-    ///List routes
-    ///
-    ///List the routes associated with a router in a particular VPC.
-    ///
-    ///Sends a `GET` request to
-    /// `/organizations/{organization_name}/projects/{project_name}/vpcs/
-    /// {vpc_name}/routers/{router_name}/routes`
-    ///
-    ///Arguments:
-    /// - `organization_name`
-    /// - `project_name`
-    /// - `vpc_name`
-    /// - `router_name`
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `page_token`: Token returned by previous call to retrieve the
-    ///   subsequent page
-    /// - `sort_by`
+    #[doc = "List routes\n\nList the routes associated with a router in a particular VPC.\n\nSends a `GET` request to `/organizations/{organization_name}/projects/{project_name}/vpcs/{vpc_name}/routers/{router_name}/routes`\n\nArguments:\n- `organization_name`\n- `project_name`\n- `vpc_name`\n- `router_name`\n- `limit`: Maximum number of items returned by a single call\n- `page_token`: Token returned by previous call to retrieve the subsequent page\n- `sort_by`\n"]
     pub async fn vpc_router_route_list<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -19045,22 +17707,7 @@ impl Client {
         }
     }
 
-    ///List routes as a Stream
-    ///
-    ///List the routes associated with a router in a particular VPC.
-    ///
-    ///Sends repeated `GET` requests to
-    /// `/organizations/{organization_name}/projects/{project_name}/vpcs/
-    /// {vpc_name}/routers/{router_name}/routes` until there are no more
-    /// results.
-    ///
-    ///Arguments:
-    /// - `organization_name`
-    /// - `project_name`
-    /// - `vpc_name`
-    /// - `router_name`
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `sort_by`
+    #[doc = "List routes as a Stream\n\nList the routes associated with a router in a particular VPC.\n\nSends repeated `GET` requests to `/organizations/{organization_name}/projects/{project_name}/vpcs/{vpc_name}/routers/{router_name}/routes` until there are no more results.\n\nArguments:\n- `organization_name`\n- `project_name`\n- `vpc_name`\n- `router_name`\n- `limit`: Maximum number of items returned by a single call\n- `sort_by`\n"]
     pub fn vpc_router_route_list_stream<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -19113,11 +17760,7 @@ impl Client {
         .boxed()
     }
 
-    ///Create a router
-    ///
-    ///Sends a `POST` request to
-    /// `/organizations/{organization_name}/projects/{project_name}/vpcs/
-    /// {vpc_name}/routers/{router_name}/routes`
+    #[doc = "Create a router\n\nSends a `POST` request to `/organizations/{organization_name}/projects/{project_name}/vpcs/{vpc_name}/routers/{router_name}/routes`\n\n"]
     pub async fn vpc_router_route_create<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -19169,11 +17812,7 @@ impl Client {
         }
     }
 
-    ///Fetch a route
-    ///
-    ///Sends a `GET` request to
-    /// `/organizations/{organization_name}/projects/{project_name}/vpcs/
-    /// {vpc_name}/routers/{router_name}/routes/{route_name}`
+    #[doc = "Fetch a route\n\nSends a `GET` request to `/organizations/{organization_name}/projects/{project_name}/vpcs/{vpc_name}/routers/{router_name}/routes/{route_name}`\n\n"]
     pub async fn vpc_router_route_view<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -19225,11 +17864,7 @@ impl Client {
         }
     }
 
-    ///Update a route
-    ///
-    ///Sends a `PUT` request to
-    /// `/organizations/{organization_name}/projects/{project_name}/vpcs/
-    /// {vpc_name}/routers/{router_name}/routes/{route_name}`
+    #[doc = "Update a route\n\nSends a `PUT` request to `/organizations/{organization_name}/projects/{project_name}/vpcs/{vpc_name}/routers/{router_name}/routes/{route_name}`\n\n"]
     pub async fn vpc_router_route_update<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -19283,11 +17918,7 @@ impl Client {
         }
     }
 
-    ///Delete a route
-    ///
-    ///Sends a `DELETE` request to
-    /// `/organizations/{organization_name}/projects/{project_name}/vpcs/
-    /// {vpc_name}/routers/{router_name}/routes/{route_name}`
+    #[doc = "Delete a route\n\nSends a `DELETE` request to `/organizations/{organization_name}/projects/{project_name}/vpcs/{vpc_name}/routers/{router_name}/routes/{route_name}`\n\n"]
     pub async fn vpc_router_route_delete<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -19339,20 +17970,7 @@ impl Client {
         }
     }
 
-    ///List subnets
-    ///
-    ///Sends a `GET` request to
-    /// `/organizations/{organization_name}/projects/{project_name}/vpcs/
-    /// {vpc_name}/subnets`
-    ///
-    ///Arguments:
-    /// - `organization_name`
-    /// - `project_name`
-    /// - `vpc_name`
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `page_token`: Token returned by previous call to retrieve the
-    ///   subsequent page
-    /// - `sort_by`
+    #[doc = "List subnets\n\nSends a `GET` request to `/organizations/{organization_name}/projects/{project_name}/vpcs/{vpc_name}/subnets`\n\nArguments:\n- `organization_name`\n- `project_name`\n- `vpc_name`\n- `limit`: Maximum number of items returned by a single call\n- `page_token`: Token returned by previous call to retrieve the subsequent page\n- `sort_by`\n"]
     pub async fn vpc_subnet_list<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -19409,18 +18027,7 @@ impl Client {
         }
     }
 
-    ///List subnets as a Stream
-    ///
-    ///Sends repeated `GET` requests to
-    /// `/organizations/{organization_name}/projects/{project_name}/vpcs/
-    /// {vpc_name}/subnets` until there are no more results.
-    ///
-    ///Arguments:
-    /// - `organization_name`
-    /// - `project_name`
-    /// - `vpc_name`
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `sort_by`
+    #[doc = "List subnets as a Stream\n\nSends repeated `GET` requests to `/organizations/{organization_name}/projects/{project_name}/vpcs/{vpc_name}/subnets` until there are no more results.\n\nArguments:\n- `organization_name`\n- `project_name`\n- `vpc_name`\n- `limit`: Maximum number of items returned by a single call\n- `sort_by`\n"]
     pub fn vpc_subnet_list_stream<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -19470,11 +18077,7 @@ impl Client {
         .boxed()
     }
 
-    ///Create a subnet
-    ///
-    ///Sends a `POST` request to
-    /// `/organizations/{organization_name}/projects/{project_name}/vpcs/
-    /// {vpc_name}/subnets`
+    #[doc = "Create a subnet\n\nSends a `POST` request to `/organizations/{organization_name}/projects/{project_name}/vpcs/{vpc_name}/subnets`\n\n"]
     pub async fn vpc_subnet_create<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -19524,11 +18127,7 @@ impl Client {
         }
     }
 
-    ///Fetch a subnet
-    ///
-    ///Sends a `GET` request to
-    /// `/organizations/{organization_name}/projects/{project_name}/vpcs/
-    /// {vpc_name}/subnets/{subnet_name}`
+    #[doc = "Fetch a subnet\n\nSends a `GET` request to `/organizations/{organization_name}/projects/{project_name}/vpcs/{vpc_name}/subnets/{subnet_name}`\n\n"]
     pub async fn vpc_subnet_view<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -19578,11 +18177,7 @@ impl Client {
         }
     }
 
-    ///Update a subnet
-    ///
-    ///Sends a `PUT` request to
-    /// `/organizations/{organization_name}/projects/{project_name}/vpcs/
-    /// {vpc_name}/subnets/{subnet_name}`
+    #[doc = "Update a subnet\n\nSends a `PUT` request to `/organizations/{organization_name}/projects/{project_name}/vpcs/{vpc_name}/subnets/{subnet_name}`\n\n"]
     pub async fn vpc_subnet_update<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -19634,11 +18229,7 @@ impl Client {
         }
     }
 
-    ///Delete a subnet
-    ///
-    ///Sends a `DELETE` request to
-    /// `/organizations/{organization_name}/projects/{project_name}/vpcs/
-    /// {vpc_name}/subnets/{subnet_name}`
+    #[doc = "Delete a subnet\n\nSends a `DELETE` request to `/organizations/{organization_name}/projects/{project_name}/vpcs/{vpc_name}/subnets/{subnet_name}`\n\n"]
     pub async fn vpc_subnet_delete<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -19688,21 +18279,7 @@ impl Client {
         }
     }
 
-    ///List network interfaces
-    ///
-    ///Sends a `GET` request to
-    /// `/organizations/{organization_name}/projects/{project_name}/vpcs/
-    /// {vpc_name}/subnets/{subnet_name}/network-interfaces`
-    ///
-    ///Arguments:
-    /// - `organization_name`
-    /// - `project_name`
-    /// - `vpc_name`
-    /// - `subnet_name`
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `page_token`: Token returned by previous call to retrieve the
-    ///   subsequent page
-    /// - `sort_by`
+    #[doc = "List network interfaces\n\nSends a `GET` request to `/organizations/{organization_name}/projects/{project_name}/vpcs/{vpc_name}/subnets/{subnet_name}/network-interfaces`\n\nArguments:\n- `organization_name`\n- `project_name`\n- `vpc_name`\n- `subnet_name`\n- `limit`: Maximum number of items returned by a single call\n- `page_token`: Token returned by previous call to retrieve the subsequent page\n- `sort_by`\n"]
     pub async fn vpc_subnet_list_network_interfaces<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -19761,20 +18338,7 @@ impl Client {
         }
     }
 
-    ///List network interfaces as a Stream
-    ///
-    ///Sends repeated `GET` requests to
-    /// `/organizations/{organization_name}/projects/{project_name}/vpcs/
-    /// {vpc_name}/subnets/{subnet_name}/network-interfaces` until there are no
-    /// more results.
-    ///
-    ///Arguments:
-    /// - `organization_name`
-    /// - `project_name`
-    /// - `vpc_name`
-    /// - `subnet_name`
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `sort_by`
+    #[doc = "List network interfaces as a Stream\n\nSends repeated `GET` requests to `/organizations/{organization_name}/projects/{project_name}/vpcs/{vpc_name}/subnets/{subnet_name}/network-interfaces` until there are no more results.\n\nArguments:\n- `organization_name`\n- `project_name`\n- `vpc_name`\n- `subnet_name`\n- `limit`: Maximum number of items returned by a single call\n- `sort_by`\n"]
     pub fn vpc_subnet_list_network_interfaces_stream<'a>(
         &'a self,
         organization_name: &'a types::Name,
@@ -19827,9 +18391,7 @@ impl Client {
         .boxed()
     }
 
-    ///Fetch the current silo's IAM policy
-    ///
-    ///Sends a `GET` request to `/policy`
+    #[doc = "Fetch the current silo's IAM policy\n\nSends a `GET` request to `/policy`\n\n"]
     pub async fn policy_view<'a>(
         &'a self,
     ) -> Result<ResponseValue<types::SiloRolePolicy>, Error<types::Error>> {
@@ -19868,9 +18430,7 @@ impl Client {
         }
     }
 
-    ///Update the current silo's IAM policy
-    ///
-    ///Sends a `PUT` request to `/policy`
+    #[doc = "Update the current silo's IAM policy\n\nSends a `PUT` request to `/policy`\n\n"]
     pub async fn policy_update<'a>(
         &'a self,
         body: &'a types::SiloRolePolicy,
@@ -19911,14 +18471,7 @@ impl Client {
         }
     }
 
-    ///List built-in roles
-    ///
-    ///Sends a `GET` request to `/roles`
-    ///
-    ///Arguments:
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `page_token`: Token returned by previous call to retrieve the
-    ///   subsequent page
+    #[doc = "List built-in roles\n\nSends a `GET` request to `/roles`\n\nArguments:\n- `limit`: Maximum number of items returned by a single call\n- `page_token`: Token returned by previous call to retrieve the subsequent page\n"]
     pub async fn role_list<'a>(
         &'a self,
         limit: Option<::std::num::NonZeroU32>,
@@ -19964,13 +18517,7 @@ impl Client {
         }
     }
 
-    ///List built-in roles as a Stream
-    ///
-    ///Sends repeated `GET` requests to `/roles` until there are no more
-    /// results.
-    ///
-    ///Arguments:
-    /// - `limit`: Maximum number of items returned by a single call
+    #[doc = "List built-in roles as a Stream\n\nSends repeated `GET` requests to `/roles` until there are no more results.\n\nArguments:\n- `limit`: Maximum number of items returned by a single call\n"]
     pub fn role_list_stream<'a>(
         &'a self,
         limit: Option<::std::num::NonZeroU32>,
@@ -20001,12 +18548,7 @@ impl Client {
             .boxed()
     }
 
-    ///Fetch a built-in role
-    ///
-    ///Sends a `GET` request to `/roles/{role_name}`
-    ///
-    ///Arguments:
-    /// - `role_name`: The built-in role's unique name.
+    #[doc = "Fetch a built-in role\n\nSends a `GET` request to `/roles/{role_name}`\n\nArguments:\n- `role_name`: The built-in role's unique name.\n"]
     pub async fn role_view<'a>(
         &'a self,
         role_name: &'a str,
@@ -20050,9 +18592,7 @@ impl Client {
         }
     }
 
-    ///Fetch the user associated with the current session
-    ///
-    ///Sends a `GET` request to `/session/me`
+    #[doc = "Fetch the user associated with the current session\n\nSends a `GET` request to `/session/me`\n\n"]
     pub async fn session_me<'a>(
         &'a self,
     ) -> Result<ResponseValue<types::User>, Error<types::Error>> {
@@ -20091,15 +18631,7 @@ impl Client {
         }
     }
 
-    ///Fetch the silo groups the current user belongs to
-    ///
-    ///Sends a `GET` request to `/session/me/groups`
-    ///
-    ///Arguments:
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `page_token`: Token returned by previous call to retrieve the
-    ///   subsequent page
-    /// - `sort_by`
+    #[doc = "Fetch the silo\u{a0}groups the current user belongs to\n\nSends a `GET` request to `/session/me/groups`\n\nArguments:\n- `limit`: Maximum number of items returned by a single call\n- `page_token`: Token returned by previous call to retrieve the subsequent page\n- `sort_by`\n"]
     pub async fn session_me_groups<'a>(
         &'a self,
         limit: Option<::std::num::NonZeroU32>,
@@ -20147,14 +18679,7 @@ impl Client {
         }
     }
 
-    ///Fetch the silo groups the current user belongs to as a Stream
-    ///
-    ///Sends repeated `GET` requests to `/session/me/groups` until there are no
-    /// more results.
-    ///
-    ///Arguments:
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `sort_by`
+    #[doc = "Fetch the silo\u{a0}groups the current user belongs to as a Stream\n\nSends repeated `GET` requests to `/session/me/groups` until there are no more results.\n\nArguments:\n- `limit`: Maximum number of items returned by a single call\n- `sort_by`\n"]
     pub fn session_me_groups_stream<'a>(
         &'a self,
         limit: Option<::std::num::NonZeroU32>,
@@ -20186,17 +18711,7 @@ impl Client {
             .boxed()
     }
 
-    ///List SSH public keys
-    ///
-    ///Lists SSH public keys for the currently authenticated user.
-    ///
-    ///Sends a `GET` request to `/session/me/sshkeys`
-    ///
-    ///Arguments:
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `page_token`: Token returned by previous call to retrieve the
-    ///   subsequent page
-    /// - `sort_by`
+    #[doc = "List SSH public keys\n\nLists SSH public keys for the currently authenticated user.\n\nSends a `GET` request to `/session/me/sshkeys`\n\nArguments:\n- `limit`: Maximum number of items returned by a single call\n- `page_token`: Token returned by previous call to retrieve the subsequent page\n- `sort_by`\n"]
     pub async fn session_sshkey_list<'a>(
         &'a self,
         limit: Option<::std::num::NonZeroU32>,
@@ -20244,16 +18759,7 @@ impl Client {
         }
     }
 
-    ///List SSH public keys as a Stream
-    ///
-    ///Lists SSH public keys for the currently authenticated user.
-    ///
-    ///Sends repeated `GET` requests to `/session/me/sshkeys` until there are
-    /// no more results.
-    ///
-    ///Arguments:
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `sort_by`
+    #[doc = "List SSH public keys as a Stream\n\nLists SSH public keys for the currently authenticated user.\n\nSends repeated `GET` requests to `/session/me/sshkeys` until there are no more results.\n\nArguments:\n- `limit`: Maximum number of items returned by a single call\n- `sort_by`\n"]
     pub fn session_sshkey_list_stream<'a>(
         &'a self,
         limit: Option<::std::num::NonZeroU32>,
@@ -20285,11 +18791,7 @@ impl Client {
             .boxed()
     }
 
-    ///Create an SSH public key
-    ///
-    ///Create an SSH public key for the currently authenticated user.
-    ///
-    ///Sends a `POST` request to `/session/me/sshkeys`
+    #[doc = "Create an SSH public key\n\nCreate an SSH public key for the currently authenticated user.\n\nSends a `POST` request to `/session/me/sshkeys`\n\n"]
     pub async fn session_sshkey_create<'a>(
         &'a self,
         body: &'a types::SshKeyCreate,
@@ -20330,12 +18832,7 @@ impl Client {
         }
     }
 
-    ///Fetch an SSH public key
-    ///
-    ///Fetch an SSH public key associated with the currently authenticated
-    /// user.
-    ///
-    ///Sends a `GET` request to `/session/me/sshkeys/{ssh_key_name}`
+    #[doc = "Fetch an SSH public key\n\nFetch an SSH public key associated with the currently authenticated user.\n\nSends a `GET` request to `/session/me/sshkeys/{ssh_key_name}`\n\n"]
     pub async fn session_sshkey_view<'a>(
         &'a self,
         ssh_key_name: &'a types::Name,
@@ -20379,12 +18876,7 @@ impl Client {
         }
     }
 
-    ///Delete an SSH public key
-    ///
-    ///Delete an SSH public key associated with the currently authenticated
-    /// user.
-    ///
-    ///Sends a `DELETE` request to `/session/me/sshkeys/{ssh_key_name}`
+    #[doc = "Delete an SSH public key\n\nDelete an SSH public key associated with the currently authenticated user.\n\nSends a `DELETE` request to `/session/me/sshkeys/{ssh_key_name}`\n\n"]
     pub async fn session_sshkey_delete<'a>(
         &'a self,
         ssh_key_name: &'a types::Name,
@@ -20428,9 +18920,7 @@ impl Client {
         }
     }
 
-    ///Fetch a system-wide image by id
-    ///
-    ///Sends a `GET` request to `/system/by-id/images/{id}`
+    #[doc = "Fetch a system-wide image by id\n\nSends a `GET` request to `/system/by-id/images/{id}`\n\n"]
     pub async fn system_image_view_by_id<'a>(
         &'a self,
         id: &'a ::uuid::Uuid,
@@ -20474,9 +18964,7 @@ impl Client {
         }
     }
 
-    ///Fetch an IP pool by id
-    ///
-    ///Sends a `GET` request to `/system/by-id/ip-pools/{id}`
+    #[doc = "Fetch an IP pool by id\n\nSends a `GET` request to `/system/by-id/ip-pools/{id}`\n\n"]
     pub async fn ip_pool_view_by_id<'a>(
         &'a self,
         id: &'a ::uuid::Uuid,
@@ -20520,9 +19008,7 @@ impl Client {
         }
     }
 
-    ///Fetch a silo by id
-    ///
-    ///Sends a `GET` request to `/system/by-id/silos/{id}`
+    #[doc = "Fetch a silo by id\n\nSends a `GET` request to `/system/by-id/silos/{id}`\n\n"]
     pub async fn silo_view_by_id<'a>(
         &'a self,
         id: &'a ::uuid::Uuid,
@@ -20566,19 +19052,7 @@ impl Client {
         }
     }
 
-    ///List system-wide certificates
-    ///
-    ///Returns a list of all the system-wide certificates. System-wide
-    /// certificates are returned sorted by creation date, with the most recent
-    /// certificates appearing first.
-    ///
-    ///Sends a `GET` request to `/system/certificates`
-    ///
-    ///Arguments:
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `page_token`: Token returned by previous call to retrieve the
-    ///   subsequent page
-    /// - `sort_by`
+    #[doc = "List system-wide certificates\n\nReturns a list of all the system-wide certificates. System-wide certificates are returned sorted by creation date, with the most recent certificates appearing first.\n\nSends a `GET` request to `/system/certificates`\n\nArguments:\n- `limit`: Maximum number of items returned by a single call\n- `page_token`: Token returned by previous call to retrieve the subsequent page\n- `sort_by`\n"]
     pub async fn certificate_list<'a>(
         &'a self,
         limit: Option<::std::num::NonZeroU32>,
@@ -20626,18 +19100,7 @@ impl Client {
         }
     }
 
-    ///List system-wide certificates as a Stream
-    ///
-    ///Returns a list of all the system-wide certificates. System-wide
-    /// certificates are returned sorted by creation date, with the most recent
-    /// certificates appearing first.
-    ///
-    ///Sends repeated `GET` requests to `/system/certificates` until there are
-    /// no more results.
-    ///
-    ///Arguments:
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `sort_by`
+    #[doc = "List system-wide certificates as a Stream\n\nReturns a list of all the system-wide certificates. System-wide certificates are returned sorted by creation date, with the most recent certificates appearing first.\n\nSends repeated `GET` requests to `/system/certificates` until there are no more results.\n\nArguments:\n- `limit`: Maximum number of items returned by a single call\n- `sort_by`\n"]
     pub fn certificate_list_stream<'a>(
         &'a self,
         limit: Option<::std::num::NonZeroU32>,
@@ -20670,12 +19133,7 @@ impl Client {
             .boxed()
     }
 
-    ///Create a new system-wide x.509 certificate
-    ///
-    ///This certificate is automatically used by the Oxide Control plane to
-    /// serve external connections.
-    ///
-    ///Sends a `POST` request to `/system/certificates`
+    #[doc = "Create a new system-wide x.509 certificate\n\nThis certificate is automatically used by the Oxide Control plane to serve external connections.\n\nSends a `POST` request to `/system/certificates`\n\n"]
     pub async fn certificate_create<'a>(
         &'a self,
         body: &'a types::CertificateCreate,
@@ -20716,11 +19174,7 @@ impl Client {
         }
     }
 
-    ///Fetch a certificate
-    ///
-    ///Returns the details of a specific certificate
-    ///
-    ///Sends a `GET` request to `/system/certificates/{certificate}`
+    #[doc = "Fetch a certificate\n\nReturns the details of a specific certificate\n\nSends a `GET` request to `/system/certificates/{certificate}`\n\n"]
     pub async fn certificate_view<'a>(
         &'a self,
         certificate: &'a types::NameOrId,
@@ -20764,11 +19218,7 @@ impl Client {
         }
     }
 
-    ///Delete a certificate
-    ///
-    ///Permanently delete a certificate. This operation cannot be undone.
-    ///
-    ///Sends a `DELETE` request to `/system/certificates/{certificate}`
+    #[doc = "Delete a certificate\n\nPermanently delete a certificate. This operation cannot be undone.\n\nSends a `DELETE` request to `/system/certificates/{certificate}`\n\n"]
     pub async fn certificate_delete<'a>(
         &'a self,
         certificate: &'a types::NameOrId,
@@ -20812,15 +19262,7 @@ impl Client {
         }
     }
 
-    ///List physical disks
-    ///
-    ///Sends a `GET` request to `/system/hardware/disks`
-    ///
-    ///Arguments:
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `page_token`: Token returned by previous call to retrieve the
-    ///   subsequent page
-    /// - `sort_by`
+    #[doc = "List physical disks\n\nSends a `GET` request to `/system/hardware/disks`\n\nArguments:\n- `limit`: Maximum number of items returned by a single call\n- `page_token`: Token returned by previous call to retrieve the subsequent page\n- `sort_by`\n"]
     pub async fn physical_disk_list<'a>(
         &'a self,
         limit: Option<::std::num::NonZeroU32>,
@@ -20868,14 +19310,7 @@ impl Client {
         }
     }
 
-    ///List physical disks as a Stream
-    ///
-    ///Sends repeated `GET` requests to `/system/hardware/disks` until there
-    /// are no more results.
-    ///
-    ///Arguments:
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `sort_by`
+    #[doc = "List physical disks as a Stream\n\nSends repeated `GET` requests to `/system/hardware/disks` until there are no more results.\n\nArguments:\n- `limit`: Maximum number of items returned by a single call\n- `sort_by`\n"]
     pub fn physical_disk_list_stream<'a>(
         &'a self,
         limit: Option<::std::num::NonZeroU32>,
@@ -20908,15 +19343,7 @@ impl Client {
             .boxed()
     }
 
-    ///List racks
-    ///
-    ///Sends a `GET` request to `/system/hardware/racks`
-    ///
-    ///Arguments:
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `page_token`: Token returned by previous call to retrieve the
-    ///   subsequent page
-    /// - `sort_by`
+    #[doc = "List racks\n\nSends a `GET` request to `/system/hardware/racks`\n\nArguments:\n- `limit`: Maximum number of items returned by a single call\n- `page_token`: Token returned by previous call to retrieve the subsequent page\n- `sort_by`\n"]
     pub async fn rack_list<'a>(
         &'a self,
         limit: Option<::std::num::NonZeroU32>,
@@ -20964,14 +19391,7 @@ impl Client {
         }
     }
 
-    ///List racks as a Stream
-    ///
-    ///Sends repeated `GET` requests to `/system/hardware/racks` until there
-    /// are no more results.
-    ///
-    ///Arguments:
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `sort_by`
+    #[doc = "List racks as a Stream\n\nSends repeated `GET` requests to `/system/hardware/racks` until there are no more results.\n\nArguments:\n- `limit`: Maximum number of items returned by a single call\n- `sort_by`\n"]
     pub fn rack_list_stream<'a>(
         &'a self,
         limit: Option<::std::num::NonZeroU32>,
@@ -21003,12 +19423,7 @@ impl Client {
             .boxed()
     }
 
-    ///Fetch a rack
-    ///
-    ///Sends a `GET` request to `/system/hardware/racks/{rack_id}`
-    ///
-    ///Arguments:
-    /// - `rack_id`: The rack's unique ID.
+    #[doc = "Fetch a rack\n\nSends a `GET` request to `/system/hardware/racks/{rack_id}`\n\nArguments:\n- `rack_id`: The rack's unique ID.\n"]
     pub async fn rack_view<'a>(
         &'a self,
         rack_id: &'a ::uuid::Uuid,
@@ -21052,15 +19467,7 @@ impl Client {
         }
     }
 
-    ///List sleds
-    ///
-    ///Sends a `GET` request to `/system/hardware/sleds`
-    ///
-    ///Arguments:
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `page_token`: Token returned by previous call to retrieve the
-    ///   subsequent page
-    /// - `sort_by`
+    #[doc = "List sleds\n\nSends a `GET` request to `/system/hardware/sleds`\n\nArguments:\n- `limit`: Maximum number of items returned by a single call\n- `page_token`: Token returned by previous call to retrieve the subsequent page\n- `sort_by`\n"]
     pub async fn sled_list<'a>(
         &'a self,
         limit: Option<::std::num::NonZeroU32>,
@@ -21108,14 +19515,7 @@ impl Client {
         }
     }
 
-    ///List sleds as a Stream
-    ///
-    ///Sends repeated `GET` requests to `/system/hardware/sleds` until there
-    /// are no more results.
-    ///
-    ///Arguments:
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `sort_by`
+    #[doc = "List sleds as a Stream\n\nSends repeated `GET` requests to `/system/hardware/sleds` until there are no more results.\n\nArguments:\n- `limit`: Maximum number of items returned by a single call\n- `sort_by`\n"]
     pub fn sled_list_stream<'a>(
         &'a self,
         limit: Option<::std::num::NonZeroU32>,
@@ -21147,12 +19547,7 @@ impl Client {
             .boxed()
     }
 
-    ///Fetch a sled
-    ///
-    ///Sends a `GET` request to `/system/hardware/sleds/{sled_id}`
-    ///
-    ///Arguments:
-    /// - `sled_id`: The sled's unique ID.
+    #[doc = "Fetch a sled\n\nSends a `GET` request to `/system/hardware/sleds/{sled_id}`\n\nArguments:\n- `sled_id`: The sled's unique ID.\n"]
     pub async fn sled_view<'a>(
         &'a self,
         sled_id: &'a ::uuid::Uuid,
@@ -21196,16 +19591,7 @@ impl Client {
         }
     }
 
-    ///List physical disks attached to sleds
-    ///
-    ///Sends a `GET` request to `/system/hardware/sleds/{sled_id}/disks`
-    ///
-    ///Arguments:
-    /// - `sled_id`: The sled's unique ID.
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `page_token`: Token returned by previous call to retrieve the
-    ///   subsequent page
-    /// - `sort_by`
+    #[doc = "List physical disks attached to sleds\n\nSends a `GET` request to `/system/hardware/sleds/{sled_id}/disks`\n\nArguments:\n- `sled_id`: The sled's unique ID.\n- `limit`: Maximum number of items returned by a single call\n- `page_token`: Token returned by previous call to retrieve the subsequent page\n- `sort_by`\n"]
     pub async fn sled_physical_disk_list<'a>(
         &'a self,
         sled_id: &'a ::uuid::Uuid,
@@ -21258,16 +19644,7 @@ impl Client {
         }
     }
 
-    ///List physical disks attached to sleds as a Stream
-    ///
-    ///Sends repeated `GET` requests to
-    /// `/system/hardware/sleds/{sled_id}/disks` until there are no more
-    /// results.
-    ///
-    ///Arguments:
-    /// - `sled_id`: The sled's unique ID.
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `sort_by`
+    #[doc = "List physical disks attached to sleds as a Stream\n\nSends repeated `GET` requests to `/system/hardware/sleds/{sled_id}/disks` until there are no more results.\n\nArguments:\n- `sled_id`: The sled's unique ID.\n- `limit`: Maximum number of items returned by a single call\n- `sort_by`\n"]
     pub fn sled_physical_disk_list_stream<'a>(
         &'a self,
         sled_id: &'a ::uuid::Uuid,
@@ -21301,19 +19678,7 @@ impl Client {
             .boxed()
     }
 
-    ///List system-wide images
-    ///
-    ///Returns a list of all the system-wide images. System-wide images are
-    /// returned sorted by creation date, with the most recent images appearing
-    /// first.
-    ///
-    ///Sends a `GET` request to `/system/images`
-    ///
-    ///Arguments:
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `page_token`: Token returned by previous call to retrieve the
-    ///   subsequent page
-    /// - `sort_by`
+    #[doc = "List system-wide images\n\nReturns a list of all the system-wide images. System-wide images are returned sorted by creation date, with the most recent images appearing first.\n\nSends a `GET` request to `/system/images`\n\nArguments:\n- `limit`: Maximum number of items returned by a single call\n- `page_token`: Token returned by previous call to retrieve the subsequent page\n- `sort_by`\n"]
     pub async fn system_image_list<'a>(
         &'a self,
         limit: Option<::std::num::NonZeroU32>,
@@ -21361,18 +19726,7 @@ impl Client {
         }
     }
 
-    ///List system-wide images as a Stream
-    ///
-    ///Returns a list of all the system-wide images. System-wide images are
-    /// returned sorted by creation date, with the most recent images appearing
-    /// first.
-    ///
-    ///Sends repeated `GET` requests to `/system/images` until there are no
-    /// more results.
-    ///
-    ///Arguments:
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `sort_by`
+    #[doc = "List system-wide images as a Stream\n\nReturns a list of all the system-wide images. System-wide images are returned sorted by creation date, with the most recent images appearing first.\n\nSends repeated `GET` requests to `/system/images` until there are no more results.\n\nArguments:\n- `limit`: Maximum number of items returned by a single call\n- `sort_by`\n"]
     pub fn system_image_list_stream<'a>(
         &'a self,
         limit: Option<::std::num::NonZeroU32>,
@@ -21405,12 +19759,7 @@ impl Client {
             .boxed()
     }
 
-    ///Create a system-wide image
-    ///
-    ///Create a new system-wide image. This image can then be used by any user
-    /// in any silo as a base for instances.
-    ///
-    ///Sends a `POST` request to `/system/images`
+    #[doc = "Create a system-wide image\n\nCreate a new system-wide image. This image can then be used by any user in any silo as a base for instances.\n\nSends a `POST` request to `/system/images`\n\n"]
     pub async fn system_image_create<'a>(
         &'a self,
         body: &'a types::GlobalImageCreate,
@@ -21451,11 +19800,7 @@ impl Client {
         }
     }
 
-    ///Fetch a system-wide image
-    ///
-    ///Returns the details of a specific system-wide image.
-    ///
-    ///Sends a `GET` request to `/system/images/{image_name}`
+    #[doc = "Fetch a system-wide image\n\nReturns the details of a specific system-wide image.\n\nSends a `GET` request to `/system/images/{image_name}`\n\n"]
     pub async fn system_image_view<'a>(
         &'a self,
         image_name: &'a types::Name,
@@ -21499,13 +19844,7 @@ impl Client {
         }
     }
 
-    ///Delete a system-wide image
-    ///
-    ///Permanently delete a system-wide image. This operation cannot be undone.
-    /// Any instances using the system-wide image will continue to run, however
-    /// new instances can not be created with this image.
-    ///
-    ///Sends a `DELETE` request to `/system/images/{image_name}`
+    #[doc = "Delete a system-wide image\n\nPermanently delete a system-wide image. This operation cannot be undone. Any instances using the system-wide image will continue to run, however new instances can not be created with this image.\n\nSends a `DELETE` request to `/system/images/{image_name}`\n\n"]
     pub async fn system_image_delete<'a>(
         &'a self,
         image_name: &'a types::Name,
@@ -21549,15 +19888,7 @@ impl Client {
         }
     }
 
-    ///List IP pools
-    ///
-    ///Sends a `GET` request to `/system/ip-pools`
-    ///
-    ///Arguments:
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `page_token`: Token returned by previous call to retrieve the
-    ///   subsequent page
-    /// - `sort_by`
+    #[doc = "List IP pools\n\nSends a `GET` request to `/system/ip-pools`\n\nArguments:\n- `limit`: Maximum number of items returned by a single call\n- `page_token`: Token returned by previous call to retrieve the subsequent page\n- `sort_by`\n"]
     pub async fn ip_pool_list<'a>(
         &'a self,
         limit: Option<::std::num::NonZeroU32>,
@@ -21605,14 +19936,7 @@ impl Client {
         }
     }
 
-    ///List IP pools as a Stream
-    ///
-    ///Sends repeated `GET` requests to `/system/ip-pools` until there are no
-    /// more results.
-    ///
-    ///Arguments:
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `sort_by`
+    #[doc = "List IP pools as a Stream\n\nSends repeated `GET` requests to `/system/ip-pools` until there are no more results.\n\nArguments:\n- `limit`: Maximum number of items returned by a single call\n- `sort_by`\n"]
     pub fn ip_pool_list_stream<'a>(
         &'a self,
         limit: Option<::std::num::NonZeroU32>,
@@ -21644,9 +19968,7 @@ impl Client {
             .boxed()
     }
 
-    ///Create an IP pool
-    ///
-    ///Sends a `POST` request to `/system/ip-pools`
+    #[doc = "Create an IP pool\n\nSends a `POST` request to `/system/ip-pools`\n\n"]
     pub async fn ip_pool_create<'a>(
         &'a self,
         body: &'a types::IpPoolCreate,
@@ -21687,9 +20009,7 @@ impl Client {
         }
     }
 
-    ///Fetch an IP pool
-    ///
-    ///Sends a `GET` request to `/system/ip-pools/{pool_name}`
+    #[doc = "Fetch an IP pool\n\nSends a `GET` request to `/system/ip-pools/{pool_name}`\n\n"]
     pub async fn ip_pool_view<'a>(
         &'a self,
         pool_name: &'a types::Name,
@@ -21733,9 +20053,7 @@ impl Client {
         }
     }
 
-    ///Update an IP Pool
-    ///
-    ///Sends a `PUT` request to `/system/ip-pools/{pool_name}`
+    #[doc = "Update an IP Pool\n\nSends a `PUT` request to `/system/ip-pools/{pool_name}`\n\n"]
     pub async fn ip_pool_update<'a>(
         &'a self,
         pool_name: &'a types::Name,
@@ -21781,9 +20099,7 @@ impl Client {
         }
     }
 
-    ///Delete an IP Pool
-    ///
-    ///Sends a `DELETE` request to `/system/ip-pools/{pool_name}`
+    #[doc = "Delete an IP Pool\n\nSends a `DELETE` request to `/system/ip-pools/{pool_name}`\n\n"]
     pub async fn ip_pool_delete<'a>(
         &'a self,
         pool_name: &'a types::Name,
@@ -21827,17 +20143,7 @@ impl Client {
         }
     }
 
-    ///List ranges for an IP pool
-    ///
-    ///Ranges are ordered by their first address.
-    ///
-    ///Sends a `GET` request to `/system/ip-pools/{pool_name}/ranges`
-    ///
-    ///Arguments:
-    /// - `pool_name`
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `page_token`: Token returned by previous call to retrieve the
-    ///   subsequent page
+    #[doc = "List ranges for an IP pool\n\nRanges are ordered by their first address.\n\nSends a `GET` request to `/system/ip-pools/{pool_name}/ranges`\n\nArguments:\n- `pool_name`\n- `limit`: Maximum number of items returned by a single call\n- `page_token`: Token returned by previous call to retrieve the subsequent page\n"]
     pub async fn ip_pool_range_list<'a>(
         &'a self,
         pool_name: &'a types::Name,
@@ -21888,16 +20194,7 @@ impl Client {
         }
     }
 
-    ///List ranges for an IP pool as a Stream
-    ///
-    ///Ranges are ordered by their first address.
-    ///
-    ///Sends repeated `GET` requests to `/system/ip-pools/{pool_name}/ranges`
-    /// until there are no more results.
-    ///
-    ///Arguments:
-    /// - `pool_name`
-    /// - `limit`: Maximum number of items returned by a single call
+    #[doc = "List ranges for an IP pool as a Stream\n\nRanges are ordered by their first address.\n\nSends repeated `GET` requests to `/system/ip-pools/{pool_name}/ranges` until there are no more results.\n\nArguments:\n- `pool_name`\n- `limit`: Maximum number of items returned by a single call\n"]
     pub fn ip_pool_range_list_stream<'a>(
         &'a self,
         pool_name: &'a types::Name,
@@ -21930,9 +20227,7 @@ impl Client {
             .boxed()
     }
 
-    ///Add a range to an IP pool
-    ///
-    ///Sends a `POST` request to `/system/ip-pools/{pool_name}/ranges/add`
+    #[doc = "Add a range to an IP pool\n\nSends a `POST` request to `/system/ip-pools/{pool_name}/ranges/add`\n\n"]
     pub async fn ip_pool_range_add<'a>(
         &'a self,
         pool_name: &'a types::Name,
@@ -21978,9 +20273,7 @@ impl Client {
         }
     }
 
-    ///Remove a range from an IP pool
-    ///
-    ///Sends a `POST` request to `/system/ip-pools/{pool_name}/ranges/remove`
+    #[doc = "Remove a range from an IP pool\n\nSends a `POST` request to `/system/ip-pools/{pool_name}/ranges/remove`\n\n"]
     pub async fn ip_pool_range_remove<'a>(
         &'a self,
         pool_name: &'a types::Name,
@@ -22026,9 +20319,7 @@ impl Client {
         }
     }
 
-    ///Fetch the IP pool used for Oxide services
-    ///
-    ///Sends a `GET` request to `/system/ip-pools-service`
+    #[doc = "Fetch the IP pool used for Oxide services\n\nSends a `GET` request to `/system/ip-pools-service`\n\n"]
     pub async fn ip_pool_service_view<'a>(
         &'a self,
     ) -> Result<ResponseValue<types::IpPool>, Error<types::Error>> {
@@ -22067,16 +20358,7 @@ impl Client {
         }
     }
 
-    ///List ranges for the IP pool used for Oxide services
-    ///
-    ///Ranges are ordered by their first address.
-    ///
-    ///Sends a `GET` request to `/system/ip-pools-service/ranges`
-    ///
-    ///Arguments:
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `page_token`: Token returned by previous call to retrieve the
-    ///   subsequent page
+    #[doc = "List ranges for the IP pool used for Oxide services\n\nRanges are ordered by their first address.\n\nSends a `GET` request to `/system/ip-pools-service/ranges`\n\nArguments:\n- `limit`: Maximum number of items returned by a single call\n- `page_token`: Token returned by previous call to retrieve the subsequent page\n"]
     pub async fn ip_pool_service_range_list<'a>(
         &'a self,
         limit: Option<::std::num::NonZeroU32>,
@@ -22122,15 +20404,7 @@ impl Client {
         }
     }
 
-    ///List ranges for the IP pool used for Oxide services as a Stream
-    ///
-    ///Ranges are ordered by their first address.
-    ///
-    ///Sends repeated `GET` requests to `/system/ip-pools-service/ranges` until
-    /// there are no more results.
-    ///
-    ///Arguments:
-    /// - `limit`: Maximum number of items returned by a single call
+    #[doc = "List ranges for the IP pool used for Oxide services as a Stream\n\nRanges are ordered by their first address.\n\nSends repeated `GET` requests to `/system/ip-pools-service/ranges` until there are no more results.\n\nArguments:\n- `limit`: Maximum number of items returned by a single call\n"]
     pub fn ip_pool_service_range_list_stream<'a>(
         &'a self,
         limit: Option<::std::num::NonZeroU32>,
@@ -22162,9 +20436,7 @@ impl Client {
             .boxed()
     }
 
-    ///Add a range to an IP pool used for Oxide services
-    ///
-    ///Sends a `POST` request to `/system/ip-pools-service/ranges/add`
+    #[doc = "Add a range to an IP pool used for Oxide services\n\nSends a `POST` request to `/system/ip-pools-service/ranges/add`\n\n"]
     pub async fn ip_pool_service_range_add<'a>(
         &'a self,
         body: &'a types::IpRange,
@@ -22205,9 +20477,7 @@ impl Client {
         }
     }
 
-    ///Remove a range from an IP pool used for Oxide services
-    ///
-    ///Sends a `POST` request to `/system/ip-pools-service/ranges/remove`
+    #[doc = "Remove a range from an IP pool used for Oxide services\n\nSends a `POST` request to `/system/ip-pools-service/ranges/remove`\n\n"]
     pub async fn ip_pool_service_range_remove<'a>(
         &'a self,
         body: &'a types::IpRange,
@@ -22248,18 +20518,7 @@ impl Client {
         }
     }
 
-    ///Access metrics data
-    ///
-    ///Sends a `GET` request to `/system/metrics/{metric_name}`
-    ///
-    ///Arguments:
-    /// - `metric_name`
-    /// - `end_time`: An exclusive end time of metrics.
-    /// - `id`: The UUID of the container being queried
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `page_token`: Token returned by previous call to retrieve the
-    ///   subsequent page
-    /// - `start_time`: An inclusive start time of metrics.
+    #[doc = "Access metrics data\n\nSends a `GET` request to `/system/metrics/{metric_name}`\n\nArguments:\n- `metric_name`\n- `end_time`: An exclusive end time of metrics.\n- `id`: The UUID of the container being queried\n- `limit`: Maximum number of items returned by a single call\n- `page_token`: Token returned by previous call to retrieve the subsequent page\n- `start_time`: An inclusive start time of metrics.\n"]
     pub async fn system_metric<'a>(
         &'a self,
         metric_name: types::SystemMetricName,
@@ -22319,9 +20578,7 @@ impl Client {
         }
     }
 
-    ///Fetch the top-level IAM policy
-    ///
-    ///Sends a `GET` request to `/system/policy`
+    #[doc = "Fetch the top-level IAM policy\n\nSends a `GET` request to `/system/policy`\n\n"]
     pub async fn system_policy_view<'a>(
         &'a self,
     ) -> Result<ResponseValue<types::FleetRolePolicy>, Error<types::Error>> {
@@ -22360,9 +20617,7 @@ impl Client {
         }
     }
 
-    ///Update the top-level IAM policy
-    ///
-    ///Sends a `PUT` request to `/system/policy`
+    #[doc = "Update the top-level IAM policy\n\nSends a `PUT` request to `/system/policy`\n\n"]
     pub async fn system_policy_update<'a>(
         &'a self,
         body: &'a types::FleetRolePolicy,
@@ -22403,15 +20658,7 @@ impl Client {
         }
     }
 
-    ///List sagas
-    ///
-    ///Sends a `GET` request to `/system/sagas`
-    ///
-    ///Arguments:
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `page_token`: Token returned by previous call to retrieve the
-    ///   subsequent page
-    /// - `sort_by`
+    #[doc = "List sagas\n\nSends a `GET` request to `/system/sagas`\n\nArguments:\n- `limit`: Maximum number of items returned by a single call\n- `page_token`: Token returned by previous call to retrieve the subsequent page\n- `sort_by`\n"]
     pub async fn saga_list<'a>(
         &'a self,
         limit: Option<::std::num::NonZeroU32>,
@@ -22459,14 +20706,7 @@ impl Client {
         }
     }
 
-    ///List sagas as a Stream
-    ///
-    ///Sends repeated `GET` requests to `/system/sagas` until there are no more
-    /// results.
-    ///
-    ///Arguments:
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `sort_by`
+    #[doc = "List sagas as a Stream\n\nSends repeated `GET` requests to `/system/sagas` until there are no more results.\n\nArguments:\n- `limit`: Maximum number of items returned by a single call\n- `sort_by`\n"]
     pub fn saga_list_stream<'a>(
         &'a self,
         limit: Option<::std::num::NonZeroU32>,
@@ -22498,9 +20738,7 @@ impl Client {
             .boxed()
     }
 
-    ///Fetch a saga
-    ///
-    ///Sends a `GET` request to `/system/sagas/{saga_id}`
+    #[doc = "Fetch a saga\n\nSends a `GET` request to `/system/sagas/{saga_id}`\n\n"]
     pub async fn saga_view<'a>(
         &'a self,
         saga_id: &'a ::uuid::Uuid,
@@ -22544,17 +20782,7 @@ impl Client {
         }
     }
 
-    ///List silos
-    ///
-    ///Lists silos that are discoverable based on the current permissions.
-    ///
-    ///Sends a `GET` request to `/system/silos`
-    ///
-    ///Arguments:
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `page_token`: Token returned by previous call to retrieve the
-    ///   subsequent page
-    /// - `sort_by`
+    #[doc = "List silos\n\nLists silos that are discoverable based on the current permissions.\n\nSends a `GET` request to `/system/silos`\n\nArguments:\n- `limit`: Maximum number of items returned by a single call\n- `page_token`: Token returned by previous call to retrieve the subsequent page\n- `sort_by`\n"]
     pub async fn silo_list<'a>(
         &'a self,
         limit: Option<::std::num::NonZeroU32>,
@@ -22602,16 +20830,7 @@ impl Client {
         }
     }
 
-    ///List silos as a Stream
-    ///
-    ///Lists silos that are discoverable based on the current permissions.
-    ///
-    ///Sends repeated `GET` requests to `/system/silos` until there are no more
-    /// results.
-    ///
-    ///Arguments:
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `sort_by`
+    #[doc = "List silos as a Stream\n\nLists silos that are discoverable based on the current permissions.\n\nSends repeated `GET` requests to `/system/silos` until there are no more results.\n\nArguments:\n- `limit`: Maximum number of items returned by a single call\n- `sort_by`\n"]
     pub fn silo_list_stream<'a>(
         &'a self,
         limit: Option<::std::num::NonZeroU32>,
@@ -22643,9 +20862,7 @@ impl Client {
             .boxed()
     }
 
-    ///Create a silo
-    ///
-    ///Sends a `POST` request to `/system/silos`
+    #[doc = "Create a silo\n\nSends a `POST` request to `/system/silos`\n\n"]
     pub async fn silo_create<'a>(
         &'a self,
         body: &'a types::SiloCreate,
@@ -22686,14 +20903,7 @@ impl Client {
         }
     }
 
-    ///Fetch a silo
-    ///
-    ///Fetch a silo by name.
-    ///
-    ///Sends a `GET` request to `/system/silos/{silo_name}`
-    ///
-    ///Arguments:
-    /// - `silo_name`: The silo's unique name.
+    #[doc = "Fetch a silo\n\nFetch a silo by name.\n\nSends a `GET` request to `/system/silos/{silo_name}`\n\nArguments:\n- `silo_name`: The silo's unique name.\n"]
     pub async fn silo_view<'a>(
         &'a self,
         silo_name: &'a types::Name,
@@ -22737,14 +20947,7 @@ impl Client {
         }
     }
 
-    ///Delete a silo
-    ///
-    ///Delete a silo by name.
-    ///
-    ///Sends a `DELETE` request to `/system/silos/{silo_name}`
-    ///
-    ///Arguments:
-    /// - `silo_name`: The silo's unique name.
+    #[doc = "Delete a silo\n\nDelete a silo by name.\n\nSends a `DELETE` request to `/system/silos/{silo_name}`\n\nArguments:\n- `silo_name`: The silo's unique name.\n"]
     pub async fn silo_delete<'a>(
         &'a self,
         silo_name: &'a types::Name,
@@ -22788,16 +20991,7 @@ impl Client {
         }
     }
 
-    ///List a silo's IDPs
-    ///
-    ///Sends a `GET` request to `/system/silos/{silo_name}/identity-providers`
-    ///
-    ///Arguments:
-    /// - `silo_name`: The silo's unique name.
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `page_token`: Token returned by previous call to retrieve the
-    ///   subsequent page
-    /// - `sort_by`
+    #[doc = "List a silo's IDPs\n\nSends a `GET` request to `/system/silos/{silo_name}/identity-providers`\n\nArguments:\n- `silo_name`: The silo's unique name.\n- `limit`: Maximum number of items returned by a single call\n- `page_token`: Token returned by previous call to retrieve the subsequent page\n- `sort_by`\n"]
     pub async fn silo_identity_provider_list<'a>(
         &'a self,
         silo_name: &'a types::Name,
@@ -22850,16 +21044,7 @@ impl Client {
         }
     }
 
-    ///List a silo's IDPs as a Stream
-    ///
-    ///Sends repeated `GET` requests to
-    /// `/system/silos/{silo_name}/identity-providers` until there are no more
-    /// results.
-    ///
-    ///Arguments:
-    /// - `silo_name`: The silo's unique name.
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `sort_by`
+    #[doc = "List a silo's IDPs as a Stream\n\nSends repeated `GET` requests to `/system/silos/{silo_name}/identity-providers` until there are no more results.\n\nArguments:\n- `silo_name`: The silo's unique name.\n- `limit`: Maximum number of items returned by a single call\n- `sort_by`\n"]
     pub fn silo_identity_provider_list_stream<'a>(
         &'a self,
         silo_name: &'a types::Name,
@@ -22893,18 +21078,7 @@ impl Client {
             .boxed()
     }
 
-    ///Create a user
-    ///
-    ///Users can only be created in Silos with `provision_type` == `Fixed`.
-    /// Otherwise, Silo users are just-in-time (JIT) provisioned when a user
-    /// first logs in using an external Identity Provider.
-    ///
-    ///Sends a `POST` request to
-    /// `/system/silos/{silo_name}/identity-providers/local/users`
-    ///
-    ///Arguments:
-    /// - `silo_name`: The silo's unique name.
-    /// - `body`
+    #[doc = "Create a user\n\nUsers can only be created in Silos with `provision_type` == `Fixed`. Otherwise, Silo users are just-in-time (JIT) provisioned when a user first logs in using an external Identity Provider.\n\nSends a `POST` request to `/system/silos/{silo_name}/identity-providers/local/users`\n\nArguments:\n- `silo_name`: The silo's unique name.\n- `body`\n"]
     pub async fn local_idp_user_create<'a>(
         &'a self,
         silo_name: &'a types::Name,
@@ -22950,14 +21124,7 @@ impl Client {
         }
     }
 
-    ///Delete a user
-    ///
-    ///Sends a `DELETE` request to
-    /// `/system/silos/{silo_name}/identity-providers/local/users/{user_id}`
-    ///
-    ///Arguments:
-    /// - `silo_name`: The silo's unique name.
-    /// - `user_id`: The user's internal id
+    #[doc = "Delete a user\n\nSends a `DELETE` request to `/system/silos/{silo_name}/identity-providers/local/users/{user_id}`\n\nArguments:\n- `silo_name`: The silo's unique name.\n- `user_id`: The user's internal id\n"]
     pub async fn local_idp_user_delete<'a>(
         &'a self,
         silo_name: &'a types::Name,
@@ -23003,19 +21170,7 @@ impl Client {
         }
     }
 
-    ///Set or invalidate a user's password
-    ///
-    ///Passwords can only be updated for users in Silos with identity mode
-    /// `LocalOnly`.
-    ///
-    ///Sends a `POST` request to
-    /// `/system/silos/{silo_name}/identity-providers/local/users/{user_id}/
-    /// set-password`
-    ///
-    ///Arguments:
-    /// - `silo_name`: The silo's unique name.
-    /// - `user_id`: The user's internal id
-    /// - `body`
+    #[doc = "Set or invalidate a user's password\n\nPasswords can only be updated for users in Silos with identity mode `LocalOnly`.\n\nSends a `POST` request to `/system/silos/{silo_name}/identity-providers/local/users/{user_id}/set-password`\n\nArguments:\n- `silo_name`: The silo's unique name.\n- `user_id`: The user's internal id\n- `body`\n"]
     pub async fn local_idp_user_set_password<'a>(
         &'a self,
         silo_name: &'a types::Name,
@@ -23063,14 +21218,7 @@ impl Client {
         }
     }
 
-    ///Create a SAML IDP
-    ///
-    ///Sends a `POST` request to
-    /// `/system/silos/{silo_name}/identity-providers/saml`
-    ///
-    ///Arguments:
-    /// - `silo_name`: The silo's unique name.
-    /// - `body`
+    #[doc = "Create a SAML IDP\n\nSends a `POST` request to `/system/silos/{silo_name}/identity-providers/saml`\n\nArguments:\n- `silo_name`: The silo's unique name.\n- `body`\n"]
     pub async fn saml_identity_provider_create<'a>(
         &'a self,
         silo_name: &'a types::Name,
@@ -23116,14 +21264,7 @@ impl Client {
         }
     }
 
-    ///Fetch a SAML IDP
-    ///
-    ///Sends a `GET` request to
-    /// `/system/silos/{silo_name}/identity-providers/saml/{provider_name}`
-    ///
-    ///Arguments:
-    /// - `silo_name`: The silo's unique name.
-    /// - `provider_name`: The SAML identity provider's name
+    #[doc = "Fetch a SAML IDP\n\nSends a `GET` request to `/system/silos/{silo_name}/identity-providers/saml/{provider_name}`\n\nArguments:\n- `silo_name`: The silo's unique name.\n- `provider_name`: The SAML identity provider's name\n"]
     pub async fn saml_identity_provider_view<'a>(
         &'a self,
         silo_name: &'a types::Name,
@@ -23169,12 +21310,7 @@ impl Client {
         }
     }
 
-    ///Fetch a silo's IAM policy
-    ///
-    ///Sends a `GET` request to `/system/silos/{silo_name}/policy`
-    ///
-    ///Arguments:
-    /// - `silo_name`: The silo's unique name.
+    #[doc = "Fetch a silo's IAM policy\n\nSends a `GET` request to `/system/silos/{silo_name}/policy`\n\nArguments:\n- `silo_name`: The silo's unique name.\n"]
     pub async fn silo_policy_view<'a>(
         &'a self,
         silo_name: &'a types::Name,
@@ -23218,13 +21354,7 @@ impl Client {
         }
     }
 
-    ///Update a silo's IAM policy
-    ///
-    ///Sends a `PUT` request to `/system/silos/{silo_name}/policy`
-    ///
-    ///Arguments:
-    /// - `silo_name`: The silo's unique name.
-    /// - `body`
+    #[doc = "Update a silo's IAM policy\n\nSends a `PUT` request to `/system/silos/{silo_name}/policy`\n\nArguments:\n- `silo_name`: The silo's unique name.\n- `body`\n"]
     pub async fn silo_policy_update<'a>(
         &'a self,
         silo_name: &'a types::Name,
@@ -23270,16 +21400,7 @@ impl Client {
         }
     }
 
-    ///List users in a silo
-    ///
-    ///Sends a `GET` request to `/system/silos/{silo_name}/users/all`
-    ///
-    ///Arguments:
-    /// - `silo_name`: The silo's unique name.
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `page_token`: Token returned by previous call to retrieve the
-    ///   subsequent page
-    /// - `sort_by`
+    #[doc = "List users in a silo\n\nSends a `GET` request to `/system/silos/{silo_name}/users/all`\n\nArguments:\n- `silo_name`: The silo's unique name.\n- `limit`: Maximum number of items returned by a single call\n- `page_token`: Token returned by previous call to retrieve the subsequent page\n- `sort_by`\n"]
     pub async fn silo_users_list<'a>(
         &'a self,
         silo_name: &'a types::Name,
@@ -23332,15 +21453,7 @@ impl Client {
         }
     }
 
-    ///List users in a silo as a Stream
-    ///
-    ///Sends repeated `GET` requests to `/system/silos/{silo_name}/users/all`
-    /// until there are no more results.
-    ///
-    ///Arguments:
-    /// - `silo_name`: The silo's unique name.
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `sort_by`
+    #[doc = "List users in a silo as a Stream\n\nSends repeated `GET` requests to `/system/silos/{silo_name}/users/all` until there are no more results.\n\nArguments:\n- `silo_name`: The silo's unique name.\n- `limit`: Maximum number of items returned by a single call\n- `sort_by`\n"]
     pub fn silo_users_list_stream<'a>(
         &'a self,
         silo_name: &'a types::Name,
@@ -23373,13 +21486,7 @@ impl Client {
             .boxed()
     }
 
-    ///Fetch a user
-    ///
-    ///Sends a `GET` request to `/system/silos/{silo_name}/users/id/{user_id}`
-    ///
-    ///Arguments:
-    /// - `silo_name`: The silo's unique name.
-    /// - `user_id`: The user's internal id
+    #[doc = "Fetch a user\n\nSends a `GET` request to `/system/silos/{silo_name}/users/id/{user_id}`\n\nArguments:\n- `silo_name`: The silo's unique name.\n- `user_id`: The user's internal id\n"]
     pub async fn silo_user_view<'a>(
         &'a self,
         silo_name: &'a types::Name,
@@ -23425,15 +21532,7 @@ impl Client {
         }
     }
 
-    ///List built-in users
-    ///
-    ///Sends a `GET` request to `/system/user`
-    ///
-    ///Arguments:
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `page_token`: Token returned by previous call to retrieve the
-    ///   subsequent page
-    /// - `sort_by`
+    #[doc = "List built-in users\n\nSends a `GET` request to `/system/user`\n\nArguments:\n- `limit`: Maximum number of items returned by a single call\n- `page_token`: Token returned by previous call to retrieve the subsequent page\n- `sort_by`\n"]
     pub async fn system_user_list<'a>(
         &'a self,
         limit: Option<::std::num::NonZeroU32>,
@@ -23481,14 +21580,7 @@ impl Client {
         }
     }
 
-    ///List built-in users as a Stream
-    ///
-    ///Sends repeated `GET` requests to `/system/user` until there are no more
-    /// results.
-    ///
-    ///Arguments:
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `sort_by`
+    #[doc = "List built-in users as a Stream\n\nSends repeated `GET` requests to `/system/user` until there are no more results.\n\nArguments:\n- `limit`: Maximum number of items returned by a single call\n- `sort_by`\n"]
     pub fn system_user_list_stream<'a>(
         &'a self,
         limit: Option<::std::num::NonZeroU32>,
@@ -23521,12 +21613,7 @@ impl Client {
             .boxed()
     }
 
-    ///Fetch a built-in user
-    ///
-    ///Sends a `GET` request to `/system/user/{user_name}`
-    ///
-    ///Arguments:
-    /// - `user_name`: The built-in user's unique name.
+    #[doc = "Fetch a built-in user\n\nSends a `GET` request to `/system/user/{user_name}`\n\nArguments:\n- `user_name`: The built-in user's unique name.\n"]
     pub async fn system_user_view<'a>(
         &'a self,
         user_name: &'a types::Name,
@@ -23570,14 +21657,7 @@ impl Client {
         }
     }
 
-    ///List timeseries schema
-    ///
-    ///Sends a `GET` request to `/timeseries/schema`
-    ///
-    ///Arguments:
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `page_token`: Token returned by previous call to retrieve the
-    ///   subsequent page
+    #[doc = "List timeseries schema\n\nSends a `GET` request to `/timeseries/schema`\n\nArguments:\n- `limit`: Maximum number of items returned by a single call\n- `page_token`: Token returned by previous call to retrieve the subsequent page\n"]
     pub async fn timeseries_schema_get<'a>(
         &'a self,
         limit: Option<::std::num::NonZeroU32>,
@@ -23623,13 +21703,7 @@ impl Client {
         }
     }
 
-    ///List timeseries schema as a Stream
-    ///
-    ///Sends repeated `GET` requests to `/timeseries/schema` until there are no
-    /// more results.
-    ///
-    ///Arguments:
-    /// - `limit`: Maximum number of items returned by a single call
+    #[doc = "List timeseries schema as a Stream\n\nSends repeated `GET` requests to `/timeseries/schema` until there are no more results.\n\nArguments:\n- `limit`: Maximum number of items returned by a single call\n"]
     pub fn timeseries_schema_get_stream<'a>(
         &'a self,
         limit: Option<::std::num::NonZeroU32>,
@@ -23661,15 +21735,7 @@ impl Client {
             .boxed()
     }
 
-    ///List users
-    ///
-    ///Sends a `GET` request to `/users`
-    ///
-    ///Arguments:
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `page_token`: Token returned by previous call to retrieve the
-    ///   subsequent page
-    /// - `sort_by`
+    #[doc = "List users\n\nSends a `GET` request to `/users`\n\nArguments:\n- `limit`: Maximum number of items returned by a single call\n- `page_token`: Token returned by previous call to retrieve the subsequent page\n- `sort_by`\n"]
     pub async fn user_list<'a>(
         &'a self,
         limit: Option<::std::num::NonZeroU32>,
@@ -23717,14 +21783,7 @@ impl Client {
         }
     }
 
-    ///List users as a Stream
-    ///
-    ///Sends repeated `GET` requests to `/users` until there are no more
-    /// results.
-    ///
-    ///Arguments:
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `sort_by`
+    #[doc = "List users as a Stream\n\nSends repeated `GET` requests to `/users` until there are no more results.\n\nArguments:\n- `limit`: Maximum number of items returned by a single call\n- `sort_by`\n"]
     pub fn user_list_stream<'a>(
         &'a self,
         limit: Option<::std::num::NonZeroU32>,
@@ -23756,17 +21815,7 @@ impl Client {
             .boxed()
     }
 
-    ///List disks
-    ///
-    ///Sends a `GET` request to `/v1/disks`
-    ///
-    ///Arguments:
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `organization`
-    /// - `page_token`: Token returned by previous call to retrieve the
-    ///   subsequent page
-    /// - `project`
-    /// - `sort_by`
+    #[doc = "List disks\n\nSends a `GET` request to `/v1/disks`\n\nArguments:\n- `limit`: Maximum number of items returned by a single call\n- `organization`\n- `page_token`: Token returned by previous call to retrieve the subsequent page\n- `project`\n- `sort_by`\n"]
     pub async fn disk_list_v1<'a>(
         &'a self,
         limit: Option<::std::num::NonZeroU32>,
@@ -23821,16 +21870,7 @@ impl Client {
         }
     }
 
-    ///List disks as a Stream
-    ///
-    ///Sends repeated `GET` requests to `/v1/disks` until there are no more
-    /// results.
-    ///
-    ///Arguments:
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `organization`
-    /// - `project`
-    /// - `sort_by`
+    #[doc = "List disks as a Stream\n\nSends repeated `GET` requests to `/v1/disks` until there are no more results.\n\nArguments:\n- `limit`: Maximum number of items returned by a single call\n- `organization`\n- `project`\n- `sort_by`\n"]
     pub fn disk_list_v1_stream<'a>(
         &'a self,
         limit: Option<::std::num::NonZeroU32>,
@@ -23864,9 +21904,7 @@ impl Client {
             .boxed()
     }
 
-    ///Create a disk
-    ///
-    ///Sends a `POST` request to `/v1/disks`
+    #[doc = "Create a disk\n\nSends a `POST` request to `/v1/disks`\n\n"]
     pub async fn disk_create_v1<'a>(
         &'a self,
         organization: Option<&'a types::NameOrId>,
@@ -23914,9 +21952,7 @@ impl Client {
         }
     }
 
-    ///Fetch a disk
-    ///
-    ///Sends a `GET` request to `/v1/disks/{disk}`
+    #[doc = "Fetch a disk\n\nSends a `GET` request to `/v1/disks/{disk}`\n\n"]
     pub async fn disk_view_v1<'a>(
         &'a self,
         disk: &'a types::NameOrId,
@@ -23967,9 +22003,7 @@ impl Client {
         }
     }
 
-    ///Delete a disk
-    ///
-    ///Sends a `DELETE` request to `/v1/disks/{disk}`
+    #[doc = "Delete a disk\n\nSends a `DELETE` request to `/v1/disks/{disk}`\n\n"]
     pub async fn disk_delete_v1<'a>(
         &'a self,
         disk: &'a types::NameOrId,
@@ -24020,17 +22054,7 @@ impl Client {
         }
     }
 
-    ///List instances
-    ///
-    ///Sends a `GET` request to `/v1/instances`
-    ///
-    ///Arguments:
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `organization`
-    /// - `page_token`: Token returned by previous call to retrieve the
-    ///   subsequent page
-    /// - `project`
-    /// - `sort_by`
+    #[doc = "List instances\n\nSends a `GET` request to `/v1/instances`\n\nArguments:\n- `limit`: Maximum number of items returned by a single call\n- `organization`\n- `page_token`: Token returned by previous call to retrieve the subsequent page\n- `project`\n- `sort_by`\n"]
     pub async fn instance_list_v1<'a>(
         &'a self,
         limit: Option<::std::num::NonZeroU32>,
@@ -24085,16 +22109,7 @@ impl Client {
         }
     }
 
-    ///List instances as a Stream
-    ///
-    ///Sends repeated `GET` requests to `/v1/instances` until there are no more
-    /// results.
-    ///
-    ///Arguments:
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `organization`
-    /// - `project`
-    /// - `sort_by`
+    #[doc = "List instances as a Stream\n\nSends repeated `GET` requests to `/v1/instances` until there are no more results.\n\nArguments:\n- `limit`: Maximum number of items returned by a single call\n- `organization`\n- `project`\n- `sort_by`\n"]
     pub fn instance_list_v1_stream<'a>(
         &'a self,
         limit: Option<::std::num::NonZeroU32>,
@@ -24129,9 +22144,7 @@ impl Client {
             .boxed()
     }
 
-    ///Create an instance
-    ///
-    ///Sends a `POST` request to `/v1/instances`
+    #[doc = "Create an instance\n\nSends a `POST` request to `/v1/instances`\n\n"]
     pub async fn instance_create_v1<'a>(
         &'a self,
         organization: Option<&'a types::NameOrId>,
@@ -24179,9 +22192,7 @@ impl Client {
         }
     }
 
-    ///Fetch an instance
-    ///
-    ///Sends a `GET` request to `/v1/instances/{instance}`
+    #[doc = "Fetch an instance\n\nSends a `GET` request to `/v1/instances/{instance}`\n\n"]
     pub async fn instance_view_v1<'a>(
         &'a self,
         instance: &'a types::NameOrId,
@@ -24232,9 +22243,7 @@ impl Client {
         }
     }
 
-    ///Delete an instance
-    ///
-    ///Sends a `DELETE` request to `/v1/instances/{instance}`
+    #[doc = "Delete an instance\n\nSends a `DELETE` request to `/v1/instances/{instance}`\n\n"]
     pub async fn instance_delete_v1<'a>(
         &'a self,
         instance: &'a types::NameOrId,
@@ -24285,18 +22294,7 @@ impl Client {
         }
     }
 
-    ///List an instance's disks
-    ///
-    ///Sends a `GET` request to `/v1/instances/{instance}/disks`
-    ///
-    ///Arguments:
-    /// - `instance`
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `organization`
-    /// - `page_token`: Token returned by previous call to retrieve the
-    ///   subsequent page
-    /// - `project`
-    /// - `sort_by`
+    #[doc = "List an instance's disks\n\nSends a `GET` request to `/v1/instances/{instance}/disks`\n\nArguments:\n- `instance`\n- `limit`: Maximum number of items returned by a single call\n- `organization`\n- `page_token`: Token returned by previous call to retrieve the subsequent page\n- `project`\n- `sort_by`\n"]
     pub async fn instance_disk_list_v1<'a>(
         &'a self,
         instance: &'a types::NameOrId,
@@ -24356,17 +22354,7 @@ impl Client {
         }
     }
 
-    ///List an instance's disks as a Stream
-    ///
-    ///Sends repeated `GET` requests to `/v1/instances/{instance}/disks` until
-    /// there are no more results.
-    ///
-    ///Arguments:
-    /// - `instance`
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `organization`
-    /// - `project`
-    /// - `sort_by`
+    #[doc = "List an instance's disks as a Stream\n\nSends repeated `GET` requests to `/v1/instances/{instance}/disks` until there are no more results.\n\nArguments:\n- `instance`\n- `limit`: Maximum number of items returned by a single call\n- `organization`\n- `project`\n- `sort_by`\n"]
     pub fn instance_disk_list_v1_stream<'a>(
         &'a self,
         instance: &'a types::NameOrId,
@@ -24408,9 +22396,7 @@ impl Client {
             .boxed()
     }
 
-    ///Attach a disk to an instance
-    ///
-    ///Sends a `POST` request to `/v1/instances/{instance}/disks/attach`
+    #[doc = "Attach a disk to an instance\n\nSends a `POST` request to `/v1/instances/{instance}/disks/attach`\n\n"]
     pub async fn instance_disk_attach_v1<'a>(
         &'a self,
         instance: &'a types::NameOrId,
@@ -24463,9 +22449,7 @@ impl Client {
         }
     }
 
-    ///Detach a disk from an instance
-    ///
-    ///Sends a `POST` request to `/v1/instances/{instance}/disks/detach`
+    #[doc = "Detach a disk from an instance\n\nSends a `POST` request to `/v1/instances/{instance}/disks/detach`\n\n"]
     pub async fn instance_disk_detach_v1<'a>(
         &'a self,
         instance: &'a types::NameOrId,
@@ -24518,9 +22502,7 @@ impl Client {
         }
     }
 
-    ///Migrate an instance
-    ///
-    ///Sends a `POST` request to `/v1/instances/{instance}/migrate`
+    #[doc = "Migrate an instance\n\nSends a `POST` request to `/v1/instances/{instance}/migrate`\n\n"]
     pub async fn instance_migrate_v1<'a>(
         &'a self,
         instance: &'a types::NameOrId,
@@ -24573,9 +22555,7 @@ impl Client {
         }
     }
 
-    ///Reboot an instance
-    ///
-    ///Sends a `POST` request to `/v1/instances/{instance}/reboot`
+    #[doc = "Reboot an instance\n\nSends a `POST` request to `/v1/instances/{instance}/reboot`\n\n"]
     pub async fn instance_reboot_v1<'a>(
         &'a self,
         instance: &'a types::NameOrId,
@@ -24626,25 +22606,7 @@ impl Client {
         }
     }
 
-    ///Fetch an instance's serial console
-    ///
-    ///Sends a `GET` request to `/v1/instances/{instance}/serial-console`
-    ///
-    ///Arguments:
-    /// - `instance`
-    /// - `from_start`: Character index in the serial buffer from which to read,
-    ///   counting the bytes output since instance start. If this is not
-    ///   provided, `most_recent` must be provided, and if this *is* provided,
-    ///   `most_recent` must *not* be provided.
-    /// - `max_bytes`: Maximum number of bytes of buffered serial console
-    ///   contents to return. If the requested range runs to the end of the
-    ///   available buffer, the data returned will be shorter than `max_bytes`.
-    /// - `most_recent`: Character index in the serial buffer from which to
-    ///   read, counting *backward* from the most recently buffered data
-    ///   retrieved from the instance. (See note on `from_start` about mutual
-    ///   exclusivity)
-    /// - `organization`
-    /// - `project`
+    #[doc = "Fetch an instance's serial console\n\nSends a `GET` request to `/v1/instances/{instance}/serial-console`\n\nArguments:\n- `instance`\n- `from_start`: Character index in the serial buffer from which to read, counting the bytes output since instance start. If this is not provided, `most_recent` must be provided, and if this *is* provided, `most_recent` must *not* be provided.\n- `max_bytes`: Maximum number of bytes of buffered serial console contents to return. If the requested range runs to the end of the available buffer, the data returned will be shorter than `max_bytes`.\n- `most_recent`: Character index in the serial buffer from which to read, counting *backward* from the most recently buffered data retrieved from the instance. (See note on `from_start` about mutual exclusivity)\n- `organization`\n- `project`\n"]
     pub async fn instance_serial_console_v1<'a>(
         &'a self,
         instance: &'a types::NameOrId,
@@ -24707,10 +22669,7 @@ impl Client {
         }
     }
 
-    ///Stream an instance's serial console
-    ///
-    ///Sends a `GET` request to
-    /// `/v1/instances/{instance}/serial-console/stream`
+    #[doc = "Stream an instance's serial console\n\nSends a `GET` request to `/v1/instances/{instance}/serial-console/stream`\n\n"]
     pub async fn instance_serial_console_stream_v1<'a>(
         &'a self,
         instance: &'a types::NameOrId,
@@ -24762,9 +22721,7 @@ impl Client {
         }
     }
 
-    ///Boot an instance
-    ///
-    ///Sends a `POST` request to `/v1/instances/{instance}/start`
+    #[doc = "Boot an instance\n\nSends a `POST` request to `/v1/instances/{instance}/start`\n\n"]
     pub async fn instance_start_v1<'a>(
         &'a self,
         instance: &'a types::NameOrId,
@@ -24815,9 +22772,7 @@ impl Client {
         }
     }
 
-    ///Stop an instance
-    ///
-    ///Sends a `POST` request to `/v1/instances/{instance}/stop`
+    #[doc = "Stop an instance\n\nSends a `POST` request to `/v1/instances/{instance}/stop`\n\n"]
     pub async fn instance_stop_v1<'a>(
         &'a self,
         instance: &'a types::NameOrId,
@@ -24868,15 +22823,7 @@ impl Client {
         }
     }
 
-    ///List organizations
-    ///
-    ///Sends a `GET` request to `/v1/organizations`
-    ///
-    ///Arguments:
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `page_token`: Token returned by previous call to retrieve the
-    ///   subsequent page
-    /// - `sort_by`
+    #[doc = "List organizations\n\nSends a `GET` request to `/v1/organizations`\n\nArguments:\n- `limit`: Maximum number of items returned by a single call\n- `page_token`: Token returned by previous call to retrieve the subsequent page\n- `sort_by`\n"]
     pub async fn organization_list_v1<'a>(
         &'a self,
         limit: Option<::std::num::NonZeroU32>,
@@ -24924,14 +22871,7 @@ impl Client {
         }
     }
 
-    ///List organizations as a Stream
-    ///
-    ///Sends repeated `GET` requests to `/v1/organizations` until there are no
-    /// more results.
-    ///
-    ///Arguments:
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `sort_by`
+    #[doc = "List organizations as a Stream\n\nSends repeated `GET` requests to `/v1/organizations` until there are no more results.\n\nArguments:\n- `limit`: Maximum number of items returned by a single call\n- `sort_by`\n"]
     pub fn organization_list_v1_stream<'a>(
         &'a self,
         limit: Option<::std::num::NonZeroU32>,
@@ -24964,9 +22904,7 @@ impl Client {
             .boxed()
     }
 
-    ///Create an organization
-    ///
-    ///Sends a `POST` request to `/v1/organizations`
+    #[doc = "Create an organization\n\nSends a `POST` request to `/v1/organizations`\n\n"]
     pub async fn organization_create_v1<'a>(
         &'a self,
         body: &'a types::OrganizationCreate,
@@ -25007,9 +22945,7 @@ impl Client {
         }
     }
 
-    ///Fetch an organization
-    ///
-    ///Sends a `GET` request to `/v1/organizations/{organization}`
+    #[doc = "Fetch an organization\n\nSends a `GET` request to `/v1/organizations/{organization}`\n\n"]
     pub async fn organization_view_v1<'a>(
         &'a self,
         organization: &'a types::NameOrId,
@@ -25053,9 +22989,7 @@ impl Client {
         }
     }
 
-    ///Update an organization
-    ///
-    ///Sends a `PUT` request to `/v1/organizations/{organization}`
+    #[doc = "Update an organization\n\nSends a `PUT` request to `/v1/organizations/{organization}`\n\n"]
     pub async fn organization_update_v1<'a>(
         &'a self,
         organization: &'a types::NameOrId,
@@ -25101,9 +23035,7 @@ impl Client {
         }
     }
 
-    ///Delete an organization
-    ///
-    ///Sends a `DELETE` request to `/v1/organizations/{organization}`
+    #[doc = "Delete an organization\n\nSends a `DELETE` request to `/v1/organizations/{organization}`\n\n"]
     pub async fn organization_delete_v1<'a>(
         &'a self,
         organization: &'a types::NameOrId,
@@ -25147,9 +23079,7 @@ impl Client {
         }
     }
 
-    ///Fetch an organization's IAM policy
-    ///
-    ///Sends a `GET` request to `/v1/organizations/{organization}/policy`
+    #[doc = "Fetch an organization's IAM policy\n\nSends a `GET` request to `/v1/organizations/{organization}/policy`\n\n"]
     pub async fn organization_policy_view_v1<'a>(
         &'a self,
         organization: &'a types::NameOrId,
@@ -25193,9 +23123,7 @@ impl Client {
         }
     }
 
-    ///Update an organization's IAM policy
-    ///
-    ///Sends a `PUT` request to `/v1/organizations/{organization}/policy`
+    #[doc = "Update an organization's IAM policy\n\nSends a `PUT` request to `/v1/organizations/{organization}/policy`\n\n"]
     pub async fn organization_policy_update_v1<'a>(
         &'a self,
         organization: &'a types::NameOrId,
@@ -25241,16 +23169,7 @@ impl Client {
         }
     }
 
-    ///List projects
-    ///
-    ///Sends a `GET` request to `/v1/projects`
-    ///
-    ///Arguments:
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `organization`
-    /// - `page_token`: Token returned by previous call to retrieve the
-    ///   subsequent page
-    /// - `sort_by`
+    #[doc = "List projects\n\nSends a `GET` request to `/v1/projects`\n\nArguments:\n- `limit`: Maximum number of items returned by a single call\n- `organization`\n- `page_token`: Token returned by previous call to retrieve the subsequent page\n- `sort_by`\n"]
     pub async fn project_list_v1<'a>(
         &'a self,
         limit: Option<::std::num::NonZeroU32>,
@@ -25303,15 +23222,7 @@ impl Client {
         }
     }
 
-    ///List projects as a Stream
-    ///
-    ///Sends repeated `GET` requests to `/v1/projects` until there are no more
-    /// results.
-    ///
-    ///Arguments:
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `organization`
-    /// - `sort_by`
+    #[doc = "List projects as a Stream\n\nSends repeated `GET` requests to `/v1/projects` until there are no more results.\n\nArguments:\n- `limit`: Maximum number of items returned by a single call\n- `organization`\n- `sort_by`\n"]
     pub fn project_list_v1_stream<'a>(
         &'a self,
         limit: Option<::std::num::NonZeroU32>,
@@ -25344,9 +23255,7 @@ impl Client {
             .boxed()
     }
 
-    ///Create a project
-    ///
-    ///Sends a `POST` request to `/v1/projects`
+    #[doc = "Create a project\n\nSends a `POST` request to `/v1/projects`\n\n"]
     pub async fn project_create_v1<'a>(
         &'a self,
         organization: &'a types::NameOrId,
@@ -25392,9 +23301,7 @@ impl Client {
         }
     }
 
-    ///Fetch a project
-    ///
-    ///Sends a `GET` request to `/v1/projects/{project}`
+    #[doc = "Fetch a project\n\nSends a `GET` request to `/v1/projects/{project}`\n\n"]
     pub async fn project_view_v1<'a>(
         &'a self,
         project: &'a types::NameOrId,
@@ -25443,9 +23350,7 @@ impl Client {
         }
     }
 
-    ///Update a project
-    ///
-    ///Sends a `PUT` request to `/v1/projects/{project}`
+    #[doc = "Update a project\n\nSends a `PUT` request to `/v1/projects/{project}`\n\n"]
     pub async fn project_update_v1<'a>(
         &'a self,
         project: &'a types::NameOrId,
@@ -25496,9 +23401,7 @@ impl Client {
         }
     }
 
-    ///Delete a project
-    ///
-    ///Sends a `DELETE` request to `/v1/projects/{project}`
+    #[doc = "Delete a project\n\nSends a `DELETE` request to `/v1/projects/{project}`\n\n"]
     pub async fn project_delete_v1<'a>(
         &'a self,
         project: &'a types::NameOrId,
@@ -25547,9 +23450,7 @@ impl Client {
         }
     }
 
-    ///Fetch a project's IAM policy
-    ///
-    ///Sends a `GET` request to `/v1/projects/{project}/policy`
+    #[doc = "Fetch a project's IAM policy\n\nSends a `GET` request to `/v1/projects/{project}/policy`\n\n"]
     pub async fn project_policy_view_v1<'a>(
         &'a self,
         project: &'a types::NameOrId,
@@ -25598,9 +23499,7 @@ impl Client {
         }
     }
 
-    ///Update a project's IAM policy
-    ///
-    ///Sends a `PUT` request to `/v1/projects/{project}/policy`
+    #[doc = "Update a project's IAM policy\n\nSends a `PUT` request to `/v1/projects/{project}/policy`\n\n"]
     pub async fn project_policy_update_v1<'a>(
         &'a self,
         project: &'a types::NameOrId,
@@ -25651,15 +23550,7 @@ impl Client {
         }
     }
 
-    ///View version and update status of component tree
-    ///
-    ///Sends a `GET` request to `/v1/system/update/components`
-    ///
-    ///Arguments:
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `page_token`: Token returned by previous call to retrieve the
-    ///   subsequent page
-    /// - `sort_by`
+    #[doc = "View version and update status of component tree\n\nSends a `GET` request to `/v1/system/update/components`\n\nArguments:\n- `limit`: Maximum number of items returned by a single call\n- `page_token`: Token returned by previous call to retrieve the subsequent page\n- `sort_by`\n"]
     pub async fn system_component_version_list<'a>(
         &'a self,
         limit: Option<::std::num::NonZeroU32>,
@@ -25707,14 +23598,7 @@ impl Client {
         }
     }
 
-    ///View version and update status of component tree as a Stream
-    ///
-    ///Sends repeated `GET` requests to `/v1/system/update/components` until
-    /// there are no more results.
-    ///
-    ///Arguments:
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `sort_by`
+    #[doc = "View version and update status of component tree as a Stream\n\nSends repeated `GET` requests to `/v1/system/update/components` until there are no more results.\n\nArguments:\n- `limit`: Maximum number of items returned by a single call\n- `sort_by`\n"]
     pub fn system_component_version_list_stream<'a>(
         &'a self,
         limit: Option<::std::num::NonZeroU32>,
@@ -25747,15 +23631,7 @@ impl Client {
             .boxed()
     }
 
-    ///List all update deployments
-    ///
-    ///Sends a `GET` request to `/v1/system/update/deployments`
-    ///
-    ///Arguments:
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `page_token`: Token returned by previous call to retrieve the
-    ///   subsequent page
-    /// - `sort_by`
+    #[doc = "List all update deployments\n\nSends a `GET` request to `/v1/system/update/deployments`\n\nArguments:\n- `limit`: Maximum number of items returned by a single call\n- `page_token`: Token returned by previous call to retrieve the subsequent page\n- `sort_by`\n"]
     pub async fn update_deployments_list<'a>(
         &'a self,
         limit: Option<::std::num::NonZeroU32>,
@@ -25803,14 +23679,7 @@ impl Client {
         }
     }
 
-    ///List all update deployments as a Stream
-    ///
-    ///Sends repeated `GET` requests to `/v1/system/update/deployments` until
-    /// there are no more results.
-    ///
-    ///Arguments:
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `sort_by`
+    #[doc = "List all update deployments as a Stream\n\nSends repeated `GET` requests to `/v1/system/update/deployments` until there are no more results.\n\nArguments:\n- `limit`: Maximum number of items returned by a single call\n- `sort_by`\n"]
     pub fn update_deployments_list_stream<'a>(
         &'a self,
         limit: Option<::std::num::NonZeroU32>,
@@ -25843,9 +23712,7 @@ impl Client {
             .boxed()
     }
 
-    ///Fetch a system update deployment
-    ///
-    ///Sends a `GET` request to `/v1/system/update/deployments/{id}`
+    #[doc = "Fetch a system update deployment\n\nSends a `GET` request to `/v1/system/update/deployments/{id}`\n\n"]
     pub async fn update_deployment_view<'a>(
         &'a self,
         id: &'a ::uuid::Uuid,
@@ -25889,9 +23756,7 @@ impl Client {
         }
     }
 
-    ///Refresh update data
-    ///
-    ///Sends a `POST` request to `/v1/system/update/refresh`
+    #[doc = "Refresh update data\n\nSends a `POST` request to `/v1/system/update/refresh`\n\n"]
     pub async fn system_update_refresh<'a>(
         &'a self,
     ) -> Result<ResponseValue<()>, Error<types::Error>> {
@@ -25930,9 +23795,7 @@ impl Client {
         }
     }
 
-    ///Start system update
-    ///
-    ///Sends a `POST` request to `/v1/system/update/start`
+    #[doc = "Start system update\n\nSends a `POST` request to `/v1/system/update/start`\n\n"]
     pub async fn system_update_start<'a>(
         &'a self,
         body: &'a types::SystemUpdateStart,
@@ -25973,11 +23836,7 @@ impl Client {
         }
     }
 
-    ///Stop system update
-    ///
-    ///If there is no update in progress, do nothing.
-    ///
-    ///Sends a `POST` request to `/v1/system/update/stop`
+    #[doc = "Stop system update\n\nIf there is no update in progress, do nothing.\n\nSends a `POST` request to `/v1/system/update/stop`\n\n"]
     pub async fn system_update_stop<'a>(
         &'a self,
     ) -> Result<ResponseValue<()>, Error<types::Error>> {
@@ -26016,15 +23875,7 @@ impl Client {
         }
     }
 
-    ///List all updates
-    ///
-    ///Sends a `GET` request to `/v1/system/update/updates`
-    ///
-    ///Arguments:
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `page_token`: Token returned by previous call to retrieve the
-    ///   subsequent page
-    /// - `sort_by`
+    #[doc = "List all updates\n\nSends a `GET` request to `/v1/system/update/updates`\n\nArguments:\n- `limit`: Maximum number of items returned by a single call\n- `page_token`: Token returned by previous call to retrieve the subsequent page\n- `sort_by`\n"]
     pub async fn system_update_list<'a>(
         &'a self,
         limit: Option<::std::num::NonZeroU32>,
@@ -26072,14 +23923,7 @@ impl Client {
         }
     }
 
-    ///List all updates as a Stream
-    ///
-    ///Sends repeated `GET` requests to `/v1/system/update/updates` until there
-    /// are no more results.
-    ///
-    ///Arguments:
-    /// - `limit`: Maximum number of items returned by a single call
-    /// - `sort_by`
+    #[doc = "List all updates as a Stream\n\nSends repeated `GET` requests to `/v1/system/update/updates` until there are no more results.\n\nArguments:\n- `limit`: Maximum number of items returned by a single call\n- `sort_by`\n"]
     pub fn system_update_list_stream<'a>(
         &'a self,
         limit: Option<::std::num::NonZeroU32>,
@@ -26112,9 +23956,7 @@ impl Client {
             .boxed()
     }
 
-    ///View system update
-    ///
-    ///Sends a `GET` request to `/v1/system/update/updates/{version}`
+    #[doc = "View system update\n\nSends a `GET` request to `/v1/system/update/updates/{version}`\n\n"]
     pub async fn system_update_view<'a>(
         &'a self,
         version: &'a types::SemverVersion,
@@ -26158,10 +24000,7 @@ impl Client {
         }
     }
 
-    ///View system update component tree
-    ///
-    ///Sends a `GET` request to
-    /// `/v1/system/update/updates/{version}/components`
+    #[doc = "View system update component tree\n\nSends a `GET` request to `/v1/system/update/updates/{version}/components`\n\n"]
     pub async fn system_update_components_list<'a>(
         &'a self,
         version: &'a types::SemverVersion,
@@ -26205,9 +24044,7 @@ impl Client {
         }
     }
 
-    ///View system version and update status
-    ///
-    ///Sends a `GET` request to `/v1/system/update/version`
+    #[doc = "View system version and update status\n\nSends a `GET` request to `/v1/system/update/version`\n\n"]
     pub async fn system_version<'a>(
         &'a self,
     ) -> Result<ResponseValue<types::SystemVersion>, Error<types::Error>> {
@@ -26247,7 +24084,7 @@ impl Client {
     }
 }
 
-/// Items consumers will typically use such as the Client.
+#[doc = r" Items consumers will typically use such as the Client."]
 pub mod prelude {
     #[allow(unused_imports)]
     pub use super::Client;

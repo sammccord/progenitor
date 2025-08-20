@@ -2,12 +2,12 @@
 use progenitor_client::{encode_path, ClientHooks, OperationInfo, RequestBuilderExt};
 #[allow(unused_imports)]
 pub use progenitor_client::{ByteStream, ClientInfo, Error, ResponseValue};
-/// Types used as operation parameters and responses.
+#[doc = r" Types used as operation parameters and responses."]
 #[allow(clippy::all)]
 pub mod types {
-    /// Error types.
+    #[doc = r" Error types."]
     pub mod error {
-        /// Error from a `TryFrom` or `FromStr` implementation.
+        #[doc = r" Error from a `TryFrom` or `FromStr` implementation."]
         pub struct ConversionError(::std::borrow::Cow<'static, str>);
         impl ::std::error::Error for ConversionError {}
         impl ::std::fmt::Display for ConversionError {
@@ -35,26 +35,26 @@ pub mod types {
         }
     }
 
-    ///`GetThingOrThingsId`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "oneOf": [
-    ///    {
-    ///      "type": "string"
-    ///    },
-    ///    {
-    ///      "type": "array",
-    ///      "items": {
-    ///        "type": "string"
-    ///      }
-    ///    }
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`GetThingOrThingsId`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"oneOf\": ["]
+    #[doc = "    {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    {"]
+    #[doc = "      \"type\": \"array\","]
+    #[doc = "      \"items\": {"]
+    #[doc = "        \"type\": \"string\""]
+    #[doc = "      }"]
+    #[doc = "    }"]
+    #[doc = "  ]"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     #[serde(untagged)]
     pub enum GetThingOrThingsId {
@@ -74,21 +74,21 @@ pub mod types {
         }
     }
 
-    ///`HeaderArgAcceptLanguage`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "default": "en",
-    ///  "type": "string",
-    ///  "enum": [
-    ///    "de",
-    ///    "en"
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`HeaderArgAcceptLanguage`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"default\": \"en\","]
+    #[doc = "  \"type\": \"string\","]
+    #[doc = "  \"enum\": ["]
+    #[doc = "    \"de\","]
+    #[doc = "    \"en\""]
+    #[doc = "  ]"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(
         :: serde :: Deserialize,
         :: serde :: Serialize,
@@ -165,59 +165,59 @@ pub mod types {
         }
     }
 
-    ///`ObjWithOptionArray`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "required": [
-    ///    "stranger-things",
-    ///    "things"
-    ///  ],
-    ///  "properties": {
-    ///    "stranger-things": {
-    ///      "type": "array",
-    ///      "items": {
-    ///        "oneOf": [
-    ///          {
-    ///            "type": "null"
-    ///          },
-    ///          {
-    ///            "allOf": [
-    ///              {
-    ///                "$ref": "#/components/schemas/Task"
-    ///              }
-    ///            ],
-    ///            "oneOf": [
-    ///              {}
-    ///            ]
-    ///          }
-    ///        ]
-    ///      }
-    ///    },
-    ///    "things": {
-    ///      "type": "array",
-    ///      "items": {
-    ///        "oneOf": [
-    ///          {
-    ///            "type": "null"
-    ///          },
-    ///          {
-    ///            "allOf": [
-    ///              {
-    ///                "$ref": "#/components/schemas/Task"
-    ///              }
-    ///            ]
-    ///          }
-    ///        ]
-    ///      }
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`ObjWithOptionArray`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"stranger-things\","]
+    #[doc = "    \"things\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"stranger-things\": {"]
+    #[doc = "      \"type\": \"array\","]
+    #[doc = "      \"items\": {"]
+    #[doc = "        \"oneOf\": ["]
+    #[doc = "          {"]
+    #[doc = "            \"type\": \"null\""]
+    #[doc = "          },"]
+    #[doc = "          {"]
+    #[doc = "            \"allOf\": ["]
+    #[doc = "              {"]
+    #[doc = "                \"$ref\": \"#/components/schemas/Task\""]
+    #[doc = "              }"]
+    #[doc = "            ],"]
+    #[doc = "            \"oneOf\": ["]
+    #[doc = "              {}"]
+    #[doc = "            ]"]
+    #[doc = "          }"]
+    #[doc = "        ]"]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    \"things\": {"]
+    #[doc = "      \"type\": \"array\","]
+    #[doc = "      \"items\": {"]
+    #[doc = "        \"oneOf\": ["]
+    #[doc = "          {"]
+    #[doc = "            \"type\": \"null\""]
+    #[doc = "          },"]
+    #[doc = "          {"]
+    #[doc = "            \"allOf\": ["]
+    #[doc = "              {"]
+    #[doc = "                \"$ref\": \"#/components/schemas/Task\""]
+    #[doc = "              }"]
+    #[doc = "            ]"]
+    #[doc = "          }"]
+    #[doc = "        ]"]
+    #[doc = "      }"]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct ObjWithOptionArray {
         #[serde(rename = "stranger-things")]
@@ -237,43 +237,43 @@ pub mod types {
         }
     }
 
-    ///`Task`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "required": [
-    ///    "id",
-    ///    "name",
-    ///    "output_rules",
-    ///    "script",
-    ///    "state"
-    ///  ],
-    ///  "properties": {
-    ///    "id": {
-    ///      "type": "string"
-    ///    },
-    ///    "name": {
-    ///      "type": "string"
-    ///    },
-    ///    "output_rules": {
-    ///      "type": "array",
-    ///      "items": {
-    ///        "type": "string"
-    ///      }
-    ///    },
-    ///    "script": {
-    ///      "type": "string"
-    ///    },
-    ///    "state": {
-    ///      "type": "string"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`Task`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"id\","]
+    #[doc = "    \"name\","]
+    #[doc = "    \"output_rules\","]
+    #[doc = "    \"script\","]
+    #[doc = "    \"state\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"id\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"name\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"output_rules\": {"]
+    #[doc = "      \"type\": \"array\","]
+    #[doc = "      \"items\": {"]
+    #[doc = "        \"type\": \"string\""]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    \"script\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"state\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct Task {
         pub id: ::std::string::String,
@@ -295,39 +295,39 @@ pub mod types {
         }
     }
 
-    ///`TaskEvent`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "required": [
-    ///    "payload",
-    ///    "seq",
-    ///    "stream",
-    ///    "time"
-    ///  ],
-    ///  "properties": {
-    ///    "payload": {
-    ///      "type": "string"
-    ///    },
-    ///    "seq": {
-    ///      "type": "integer",
-    ///      "format": "uint",
-    ///      "minimum": 0.0
-    ///    },
-    ///    "stream": {
-    ///      "type": "string"
-    ///    },
-    ///    "time": {
-    ///      "type": "string",
-    ///      "format": "date-time"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`TaskEvent`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"payload\","]
+    #[doc = "    \"seq\","]
+    #[doc = "    \"stream\","]
+    #[doc = "    \"time\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"payload\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"seq\": {"]
+    #[doc = "      \"type\": \"integer\","]
+    #[doc = "      \"format\": \"uint\","]
+    #[doc = "      \"minimum\": 0.0"]
+    #[doc = "    },"]
+    #[doc = "    \"stream\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"time\": {"]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"date-time\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct TaskEvent {
         pub payload: ::std::string::String,
@@ -348,34 +348,34 @@ pub mod types {
         }
     }
 
-    ///`TaskOutput`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "required": [
-    ///    "id",
-    ///    "path",
-    ///    "size"
-    ///  ],
-    ///  "properties": {
-    ///    "id": {
-    ///      "type": "string"
-    ///    },
-    ///    "path": {
-    ///      "type": "string"
-    ///    },
-    ///    "size": {
-    ///      "type": "integer",
-    ///      "format": "uint64",
-    ///      "minimum": 0.0
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`TaskOutput`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"id\","]
+    #[doc = "    \"path\","]
+    #[doc = "    \"size\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"id\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"path\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"size\": {"]
+    #[doc = "      \"type\": \"integer\","]
+    #[doc = "      \"format\": \"uint64\","]
+    #[doc = "      \"minimum\": 0.0"]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct TaskOutput {
         pub id: ::std::string::String,
@@ -395,38 +395,38 @@ pub mod types {
         }
     }
 
-    ///`TaskSubmit`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "required": [
-    ///    "default",
-    ///    "name",
-    ///    "script"
-    ///  ],
-    ///  "properties": {
-    ///    "default": {
-    ///      "type": "boolean"
-    ///    },
-    ///    "name": {
-    ///      "type": "string"
-    ///    },
-    ///    "output_rules": {
-    ///      "type": "array",
-    ///      "items": {
-    ///        "type": "string"
-    ///      }
-    ///    },
-    ///    "script": {
-    ///      "type": "string"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`TaskSubmit`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"default\","]
+    #[doc = "    \"name\","]
+    #[doc = "    \"script\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"default\": {"]
+    #[doc = "      \"type\": \"boolean\""]
+    #[doc = "    },"]
+    #[doc = "    \"name\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"output_rules\": {"]
+    #[doc = "      \"type\": \"array\","]
+    #[doc = "      \"items\": {"]
+    #[doc = "        \"type\": \"string\""]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    \"script\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct TaskSubmit {
         pub default: bool,
@@ -448,24 +448,24 @@ pub mod types {
         }
     }
 
-    ///`TaskSubmitResult`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "required": [
-    ///    "id"
-    ///  ],
-    ///  "properties": {
-    ///    "id": {
-    ///      "type": "string"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`TaskSubmitResult`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"id\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"id\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct TaskSubmitResult {
         pub id: ::std::string::String,
@@ -483,24 +483,24 @@ pub mod types {
         }
     }
 
-    ///`UploadedChunk`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "required": [
-    ///    "id"
-    ///  ],
-    ///  "properties": {
-    ///    "id": {
-    ///      "type": "string"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`UploadedChunk`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"id\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"id\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct UploadedChunk {
         pub id: ::std::string::String,
@@ -518,24 +518,24 @@ pub mod types {
         }
     }
 
-    ///`UserCreate`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "required": [
-    ///    "name"
-    ///  ],
-    ///  "properties": {
-    ///    "name": {
-    ///      "type": "string"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`UserCreate`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"name\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"name\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct UserCreate {
         pub name: ::std::string::String,
@@ -553,32 +553,32 @@ pub mod types {
         }
     }
 
-    ///`UserCreateResult`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "required": [
-    ///    "id",
-    ///    "name",
-    ///    "token"
-    ///  ],
-    ///  "properties": {
-    ///    "id": {
-    ///      "type": "string"
-    ///    },
-    ///    "name": {
-    ///      "type": "string"
-    ///    },
-    ///    "token": {
-    ///      "type": "string"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`UserCreateResult`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"id\","]
+    #[doc = "    \"name\","]
+    #[doc = "    \"token\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"id\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"name\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"token\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct UserCreateResult {
         pub id: ::std::string::String,
@@ -598,28 +598,28 @@ pub mod types {
         }
     }
 
-    ///`WhoamiResult`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "required": [
-    ///    "id",
-    ///    "name"
-    ///  ],
-    ///  "properties": {
-    ///    "id": {
-    ///      "type": "string"
-    ///    },
-    ///    "name": {
-    ///      "type": "string"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`WhoamiResult`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"id\","]
+    #[doc = "    \"name\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"id\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"name\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct WhoamiResult {
         pub id: ::std::string::String,
@@ -638,46 +638,46 @@ pub mod types {
         }
     }
 
-    ///`Worker`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "required": [
-    ///    "deleted",
-    ///    "id",
-    ///    "recycle",
-    ///    "tasks"
-    ///  ],
-    ///  "properties": {
-    ///    "deleted": {
-    ///      "type": "boolean"
-    ///    },
-    ///    "id": {
-    ///      "type": "string"
-    ///    },
-    ///    "instance_id": {
-    ///      "type": "string"
-    ///    },
-    ///    "lastping": {
-    ///      "type": "string",
-    ///      "format": "date-time"
-    ///    },
-    ///    "recycle": {
-    ///      "type": "boolean"
-    ///    },
-    ///    "tasks": {
-    ///      "type": "array",
-    ///      "items": {
-    ///        "$ref": "#/components/schemas/WorkerTask"
-    ///      }
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`Worker`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"deleted\","]
+    #[doc = "    \"id\","]
+    #[doc = "    \"recycle\","]
+    #[doc = "    \"tasks\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"deleted\": {"]
+    #[doc = "      \"type\": \"boolean\""]
+    #[doc = "    },"]
+    #[doc = "    \"id\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"instance_id\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"lastping\": {"]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"date-time\""]
+    #[doc = "    },"]
+    #[doc = "    \"recycle\": {"]
+    #[doc = "      \"type\": \"boolean\""]
+    #[doc = "    },"]
+    #[doc = "    \"tasks\": {"]
+    #[doc = "      \"type\": \"array\","]
+    #[doc = "      \"items\": {"]
+    #[doc = "        \"$ref\": \"#/components/schemas/WorkerTask\""]
+    #[doc = "      }"]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct Worker {
         pub deleted: bool,
@@ -702,36 +702,36 @@ pub mod types {
         }
     }
 
-    ///`WorkerAddOutput`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "required": [
-    ///    "chunks",
-    ///    "path",
-    ///    "size"
-    ///  ],
-    ///  "properties": {
-    ///    "chunks": {
-    ///      "type": "array",
-    ///      "items": {
-    ///        "type": "string"
-    ///      }
-    ///    },
-    ///    "path": {
-    ///      "type": "string"
-    ///    },
-    ///    "size": {
-    ///      "type": "integer",
-    ///      "format": "int64"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`WorkerAddOutput`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"chunks\","]
+    #[doc = "    \"path\","]
+    #[doc = "    \"size\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"chunks\": {"]
+    #[doc = "      \"type\": \"array\","]
+    #[doc = "      \"items\": {"]
+    #[doc = "        \"type\": \"string\""]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    \"path\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"size\": {"]
+    #[doc = "      \"type\": \"integer\","]
+    #[doc = "      \"format\": \"int64\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct WorkerAddOutput {
         pub chunks: ::std::vec::Vec<::std::string::String>,
@@ -751,33 +751,33 @@ pub mod types {
         }
     }
 
-    ///`WorkerAppendTask`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "required": [
-    ///    "payload",
-    ///    "stream",
-    ///    "time"
-    ///  ],
-    ///  "properties": {
-    ///    "payload": {
-    ///      "type": "string"
-    ///    },
-    ///    "stream": {
-    ///      "type": "string"
-    ///    },
-    ///    "time": {
-    ///      "type": "string",
-    ///      "format": "date-time"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`WorkerAppendTask`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"payload\","]
+    #[doc = "    \"stream\","]
+    #[doc = "    \"time\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"payload\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"stream\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"time\": {"]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"date-time\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct WorkerAppendTask {
         pub payload: ::std::string::String,
@@ -797,28 +797,28 @@ pub mod types {
         }
     }
 
-    ///`WorkerBootstrap`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "required": [
-    ///    "bootstrap",
-    ///    "token"
-    ///  ],
-    ///  "properties": {
-    ///    "bootstrap": {
-    ///      "type": "string"
-    ///    },
-    ///    "token": {
-    ///      "type": "string"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`WorkerBootstrap`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"bootstrap\","]
+    #[doc = "    \"token\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"bootstrap\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"token\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct WorkerBootstrap {
         pub bootstrap: ::std::string::String,
@@ -837,24 +837,24 @@ pub mod types {
         }
     }
 
-    ///`WorkerBootstrapResult`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "required": [
-    ///    "id"
-    ///  ],
-    ///  "properties": {
-    ///    "id": {
-    ///      "type": "string"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`WorkerBootstrapResult`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"id\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"id\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct WorkerBootstrapResult {
         pub id: ::std::string::String,
@@ -872,24 +872,24 @@ pub mod types {
         }
     }
 
-    ///`WorkerCompleteTask`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "required": [
-    ///    "failed"
-    ///  ],
-    ///  "properties": {
-    ///    "failed": {
-    ///      "type": "boolean"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`WorkerCompleteTask`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"failed\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"failed\": {"]
+    #[doc = "      \"type\": \"boolean\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct WorkerCompleteTask {
         pub failed: bool,
@@ -907,27 +907,27 @@ pub mod types {
         }
     }
 
-    ///`WorkerPingResult`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "required": [
-    ///    "poweroff"
-    ///  ],
-    ///  "properties": {
-    ///    "poweroff": {
-    ///      "type": "boolean"
-    ///    },
-    ///    "task": {
-    ///      "$ref": "#/components/schemas/WorkerPingTask"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`WorkerPingResult`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"poweroff\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"poweroff\": {"]
+    #[doc = "      \"type\": \"boolean\""]
+    #[doc = "    },"]
+    #[doc = "    \"task\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/WorkerPingTask\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct WorkerPingResult {
         pub poweroff: bool,
@@ -947,35 +947,35 @@ pub mod types {
         }
     }
 
-    ///`WorkerPingTask`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "required": [
-    ///    "id",
-    ///    "output_rules",
-    ///    "script"
-    ///  ],
-    ///  "properties": {
-    ///    "id": {
-    ///      "type": "string"
-    ///    },
-    ///    "output_rules": {
-    ///      "type": "array",
-    ///      "items": {
-    ///        "type": "string"
-    ///      }
-    ///    },
-    ///    "script": {
-    ///      "type": "string"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`WorkerPingTask`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"id\","]
+    #[doc = "    \"output_rules\","]
+    #[doc = "    \"script\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"id\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"output_rules\": {"]
+    #[doc = "      \"type\": \"array\","]
+    #[doc = "      \"items\": {"]
+    #[doc = "        \"type\": \"string\""]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    \"script\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct WorkerPingTask {
         pub id: ::std::string::String,
@@ -995,32 +995,32 @@ pub mod types {
         }
     }
 
-    ///`WorkerTask`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "required": [
-    ///    "id",
-    ///    "name",
-    ///    "owner"
-    ///  ],
-    ///  "properties": {
-    ///    "id": {
-    ///      "type": "string"
-    ///    },
-    ///    "name": {
-    ///      "type": "string"
-    ///    },
-    ///    "owner": {
-    ///      "type": "string"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`WorkerTask`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"id\","]
+    #[doc = "    \"name\","]
+    #[doc = "    \"owner\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"id\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"name\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"owner\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct WorkerTask {
         pub id: ::std::string::String,
@@ -1040,27 +1040,27 @@ pub mod types {
         }
     }
 
-    ///`WorkersResult`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "required": [
-    ///    "workers"
-    ///  ],
-    ///  "properties": {
-    ///    "workers": {
-    ///      "type": "array",
-    ///      "items": {
-    ///        "$ref": "#/components/schemas/Worker"
-    ///      }
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`WorkersResult`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"workers\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"workers\": {"]
+    #[doc = "      \"type\": \"array\","]
+    #[doc = "      \"items\": {"]
+    #[doc = "        \"$ref\": \"#/components/schemas/Worker\""]
+    #[doc = "      }"]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct WorkersResult {
         pub workers: ::std::vec::Vec<Worker>,
@@ -1078,7 +1078,7 @@ pub mod types {
         }
     }
 
-    /// Types for composing complex structures.
+    #[doc = r" Types for composing complex structures."]
     pub mod builder {
         #[derive(Clone, Debug)]
         pub struct ObjWithOptionArray {
@@ -2436,40 +2436,47 @@ pub mod types {
 }
 
 #[derive(Clone, Debug)]
-///Client for Buildomat
-///
-///Version: 1.0
+#[doc = "Client for Buildomat\n\nVersion: 1.0"]
 pub struct Client {
     pub(crate) baseurl: String,
-    pub(crate) client: reqwest::Client,
+    pub(crate) client: reqwest_middleware::ClientWithMiddleware,
 }
 
 impl Client {
-    /// Create a new client.
-    ///
-    /// `baseurl` is the base URL provided to the internal
-    /// `reqwest::Client`, and should include a scheme and hostname,
-    /// as well as port and a path stem if applicable.
+    #[doc = r" Create a new client."]
+    #[doc = r""]
+    #[doc = r" `baseurl` is the base URL provided to the internal"]
+    #[doc = r" `reqwest::Client`, and should include a scheme and hostname,"]
+    #[doc = r" as well as port and a path stem if applicable."]
     pub fn new(baseurl: &str) -> Self {
         #[cfg(not(target_arch = "wasm32"))]
         let client = {
             let dur = std::time::Duration::from_secs(15);
-            reqwest::ClientBuilder::new()
+            let reqwest_client = reqwest::ClientBuilder::new()
                 .connect_timeout(dur)
                 .timeout(dur)
+                .build()
+                .unwrap();
+            reqwest_middleware::ClientBuilder::new(reqwest_client).build()
         };
         #[cfg(target_arch = "wasm32")]
-        let client = reqwest::ClientBuilder::new();
-        Self::new_with_client(baseurl, client.build().unwrap())
+        let client = {
+            let reqwest_client = reqwest::ClientBuilder::new().build().unwrap();
+            reqwest_middleware::ClientBuilder::new(reqwest_client).build()
+        };
+        Self::new_with_client(baseurl, client)
     }
 
-    /// Construct a new client with an existing `reqwest::Client`,
-    /// allowing more control over its configuration.
-    ///
-    /// `baseurl` is the base URL provided to the internal
-    /// `reqwest::Client`, and should include a scheme and hostname,
-    /// as well as port and a path stem if applicable.
-    pub fn new_with_client(baseurl: &str, client: reqwest::Client) -> Self {
+    #[doc = r" Construct a new client with an existing `reqwest_middleware::ClientWithMiddleware`,"]
+    #[doc = r" allowing more control over its configuration."]
+    #[doc = r""]
+    #[doc = r" `baseurl` is the base URL provided to the internal"]
+    #[doc = r" `reqwest_middleware::ClientWithMiddleware`, and should include a scheme and hostname,"]
+    #[doc = r" as well as port and a path stem if applicable."]
+    pub fn new_with_client(
+        baseurl: &str,
+        client: reqwest_middleware::ClientWithMiddleware,
+    ) -> Self {
         Self {
             baseurl: baseurl.to_string(),
             client,
@@ -2486,7 +2493,7 @@ impl ClientInfo<()> for Client {
         self.baseurl.as_str()
     }
 
-    fn client(&self) -> &reqwest::Client {
+    fn client(&self) -> &reqwest_middleware::ClientWithMiddleware {
         &self.client
     }
 
@@ -2497,259 +2504,113 @@ impl ClientInfo<()> for Client {
 
 impl ClientHooks<()> for &Client {}
 impl Client {
-    ///Sends a `POST` request to `/v1/control/hold`
-    ///
-    ///```ignore
-    /// let response = client.control_hold()
-    ///    .send()
-    ///    .await;
-    /// ```
+    #[doc = "Sends a `POST` request to `/v1/control/hold`\n\n```ignore\nlet response = client.control_hold()\n    .send()\n    .await;\n```"]
     pub fn control_hold(&self) -> builder::ControlHold<'_> {
         builder::ControlHold::new(self)
     }
 
-    ///Sends a `POST` request to `/v1/control/resume`
-    ///
-    ///```ignore
-    /// let response = client.control_resume()
-    ///    .send()
-    ///    .await;
-    /// ```
+    #[doc = "Sends a `POST` request to `/v1/control/resume`\n\n```ignore\nlet response = client.control_resume()\n    .send()\n    .await;\n```"]
     pub fn control_resume(&self) -> builder::ControlResume<'_> {
         builder::ControlResume::new(self)
     }
 
-    ///Sends a `GET` request to `/v1/task/{Task}`
-    ///
-    ///```ignore
-    /// let response = client.task_get()
-    ///    .task(task)
-    ///    .send()
-    ///    .await;
-    /// ```
+    #[doc = "Sends a `GET` request to `/v1/task/{Task}`\n\n```ignore\nlet response = client.task_get()\n    .task(task)\n    .send()\n    .await;\n```"]
     pub fn task_get(&self) -> builder::TaskGet<'_> {
         builder::TaskGet::new(self)
     }
 
-    ///Sends a `GET` request to `/v1/tasks`
-    ///
-    ///```ignore
-    /// let response = client.tasks_get()
-    ///    .send()
-    ///    .await;
-    /// ```
+    #[doc = "Sends a `GET` request to `/v1/tasks`\n\n```ignore\nlet response = client.tasks_get()\n    .send()\n    .await;\n```"]
     pub fn tasks_get(&self) -> builder::TasksGet<'_> {
         builder::TasksGet::new(self)
     }
 
-    ///Sends a `POST` request to `/v1/tasks`
-    ///
-    ///```ignore
-    /// let response = client.task_submit()
-    ///    .body(body)
-    ///    .send()
-    ///    .await;
-    /// ```
+    #[doc = "Sends a `POST` request to `/v1/tasks`\n\n```ignore\nlet response = client.task_submit()\n    .body(body)\n    .send()\n    .await;\n```"]
     pub fn task_submit(&self) -> builder::TaskSubmit<'_> {
         builder::TaskSubmit::new(self)
     }
 
-    ///Sends a `GET` request to `/v1/tasks/{task}/events`
-    ///
-    ///```ignore
-    /// let response = client.task_events_get()
-    ///    .task(task)
-    ///    .minseq(minseq)
-    ///    .send()
-    ///    .await;
-    /// ```
+    #[doc = "Sends a `GET` request to `/v1/tasks/{task}/events`\n\n```ignore\nlet response = client.task_events_get()\n    .task(task)\n    .minseq(minseq)\n    .send()\n    .await;\n```"]
     pub fn task_events_get(&self) -> builder::TaskEventsGet<'_> {
         builder::TaskEventsGet::new(self)
     }
 
-    ///Sends a `GET` request to `/v1/tasks/{task}/outputs`
-    ///
-    ///```ignore
-    /// let response = client.task_outputs_get()
-    ///    .task(task)
-    ///    .send()
-    ///    .await;
-    /// ```
+    #[doc = "Sends a `GET` request to `/v1/tasks/{task}/outputs`\n\n```ignore\nlet response = client.task_outputs_get()\n    .task(task)\n    .send()\n    .await;\n```"]
     pub fn task_outputs_get(&self) -> builder::TaskOutputsGet<'_> {
         builder::TaskOutputsGet::new(self)
     }
 
-    ///Sends a `GET` request to `/v1/tasks/{task}/outputs/{output}`
-    ///
-    ///```ignore
-    /// let response = client.task_output_download()
-    ///    .task(task)
-    ///    .output(output)
-    ///    .send()
-    ///    .await;
-    /// ```
+    #[doc = "Sends a `GET` request to `/v1/tasks/{task}/outputs/{output}`\n\n```ignore\nlet response = client.task_output_download()\n    .task(task)\n    .output(output)\n    .send()\n    .await;\n```"]
     pub fn task_output_download(&self) -> builder::TaskOutputDownload<'_> {
         builder::TaskOutputDownload::new(self)
     }
 
-    ///Sends a `POST` request to `/v1/users`
-    ///
-    ///```ignore
-    /// let response = client.user_create()
-    ///    .body(body)
-    ///    .send()
-    ///    .await;
-    /// ```
+    #[doc = "Sends a `POST` request to `/v1/users`\n\n```ignore\nlet response = client.user_create()\n    .body(body)\n    .send()\n    .await;\n```"]
     pub fn user_create(&self) -> builder::UserCreate<'_> {
         builder::UserCreate::new(self)
     }
 
-    ///Sends a `GET` request to `/v1/whoami`
-    ///
-    ///```ignore
-    /// let response = client.whoami()
-    ///    .send()
-    ///    .await;
-    /// ```
+    #[doc = "Sends a `GET` request to `/v1/whoami`\n\n```ignore\nlet response = client.whoami()\n    .send()\n    .await;\n```"]
     pub fn whoami(&self) -> builder::Whoami<'_> {
         builder::Whoami::new(self)
     }
 
-    ///Sends a `PUT` request to `/v1/whoami/name`
-    ///
-    ///```ignore
-    /// let response = client.whoami_put_name()
-    ///    .body(body)
-    ///    .send()
-    ///    .await;
-    /// ```
+    #[doc = "Sends a `PUT` request to `/v1/whoami/name`\n\n```ignore\nlet response = client.whoami_put_name()\n    .body(body)\n    .send()\n    .await;\n```"]
     pub fn whoami_put_name(&self) -> builder::WhoamiPutName<'_> {
         builder::WhoamiPutName::new(self)
     }
 
-    ///Sends a `POST` request to `/v1/worker/bootstrap`
-    ///
-    ///```ignore
-    /// let response = client.worker_bootstrap()
-    ///    .body(body)
-    ///    .send()
-    ///    .await;
-    /// ```
+    #[doc = "Sends a `POST` request to `/v1/worker/bootstrap`\n\n```ignore\nlet response = client.worker_bootstrap()\n    .body(body)\n    .send()\n    .await;\n```"]
     pub fn worker_bootstrap(&self) -> builder::WorkerBootstrap<'_> {
         builder::WorkerBootstrap::new(self)
     }
 
-    ///Sends a `GET` request to `/v1/worker/ping`
-    ///
-    ///```ignore
-    /// let response = client.worker_ping()
-    ///    .send()
-    ///    .await;
-    /// ```
+    #[doc = "Sends a `GET` request to `/v1/worker/ping`\n\n```ignore\nlet response = client.worker_ping()\n    .send()\n    .await;\n```"]
     pub fn worker_ping(&self) -> builder::WorkerPing<'_> {
         builder::WorkerPing::new(self)
     }
 
-    ///Sends a `POST` request to `/v1/worker/task/{task}/append`
-    ///
-    ///```ignore
-    /// let response = client.worker_task_append()
-    ///    .task(task)
-    ///    .body(body)
-    ///    .send()
-    ///    .await;
-    /// ```
+    #[doc = "Sends a `POST` request to `/v1/worker/task/{task}/append`\n\n```ignore\nlet response = client.worker_task_append()\n    .task(task)\n    .body(body)\n    .send()\n    .await;\n```"]
     pub fn worker_task_append(&self) -> builder::WorkerTaskAppend<'_> {
         builder::WorkerTaskAppend::new(self)
     }
 
-    ///Sends a `POST` request to `/v1/worker/task/{task}/chunk`
-    ///
-    ///```ignore
-    /// let response = client.worker_task_upload_chunk()
-    ///    .task(task)
-    ///    .body(body)
-    ///    .send()
-    ///    .await;
-    /// ```
+    #[doc = "Sends a `POST` request to `/v1/worker/task/{task}/chunk`\n\n```ignore\nlet response = client.worker_task_upload_chunk()\n    .task(task)\n    .body(body)\n    .send()\n    .await;\n```"]
     pub fn worker_task_upload_chunk(&self) -> builder::WorkerTaskUploadChunk<'_> {
         builder::WorkerTaskUploadChunk::new(self)
     }
 
-    ///Sends a `POST` request to `/v1/worker/task/{task}/complete`
-    ///
-    ///```ignore
-    /// let response = client.worker_task_complete()
-    ///    .task(task)
-    ///    .body(body)
-    ///    .send()
-    ///    .await;
-    /// ```
+    #[doc = "Sends a `POST` request to `/v1/worker/task/{task}/complete`\n\n```ignore\nlet response = client.worker_task_complete()\n    .task(task)\n    .body(body)\n    .send()\n    .await;\n```"]
     pub fn worker_task_complete(&self) -> builder::WorkerTaskComplete<'_> {
         builder::WorkerTaskComplete::new(self)
     }
 
-    ///Sends a `POST` request to `/v1/worker/task/{task}/output`
-    ///
-    ///```ignore
-    /// let response = client.worker_task_add_output()
-    ///    .task(task)
-    ///    .body(body)
-    ///    .send()
-    ///    .await;
-    /// ```
+    #[doc = "Sends a `POST` request to `/v1/worker/task/{task}/output`\n\n```ignore\nlet response = client.worker_task_add_output()\n    .task(task)\n    .body(body)\n    .send()\n    .await;\n```"]
     pub fn worker_task_add_output(&self) -> builder::WorkerTaskAddOutput<'_> {
         builder::WorkerTaskAddOutput::new(self)
     }
 
-    ///Sends a `GET` request to `/v1/workers`
-    ///
-    ///```ignore
-    /// let response = client.workers_list()
-    ///    .send()
-    ///    .await;
-    /// ```
+    #[doc = "Sends a `GET` request to `/v1/workers`\n\n```ignore\nlet response = client.workers_list()\n    .send()\n    .await;\n```"]
     pub fn workers_list(&self) -> builder::WorkersList<'_> {
         builder::WorkersList::new(self)
     }
 
-    ///Sends a `POST` request to `/v1/workers/recycle`
-    ///
-    ///```ignore
-    /// let response = client.workers_recycle()
-    ///    .send()
-    ///    .await;
-    /// ```
+    #[doc = "Sends a `POST` request to `/v1/workers/recycle`\n\n```ignore\nlet response = client.workers_recycle()\n    .send()\n    .await;\n```"]
     pub fn workers_recycle(&self) -> builder::WorkersRecycle<'_> {
         builder::WorkersRecycle::new(self)
     }
 
-    ///Sends a `GET` request to `/v1/things`
-    ///
-    ///```ignore
-    /// let response = client.get_thing_or_things()
-    ///    .id(id)
-    ///    .send()
-    ///    .await;
-    /// ```
+    #[doc = "Sends a `GET` request to `/v1/things`\n\n```ignore\nlet response = client.get_thing_or_things()\n    .id(id)\n    .send()\n    .await;\n```"]
     pub fn get_thing_or_things(&self) -> builder::GetThingOrThings<'_> {
         builder::GetThingOrThings::new(self)
     }
 
-    ///Sends a `GET` request to `/v1/header-arg`
-    ///
-    ///```ignore
-    /// let response = client.header_arg()
-    ///    .accept_language(accept_language)
-    ///    .send()
-    ///    .await;
-    /// ```
+    #[doc = "Sends a `GET` request to `/v1/header-arg`\n\n```ignore\nlet response = client.header_arg()\n    .accept_language(accept_language)\n    .send()\n    .await;\n```"]
     pub fn header_arg(&self) -> builder::HeaderArg<'_> {
         builder::HeaderArg::new(self)
     }
 }
 
-/// Types for composing operation parameters.
+#[doc = r" Types for composing operation parameters."]
 #[allow(clippy::all)]
 pub mod builder {
     use super::types;
@@ -2758,9 +2619,7 @@ pub mod builder {
         encode_path, ByteStream, ClientHooks, ClientInfo, Error, OperationInfo, RequestBuilderExt,
         ResponseValue,
     };
-    ///Builder for [`Client::control_hold`]
-    ///
-    ///[`Client::control_hold`]: super::Client::control_hold
+    #[doc = "Builder for [`Client::control_hold`]\n\n[`Client::control_hold`]: super::Client::control_hold"]
     #[derive(Debug, Clone)]
     pub struct ControlHold<'a> {
         client: &'a super::Client,
@@ -2771,7 +2630,7 @@ pub mod builder {
             Self { client: client }
         }
 
-        ///Sends a `POST` request to `/v1/control/hold`
+        #[doc = "Sends a `POST` request to `/v1/control/hold`"]
         pub async fn send(self) -> Result<ResponseValue<()>, Error<()>> {
             let Self { client } = self;
             let url = format!("{}/v1/control/hold", client.baseurl,);
@@ -2804,9 +2663,7 @@ pub mod builder {
         }
     }
 
-    ///Builder for [`Client::control_resume`]
-    ///
-    ///[`Client::control_resume`]: super::Client::control_resume
+    #[doc = "Builder for [`Client::control_resume`]\n\n[`Client::control_resume`]: super::Client::control_resume"]
     #[derive(Debug, Clone)]
     pub struct ControlResume<'a> {
         client: &'a super::Client,
@@ -2817,7 +2674,7 @@ pub mod builder {
             Self { client: client }
         }
 
-        ///Sends a `POST` request to `/v1/control/resume`
+        #[doc = "Sends a `POST` request to `/v1/control/resume`"]
         pub async fn send(self) -> Result<ResponseValue<()>, Error<()>> {
             let Self { client } = self;
             let url = format!("{}/v1/control/resume", client.baseurl,);
@@ -2842,9 +2699,7 @@ pub mod builder {
         }
     }
 
-    ///Builder for [`Client::task_get`]
-    ///
-    ///[`Client::task_get`]: super::Client::task_get
+    #[doc = "Builder for [`Client::task_get`]\n\n[`Client::task_get`]: super::Client::task_get"]
     #[derive(Debug, Clone)]
     pub struct TaskGet<'a> {
         client: &'a super::Client,
@@ -2869,7 +2724,7 @@ pub mod builder {
             self
         }
 
-        ///Sends a `GET` request to `/v1/task/{Task}`
+        #[doc = "Sends a `GET` request to `/v1/task/{Task}`"]
         pub async fn send(self) -> Result<ResponseValue<types::Task>, Error<()>> {
             let Self { client, task } = self;
             let task = task.map_err(Error::InvalidRequest)?;
@@ -2907,9 +2762,7 @@ pub mod builder {
         }
     }
 
-    ///Builder for [`Client::tasks_get`]
-    ///
-    ///[`Client::tasks_get`]: super::Client::tasks_get
+    #[doc = "Builder for [`Client::tasks_get`]\n\n[`Client::tasks_get`]: super::Client::tasks_get"]
     #[derive(Debug, Clone)]
     pub struct TasksGet<'a> {
         client: &'a super::Client,
@@ -2920,7 +2773,7 @@ pub mod builder {
             Self { client: client }
         }
 
-        ///Sends a `GET` request to `/v1/tasks`
+        #[doc = "Sends a `GET` request to `/v1/tasks`"]
         pub async fn send(self) -> Result<ResponseValue<::std::vec::Vec<types::Task>>, Error<()>> {
             let Self { client } = self;
             let url = format!("{}/v1/tasks", client.baseurl,);
@@ -2953,9 +2806,7 @@ pub mod builder {
         }
     }
 
-    ///Builder for [`Client::task_submit`]
-    ///
-    ///[`Client::task_submit`]: super::Client::task_submit
+    #[doc = "Builder for [`Client::task_submit`]\n\n[`Client::task_submit`]: super::Client::task_submit"]
     #[derive(Debug, Clone)]
     pub struct TaskSubmit<'a> {
         client: &'a super::Client,
@@ -2990,7 +2841,7 @@ pub mod builder {
             self
         }
 
-        ///Sends a `POST` request to `/v1/tasks`
+        #[doc = "Sends a `POST` request to `/v1/tasks`"]
         pub async fn send(self) -> Result<ResponseValue<types::TaskSubmitResult>, Error<()>> {
             let Self { client, body } = self;
             let body = body
@@ -3027,9 +2878,7 @@ pub mod builder {
         }
     }
 
-    ///Builder for [`Client::task_events_get`]
-    ///
-    ///[`Client::task_events_get`]: super::Client::task_events_get
+    #[doc = "Builder for [`Client::task_events_get`]\n\n[`Client::task_events_get`]: super::Client::task_events_get"]
     #[derive(Debug, Clone)]
     pub struct TaskEventsGet<'a> {
         client: &'a super::Client,
@@ -3067,7 +2916,7 @@ pub mod builder {
             self
         }
 
-        ///Sends a `GET` request to `/v1/tasks/{task}/events`
+        #[doc = "Sends a `GET` request to `/v1/tasks/{task}/events`"]
         pub async fn send(
             self,
         ) -> Result<ResponseValue<::std::vec::Vec<types::TaskEvent>>, Error<()>> {
@@ -3113,9 +2962,7 @@ pub mod builder {
         }
     }
 
-    ///Builder for [`Client::task_outputs_get`]
-    ///
-    ///[`Client::task_outputs_get`]: super::Client::task_outputs_get
+    #[doc = "Builder for [`Client::task_outputs_get`]\n\n[`Client::task_outputs_get`]: super::Client::task_outputs_get"]
     #[derive(Debug, Clone)]
     pub struct TaskOutputsGet<'a> {
         client: &'a super::Client,
@@ -3140,7 +2987,7 @@ pub mod builder {
             self
         }
 
-        ///Sends a `GET` request to `/v1/tasks/{task}/outputs`
+        #[doc = "Sends a `GET` request to `/v1/tasks/{task}/outputs`"]
         pub async fn send(
             self,
         ) -> Result<ResponseValue<::std::vec::Vec<types::TaskOutput>>, Error<()>> {
@@ -3180,9 +3027,7 @@ pub mod builder {
         }
     }
 
-    ///Builder for [`Client::task_output_download`]
-    ///
-    ///[`Client::task_output_download`]: super::Client::task_output_download
+    #[doc = "Builder for [`Client::task_output_download`]\n\n[`Client::task_output_download`]: super::Client::task_output_download"]
     #[derive(Debug, Clone)]
     pub struct TaskOutputDownload<'a> {
         client: &'a super::Client,
@@ -3219,7 +3064,7 @@ pub mod builder {
             self
         }
 
-        ///Sends a `GET` request to `/v1/tasks/{task}/outputs/{output}`
+        #[doc = "Sends a `GET` request to `/v1/tasks/{task}/outputs/{output}`"]
         pub async fn send(self) -> Result<ResponseValue<ByteStream>, Error<()>> {
             let Self {
                 client,
@@ -3255,9 +3100,7 @@ pub mod builder {
         }
     }
 
-    ///Builder for [`Client::user_create`]
-    ///
-    ///[`Client::user_create`]: super::Client::user_create
+    #[doc = "Builder for [`Client::user_create`]\n\n[`Client::user_create`]: super::Client::user_create"]
     #[derive(Debug, Clone)]
     pub struct UserCreate<'a> {
         client: &'a super::Client,
@@ -3292,7 +3135,7 @@ pub mod builder {
             self
         }
 
-        ///Sends a `POST` request to `/v1/users`
+        #[doc = "Sends a `POST` request to `/v1/users`"]
         pub async fn send(self) -> Result<ResponseValue<types::UserCreateResult>, Error<()>> {
             let Self { client, body } = self;
             let body = body
@@ -3329,9 +3172,7 @@ pub mod builder {
         }
     }
 
-    ///Builder for [`Client::whoami`]
-    ///
-    ///[`Client::whoami`]: super::Client::whoami
+    #[doc = "Builder for [`Client::whoami`]\n\n[`Client::whoami`]: super::Client::whoami"]
     #[derive(Debug, Clone)]
     pub struct Whoami<'a> {
         client: &'a super::Client,
@@ -3342,7 +3183,7 @@ pub mod builder {
             Self { client: client }
         }
 
-        ///Sends a `GET` request to `/v1/whoami`
+        #[doc = "Sends a `GET` request to `/v1/whoami`"]
         pub async fn send(self) -> Result<ResponseValue<types::WhoamiResult>, Error<()>> {
             let Self { client } = self;
             let url = format!("{}/v1/whoami", client.baseurl,);
@@ -3375,9 +3216,7 @@ pub mod builder {
         }
     }
 
-    ///Builder for [`Client::whoami_put_name`]
-    ///
-    ///[`Client::whoami_put_name`]: super::Client::whoami_put_name
+    #[doc = "Builder for [`Client::whoami_put_name`]\n\n[`Client::whoami_put_name`]: super::Client::whoami_put_name"]
     #[derive(Debug)]
     pub struct WhoamiPutName<'a> {
         client: &'a super::Client,
@@ -3403,7 +3242,7 @@ pub mod builder {
             self
         }
 
-        ///Sends a `PUT` request to `/v1/whoami/name`
+        #[doc = "Sends a `PUT` request to `/v1/whoami/name`"]
         pub async fn send(self) -> Result<ResponseValue<()>, Error<()>> {
             let Self { client, body } = self;
             let body = body.map_err(Error::InvalidRequest)?;
@@ -3438,9 +3277,7 @@ pub mod builder {
         }
     }
 
-    ///Builder for [`Client::worker_bootstrap`]
-    ///
-    ///[`Client::worker_bootstrap`]: super::Client::worker_bootstrap
+    #[doc = "Builder for [`Client::worker_bootstrap`]\n\n[`Client::worker_bootstrap`]: super::Client::worker_bootstrap"]
     #[derive(Debug, Clone)]
     pub struct WorkerBootstrap<'a> {
         client: &'a super::Client,
@@ -3475,7 +3312,7 @@ pub mod builder {
             self
         }
 
-        ///Sends a `POST` request to `/v1/worker/bootstrap`
+        #[doc = "Sends a `POST` request to `/v1/worker/bootstrap`"]
         pub async fn send(self) -> Result<ResponseValue<types::WorkerBootstrapResult>, Error<()>> {
             let Self { client, body } = self;
             let body = body
@@ -3512,9 +3349,7 @@ pub mod builder {
         }
     }
 
-    ///Builder for [`Client::worker_ping`]
-    ///
-    ///[`Client::worker_ping`]: super::Client::worker_ping
+    #[doc = "Builder for [`Client::worker_ping`]\n\n[`Client::worker_ping`]: super::Client::worker_ping"]
     #[derive(Debug, Clone)]
     pub struct WorkerPing<'a> {
         client: &'a super::Client,
@@ -3525,7 +3360,7 @@ pub mod builder {
             Self { client: client }
         }
 
-        ///Sends a `GET` request to `/v1/worker/ping`
+        #[doc = "Sends a `GET` request to `/v1/worker/ping`"]
         pub async fn send(self) -> Result<ResponseValue<types::WorkerPingResult>, Error<()>> {
             let Self { client } = self;
             let url = format!("{}/v1/worker/ping", client.baseurl,);
@@ -3558,9 +3393,7 @@ pub mod builder {
         }
     }
 
-    ///Builder for [`Client::worker_task_append`]
-    ///
-    ///[`Client::worker_task_append`]: super::Client::worker_task_append
+    #[doc = "Builder for [`Client::worker_task_append`]\n\n[`Client::worker_task_append`]: super::Client::worker_task_append"]
     #[derive(Debug, Clone)]
     pub struct WorkerTaskAppend<'a> {
         client: &'a super::Client,
@@ -3609,7 +3442,7 @@ pub mod builder {
             self
         }
 
-        ///Sends a `POST` request to `/v1/worker/task/{task}/append`
+        #[doc = "Sends a `POST` request to `/v1/worker/task/{task}/append`"]
         pub async fn send(self) -> Result<ResponseValue<()>, Error<()>> {
             let Self { client, task, body } = self;
             let task = task.map_err(Error::InvalidRequest)?;
@@ -3647,9 +3480,7 @@ pub mod builder {
         }
     }
 
-    ///Builder for [`Client::worker_task_upload_chunk`]
-    ///
-    ///[`Client::worker_task_upload_chunk`]: super::Client::worker_task_upload_chunk
+    #[doc = "Builder for [`Client::worker_task_upload_chunk`]\n\n[`Client::worker_task_upload_chunk`]: super::Client::worker_task_upload_chunk"]
     #[derive(Debug)]
     pub struct WorkerTaskUploadChunk<'a> {
         client: &'a super::Client,
@@ -3686,7 +3517,7 @@ pub mod builder {
             self
         }
 
-        ///Sends a `POST` request to `/v1/worker/task/{task}/chunk`
+        #[doc = "Sends a `POST` request to `/v1/worker/task/{task}/chunk`"]
         pub async fn send(self) -> Result<ResponseValue<types::UploadedChunk>, Error<()>> {
             let Self { client, task, body } = self;
             let task = task.map_err(Error::InvalidRequest)?;
@@ -3730,9 +3561,7 @@ pub mod builder {
         }
     }
 
-    ///Builder for [`Client::worker_task_complete`]
-    ///
-    ///[`Client::worker_task_complete`]: super::Client::worker_task_complete
+    #[doc = "Builder for [`Client::worker_task_complete`]\n\n[`Client::worker_task_complete`]: super::Client::worker_task_complete"]
     #[derive(Debug, Clone)]
     pub struct WorkerTaskComplete<'a> {
         client: &'a super::Client,
@@ -3781,7 +3610,7 @@ pub mod builder {
             self
         }
 
-        ///Sends a `POST` request to `/v1/worker/task/{task}/complete`
+        #[doc = "Sends a `POST` request to `/v1/worker/task/{task}/complete`"]
         pub async fn send(self) -> Result<ResponseValue<()>, Error<()>> {
             let Self { client, task, body } = self;
             let task = task.map_err(Error::InvalidRequest)?;
@@ -3819,9 +3648,7 @@ pub mod builder {
         }
     }
 
-    ///Builder for [`Client::worker_task_add_output`]
-    ///
-    ///[`Client::worker_task_add_output`]: super::Client::worker_task_add_output
+    #[doc = "Builder for [`Client::worker_task_add_output`]\n\n[`Client::worker_task_add_output`]: super::Client::worker_task_add_output"]
     #[derive(Debug, Clone)]
     pub struct WorkerTaskAddOutput<'a> {
         client: &'a super::Client,
@@ -3868,7 +3695,7 @@ pub mod builder {
             self
         }
 
-        ///Sends a `POST` request to `/v1/worker/task/{task}/output`
+        #[doc = "Sends a `POST` request to `/v1/worker/task/{task}/output`"]
         pub async fn send(self) -> Result<ResponseValue<()>, Error<()>> {
             let Self { client, task, body } = self;
             let task = task.map_err(Error::InvalidRequest)?;
@@ -3906,9 +3733,7 @@ pub mod builder {
         }
     }
 
-    ///Builder for [`Client::workers_list`]
-    ///
-    ///[`Client::workers_list`]: super::Client::workers_list
+    #[doc = "Builder for [`Client::workers_list`]\n\n[`Client::workers_list`]: super::Client::workers_list"]
     #[derive(Debug, Clone)]
     pub struct WorkersList<'a> {
         client: &'a super::Client,
@@ -3919,7 +3744,7 @@ pub mod builder {
             Self { client: client }
         }
 
-        ///Sends a `GET` request to `/v1/workers`
+        #[doc = "Sends a `GET` request to `/v1/workers`"]
         pub async fn send(self) -> Result<ResponseValue<types::WorkersResult>, Error<()>> {
             let Self { client } = self;
             let url = format!("{}/v1/workers", client.baseurl,);
@@ -3952,9 +3777,7 @@ pub mod builder {
         }
     }
 
-    ///Builder for [`Client::workers_recycle`]
-    ///
-    ///[`Client::workers_recycle`]: super::Client::workers_recycle
+    #[doc = "Builder for [`Client::workers_recycle`]\n\n[`Client::workers_recycle`]: super::Client::workers_recycle"]
     #[derive(Debug, Clone)]
     pub struct WorkersRecycle<'a> {
         client: &'a super::Client,
@@ -3965,7 +3788,7 @@ pub mod builder {
             Self { client: client }
         }
 
-        ///Sends a `POST` request to `/v1/workers/recycle`
+        #[doc = "Sends a `POST` request to `/v1/workers/recycle`"]
         pub async fn send(self) -> Result<ResponseValue<()>, Error<()>> {
             let Self { client } = self;
             let url = format!("{}/v1/workers/recycle", client.baseurl,);
@@ -3990,9 +3813,7 @@ pub mod builder {
         }
     }
 
-    ///Builder for [`Client::get_thing_or_things`]
-    ///
-    ///[`Client::get_thing_or_things`]: super::Client::get_thing_or_things
+    #[doc = "Builder for [`Client::get_thing_or_things`]\n\n[`Client::get_thing_or_things`]: super::Client::get_thing_or_things"]
     #[derive(Debug, Clone)]
     pub struct GetThingOrThings<'a> {
         client: &'a super::Client,
@@ -4018,7 +3839,7 @@ pub mod builder {
             self
         }
 
-        ///Sends a `GET` request to `/v1/things`
+        #[doc = "Sends a `GET` request to `/v1/things`"]
         pub async fn send(self) -> Result<ResponseValue<::std::string::String>, Error<()>> {
             let Self { client, id } = self;
             let id = id.map_err(Error::InvalidRequest)?;
@@ -4053,9 +3874,7 @@ pub mod builder {
         }
     }
 
-    ///Builder for [`Client::header_arg`]
-    ///
-    ///[`Client::header_arg`]: super::Client::header_arg
+    #[doc = "Builder for [`Client::header_arg`]\n\n[`Client::header_arg`]: super::Client::header_arg"]
     #[derive(Debug, Clone)]
     pub struct HeaderArg<'a> {
         client: &'a super::Client,
@@ -4080,7 +3899,7 @@ pub mod builder {
             self
         }
 
-        ///Sends a `GET` request to `/v1/header-arg`
+        #[doc = "Sends a `GET` request to `/v1/header-arg`"]
         pub async fn send(self) -> Result<ResponseValue<()>, Error<()>> {
             let Self {
                 client,
@@ -4113,8 +3932,8 @@ pub mod builder {
     }
 }
 
-/// Items consumers will typically use such as the Client and
-/// extension traits.
+#[doc = r" Items consumers will typically use such as the Client and"]
+#[doc = r" extension traits."]
 pub mod prelude {
     #[allow(unused_imports)]
     pub use super::Client;

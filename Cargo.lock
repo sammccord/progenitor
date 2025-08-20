@@ -622,11 +622,13 @@ version = "0.0.1"
 dependencies = [
  "base64",
  "chrono",
+ "http",
  "prettyplease",
  "progenitor",
  "progenitor-client",
  "rand",
  "reqwest",
+ "reqwest-middleware",
  "serde",
  "serde_json",
  "syn",
@@ -638,8 +640,10 @@ name = "example-macro"
 version = "0.0.1"
 dependencies = [
  "chrono",
+ "http",
  "progenitor",
  "reqwest",
+ "reqwest-middleware",
  "schemars",
  "serde",
  "uuid",
@@ -651,10 +655,12 @@ version = "0.1.0"
 dependencies = [
  "base64",
  "chrono",
+ "http",
  "prettyplease",
  "progenitor",
  "progenitor-client",
  "reqwest",
+ "reqwest-middleware",
  "serde",
  "serde_json",
  "syn",
@@ -1608,6 +1614,7 @@ dependencies = [
  "base64",
  "chrono",
  "futures",
+ "http",
  "percent-encoding",
  "progenitor-client",
  "progenitor-impl",
@@ -1615,6 +1622,7 @@ dependencies = [
  "rand",
  "regress",
  "reqwest",
+ "reqwest-middleware",
  "schemars",
  "serde",
  "serde_json",
@@ -1628,8 +1636,10 @@ version = "0.11.0"
 dependencies = [
  "bytes",
  "futures-core",
+ "http",
  "percent-encoding",
  "reqwest",
+ "reqwest-middleware",
  "serde",
  "serde_json",
  "serde_urlencoded",
@@ -1831,6 +1841,21 @@ dependencies = [
  "wasm-streams",
  "web-sys",
  "winreg",
+]
+
+[[package]]
+name = "reqwest-middleware"
+version = "0.3.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "562ceb5a604d3f7c885a792d42c199fd8af239d0a51b2fa6a78aafa092452b04"
+dependencies = [
+ "anyhow",
+ "async-trait",
+ "http",
+ "reqwest",
+ "serde",
+ "thiserror 1.0.69",
+ "tower-service",
 ]
 
 [[package]]

@@ -33,9 +33,6 @@ fn generate_formatted(generator: &mut Generator, spec: &OpenAPI) -> String {
 
 fn reformat_code(content: TokenStream) -> String {
     let rustfmt_config = rustfmt_wrapper::config::Config {
-        format_strings: Some(true),
-        normalize_doc_attributes: Some(true),
-        wrap_comments: Some(true),
         ..Default::default()
     };
     space_out_items(rustfmt_wrapper::rustfmt_config(rustfmt_config, content).unwrap()).unwrap()
@@ -108,7 +105,6 @@ fn verify_apis(openapi_file: &str) {
     // TODO pending #368
     let output = rustfmt_wrapper::rustfmt_config(
         rustfmt_wrapper::config::Config {
-            format_strings: Some(true),
             ..Default::default()
         },
         code,

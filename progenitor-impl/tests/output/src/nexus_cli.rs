@@ -343,104 +343,15 @@ impl<T: CliConfig> Cli<T> {
     }
 
     pub fn cli_device_auth_request() -> ::clap::Command {
-        ::clap::Command::new("")
-            .arg(
-                ::clap::Arg::new("client-id")
-                    .long("client-id")
-                    .value_parser(::clap::value_parser!(::uuid::Uuid))
-                    .required_unless_present("json-body"),
-            )
-            .arg(
-                ::clap::Arg::new("json-body")
-                    .long("json-body")
-                    .value_name("JSON-FILE")
-                    .required(false)
-                    .value_parser(::clap::value_parser!(std::path::PathBuf))
-                    .help("Path to a file that contains the full json body."),
-            )
-            .arg(
-                ::clap::Arg::new("json-body-template")
-                    .long("json-body-template")
-                    .action(::clap::ArgAction::SetTrue)
-                    .help("XXX"),
-            )
-            .about("Start an OAuth 2.0 Device Authorization Grant")
-            .long_about(
-                "This endpoint is designed to be accessed from an *unauthenticated* API client. \
-                 It generates and records a `device_code` and `user_code` which must be verified \
-                 and confirmed prior to a token being granted.",
-            )
+        :: clap :: Command :: new ("") . arg (:: clap :: Arg :: new ("client-id") . long ("client-id") . value_parser (:: clap :: value_parser ! (:: uuid :: Uuid)) . required_unless_present ("json-body")) . arg (:: clap :: Arg :: new ("json-body") . long ("json-body") . value_name ("JSON-FILE") . required (false) . value_parser (:: clap :: value_parser ! (std :: path :: PathBuf)) . help ("Path to a file that contains the full json body.")) . arg (:: clap :: Arg :: new ("json-body-template") . long ("json-body-template") . action (:: clap :: ArgAction :: SetTrue) . help ("XXX")) . about ("Start an OAuth 2.0 Device Authorization Grant") . long_about ("This endpoint is designed to be accessed from an *unauthenticated* API client. It generates and records a `device_code` and `user_code` which must be verified and confirmed prior to a token being granted.")
     }
 
     pub fn cli_device_auth_confirm() -> ::clap::Command {
-        ::clap::Command::new("")
-            .arg(
-                ::clap::Arg::new("user-code")
-                    .long("user-code")
-                    .value_parser(::clap::value_parser!(::std::string::String))
-                    .required_unless_present("json-body"),
-            )
-            .arg(
-                ::clap::Arg::new("json-body")
-                    .long("json-body")
-                    .value_name("JSON-FILE")
-                    .required(false)
-                    .value_parser(::clap::value_parser!(std::path::PathBuf))
-                    .help("Path to a file that contains the full json body."),
-            )
-            .arg(
-                ::clap::Arg::new("json-body-template")
-                    .long("json-body-template")
-                    .action(::clap::ArgAction::SetTrue)
-                    .help("XXX"),
-            )
-            .about("Confirm an OAuth 2.0 Device Authorization Grant")
-            .long_about(
-                "This endpoint is designed to be accessed by the user agent (browser), not the \
-                 client requesting the token. So we do not actually return the token here; it \
-                 will be returned in response to the poll on `/device/token`.",
-            )
+        :: clap :: Command :: new ("") . arg (:: clap :: Arg :: new ("user-code") . long ("user-code") . value_parser (:: clap :: value_parser ! (:: std :: string :: String)) . required_unless_present ("json-body")) . arg (:: clap :: Arg :: new ("json-body") . long ("json-body") . value_name ("JSON-FILE") . required (false) . value_parser (:: clap :: value_parser ! (std :: path :: PathBuf)) . help ("Path to a file that contains the full json body.")) . arg (:: clap :: Arg :: new ("json-body-template") . long ("json-body-template") . action (:: clap :: ArgAction :: SetTrue) . help ("XXX")) . about ("Confirm an OAuth 2.0 Device Authorization Grant") . long_about ("This endpoint is designed to be accessed by the user agent (browser), not the client requesting the token. So we do not actually return the token here; it will be returned in response to the poll on `/device/token`.")
     }
 
     pub fn cli_device_access_token() -> ::clap::Command {
-        ::clap::Command::new("")
-            .arg(
-                ::clap::Arg::new("client-id")
-                    .long("client-id")
-                    .value_parser(::clap::value_parser!(::uuid::Uuid))
-                    .required_unless_present("json-body"),
-            )
-            .arg(
-                ::clap::Arg::new("device-code")
-                    .long("device-code")
-                    .value_parser(::clap::value_parser!(::std::string::String))
-                    .required_unless_present("json-body"),
-            )
-            .arg(
-                ::clap::Arg::new("grant-type")
-                    .long("grant-type")
-                    .value_parser(::clap::value_parser!(::std::string::String))
-                    .required_unless_present("json-body"),
-            )
-            .arg(
-                ::clap::Arg::new("json-body")
-                    .long("json-body")
-                    .value_name("JSON-FILE")
-                    .required(false)
-                    .value_parser(::clap::value_parser!(std::path::PathBuf))
-                    .help("Path to a file that contains the full json body."),
-            )
-            .arg(
-                ::clap::Arg::new("json-body-template")
-                    .long("json-body-template")
-                    .action(::clap::ArgAction::SetTrue)
-                    .help("XXX"),
-            )
-            .about("Request a device access token")
-            .long_about(
-                "This endpoint should be polled by the client until the user code is verified and \
-                 the grant is confirmed.",
-            )
+        :: clap :: Command :: new ("") . arg (:: clap :: Arg :: new ("client-id") . long ("client-id") . value_parser (:: clap :: value_parser ! (:: uuid :: Uuid)) . required_unless_present ("json-body")) . arg (:: clap :: Arg :: new ("device-code") . long ("device-code") . value_parser (:: clap :: value_parser ! (:: std :: string :: String)) . required_unless_present ("json-body")) . arg (:: clap :: Arg :: new ("grant-type") . long ("grant-type") . value_parser (:: clap :: value_parser ! (:: std :: string :: String)) . required_unless_present ("json-body")) . arg (:: clap :: Arg :: new ("json-body") . long ("json-body") . value_name ("JSON-FILE") . required (false) . value_parser (:: clap :: value_parser ! (std :: path :: PathBuf)) . help ("Path to a file that contains the full json body.")) . arg (:: clap :: Arg :: new ("json-body-template") . long ("json-body-template") . action (:: clap :: ArgAction :: SetTrue) . help ("XXX")) . about ("Request a device access token") . long_about ("This endpoint should be polled by the client until the user code is verified and the grant is confirmed.")
     }
 
     pub fn cli_group_list() -> ::clap::Command {
@@ -528,24 +439,7 @@ impl<T: CliConfig> Cli<T> {
     }
 
     pub fn cli_login_saml_begin() -> ::clap::Command {
-        ::clap::Command::new("")
-            .arg(
-                ::clap::Arg::new("provider-name")
-                    .long("provider-name")
-                    .value_parser(::clap::value_parser!(types::Name))
-                    .required(true),
-            )
-            .arg(
-                ::clap::Arg::new("silo-name")
-                    .long("silo-name")
-                    .value_parser(::clap::value_parser!(types::Name))
-                    .required(true),
-            )
-            .about("Prompt user login")
-            .long_about(
-                "Either display a page asking a user for their credentials, or redirect them to \
-                 their identity provider.",
-            )
+        :: clap :: Command :: new ("") . arg (:: clap :: Arg :: new ("provider-name") . long ("provider-name") . value_parser (:: clap :: value_parser ! (types :: Name)) . required (true)) . arg (:: clap :: Arg :: new ("silo-name") . long ("silo-name") . value_parser (:: clap :: value_parser ! (types :: Name)) . required (true)) . about ("Prompt user login") . long_about ("Either display a page asking a user for their credentials, or redirect them to their identity provider.")
     }
 
     pub fn cli_login_saml() -> ::clap::Command {
@@ -1092,44 +986,7 @@ impl<T: CliConfig> Cli<T> {
     }
 
     pub fn cli_image_list() -> ::clap::Command {
-        ::clap::Command::new("")
-            .arg(
-                ::clap::Arg::new("limit")
-                    .long("limit")
-                    .value_parser(::clap::value_parser!(::std::num::NonZeroU32))
-                    .required(false)
-                    .help("Maximum number of items returned by a single call"),
-            )
-            .arg(
-                ::clap::Arg::new("organization-name")
-                    .long("organization-name")
-                    .value_parser(::clap::value_parser!(types::Name))
-                    .required(true)
-                    .help("The organization's unique name."),
-            )
-            .arg(
-                ::clap::Arg::new("project-name")
-                    .long("project-name")
-                    .value_parser(::clap::value_parser!(types::Name))
-                    .required(true)
-                    .help("The project's unique name within the organization."),
-            )
-            .arg(
-                ::clap::Arg::new("sort-by")
-                    .long("sort-by")
-                    .value_parser(::clap::builder::TypedValueParser::map(
-                        ::clap::builder::PossibleValuesParser::new([
-                            types::NameSortMode::NameAscending.to_string(),
-                        ]),
-                        |s| types::NameSortMode::try_from(s).unwrap(),
-                    ))
-                    .required(false),
-            )
-            .about("List images")
-            .long_about(
-                "List images in a project. The images are returned sorted by creation date, with \
-                 the most recent images appearing first.",
-            )
+        :: clap :: Command :: new ("") . arg (:: clap :: Arg :: new ("limit") . long ("limit") . value_parser (:: clap :: value_parser ! (:: std :: num :: NonZeroU32)) . required (false) . help ("Maximum number of items returned by a single call")) . arg (:: clap :: Arg :: new ("organization-name") . long ("organization-name") . value_parser (:: clap :: value_parser ! (types :: Name)) . required (true) . help ("The organization's unique name.")) . arg (:: clap :: Arg :: new ("project-name") . long ("project-name") . value_parser (:: clap :: value_parser ! (types :: Name)) . required (true) . help ("The project's unique name within the organization.")) . arg (:: clap :: Arg :: new ("sort-by") . long ("sort-by") . value_parser (:: clap :: builder :: TypedValueParser :: map (:: clap :: builder :: PossibleValuesParser :: new ([types :: NameSortMode :: NameAscending . to_string () ,]) , | s | types :: NameSortMode :: try_from (s) . unwrap ())) . required (false)) . about ("List images") . long_about ("List images in a project. The images are returned sorted by creation date, with the most recent images appearing first.")
     }
 
     pub fn cli_image_create() -> ::clap::Command {
@@ -1203,31 +1060,7 @@ impl<T: CliConfig> Cli<T> {
     }
 
     pub fn cli_image_delete() -> ::clap::Command {
-        ::clap::Command::new("")
-            .arg(
-                ::clap::Arg::new("image-name")
-                    .long("image-name")
-                    .value_parser(::clap::value_parser!(types::Name))
-                    .required(true),
-            )
-            .arg(
-                ::clap::Arg::new("organization-name")
-                    .long("organization-name")
-                    .value_parser(::clap::value_parser!(types::Name))
-                    .required(true),
-            )
-            .arg(
-                ::clap::Arg::new("project-name")
-                    .long("project-name")
-                    .value_parser(::clap::value_parser!(types::Name))
-                    .required(true),
-            )
-            .about("Delete an image")
-            .long_about(
-                "Permanently delete an image from a project. This operation cannot be undone. Any \
-                 instances in the project using the image will continue to run, however new \
-                 instances can not be created with this image.",
-            )
+        :: clap :: Command :: new ("") . arg (:: clap :: Arg :: new ("image-name") . long ("image-name") . value_parser (:: clap :: value_parser ! (types :: Name)) . required (true)) . arg (:: clap :: Arg :: new ("organization-name") . long ("organization-name") . value_parser (:: clap :: value_parser ! (types :: Name)) . required (true)) . arg (:: clap :: Arg :: new ("project-name") . long ("project-name") . value_parser (:: clap :: value_parser ! (types :: Name)) . required (true)) . about ("Delete an image") . long_about ("Permanently delete an image from a project. This operation cannot be undone. Any instances in the project using the image will continue to run, however new instances can not be created with this image.")
     }
 
     pub fn cli_instance_list() -> ::clap::Command {
@@ -1268,85 +1101,7 @@ impl<T: CliConfig> Cli<T> {
     }
 
     pub fn cli_instance_create() -> ::clap::Command {
-        ::clap::Command::new("")
-            .arg(
-                ::clap::Arg::new("description")
-                    .long("description")
-                    .value_parser(::clap::value_parser!(::std::string::String))
-                    .required_unless_present("json-body"),
-            )
-            .arg(
-                ::clap::Arg::new("hostname")
-                    .long("hostname")
-                    .value_parser(::clap::value_parser!(::std::string::String))
-                    .required_unless_present("json-body"),
-            )
-            .arg(
-                ::clap::Arg::new("memory")
-                    .long("memory")
-                    .value_parser(::clap::value_parser!(types::ByteCount))
-                    .required_unless_present("json-body"),
-            )
-            .arg(
-                ::clap::Arg::new("name")
-                    .long("name")
-                    .value_parser(::clap::value_parser!(types::Name))
-                    .required_unless_present("json-body"),
-            )
-            .arg(
-                ::clap::Arg::new("ncpus")
-                    .long("ncpus")
-                    .value_parser(::clap::value_parser!(types::InstanceCpuCount))
-                    .required_unless_present("json-body"),
-            )
-            .arg(
-                ::clap::Arg::new("organization-name")
-                    .long("organization-name")
-                    .value_parser(::clap::value_parser!(types::Name))
-                    .required(true)
-                    .help("The organization's unique name."),
-            )
-            .arg(
-                ::clap::Arg::new("project-name")
-                    .long("project-name")
-                    .value_parser(::clap::value_parser!(types::Name))
-                    .required(true)
-                    .help("The project's unique name within the organization."),
-            )
-            .arg(
-                ::clap::Arg::new("start")
-                    .long("start")
-                    .value_parser(::clap::value_parser!(bool))
-                    .required(false)
-                    .help("Should this instance be started upon creation; true by default."),
-            )
-            .arg(
-                ::clap::Arg::new("user-data")
-                    .long("user-data")
-                    .value_parser(::clap::value_parser!(::std::string::String))
-                    .required(false)
-                    .help(
-                        "User data for instance initialization systems (such as cloud-init). Must \
-                         be a Base64-encoded string, as specified in RFC 4648 § 4 (+ and / \
-                         characters with padding). Maximum 32 KiB unencoded data.",
-                    ),
-            )
-            .arg(
-                ::clap::Arg::new("json-body")
-                    .long("json-body")
-                    .value_name("JSON-FILE")
-                    .required(false)
-                    .value_parser(::clap::value_parser!(std::path::PathBuf))
-                    .help("Path to a file that contains the full json body."),
-            )
-            .arg(
-                ::clap::Arg::new("json-body-template")
-                    .long("json-body-template")
-                    .action(::clap::ArgAction::SetTrue)
-                    .help("XXX"),
-            )
-            .about("Create an instance")
-            .long_about("Use `POST /v1/instances` instead")
+        :: clap :: Command :: new ("") . arg (:: clap :: Arg :: new ("description") . long ("description") . value_parser (:: clap :: value_parser ! (:: std :: string :: String)) . required_unless_present ("json-body")) . arg (:: clap :: Arg :: new ("hostname") . long ("hostname") . value_parser (:: clap :: value_parser ! (:: std :: string :: String)) . required_unless_present ("json-body")) . arg (:: clap :: Arg :: new ("memory") . long ("memory") . value_parser (:: clap :: value_parser ! (types :: ByteCount)) . required_unless_present ("json-body")) . arg (:: clap :: Arg :: new ("name") . long ("name") . value_parser (:: clap :: value_parser ! (types :: Name)) . required_unless_present ("json-body")) . arg (:: clap :: Arg :: new ("ncpus") . long ("ncpus") . value_parser (:: clap :: value_parser ! (types :: InstanceCpuCount)) . required_unless_present ("json-body")) . arg (:: clap :: Arg :: new ("organization-name") . long ("organization-name") . value_parser (:: clap :: value_parser ! (types :: Name)) . required (true) . help ("The organization's unique name.")) . arg (:: clap :: Arg :: new ("project-name") . long ("project-name") . value_parser (:: clap :: value_parser ! (types :: Name)) . required (true) . help ("The project's unique name within the organization.")) . arg (:: clap :: Arg :: new ("start") . long ("start") . value_parser (:: clap :: value_parser ! (bool)) . required (false) . help ("Should this instance be started upon creation; true by default.")) . arg (:: clap :: Arg :: new ("user-data") . long ("user-data") . value_parser (:: clap :: value_parser ! (:: std :: string :: String)) . required (false) . help ("User data for instance initialization systems (such as cloud-init). Must be a Base64-encoded string, as specified in RFC 4648 § 4 (+ and / characters with padding). Maximum 32 KiB unencoded data.")) . arg (:: clap :: Arg :: new ("json-body") . long ("json-body") . value_name ("JSON-FILE") . required (false) . value_parser (:: clap :: value_parser ! (std :: path :: PathBuf)) . help ("Path to a file that contains the full json body.")) . arg (:: clap :: Arg :: new ("json-body-template") . long ("json-body-template") . action (:: clap :: ArgAction :: SetTrue) . help ("XXX")) . about ("Create an instance") . long_about ("Use `POST /v1/instances` instead")
     }
 
     pub fn cli_instance_view() -> ::clap::Command {
@@ -1635,76 +1390,7 @@ impl<T: CliConfig> Cli<T> {
     }
 
     pub fn cli_instance_network_interface_create() -> ::clap::Command {
-        ::clap::Command::new("")
-            .arg(
-                ::clap::Arg::new("description")
-                    .long("description")
-                    .value_parser(::clap::value_parser!(::std::string::String))
-                    .required_unless_present("json-body"),
-            )
-            .arg(
-                ::clap::Arg::new("instance-name")
-                    .long("instance-name")
-                    .value_parser(::clap::value_parser!(types::Name))
-                    .required(true),
-            )
-            .arg(
-                ::clap::Arg::new("ip")
-                    .long("ip")
-                    .value_parser(::clap::value_parser!(::std::net::IpAddr))
-                    .required(false)
-                    .help(
-                        "The IP address for the interface. One will be auto-assigned if not \
-                         provided.",
-                    ),
-            )
-            .arg(
-                ::clap::Arg::new("name")
-                    .long("name")
-                    .value_parser(::clap::value_parser!(types::Name))
-                    .required_unless_present("json-body"),
-            )
-            .arg(
-                ::clap::Arg::new("organization-name")
-                    .long("organization-name")
-                    .value_parser(::clap::value_parser!(types::Name))
-                    .required(true),
-            )
-            .arg(
-                ::clap::Arg::new("project-name")
-                    .long("project-name")
-                    .value_parser(::clap::value_parser!(types::Name))
-                    .required(true),
-            )
-            .arg(
-                ::clap::Arg::new("subnet-name")
-                    .long("subnet-name")
-                    .value_parser(::clap::value_parser!(types::Name))
-                    .required_unless_present("json-body")
-                    .help("The VPC Subnet in which to create the interface."),
-            )
-            .arg(
-                ::clap::Arg::new("vpc-name")
-                    .long("vpc-name")
-                    .value_parser(::clap::value_parser!(types::Name))
-                    .required_unless_present("json-body")
-                    .help("The VPC in which to create the interface."),
-            )
-            .arg(
-                ::clap::Arg::new("json-body")
-                    .long("json-body")
-                    .value_name("JSON-FILE")
-                    .required(false)
-                    .value_parser(::clap::value_parser!(std::path::PathBuf))
-                    .help("Path to a file that contains the full json body."),
-            )
-            .arg(
-                ::clap::Arg::new("json-body-template")
-                    .long("json-body-template")
-                    .action(::clap::ArgAction::SetTrue)
-                    .help("XXX"),
-            )
-            .about("Create a network interface")
+        :: clap :: Command :: new ("") . arg (:: clap :: Arg :: new ("description") . long ("description") . value_parser (:: clap :: value_parser ! (:: std :: string :: String)) . required_unless_present ("json-body")) . arg (:: clap :: Arg :: new ("instance-name") . long ("instance-name") . value_parser (:: clap :: value_parser ! (types :: Name)) . required (true)) . arg (:: clap :: Arg :: new ("ip") . long ("ip") . value_parser (:: clap :: value_parser ! (:: std :: net :: IpAddr)) . required (false) . help ("The IP address for the interface. One will be auto-assigned if not provided.")) . arg (:: clap :: Arg :: new ("name") . long ("name") . value_parser (:: clap :: value_parser ! (types :: Name)) . required_unless_present ("json-body")) . arg (:: clap :: Arg :: new ("organization-name") . long ("organization-name") . value_parser (:: clap :: value_parser ! (types :: Name)) . required (true)) . arg (:: clap :: Arg :: new ("project-name") . long ("project-name") . value_parser (:: clap :: value_parser ! (types :: Name)) . required (true)) . arg (:: clap :: Arg :: new ("subnet-name") . long ("subnet-name") . value_parser (:: clap :: value_parser ! (types :: Name)) . required_unless_present ("json-body") . help ("The VPC Subnet in which to create the interface.")) . arg (:: clap :: Arg :: new ("vpc-name") . long ("vpc-name") . value_parser (:: clap :: value_parser ! (types :: Name)) . required_unless_present ("json-body") . help ("The VPC in which to create the interface.")) . arg (:: clap :: Arg :: new ("json-body") . long ("json-body") . value_name ("JSON-FILE") . required (false) . value_parser (:: clap :: value_parser ! (std :: path :: PathBuf)) . help ("Path to a file that contains the full json body.")) . arg (:: clap :: Arg :: new ("json-body-template") . long ("json-body-template") . action (:: clap :: ArgAction :: SetTrue) . help ("XXX")) . about ("Create a network interface")
     }
 
     pub fn cli_instance_network_interface_view() -> ::clap::Command {
@@ -1737,108 +1423,11 @@ impl<T: CliConfig> Cli<T> {
     }
 
     pub fn cli_instance_network_interface_update() -> ::clap::Command {
-        ::clap::Command::new("")
-            .arg(
-                ::clap::Arg::new("description")
-                    .long("description")
-                    .value_parser(::clap::value_parser!(::std::string::String))
-                    .required(false),
-            )
-            .arg(
-                ::clap::Arg::new("instance-name")
-                    .long("instance-name")
-                    .value_parser(::clap::value_parser!(types::Name))
-                    .required(true),
-            )
-            .arg(
-                ::clap::Arg::new("interface-name")
-                    .long("interface-name")
-                    .value_parser(::clap::value_parser!(types::Name))
-                    .required(true),
-            )
-            .arg(
-                ::clap::Arg::new("name")
-                    .long("name")
-                    .value_parser(::clap::value_parser!(types::Name))
-                    .required(false),
-            )
-            .arg(
-                ::clap::Arg::new("organization-name")
-                    .long("organization-name")
-                    .value_parser(::clap::value_parser!(types::Name))
-                    .required(true),
-            )
-            .arg(
-                ::clap::Arg::new("primary")
-                    .long("primary")
-                    .value_parser(::clap::value_parser!(bool))
-                    .required(false)
-                    .help(
-                        "Make a secondary interface the instance's primary interface.\n\nIf \
-                         applied to a secondary interface, that interface will become the primary \
-                         on the next reboot of the instance. Note that this may have implications \
-                         for routing between instances, as the new primary interface will be on a \
-                         distinct subnet from the previous primary interface.\n\nNote that this \
-                         can only be used to select a new primary interface for an instance. \
-                         Requests to change the primary interface into a secondary will return an \
-                         error.",
-                    ),
-            )
-            .arg(
-                ::clap::Arg::new("project-name")
-                    .long("project-name")
-                    .value_parser(::clap::value_parser!(types::Name))
-                    .required(true),
-            )
-            .arg(
-                ::clap::Arg::new("json-body")
-                    .long("json-body")
-                    .value_name("JSON-FILE")
-                    .required(false)
-                    .value_parser(::clap::value_parser!(std::path::PathBuf))
-                    .help("Path to a file that contains the full json body."),
-            )
-            .arg(
-                ::clap::Arg::new("json-body-template")
-                    .long("json-body-template")
-                    .action(::clap::ArgAction::SetTrue)
-                    .help("XXX"),
-            )
-            .about("Update a network interface")
+        :: clap :: Command :: new ("") . arg (:: clap :: Arg :: new ("description") . long ("description") . value_parser (:: clap :: value_parser ! (:: std :: string :: String)) . required (false)) . arg (:: clap :: Arg :: new ("instance-name") . long ("instance-name") . value_parser (:: clap :: value_parser ! (types :: Name)) . required (true)) . arg (:: clap :: Arg :: new ("interface-name") . long ("interface-name") . value_parser (:: clap :: value_parser ! (types :: Name)) . required (true)) . arg (:: clap :: Arg :: new ("name") . long ("name") . value_parser (:: clap :: value_parser ! (types :: Name)) . required (false)) . arg (:: clap :: Arg :: new ("organization-name") . long ("organization-name") . value_parser (:: clap :: value_parser ! (types :: Name)) . required (true)) . arg (:: clap :: Arg :: new ("primary") . long ("primary") . value_parser (:: clap :: value_parser ! (bool)) . required (false) . help ("Make a secondary interface the instance's primary interface.\n\nIf applied to a secondary interface, that interface will become the primary on the next reboot of the instance. Note that this may have implications for routing between instances, as the new primary interface will be on a distinct subnet from the previous primary interface.\n\nNote that this can only be used to select a new primary interface for an instance. Requests to change the primary interface into a secondary will return an error.")) . arg (:: clap :: Arg :: new ("project-name") . long ("project-name") . value_parser (:: clap :: value_parser ! (types :: Name)) . required (true)) . arg (:: clap :: Arg :: new ("json-body") . long ("json-body") . value_name ("JSON-FILE") . required (false) . value_parser (:: clap :: value_parser ! (std :: path :: PathBuf)) . help ("Path to a file that contains the full json body.")) . arg (:: clap :: Arg :: new ("json-body-template") . long ("json-body-template") . action (:: clap :: ArgAction :: SetTrue) . help ("XXX")) . about ("Update a network interface")
     }
 
     pub fn cli_instance_network_interface_delete() -> ::clap::Command {
-        ::clap::Command::new("")
-            .arg(
-                ::clap::Arg::new("instance-name")
-                    .long("instance-name")
-                    .value_parser(::clap::value_parser!(types::Name))
-                    .required(true),
-            )
-            .arg(
-                ::clap::Arg::new("interface-name")
-                    .long("interface-name")
-                    .value_parser(::clap::value_parser!(types::Name))
-                    .required(true),
-            )
-            .arg(
-                ::clap::Arg::new("organization-name")
-                    .long("organization-name")
-                    .value_parser(::clap::value_parser!(types::Name))
-                    .required(true),
-            )
-            .arg(
-                ::clap::Arg::new("project-name")
-                    .long("project-name")
-                    .value_parser(::clap::value_parser!(types::Name))
-                    .required(true),
-            )
-            .about("Delete a network interface")
-            .long_about(
-                "Note that the primary interface for an instance cannot be deleted if there are \
-                 any secondary interfaces. A new primary interface must be designated first. The \
-                 primary interface can be deleted if there are no secondary interfaces.",
-            )
+        :: clap :: Command :: new ("") . arg (:: clap :: Arg :: new ("instance-name") . long ("instance-name") . value_parser (:: clap :: value_parser ! (types :: Name)) . required (true)) . arg (:: clap :: Arg :: new ("interface-name") . long ("interface-name") . value_parser (:: clap :: value_parser ! (types :: Name)) . required (true)) . arg (:: clap :: Arg :: new ("organization-name") . long ("organization-name") . value_parser (:: clap :: value_parser ! (types :: Name)) . required (true)) . arg (:: clap :: Arg :: new ("project-name") . long ("project-name") . value_parser (:: clap :: value_parser ! (types :: Name)) . required (true)) . about ("Delete a network interface") . long_about ("Note that the primary interface for an instance cannot be deleted if there are any secondary interfaces. A new primary interface must be designated first. The primary interface can be deleted if there are no secondary interfaces.")
     }
 
     pub fn cli_instance_reboot() -> ::clap::Command {
@@ -1866,61 +1455,7 @@ impl<T: CliConfig> Cli<T> {
     }
 
     pub fn cli_instance_serial_console() -> ::clap::Command {
-        ::clap::Command::new("")
-            .arg(
-                ::clap::Arg::new("from-start")
-                    .long("from-start")
-                    .value_parser(::clap::value_parser!(u64))
-                    .required(false)
-                    .help(
-                        "Character index in the serial buffer from which to read, counting the \
-                         bytes output since instance start. If this is not provided, \
-                         `most_recent` must be provided, and if this *is* provided, `most_recent` \
-                         must *not* be provided.",
-                    ),
-            )
-            .arg(
-                ::clap::Arg::new("instance-name")
-                    .long("instance-name")
-                    .value_parser(::clap::value_parser!(types::Name))
-                    .required(true),
-            )
-            .arg(
-                ::clap::Arg::new("max-bytes")
-                    .long("max-bytes")
-                    .value_parser(::clap::value_parser!(u64))
-                    .required(false)
-                    .help(
-                        "Maximum number of bytes of buffered serial console contents to return. \
-                         If the requested range runs to the end of the available buffer, the data \
-                         returned will be shorter than `max_bytes`.",
-                    ),
-            )
-            .arg(
-                ::clap::Arg::new("most-recent")
-                    .long("most-recent")
-                    .value_parser(::clap::value_parser!(u64))
-                    .required(false)
-                    .help(
-                        "Character index in the serial buffer from which to read, counting \
-                         *backward* from the most recently buffered data retrieved from the \
-                         instance. (See note on `from_start` about mutual exclusivity)",
-                    ),
-            )
-            .arg(
-                ::clap::Arg::new("organization-name")
-                    .long("organization-name")
-                    .value_parser(::clap::value_parser!(types::Name))
-                    .required(true),
-            )
-            .arg(
-                ::clap::Arg::new("project-name")
-                    .long("project-name")
-                    .value_parser(::clap::value_parser!(types::Name))
-                    .required(true),
-            )
-            .about("Fetch an instance's serial console")
-            .long_about("Use `GET /v1/instances/{instance}/serial-console` instead")
+        :: clap :: Command :: new ("") . arg (:: clap :: Arg :: new ("from-start") . long ("from-start") . value_parser (:: clap :: value_parser ! (u64)) . required (false) . help ("Character index in the serial buffer from which to read, counting the bytes output since instance start. If this is not provided, `most_recent` must be provided, and if this *is* provided, `most_recent` must *not* be provided.")) . arg (:: clap :: Arg :: new ("instance-name") . long ("instance-name") . value_parser (:: clap :: value_parser ! (types :: Name)) . required (true)) . arg (:: clap :: Arg :: new ("max-bytes") . long ("max-bytes") . value_parser (:: clap :: value_parser ! (u64)) . required (false) . help ("Maximum number of bytes of buffered serial console contents to return. If the requested range runs to the end of the available buffer, the data returned will be shorter than `max_bytes`.")) . arg (:: clap :: Arg :: new ("most-recent") . long ("most-recent") . value_parser (:: clap :: value_parser ! (u64)) . required (false) . help ("Character index in the serial buffer from which to read, counting *backward* from the most recently buffered data retrieved from the instance. (See note on `from_start` about mutual exclusivity)")) . arg (:: clap :: Arg :: new ("organization-name") . long ("organization-name") . value_parser (:: clap :: value_parser ! (types :: Name)) . required (true)) . arg (:: clap :: Arg :: new ("project-name") . long ("project-name") . value_parser (:: clap :: value_parser ! (types :: Name)) . required (true)) . about ("Fetch an instance's serial console") . long_about ("Use `GET /v1/instances/{instance}/serial-console` instead")
     }
 
     pub fn cli_instance_serial_console_stream() -> ::clap::Command {
@@ -2222,66 +1757,7 @@ impl<T: CliConfig> Cli<T> {
     }
 
     pub fn cli_vpc_create() -> ::clap::Command {
-        ::clap::Command::new("")
-            .arg(
-                ::clap::Arg::new("description")
-                    .long("description")
-                    .value_parser(::clap::value_parser!(::std::string::String))
-                    .required_unless_present("json-body"),
-            )
-            .arg(
-                ::clap::Arg::new("dns-name")
-                    .long("dns-name")
-                    .value_parser(::clap::value_parser!(types::Name))
-                    .required_unless_present("json-body"),
-            )
-            .arg(
-                ::clap::Arg::new("ipv6-prefix")
-                    .long("ipv6-prefix")
-                    .value_parser(::clap::value_parser!(types::Ipv6Net))
-                    .required(false)
-                    .help(
-                        "The IPv6 prefix for this VPC.\n\nAll IPv6 subnets created from this VPC \
-                         must be taken from this range, which sould be a Unique Local Address in \
-                         the range `fd00::/48`. The default VPC Subnet will have the first `/64` \
-                         range from this prefix.",
-                    ),
-            )
-            .arg(
-                ::clap::Arg::new("name")
-                    .long("name")
-                    .value_parser(::clap::value_parser!(types::Name))
-                    .required_unless_present("json-body"),
-            )
-            .arg(
-                ::clap::Arg::new("organization-name")
-                    .long("organization-name")
-                    .value_parser(::clap::value_parser!(types::Name))
-                    .required(true)
-                    .help("The organization's unique name."),
-            )
-            .arg(
-                ::clap::Arg::new("project-name")
-                    .long("project-name")
-                    .value_parser(::clap::value_parser!(types::Name))
-                    .required(true)
-                    .help("The project's unique name within the organization."),
-            )
-            .arg(
-                ::clap::Arg::new("json-body")
-                    .long("json-body")
-                    .value_name("JSON-FILE")
-                    .required(false)
-                    .value_parser(::clap::value_parser!(std::path::PathBuf))
-                    .help("Path to a file that contains the full json body."),
-            )
-            .arg(
-                ::clap::Arg::new("json-body-template")
-                    .long("json-body-template")
-                    .action(::clap::ArgAction::SetTrue)
-                    .help("XXX"),
-            )
-            .about("Create a VPC")
+        :: clap :: Command :: new ("") . arg (:: clap :: Arg :: new ("description") . long ("description") . value_parser (:: clap :: value_parser ! (:: std :: string :: String)) . required_unless_present ("json-body")) . arg (:: clap :: Arg :: new ("dns-name") . long ("dns-name") . value_parser (:: clap :: value_parser ! (types :: Name)) . required_unless_present ("json-body")) . arg (:: clap :: Arg :: new ("ipv6-prefix") . long ("ipv6-prefix") . value_parser (:: clap :: value_parser ! (types :: Ipv6Net)) . required (false) . help ("The IPv6 prefix for this VPC.\n\nAll IPv6 subnets created from this VPC must be taken from this range, which sould be a Unique Local Address in the range `fd00::/48`. The default VPC Subnet will have the first `/64` range from this prefix.")) . arg (:: clap :: Arg :: new ("name") . long ("name") . value_parser (:: clap :: value_parser ! (types :: Name)) . required_unless_present ("json-body")) . arg (:: clap :: Arg :: new ("organization-name") . long ("organization-name") . value_parser (:: clap :: value_parser ! (types :: Name)) . required (true) . help ("The organization's unique name.")) . arg (:: clap :: Arg :: new ("project-name") . long ("project-name") . value_parser (:: clap :: value_parser ! (types :: Name)) . required (true) . help ("The project's unique name within the organization.")) . arg (:: clap :: Arg :: new ("json-body") . long ("json-body") . value_name ("JSON-FILE") . required (false) . value_parser (:: clap :: value_parser ! (std :: path :: PathBuf)) . help ("Path to a file that contains the full json body.")) . arg (:: clap :: Arg :: new ("json-body-template") . long ("json-body-template") . action (:: clap :: ArgAction :: SetTrue) . help ("XXX")) . about ("Create a VPC")
     }
 
     pub fn cli_vpc_view() -> ::clap::Command {
@@ -2924,75 +2400,7 @@ impl<T: CliConfig> Cli<T> {
     }
 
     pub fn cli_vpc_subnet_create() -> ::clap::Command {
-        ::clap::Command::new("")
-            .arg(
-                ::clap::Arg::new("description")
-                    .long("description")
-                    .value_parser(::clap::value_parser!(::std::string::String))
-                    .required_unless_present("json-body"),
-            )
-            .arg(
-                ::clap::Arg::new("ipv4-block")
-                    .long("ipv4-block")
-                    .value_parser(::clap::value_parser!(types::Ipv4Net))
-                    .required_unless_present("json-body")
-                    .help(
-                        "The IPv4 address range for this subnet.\n\nIt must be allocated from an \
-                         RFC 1918 private address range, and must not overlap with any other \
-                         existing subnet in the VPC.",
-                    ),
-            )
-            .arg(
-                ::clap::Arg::new("ipv6-block")
-                    .long("ipv6-block")
-                    .value_parser(::clap::value_parser!(types::Ipv6Net))
-                    .required(false)
-                    .help(
-                        "The IPv6 address range for this subnet.\n\nIt must be allocated from the \
-                         RFC 4193 Unique Local Address range, with the prefix equal to the parent \
-                         VPC's prefix. A random `/64` block will be assigned if one is not \
-                         provided. It must not overlap with any existing subnet in the VPC.",
-                    ),
-            )
-            .arg(
-                ::clap::Arg::new("name")
-                    .long("name")
-                    .value_parser(::clap::value_parser!(types::Name))
-                    .required_unless_present("json-body"),
-            )
-            .arg(
-                ::clap::Arg::new("organization-name")
-                    .long("organization-name")
-                    .value_parser(::clap::value_parser!(types::Name))
-                    .required(true),
-            )
-            .arg(
-                ::clap::Arg::new("project-name")
-                    .long("project-name")
-                    .value_parser(::clap::value_parser!(types::Name))
-                    .required(true),
-            )
-            .arg(
-                ::clap::Arg::new("vpc-name")
-                    .long("vpc-name")
-                    .value_parser(::clap::value_parser!(types::Name))
-                    .required(true),
-            )
-            .arg(
-                ::clap::Arg::new("json-body")
-                    .long("json-body")
-                    .value_name("JSON-FILE")
-                    .required(false)
-                    .value_parser(::clap::value_parser!(std::path::PathBuf))
-                    .help("Path to a file that contains the full json body."),
-            )
-            .arg(
-                ::clap::Arg::new("json-body-template")
-                    .long("json-body-template")
-                    .action(::clap::ArgAction::SetTrue)
-                    .help("XXX"),
-            )
-            .about("Create a subnet")
+        :: clap :: Command :: new ("") . arg (:: clap :: Arg :: new ("description") . long ("description") . value_parser (:: clap :: value_parser ! (:: std :: string :: String)) . required_unless_present ("json-body")) . arg (:: clap :: Arg :: new ("ipv4-block") . long ("ipv4-block") . value_parser (:: clap :: value_parser ! (types :: Ipv4Net)) . required_unless_present ("json-body") . help ("The IPv4 address range for this subnet.\n\nIt must be allocated from an RFC 1918 private address range, and must not overlap with any other existing subnet in the VPC.")) . arg (:: clap :: Arg :: new ("ipv6-block") . long ("ipv6-block") . value_parser (:: clap :: value_parser ! (types :: Ipv6Net)) . required (false) . help ("The IPv6 address range for this subnet.\n\nIt must be allocated from the RFC 4193 Unique Local Address range, with the prefix equal to the parent VPC's prefix. A random `/64` block will be assigned if one is not provided. It must not overlap with any existing subnet in the VPC.")) . arg (:: clap :: Arg :: new ("name") . long ("name") . value_parser (:: clap :: value_parser ! (types :: Name)) . required_unless_present ("json-body")) . arg (:: clap :: Arg :: new ("organization-name") . long ("organization-name") . value_parser (:: clap :: value_parser ! (types :: Name)) . required (true)) . arg (:: clap :: Arg :: new ("project-name") . long ("project-name") . value_parser (:: clap :: value_parser ! (types :: Name)) . required (true)) . arg (:: clap :: Arg :: new ("vpc-name") . long ("vpc-name") . value_parser (:: clap :: value_parser ! (types :: Name)) . required (true)) . arg (:: clap :: Arg :: new ("json-body") . long ("json-body") . value_name ("JSON-FILE") . required (false) . value_parser (:: clap :: value_parser ! (std :: path :: PathBuf)) . help ("Path to a file that contains the full json body.")) . arg (:: clap :: Arg :: new ("json-body-template") . long ("json-body-template") . action (:: clap :: ArgAction :: SetTrue) . help ("XXX")) . about ("Create a subnet")
     }
 
     pub fn cli_vpc_subnet_view() -> ::clap::Command {
@@ -3352,78 +2760,11 @@ impl<T: CliConfig> Cli<T> {
     }
 
     pub fn cli_certificate_list() -> ::clap::Command {
-        ::clap::Command::new("")
-            .arg(
-                ::clap::Arg::new("limit")
-                    .long("limit")
-                    .value_parser(::clap::value_parser!(::std::num::NonZeroU32))
-                    .required(false)
-                    .help("Maximum number of items returned by a single call"),
-            )
-            .arg(
-                ::clap::Arg::new("sort-by")
-                    .long("sort-by")
-                    .value_parser(::clap::builder::TypedValueParser::map(
-                        ::clap::builder::PossibleValuesParser::new([
-                            types::NameSortMode::NameAscending.to_string(),
-                        ]),
-                        |s| types::NameSortMode::try_from(s).unwrap(),
-                    ))
-                    .required(false),
-            )
-            .about("List system-wide certificates")
-            .long_about(
-                "Returns a list of all the system-wide certificates. System-wide certificates are \
-                 returned sorted by creation date, with the most recent certificates appearing \
-                 first.",
-            )
+        :: clap :: Command :: new ("") . arg (:: clap :: Arg :: new ("limit") . long ("limit") . value_parser (:: clap :: value_parser ! (:: std :: num :: NonZeroU32)) . required (false) . help ("Maximum number of items returned by a single call")) . arg (:: clap :: Arg :: new ("sort-by") . long ("sort-by") . value_parser (:: clap :: builder :: TypedValueParser :: map (:: clap :: builder :: PossibleValuesParser :: new ([types :: NameSortMode :: NameAscending . to_string () ,]) , | s | types :: NameSortMode :: try_from (s) . unwrap ())) . required (false)) . about ("List system-wide certificates") . long_about ("Returns a list of all the system-wide certificates. System-wide certificates are returned sorted by creation date, with the most recent certificates appearing first.")
     }
 
     pub fn cli_certificate_create() -> ::clap::Command {
-        ::clap::Command::new("")
-            .arg(
-                ::clap::Arg::new("description")
-                    .long("description")
-                    .value_parser(::clap::value_parser!(::std::string::String))
-                    .required_unless_present("json-body"),
-            )
-            .arg(
-                ::clap::Arg::new("name")
-                    .long("name")
-                    .value_parser(::clap::value_parser!(types::Name))
-                    .required_unless_present("json-body"),
-            )
-            .arg(
-                ::clap::Arg::new("service")
-                    .long("service")
-                    .value_parser(::clap::builder::TypedValueParser::map(
-                        ::clap::builder::PossibleValuesParser::new([
-                            types::ServiceUsingCertificate::ExternalApi.to_string(),
-                        ]),
-                        |s| types::ServiceUsingCertificate::try_from(s).unwrap(),
-                    ))
-                    .required_unless_present("json-body")
-                    .help("The service using this certificate"),
-            )
-            .arg(
-                ::clap::Arg::new("json-body")
-                    .long("json-body")
-                    .value_name("JSON-FILE")
-                    .required(true)
-                    .value_parser(::clap::value_parser!(std::path::PathBuf))
-                    .help("Path to a file that contains the full json body."),
-            )
-            .arg(
-                ::clap::Arg::new("json-body-template")
-                    .long("json-body-template")
-                    .action(::clap::ArgAction::SetTrue)
-                    .help("XXX"),
-            )
-            .about("Create a new system-wide x.509 certificate.")
-            .long_about(
-                "This certificate is automatically used by the Oxide Control plane to serve \
-                 external connections.",
-            )
+        :: clap :: Command :: new ("") . arg (:: clap :: Arg :: new ("description") . long ("description") . value_parser (:: clap :: value_parser ! (:: std :: string :: String)) . required_unless_present ("json-body")) . arg (:: clap :: Arg :: new ("name") . long ("name") . value_parser (:: clap :: value_parser ! (types :: Name)) . required_unless_present ("json-body")) . arg (:: clap :: Arg :: new ("service") . long ("service") . value_parser (:: clap :: builder :: TypedValueParser :: map (:: clap :: builder :: PossibleValuesParser :: new ([types :: ServiceUsingCertificate :: ExternalApi . to_string () ,]) , | s | types :: ServiceUsingCertificate :: try_from (s) . unwrap ())) . required_unless_present ("json-body") . help ("The service using this certificate")) . arg (:: clap :: Arg :: new ("json-body") . long ("json-body") . value_name ("JSON-FILE") . required (true) . value_parser (:: clap :: value_parser ! (std :: path :: PathBuf)) . help ("Path to a file that contains the full json body.")) . arg (:: clap :: Arg :: new ("json-body-template") . long ("json-body-template") . action (:: clap :: ArgAction :: SetTrue) . help ("XXX")) . about ("Create a new system-wide x.509 certificate.") . long_about ("This certificate is automatically used by the Oxide Control plane to serve external connections.")
     }
 
     pub fn cli_certificate_view() -> ::clap::Command {
@@ -3574,65 +2915,11 @@ impl<T: CliConfig> Cli<T> {
     }
 
     pub fn cli_system_image_list() -> ::clap::Command {
-        ::clap::Command::new("")
-            .arg(
-                ::clap::Arg::new("limit")
-                    .long("limit")
-                    .value_parser(::clap::value_parser!(::std::num::NonZeroU32))
-                    .required(false)
-                    .help("Maximum number of items returned by a single call"),
-            )
-            .arg(
-                ::clap::Arg::new("sort-by")
-                    .long("sort-by")
-                    .value_parser(::clap::builder::TypedValueParser::map(
-                        ::clap::builder::PossibleValuesParser::new([
-                            types::NameSortMode::NameAscending.to_string(),
-                        ]),
-                        |s| types::NameSortMode::try_from(s).unwrap(),
-                    ))
-                    .required(false),
-            )
-            .about("List system-wide images")
-            .long_about(
-                "Returns a list of all the system-wide images. System-wide images are returned \
-                 sorted by creation date, with the most recent images appearing first.",
-            )
+        :: clap :: Command :: new ("") . arg (:: clap :: Arg :: new ("limit") . long ("limit") . value_parser (:: clap :: value_parser ! (:: std :: num :: NonZeroU32)) . required (false) . help ("Maximum number of items returned by a single call")) . arg (:: clap :: Arg :: new ("sort-by") . long ("sort-by") . value_parser (:: clap :: builder :: TypedValueParser :: map (:: clap :: builder :: PossibleValuesParser :: new ([types :: NameSortMode :: NameAscending . to_string () ,]) , | s | types :: NameSortMode :: try_from (s) . unwrap ())) . required (false)) . about ("List system-wide images") . long_about ("Returns a list of all the system-wide images. System-wide images are returned sorted by creation date, with the most recent images appearing first.")
     }
 
     pub fn cli_system_image_create() -> ::clap::Command {
-        ::clap::Command::new("")
-            .arg(
-                ::clap::Arg::new("description")
-                    .long("description")
-                    .value_parser(::clap::value_parser!(::std::string::String))
-                    .required_unless_present("json-body"),
-            )
-            .arg(
-                ::clap::Arg::new("name")
-                    .long("name")
-                    .value_parser(::clap::value_parser!(types::Name))
-                    .required_unless_present("json-body"),
-            )
-            .arg(
-                ::clap::Arg::new("json-body")
-                    .long("json-body")
-                    .value_name("JSON-FILE")
-                    .required(true)
-                    .value_parser(::clap::value_parser!(std::path::PathBuf))
-                    .help("Path to a file that contains the full json body."),
-            )
-            .arg(
-                ::clap::Arg::new("json-body-template")
-                    .long("json-body-template")
-                    .action(::clap::ArgAction::SetTrue)
-                    .help("XXX"),
-            )
-            .about("Create a system-wide image")
-            .long_about(
-                "Create a new system-wide image. This image can then be used by any user in any \
-                 silo as a base for instances.",
-            )
+        :: clap :: Command :: new ("") . arg (:: clap :: Arg :: new ("description") . long ("description") . value_parser (:: clap :: value_parser ! (:: std :: string :: String)) . required_unless_present ("json-body")) . arg (:: clap :: Arg :: new ("name") . long ("name") . value_parser (:: clap :: value_parser ! (types :: Name)) . required_unless_present ("json-body")) . arg (:: clap :: Arg :: new ("json-body") . long ("json-body") . value_name ("JSON-FILE") . required (true) . value_parser (:: clap :: value_parser ! (std :: path :: PathBuf)) . help ("Path to a file that contains the full json body.")) . arg (:: clap :: Arg :: new ("json-body-template") . long ("json-body-template") . action (:: clap :: ArgAction :: SetTrue) . help ("XXX")) . about ("Create a system-wide image") . long_about ("Create a new system-wide image. This image can then be used by any user in any silo as a base for instances.")
     }
 
     pub fn cli_system_image_view() -> ::clap::Command {
@@ -3648,19 +2935,7 @@ impl<T: CliConfig> Cli<T> {
     }
 
     pub fn cli_system_image_delete() -> ::clap::Command {
-        ::clap::Command::new("")
-            .arg(
-                ::clap::Arg::new("image-name")
-                    .long("image-name")
-                    .value_parser(::clap::value_parser!(types::Name))
-                    .required(true),
-            )
-            .about("Delete a system-wide image")
-            .long_about(
-                "Permanently delete a system-wide image. This operation cannot be undone. Any \
-                 instances using the system-wide image will continue to run, however new \
-                 instances can not be created with this image.",
-            )
+        :: clap :: Command :: new ("") . arg (:: clap :: Arg :: new ("image-name") . long ("image-name") . value_parser (:: clap :: value_parser ! (types :: Name)) . required (true)) . about ("Delete a system-wide image") . long_about ("Permanently delete a system-wide image. This operation cannot be undone. Any instances using the system-wide image will continue to run, however new instances can not be created with this image.")
     }
 
     pub fn cli_ip_pool_list() -> ::clap::Command {
@@ -4043,66 +3318,7 @@ impl<T: CliConfig> Cli<T> {
     }
 
     pub fn cli_silo_create() -> ::clap::Command {
-        ::clap::Command::new("")
-            .arg(
-                ::clap::Arg::new("admin-group-name")
-                    .long("admin-group-name")
-                    .value_parser(::clap::value_parser!(::std::string::String))
-                    .required(false)
-                    .help(
-                        "If set, this group will be created during Silo creation and granted the \
-                         \"Silo Admin\" role. Identity providers can assert that users belong to \
-                         this group and those users can log in and further initialize the \
-                         Silo.\n\nNote that if configuring a SAML based identity provider, \
-                         group_attribute_name must be set for users to be considered part of a \
-                         group. See [`SamlIdentityProviderCreate`] for more information.",
-                    ),
-            )
-            .arg(
-                ::clap::Arg::new("description")
-                    .long("description")
-                    .value_parser(::clap::value_parser!(::std::string::String))
-                    .required_unless_present("json-body"),
-            )
-            .arg(
-                ::clap::Arg::new("discoverable")
-                    .long("discoverable")
-                    .value_parser(::clap::value_parser!(bool))
-                    .required_unless_present("json-body"),
-            )
-            .arg(
-                ::clap::Arg::new("identity-mode")
-                    .long("identity-mode")
-                    .value_parser(::clap::builder::TypedValueParser::map(
-                        ::clap::builder::PossibleValuesParser::new([
-                            types::SiloIdentityMode::SamlJit.to_string(),
-                            types::SiloIdentityMode::LocalOnly.to_string(),
-                        ]),
-                        |s| types::SiloIdentityMode::try_from(s).unwrap(),
-                    ))
-                    .required_unless_present("json-body"),
-            )
-            .arg(
-                ::clap::Arg::new("name")
-                    .long("name")
-                    .value_parser(::clap::value_parser!(types::Name))
-                    .required_unless_present("json-body"),
-            )
-            .arg(
-                ::clap::Arg::new("json-body")
-                    .long("json-body")
-                    .value_name("JSON-FILE")
-                    .required(false)
-                    .value_parser(::clap::value_parser!(std::path::PathBuf))
-                    .help("Path to a file that contains the full json body."),
-            )
-            .arg(
-                ::clap::Arg::new("json-body-template")
-                    .long("json-body-template")
-                    .action(::clap::ArgAction::SetTrue)
-                    .help("XXX"),
-            )
-            .about("Create a silo")
+        :: clap :: Command :: new ("") . arg (:: clap :: Arg :: new ("admin-group-name") . long ("admin-group-name") . value_parser (:: clap :: value_parser ! (:: std :: string :: String)) . required (false) . help ("If set, this group will be created during Silo creation and granted the \"Silo Admin\" role. Identity providers can assert that users belong to this group and those users can log in and further initialize the Silo.\n\nNote that if configuring a SAML based identity provider, group_attribute_name must be set for users to be considered part of a group. See [`SamlIdentityProviderCreate`] for more information.")) . arg (:: clap :: Arg :: new ("description") . long ("description") . value_parser (:: clap :: value_parser ! (:: std :: string :: String)) . required_unless_present ("json-body")) . arg (:: clap :: Arg :: new ("discoverable") . long ("discoverable") . value_parser (:: clap :: value_parser ! (bool)) . required_unless_present ("json-body")) . arg (:: clap :: Arg :: new ("identity-mode") . long ("identity-mode") . value_parser (:: clap :: builder :: TypedValueParser :: map (:: clap :: builder :: PossibleValuesParser :: new ([types :: SiloIdentityMode :: SamlJit . to_string () , types :: SiloIdentityMode :: LocalOnly . to_string () ,]) , | s | types :: SiloIdentityMode :: try_from (s) . unwrap ())) . required_unless_present ("json-body")) . arg (:: clap :: Arg :: new ("name") . long ("name") . value_parser (:: clap :: value_parser ! (types :: Name)) . required_unless_present ("json-body")) . arg (:: clap :: Arg :: new ("json-body") . long ("json-body") . value_name ("JSON-FILE") . required (false) . value_parser (:: clap :: value_parser ! (std :: path :: PathBuf)) . help ("Path to a file that contains the full json body.")) . arg (:: clap :: Arg :: new ("json-body-template") . long ("json-body-template") . action (:: clap :: ArgAction :: SetTrue) . help ("XXX")) . about ("Create a silo")
     }
 
     pub fn cli_silo_view() -> ::clap::Command {
@@ -4162,41 +3378,7 @@ impl<T: CliConfig> Cli<T> {
     }
 
     pub fn cli_local_idp_user_create() -> ::clap::Command {
-        ::clap::Command::new("")
-            .arg(
-                ::clap::Arg::new("external-id")
-                    .long("external-id")
-                    .value_parser(::clap::value_parser!(types::UserId))
-                    .required_unless_present("json-body")
-                    .help("username used to log in"),
-            )
-            .arg(
-                ::clap::Arg::new("silo-name")
-                    .long("silo-name")
-                    .value_parser(::clap::value_parser!(types::Name))
-                    .required(true)
-                    .help("The silo's unique name."),
-            )
-            .arg(
-                ::clap::Arg::new("json-body")
-                    .long("json-body")
-                    .value_name("JSON-FILE")
-                    .required(true)
-                    .value_parser(::clap::value_parser!(std::path::PathBuf))
-                    .help("Path to a file that contains the full json body."),
-            )
-            .arg(
-                ::clap::Arg::new("json-body-template")
-                    .long("json-body-template")
-                    .action(::clap::ArgAction::SetTrue)
-                    .help("XXX"),
-            )
-            .about("Create a user")
-            .long_about(
-                "Users can only be created in Silos with `provision_type` == `Fixed`. Otherwise, \
-                 Silo users are just-in-time (JIT) provisioned when a user first logs in using an \
-                 external Identity Provider.",
-            )
+        :: clap :: Command :: new ("") . arg (:: clap :: Arg :: new ("external-id") . long ("external-id") . value_parser (:: clap :: value_parser ! (types :: UserId)) . required_unless_present ("json-body") . help ("username used to log in")) . arg (:: clap :: Arg :: new ("silo-name") . long ("silo-name") . value_parser (:: clap :: value_parser ! (types :: Name)) . required (true) . help ("The silo's unique name.")) . arg (:: clap :: Arg :: new ("json-body") . long ("json-body") . value_name ("JSON-FILE") . required (true) . value_parser (:: clap :: value_parser ! (std :: path :: PathBuf)) . help ("Path to a file that contains the full json body.")) . arg (:: clap :: Arg :: new ("json-body-template") . long ("json-body-template") . action (:: clap :: ArgAction :: SetTrue) . help ("XXX")) . about ("Create a user") . long_about ("Users can only be created in Silos with `provision_type` == `Fixed`. Otherwise, Silo users are just-in-time (JIT) provisioned when a user first logs in using an external Identity Provider.")
     }
 
     pub fn cli_local_idp_user_delete() -> ::clap::Command {
@@ -4255,87 +3437,7 @@ impl<T: CliConfig> Cli<T> {
     }
 
     pub fn cli_saml_identity_provider_create() -> ::clap::Command {
-        ::clap::Command::new("")
-            .arg(
-                ::clap::Arg::new("acs-url")
-                    .long("acs-url")
-                    .value_parser(::clap::value_parser!(::std::string::String))
-                    .required_unless_present("json-body")
-                    .help("service provider endpoint where the response will be sent"),
-            )
-            .arg(
-                ::clap::Arg::new("description")
-                    .long("description")
-                    .value_parser(::clap::value_parser!(::std::string::String))
-                    .required_unless_present("json-body"),
-            )
-            .arg(
-                ::clap::Arg::new("group-attribute-name")
-                    .long("group-attribute-name")
-                    .value_parser(::clap::value_parser!(::std::string::String))
-                    .required(false)
-                    .help(
-                        "If set, SAML attributes with this name will be considered to denote a \
-                         user's group membership, where the attribute value(s) should be a \
-                         comma-separated list of group names.",
-                    ),
-            )
-            .arg(
-                ::clap::Arg::new("idp-entity-id")
-                    .long("idp-entity-id")
-                    .value_parser(::clap::value_parser!(::std::string::String))
-                    .required_unless_present("json-body")
-                    .help("idp's entity id"),
-            )
-            .arg(
-                ::clap::Arg::new("name")
-                    .long("name")
-                    .value_parser(::clap::value_parser!(types::Name))
-                    .required_unless_present("json-body"),
-            )
-            .arg(
-                ::clap::Arg::new("silo-name")
-                    .long("silo-name")
-                    .value_parser(::clap::value_parser!(types::Name))
-                    .required(true)
-                    .help("The silo's unique name."),
-            )
-            .arg(
-                ::clap::Arg::new("slo-url")
-                    .long("slo-url")
-                    .value_parser(::clap::value_parser!(::std::string::String))
-                    .required_unless_present("json-body")
-                    .help("service provider endpoint where the idp should send log out requests"),
-            )
-            .arg(
-                ::clap::Arg::new("sp-client-id")
-                    .long("sp-client-id")
-                    .value_parser(::clap::value_parser!(::std::string::String))
-                    .required_unless_present("json-body")
-                    .help("sp's client id"),
-            )
-            .arg(
-                ::clap::Arg::new("technical-contact-email")
-                    .long("technical-contact-email")
-                    .value_parser(::clap::value_parser!(::std::string::String))
-                    .required_unless_present("json-body")
-                    .help("customer's technical contact for saml configuration"),
-            )
-            .arg(
-                ::clap::Arg::new("json-body")
-                    .long("json-body")
-                    .value_name("JSON-FILE")
-                    .required(true)
-                    .value_parser(::clap::value_parser!(std::path::PathBuf))
-                    .help("Path to a file that contains the full json body."),
-            )
-            .arg(
-                ::clap::Arg::new("json-body-template")
-                    .long("json-body-template")
-                    .action(::clap::ArgAction::SetTrue)
-                    .help("XXX"),
-            )
-            .about("Create a SAML IDP")
+        :: clap :: Command :: new ("") . arg (:: clap :: Arg :: new ("acs-url") . long ("acs-url") . value_parser (:: clap :: value_parser ! (:: std :: string :: String)) . required_unless_present ("json-body") . help ("service provider endpoint where the response will be sent")) . arg (:: clap :: Arg :: new ("description") . long ("description") . value_parser (:: clap :: value_parser ! (:: std :: string :: String)) . required_unless_present ("json-body")) . arg (:: clap :: Arg :: new ("group-attribute-name") . long ("group-attribute-name") . value_parser (:: clap :: value_parser ! (:: std :: string :: String)) . required (false) . help ("If set, SAML attributes with this name will be considered to denote a user's group membership, where the attribute value(s) should be a comma-separated list of group names.")) . arg (:: clap :: Arg :: new ("idp-entity-id") . long ("idp-entity-id") . value_parser (:: clap :: value_parser ! (:: std :: string :: String)) . required_unless_present ("json-body") . help ("idp's entity id")) . arg (:: clap :: Arg :: new ("name") . long ("name") . value_parser (:: clap :: value_parser ! (types :: Name)) . required_unless_present ("json-body")) . arg (:: clap :: Arg :: new ("silo-name") . long ("silo-name") . value_parser (:: clap :: value_parser ! (types :: Name)) . required (true) . help ("The silo's unique name.")) . arg (:: clap :: Arg :: new ("slo-url") . long ("slo-url") . value_parser (:: clap :: value_parser ! (:: std :: string :: String)) . required_unless_present ("json-body") . help ("service provider endpoint where the idp should send log out requests")) . arg (:: clap :: Arg :: new ("sp-client-id") . long ("sp-client-id") . value_parser (:: clap :: value_parser ! (:: std :: string :: String)) . required_unless_present ("json-body") . help ("sp's client id")) . arg (:: clap :: Arg :: new ("technical-contact-email") . long ("technical-contact-email") . value_parser (:: clap :: value_parser ! (:: std :: string :: String)) . required_unless_present ("json-body") . help ("customer's technical contact for saml configuration")) . arg (:: clap :: Arg :: new ("json-body") . long ("json-body") . value_name ("JSON-FILE") . required (true) . value_parser (:: clap :: value_parser ! (std :: path :: PathBuf)) . help ("Path to a file that contains the full json body.")) . arg (:: clap :: Arg :: new ("json-body-template") . long ("json-body-template") . action (:: clap :: ArgAction :: SetTrue) . help ("XXX")) . about ("Create a SAML IDP")
     }
 
     pub fn cli_saml_identity_provider_view() -> ::clap::Command {
@@ -4685,82 +3787,7 @@ impl<T: CliConfig> Cli<T> {
     }
 
     pub fn cli_instance_create_v1() -> ::clap::Command {
-        ::clap::Command::new("")
-            .arg(
-                ::clap::Arg::new("description")
-                    .long("description")
-                    .value_parser(::clap::value_parser!(::std::string::String))
-                    .required_unless_present("json-body"),
-            )
-            .arg(
-                ::clap::Arg::new("hostname")
-                    .long("hostname")
-                    .value_parser(::clap::value_parser!(::std::string::String))
-                    .required_unless_present("json-body"),
-            )
-            .arg(
-                ::clap::Arg::new("memory")
-                    .long("memory")
-                    .value_parser(::clap::value_parser!(types::ByteCount))
-                    .required_unless_present("json-body"),
-            )
-            .arg(
-                ::clap::Arg::new("name")
-                    .long("name")
-                    .value_parser(::clap::value_parser!(types::Name))
-                    .required_unless_present("json-body"),
-            )
-            .arg(
-                ::clap::Arg::new("ncpus")
-                    .long("ncpus")
-                    .value_parser(::clap::value_parser!(types::InstanceCpuCount))
-                    .required_unless_present("json-body"),
-            )
-            .arg(
-                ::clap::Arg::new("organization")
-                    .long("organization")
-                    .value_parser(::clap::value_parser!(types::NameOrId))
-                    .required(false),
-            )
-            .arg(
-                ::clap::Arg::new("project")
-                    .long("project")
-                    .value_parser(::clap::value_parser!(types::NameOrId))
-                    .required(true),
-            )
-            .arg(
-                ::clap::Arg::new("start")
-                    .long("start")
-                    .value_parser(::clap::value_parser!(bool))
-                    .required(false)
-                    .help("Should this instance be started upon creation; true by default."),
-            )
-            .arg(
-                ::clap::Arg::new("user-data")
-                    .long("user-data")
-                    .value_parser(::clap::value_parser!(::std::string::String))
-                    .required(false)
-                    .help(
-                        "User data for instance initialization systems (such as cloud-init). Must \
-                         be a Base64-encoded string, as specified in RFC 4648 § 4 (+ and / \
-                         characters with padding). Maximum 32 KiB unencoded data.",
-                    ),
-            )
-            .arg(
-                ::clap::Arg::new("json-body")
-                    .long("json-body")
-                    .value_name("JSON-FILE")
-                    .required(false)
-                    .value_parser(::clap::value_parser!(std::path::PathBuf))
-                    .help("Path to a file that contains the full json body."),
-            )
-            .arg(
-                ::clap::Arg::new("json-body-template")
-                    .long("json-body-template")
-                    .action(::clap::ArgAction::SetTrue)
-                    .help("XXX"),
-            )
-            .about("Create an instance")
+        :: clap :: Command :: new ("") . arg (:: clap :: Arg :: new ("description") . long ("description") . value_parser (:: clap :: value_parser ! (:: std :: string :: String)) . required_unless_present ("json-body")) . arg (:: clap :: Arg :: new ("hostname") . long ("hostname") . value_parser (:: clap :: value_parser ! (:: std :: string :: String)) . required_unless_present ("json-body")) . arg (:: clap :: Arg :: new ("memory") . long ("memory") . value_parser (:: clap :: value_parser ! (types :: ByteCount)) . required_unless_present ("json-body")) . arg (:: clap :: Arg :: new ("name") . long ("name") . value_parser (:: clap :: value_parser ! (types :: Name)) . required_unless_present ("json-body")) . arg (:: clap :: Arg :: new ("ncpus") . long ("ncpus") . value_parser (:: clap :: value_parser ! (types :: InstanceCpuCount)) . required_unless_present ("json-body")) . arg (:: clap :: Arg :: new ("organization") . long ("organization") . value_parser (:: clap :: value_parser ! (types :: NameOrId)) . required (false)) . arg (:: clap :: Arg :: new ("project") . long ("project") . value_parser (:: clap :: value_parser ! (types :: NameOrId)) . required (true)) . arg (:: clap :: Arg :: new ("start") . long ("start") . value_parser (:: clap :: value_parser ! (bool)) . required (false) . help ("Should this instance be started upon creation; true by default.")) . arg (:: clap :: Arg :: new ("user-data") . long ("user-data") . value_parser (:: clap :: value_parser ! (:: std :: string :: String)) . required (false) . help ("User data for instance initialization systems (such as cloud-init). Must be a Base64-encoded string, as specified in RFC 4648 § 4 (+ and / characters with padding). Maximum 32 KiB unencoded data.")) . arg (:: clap :: Arg :: new ("json-body") . long ("json-body") . value_name ("JSON-FILE") . required (false) . value_parser (:: clap :: value_parser ! (std :: path :: PathBuf)) . help ("Path to a file that contains the full json body.")) . arg (:: clap :: Arg :: new ("json-body-template") . long ("json-body-template") . action (:: clap :: ArgAction :: SetTrue) . help ("XXX")) . about ("Create an instance")
     }
 
     pub fn cli_instance_view_v1() -> ::clap::Command {
@@ -5005,60 +4032,7 @@ impl<T: CliConfig> Cli<T> {
     }
 
     pub fn cli_instance_serial_console_v1() -> ::clap::Command {
-        ::clap::Command::new("")
-            .arg(
-                ::clap::Arg::new("from-start")
-                    .long("from-start")
-                    .value_parser(::clap::value_parser!(u64))
-                    .required(false)
-                    .help(
-                        "Character index in the serial buffer from which to read, counting the \
-                         bytes output since instance start. If this is not provided, \
-                         `most_recent` must be provided, and if this *is* provided, `most_recent` \
-                         must *not* be provided.",
-                    ),
-            )
-            .arg(
-                ::clap::Arg::new("instance")
-                    .long("instance")
-                    .value_parser(::clap::value_parser!(types::NameOrId))
-                    .required(true),
-            )
-            .arg(
-                ::clap::Arg::new("max-bytes")
-                    .long("max-bytes")
-                    .value_parser(::clap::value_parser!(u64))
-                    .required(false)
-                    .help(
-                        "Maximum number of bytes of buffered serial console contents to return. \
-                         If the requested range runs to the end of the available buffer, the data \
-                         returned will be shorter than `max_bytes`.",
-                    ),
-            )
-            .arg(
-                ::clap::Arg::new("most-recent")
-                    .long("most-recent")
-                    .value_parser(::clap::value_parser!(u64))
-                    .required(false)
-                    .help(
-                        "Character index in the serial buffer from which to read, counting \
-                         *backward* from the most recently buffered data retrieved from the \
-                         instance. (See note on `from_start` about mutual exclusivity)",
-                    ),
-            )
-            .arg(
-                ::clap::Arg::new("organization")
-                    .long("organization")
-                    .value_parser(::clap::value_parser!(types::NameOrId))
-                    .required(false),
-            )
-            .arg(
-                ::clap::Arg::new("project")
-                    .long("project")
-                    .value_parser(::clap::value_parser!(types::NameOrId))
-                    .required(false),
-            )
-            .about("Fetch an instance's serial console")
+        :: clap :: Command :: new ("") . arg (:: clap :: Arg :: new ("from-start") . long ("from-start") . value_parser (:: clap :: value_parser ! (u64)) . required (false) . help ("Character index in the serial buffer from which to read, counting the bytes output since instance start. If this is not provided, `most_recent` must be provided, and if this *is* provided, `most_recent` must *not* be provided.")) . arg (:: clap :: Arg :: new ("instance") . long ("instance") . value_parser (:: clap :: value_parser ! (types :: NameOrId)) . required (true)) . arg (:: clap :: Arg :: new ("max-bytes") . long ("max-bytes") . value_parser (:: clap :: value_parser ! (u64)) . required (false) . help ("Maximum number of bytes of buffered serial console contents to return. If the requested range runs to the end of the available buffer, the data returned will be shorter than `max_bytes`.")) . arg (:: clap :: Arg :: new ("most-recent") . long ("most-recent") . value_parser (:: clap :: value_parser ! (u64)) . required (false) . help ("Character index in the serial buffer from which to read, counting *backward* from the most recently buffered data retrieved from the instance. (See note on `from_start` about mutual exclusivity)")) . arg (:: clap :: Arg :: new ("organization") . long ("organization") . value_parser (:: clap :: value_parser ! (types :: NameOrId)) . required (false)) . arg (:: clap :: Arg :: new ("project") . long ("project") . value_parser (:: clap :: value_parser ! (types :: NameOrId)) . required (false)) . about ("Fetch an instance's serial console")
     }
 
     pub fn cli_instance_serial_console_stream_v1() -> ::clap::Command {
