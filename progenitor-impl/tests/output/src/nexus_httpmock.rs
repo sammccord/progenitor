@@ -4002,15 +4002,7 @@ pub mod operations {
     pub struct InstanceNetworkInterfaceViewWhen(::httpmock::When);
     impl InstanceNetworkInterfaceViewWhen {
         pub fn new(inner: ::httpmock::When) -> Self {
-            Self(
-                inner.method(::httpmock::Method::GET).path_matches(
-                    regex::Regex::new(
-                        "^/organizations/[^/]*/projects/[^/]*/instances/[^/]*/network-interfaces/\
-                         [^/]*$",
-                    )
-                    .unwrap(),
-                ),
-            )
+            Self (inner . method (:: httpmock :: Method :: GET) . path_matches (regex :: Regex :: new ("^/organizations/[^/]*/projects/[^/]*/instances/[^/]*/network-interfaces/[^/]*$") . unwrap ()))
         }
 
         pub fn into_inner(self) -> ::httpmock::When {
@@ -4097,15 +4089,7 @@ pub mod operations {
     pub struct InstanceNetworkInterfaceUpdateWhen(::httpmock::When);
     impl InstanceNetworkInterfaceUpdateWhen {
         pub fn new(inner: ::httpmock::When) -> Self {
-            Self(
-                inner.method(::httpmock::Method::PUT).path_matches(
-                    regex::Regex::new(
-                        "^/organizations/[^/]*/projects/[^/]*/instances/[^/]*/network-interfaces/\
-                         [^/]*$",
-                    )
-                    .unwrap(),
-                ),
-            )
+            Self (inner . method (:: httpmock :: Method :: PUT) . path_matches (regex :: Regex :: new ("^/organizations/[^/]*/projects/[^/]*/instances/[^/]*/network-interfaces/[^/]*$") . unwrap ()))
         }
 
         pub fn into_inner(self) -> ::httpmock::When {
@@ -4196,15 +4180,7 @@ pub mod operations {
     pub struct InstanceNetworkInterfaceDeleteWhen(::httpmock::When);
     impl InstanceNetworkInterfaceDeleteWhen {
         pub fn new(inner: ::httpmock::When) -> Self {
-            Self(
-                inner.method(::httpmock::Method::DELETE).path_matches(
-                    regex::Regex::new(
-                        "^/organizations/[^/]*/projects/[^/]*/instances/[^/]*/network-interfaces/\
-                         [^/]*$",
-                    )
-                    .unwrap(),
-                ),
-            )
+            Self (inner . method (:: httpmock :: Method :: DELETE) . path_matches (regex :: Regex :: new ("^/organizations/[^/]*/projects/[^/]*/instances/[^/]*/network-interfaces/[^/]*$") . unwrap ()))
         }
 
         pub fn into_inner(self) -> ::httpmock::When {
@@ -4504,15 +4480,7 @@ pub mod operations {
     pub struct InstanceSerialConsoleStreamWhen(::httpmock::When);
     impl InstanceSerialConsoleStreamWhen {
         pub fn new(inner: ::httpmock::When) -> Self {
-            Self(
-                inner.method(::httpmock::Method::GET).path_matches(
-                    regex::Regex::new(
-                        "^/organizations/[^/]*/projects/[^/]*/instances/[^/]*/serial-console/\
-                         stream$",
-                    )
-                    .unwrap(),
-                ),
-            )
+            Self (inner . method (:: httpmock :: Method :: GET) . path_matches (regex :: Regex :: new ("^/organizations/[^/]*/projects/[^/]*/instances/[^/]*/serial-console/stream$") . unwrap ()))
         }
 
         pub fn into_inner(self) -> ::httpmock::When {
@@ -6578,15 +6546,7 @@ pub mod operations {
     pub struct VpcRouterRouteViewWhen(::httpmock::When);
     impl VpcRouterRouteViewWhen {
         pub fn new(inner: ::httpmock::When) -> Self {
-            Self(
-                inner.method(::httpmock::Method::GET).path_matches(
-                    regex::Regex::new(
-                        "^/organizations/[^/]*/projects/[^/]*/vpcs/[^/]*/routers/[^/]*/routes/[^/\
-                         ]*$",
-                    )
-                    .unwrap(),
-                ),
-            )
+            Self (inner . method (:: httpmock :: Method :: GET) . path_matches (regex :: Regex :: new ("^/organizations/[^/]*/projects/[^/]*/vpcs/[^/]*/routers/[^/]*/routes/[^/]*$") . unwrap ()))
         }
 
         pub fn into_inner(self) -> ::httpmock::When {
@@ -6682,15 +6642,7 @@ pub mod operations {
     pub struct VpcRouterRouteUpdateWhen(::httpmock::When);
     impl VpcRouterRouteUpdateWhen {
         pub fn new(inner: ::httpmock::When) -> Self {
-            Self(
-                inner.method(::httpmock::Method::PUT).path_matches(
-                    regex::Regex::new(
-                        "^/organizations/[^/]*/projects/[^/]*/vpcs/[^/]*/routers/[^/]*/routes/[^/\
-                         ]*$",
-                    )
-                    .unwrap(),
-                ),
-            )
+            Self (inner . method (:: httpmock :: Method :: PUT) . path_matches (regex :: Regex :: new ("^/organizations/[^/]*/projects/[^/]*/vpcs/[^/]*/routers/[^/]*/routes/[^/]*$") . unwrap ()))
         }
 
         pub fn into_inner(self) -> ::httpmock::When {
@@ -6790,15 +6742,7 @@ pub mod operations {
     pub struct VpcRouterRouteDeleteWhen(::httpmock::When);
     impl VpcRouterRouteDeleteWhen {
         pub fn new(inner: ::httpmock::When) -> Self {
-            Self(
-                inner.method(::httpmock::Method::DELETE).path_matches(
-                    regex::Regex::new(
-                        "^/organizations/[^/]*/projects/[^/]*/vpcs/[^/]*/routers/[^/]*/routes/[^/\
-                         ]*$",
-                    )
-                    .unwrap(),
-                ),
-            )
+            Self (inner . method (:: httpmock :: Method :: DELETE) . path_matches (regex :: Regex :: new ("^/organizations/[^/]*/projects/[^/]*/vpcs/[^/]*/routers/[^/]*/routes/[^/]*$") . unwrap ()))
         }
 
         pub fn into_inner(self) -> ::httpmock::When {
@@ -7388,15 +7332,7 @@ pub mod operations {
     pub struct VpcSubnetListNetworkInterfacesWhen(::httpmock::When);
     impl VpcSubnetListNetworkInterfacesWhen {
         pub fn new(inner: ::httpmock::When) -> Self {
-            Self(
-                inner.method(::httpmock::Method::GET).path_matches(
-                    regex::Regex::new(
-                        "^/organizations/[^/]*/projects/[^/]*/vpcs/[^/]*/subnets/[^/]*/\
-                         network-interfaces$",
-                    )
-                    .unwrap(),
-                ),
-            )
+            Self (inner . method (:: httpmock :: Method :: GET) . path_matches (regex :: Regex :: new ("^/organizations/[^/]*/projects/[^/]*/vpcs/[^/]*/subnets/[^/]*/network-interfaces$") . unwrap ()))
         }
 
         pub fn into_inner(self) -> ::httpmock::When {

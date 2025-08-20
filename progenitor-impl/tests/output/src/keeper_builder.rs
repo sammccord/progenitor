@@ -2,12 +2,12 @@
 use progenitor_client::{encode_path, ClientHooks, OperationInfo, RequestBuilderExt};
 #[allow(unused_imports)]
 pub use progenitor_client::{ByteStream, ClientInfo, Error, ResponseValue};
-/// Types used as operation parameters and responses.
+#[doc = r" Types used as operation parameters and responses."]
 #[allow(clippy::all)]
 pub mod types {
-    /// Error types.
+    #[doc = r" Error types."]
     pub mod error {
-        /// Error from a `TryFrom` or `FromStr` implementation.
+        #[doc = r" Error from a `TryFrom` or `FromStr` implementation."]
         pub struct ConversionError(::std::borrow::Cow<'static, str>);
         impl ::std::error::Error for ConversionError {}
         impl ::std::fmt::Display for ConversionError {
@@ -35,29 +35,29 @@ pub mod types {
         }
     }
 
-    ///`EnrolBody`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "title": "EnrolBody",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "host",
-    ///    "key"
-    ///  ],
-    ///  "properties": {
-    ///    "host": {
-    ///      "type": "string"
-    ///    },
-    ///    "key": {
-    ///      "type": "string"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`EnrolBody`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"title\": \"EnrolBody\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"host\","]
+    #[doc = "    \"key\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"host\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"key\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(
         :: serde :: Deserialize, :: serde :: Serialize, Clone, Debug, schemars :: JsonSchema,
     )]
@@ -78,28 +78,28 @@ pub mod types {
         }
     }
 
-    ///`GlobalJobsResult`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "title": "GlobalJobsResult",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "summary"
-    ///  ],
-    ///  "properties": {
-    ///    "summary": {
-    ///      "type": "array",
-    ///      "items": {
-    ///        "$ref": "#/components/schemas/ReportSummary"
-    ///      }
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`GlobalJobsResult`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"title\": \"GlobalJobsResult\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"summary\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"summary\": {"]
+    #[doc = "      \"type\": \"array\","]
+    #[doc = "      \"items\": {"]
+    #[doc = "        \"$ref\": \"#/components/schemas/ReportSummary\""]
+    #[doc = "      }"]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(
         :: serde :: Deserialize, :: serde :: Serialize, Clone, Debug, schemars :: JsonSchema,
     )]
@@ -119,33 +119,33 @@ pub mod types {
         }
     }
 
-    ///`OutputRecord`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "required": [
-    ///    "msg",
-    ///    "stream",
-    ///    "time"
-    ///  ],
-    ///  "properties": {
-    ///    "msg": {
-    ///      "type": "string"
-    ///    },
-    ///    "stream": {
-    ///      "type": "string"
-    ///    },
-    ///    "time": {
-    ///      "type": "string",
-    ///      "format": "date-time"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`OutputRecord`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"msg\","]
+    #[doc = "    \"stream\","]
+    #[doc = "    \"time\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"msg\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"stream\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"time\": {"]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"date-time\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(
         :: serde :: Deserialize, :: serde :: Serialize, Clone, Debug, schemars :: JsonSchema,
     )]
@@ -167,29 +167,29 @@ pub mod types {
         }
     }
 
-    ///`PingResult`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "title": "PingResult",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "host",
-    ///    "ok"
-    ///  ],
-    ///  "properties": {
-    ///    "host": {
-    ///      "type": "string"
-    ///    },
-    ///    "ok": {
-    ///      "type": "boolean"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`PingResult`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"title\": \"PingResult\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"host\","]
+    #[doc = "    \"ok\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"host\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"ok\": {"]
+    #[doc = "      \"type\": \"boolean\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(
         :: serde :: Deserialize, :: serde :: Serialize, Clone, Debug, schemars :: JsonSchema,
     )]
@@ -210,40 +210,40 @@ pub mod types {
         }
     }
 
-    ///`ReportFinishBody`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "title": "ReportFinishBody",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "duration_millis",
-    ///    "end_time",
-    ///    "exit_status",
-    ///    "id"
-    ///  ],
-    ///  "properties": {
-    ///    "duration_millis": {
-    ///      "type": "integer",
-    ///      "format": "int32"
-    ///    },
-    ///    "end_time": {
-    ///      "type": "string",
-    ///      "format": "date-time"
-    ///    },
-    ///    "exit_status": {
-    ///      "type": "integer",
-    ///      "format": "int32"
-    ///    },
-    ///    "id": {
-    ///      "$ref": "#/components/schemas/ReportId"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`ReportFinishBody`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"title\": \"ReportFinishBody\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"duration_millis\","]
+    #[doc = "    \"end_time\","]
+    #[doc = "    \"exit_status\","]
+    #[doc = "    \"id\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"duration_millis\": {"]
+    #[doc = "      \"type\": \"integer\","]
+    #[doc = "      \"format\": \"int32\""]
+    #[doc = "    },"]
+    #[doc = "    \"end_time\": {"]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"date-time\""]
+    #[doc = "    },"]
+    #[doc = "    \"exit_status\": {"]
+    #[doc = "      \"type\": \"integer\","]
+    #[doc = "      \"format\": \"int32\""]
+    #[doc = "    },"]
+    #[doc = "    \"id\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/ReportId\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(
         :: serde :: Deserialize, :: serde :: Serialize, Clone, Debug, schemars :: JsonSchema,
     )]
@@ -266,43 +266,43 @@ pub mod types {
         }
     }
 
-    ///`ReportId`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "required": [
-    ///    "host",
-    ///    "job",
-    ///    "pid",
-    ///    "time",
-    ///    "uuid"
-    ///  ],
-    ///  "properties": {
-    ///    "host": {
-    ///      "type": "string"
-    ///    },
-    ///    "job": {
-    ///      "type": "string"
-    ///    },
-    ///    "pid": {
-    ///      "type": "integer",
-    ///      "format": "uint64",
-    ///      "minimum": 0.0
-    ///    },
-    ///    "time": {
-    ///      "type": "string",
-    ///      "format": "date-time"
-    ///    },
-    ///    "uuid": {
-    ///      "type": "string"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`ReportId`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"host\","]
+    #[doc = "    \"job\","]
+    #[doc = "    \"pid\","]
+    #[doc = "    \"time\","]
+    #[doc = "    \"uuid\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"host\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"job\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"pid\": {"]
+    #[doc = "      \"type\": \"integer\","]
+    #[doc = "      \"format\": \"uint64\","]
+    #[doc = "      \"minimum\": 0.0"]
+    #[doc = "    },"]
+    #[doc = "    \"time\": {"]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"date-time\""]
+    #[doc = "    },"]
+    #[doc = "    \"uuid\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(
         :: serde :: Deserialize, :: serde :: Serialize, Clone, Debug, schemars :: JsonSchema,
     )]
@@ -326,29 +326,29 @@ pub mod types {
         }
     }
 
-    ///`ReportOutputBody`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "title": "ReportOutputBody",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "id",
-    ///    "record"
-    ///  ],
-    ///  "properties": {
-    ///    "id": {
-    ///      "$ref": "#/components/schemas/ReportId"
-    ///    },
-    ///    "record": {
-    ///      "$ref": "#/components/schemas/OutputRecord"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`ReportOutputBody`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"title\": \"ReportOutputBody\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"id\","]
+    #[doc = "    \"record\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"id\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/ReportId\""]
+    #[doc = "    },"]
+    #[doc = "    \"record\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/OutputRecord\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(
         :: serde :: Deserialize, :: serde :: Serialize, Clone, Debug, schemars :: JsonSchema,
     )]
@@ -369,25 +369,25 @@ pub mod types {
         }
     }
 
-    ///`ReportResult`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "title": "ReportResult",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "existed_already"
-    ///  ],
-    ///  "properties": {
-    ///    "existed_already": {
-    ///      "type": "boolean"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`ReportResult`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"title\": \"ReportResult\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"existed_already\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"existed_already\": {"]
+    #[doc = "      \"type\": \"boolean\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(
         :: serde :: Deserialize, :: serde :: Serialize, Clone, Debug, schemars :: JsonSchema,
     )]
@@ -407,34 +407,34 @@ pub mod types {
         }
     }
 
-    ///`ReportStartBody`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "title": "ReportStartBody",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "id",
-    ///    "script",
-    ///    "start_time"
-    ///  ],
-    ///  "properties": {
-    ///    "id": {
-    ///      "$ref": "#/components/schemas/ReportId"
-    ///    },
-    ///    "script": {
-    ///      "type": "string"
-    ///    },
-    ///    "start_time": {
-    ///      "type": "string",
-    ///      "format": "date-time"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`ReportStartBody`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"title\": \"ReportStartBody\","]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"id\","]
+    #[doc = "    \"script\","]
+    #[doc = "    \"start_time\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"id\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/ReportId\""]
+    #[doc = "    },"]
+    #[doc = "    \"script\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"start_time\": {"]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"date-time\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(
         :: serde :: Deserialize, :: serde :: Serialize, Clone, Debug, schemars :: JsonSchema,
     )]
@@ -456,48 +456,48 @@ pub mod types {
         }
     }
 
-    ///`ReportSummary`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "required": [
-    ///    "age_seconds",
-    ///    "duration_seconds",
-    ///    "host",
-    ///    "job",
-    ///    "status",
-    ///    "when"
-    ///  ],
-    ///  "properties": {
-    ///    "age_seconds": {
-    ///      "type": "integer",
-    ///      "format": "int32"
-    ///    },
-    ///    "duration_seconds": {
-    ///      "type": "integer",
-    ///      "format": "int32"
-    ///    },
-    ///    "host": {
-    ///      "type": "string"
-    ///    },
-    ///    "job": {
-    ///      "type": "string"
-    ///    },
-    ///    "status": {
-    ///      "type": "integer",
-    ///      "format": "int32"
-    ///    },
-    ///    "when": {
-    ///      "type": "string",
-    ///      "format": "date-time"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`ReportSummary`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"age_seconds\","]
+    #[doc = "    \"duration_seconds\","]
+    #[doc = "    \"host\","]
+    #[doc = "    \"job\","]
+    #[doc = "    \"status\","]
+    #[doc = "    \"when\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"age_seconds\": {"]
+    #[doc = "      \"type\": \"integer\","]
+    #[doc = "      \"format\": \"int32\""]
+    #[doc = "    },"]
+    #[doc = "    \"duration_seconds\": {"]
+    #[doc = "      \"type\": \"integer\","]
+    #[doc = "      \"format\": \"int32\""]
+    #[doc = "    },"]
+    #[doc = "    \"host\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"job\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"status\": {"]
+    #[doc = "      \"type\": \"integer\","]
+    #[doc = "      \"format\": \"int32\""]
+    #[doc = "    },"]
+    #[doc = "    \"when\": {"]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"date-time\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(
         :: serde :: Deserialize, :: serde :: Serialize, Clone, Debug, schemars :: JsonSchema,
     )]
@@ -522,7 +522,7 @@ pub mod types {
         }
     }
 
-    /// Types for composing complex structures.
+    #[doc = r" Types for composing complex structures."]
     pub mod builder {
         #[derive(Clone, Debug)]
         pub struct EnrolBody {
@@ -1262,42 +1262,47 @@ pub mod types {
 }
 
 #[derive(Clone, Debug)]
-///Client for Keeper API
-///
-///report execution of cron jobs through a mechanism other than mail
-///
-///Version: 1.0
+#[doc = "Client for Keeper API\n\nreport execution of cron jobs through a mechanism other than mail\n\nVersion: 1.0"]
 pub struct Client {
     pub(crate) baseurl: String,
-    pub(crate) client: reqwest::Client,
+    pub(crate) client: reqwest_middleware::ClientWithMiddleware,
 }
 
 impl Client {
-    /// Create a new client.
-    ///
-    /// `baseurl` is the base URL provided to the internal
-    /// `reqwest::Client`, and should include a scheme and hostname,
-    /// as well as port and a path stem if applicable.
+    #[doc = r" Create a new client."]
+    #[doc = r""]
+    #[doc = r" `baseurl` is the base URL provided to the internal"]
+    #[doc = r" `reqwest::Client`, and should include a scheme and hostname,"]
+    #[doc = r" as well as port and a path stem if applicable."]
     pub fn new(baseurl: &str) -> Self {
         #[cfg(not(target_arch = "wasm32"))]
         let client = {
             let dur = std::time::Duration::from_secs(15);
-            reqwest::ClientBuilder::new()
+            let reqwest_client = reqwest::ClientBuilder::new()
                 .connect_timeout(dur)
                 .timeout(dur)
+                .build()
+                .unwrap();
+            reqwest_middleware::ClientBuilder::new(reqwest_client).build()
         };
         #[cfg(target_arch = "wasm32")]
-        let client = reqwest::ClientBuilder::new();
-        Self::new_with_client(baseurl, client.build().unwrap())
+        let client = {
+            let reqwest_client = reqwest::ClientBuilder::new().build().unwrap();
+            reqwest_middleware::ClientBuilder::new(reqwest_client).build()
+        };
+        Self::new_with_client(baseurl, client)
     }
 
-    /// Construct a new client with an existing `reqwest::Client`,
-    /// allowing more control over its configuration.
-    ///
-    /// `baseurl` is the base URL provided to the internal
-    /// `reqwest::Client`, and should include a scheme and hostname,
-    /// as well as port and a path stem if applicable.
-    pub fn new_with_client(baseurl: &str, client: reqwest::Client) -> Self {
+    #[doc = r" Construct a new client with an existing `reqwest_middleware::ClientWithMiddleware`,"]
+    #[doc = r" allowing more control over its configuration."]
+    #[doc = r""]
+    #[doc = r" `baseurl` is the base URL provided to the internal"]
+    #[doc = r" `reqwest_middleware::ClientWithMiddleware`, and should include a scheme and hostname,"]
+    #[doc = r" as well as port and a path stem if applicable."]
+    pub fn new_with_client(
+        baseurl: &str,
+        client: reqwest_middleware::ClientWithMiddleware,
+    ) -> Self {
         Self {
             baseurl: baseurl.to_string(),
             client,
@@ -1314,7 +1319,7 @@ impl ClientInfo<()> for Client {
         self.baseurl.as_str()
     }
 
-    fn client(&self) -> &reqwest::Client {
+    fn client(&self) -> &reqwest_middleware::ClientWithMiddleware {
         &self.client
     }
 
@@ -1325,100 +1330,38 @@ impl ClientInfo<()> for Client {
 
 impl ClientHooks<()> for &Client {}
 impl Client {
-    ///Sends a `POST` request to `/enrol`
-    ///
-    ///Arguments:
-    /// - `authorization`: Authorization header (bearer token)
-    /// - `body`
-    ///```ignore
-    /// let response = client.enrol()
-    ///    .authorization(authorization)
-    ///    .body(body)
-    ///    .send()
-    ///    .await;
-    /// ```
+    #[doc = "Sends a `POST` request to `/enrol`\n\nArguments:\n- `authorization`: Authorization header (bearer token)\n- `body`\n```ignore\nlet response = client.enrol()\n    .authorization(authorization)\n    .body(body)\n    .send()\n    .await;\n```"]
     pub fn enrol(&self) -> builder::Enrol<'_> {
         builder::Enrol::new(self)
     }
 
-    ///Sends a `GET` request to `/global/jobs`
-    ///
-    ///Arguments:
-    /// - `authorization`: Authorization header (bearer token)
-    ///```ignore
-    /// let response = client.global_jobs()
-    ///    .authorization(authorization)
-    ///    .send()
-    ///    .await;
-    /// ```
+    #[doc = "Sends a `GET` request to `/global/jobs`\n\nArguments:\n- `authorization`: Authorization header (bearer token)\n```ignore\nlet response = client.global_jobs()\n    .authorization(authorization)\n    .send()\n    .await;\n```"]
     pub fn global_jobs(&self) -> builder::GlobalJobs<'_> {
         builder::GlobalJobs::new(self)
     }
 
-    ///Sends a `GET` request to `/ping`
-    ///
-    ///Arguments:
-    /// - `authorization`: Authorization header (bearer token)
-    ///```ignore
-    /// let response = client.ping()
-    ///    .authorization(authorization)
-    ///    .send()
-    ///    .await;
-    /// ```
+    #[doc = "Sends a `GET` request to `/ping`\n\nArguments:\n- `authorization`: Authorization header (bearer token)\n```ignore\nlet response = client.ping()\n    .authorization(authorization)\n    .send()\n    .await;\n```"]
     pub fn ping(&self) -> builder::Ping<'_> {
         builder::Ping::new(self)
     }
 
-    ///Sends a `POST` request to `/report/finish`
-    ///
-    ///Arguments:
-    /// - `authorization`: Authorization header (bearer token)
-    /// - `body`
-    ///```ignore
-    /// let response = client.report_finish()
-    ///    .authorization(authorization)
-    ///    .body(body)
-    ///    .send()
-    ///    .await;
-    /// ```
+    #[doc = "Sends a `POST` request to `/report/finish`\n\nArguments:\n- `authorization`: Authorization header (bearer token)\n- `body`\n```ignore\nlet response = client.report_finish()\n    .authorization(authorization)\n    .body(body)\n    .send()\n    .await;\n```"]
     pub fn report_finish(&self) -> builder::ReportFinish<'_> {
         builder::ReportFinish::new(self)
     }
 
-    ///Sends a `POST` request to `/report/output`
-    ///
-    ///Arguments:
-    /// - `authorization`: Authorization header (bearer token)
-    /// - `body`
-    ///```ignore
-    /// let response = client.report_output()
-    ///    .authorization(authorization)
-    ///    .body(body)
-    ///    .send()
-    ///    .await;
-    /// ```
+    #[doc = "Sends a `POST` request to `/report/output`\n\nArguments:\n- `authorization`: Authorization header (bearer token)\n- `body`\n```ignore\nlet response = client.report_output()\n    .authorization(authorization)\n    .body(body)\n    .send()\n    .await;\n```"]
     pub fn report_output(&self) -> builder::ReportOutput<'_> {
         builder::ReportOutput::new(self)
     }
 
-    ///Sends a `POST` request to `/report/start`
-    ///
-    ///Arguments:
-    /// - `authorization`: Authorization header (bearer token)
-    /// - `body`
-    ///```ignore
-    /// let response = client.report_start()
-    ///    .authorization(authorization)
-    ///    .body(body)
-    ///    .send()
-    ///    .await;
-    /// ```
+    #[doc = "Sends a `POST` request to `/report/start`\n\nArguments:\n- `authorization`: Authorization header (bearer token)\n- `body`\n```ignore\nlet response = client.report_start()\n    .authorization(authorization)\n    .body(body)\n    .send()\n    .await;\n```"]
     pub fn report_start(&self) -> builder::ReportStart<'_> {
         builder::ReportStart::new(self)
     }
 }
 
-/// Types for composing operation parameters.
+#[doc = r" Types for composing operation parameters."]
 #[allow(clippy::all)]
 pub mod builder {
     use super::types;
@@ -1427,9 +1370,7 @@ pub mod builder {
         encode_path, ByteStream, ClientHooks, ClientInfo, Error, OperationInfo, RequestBuilderExt,
         ResponseValue,
     };
-    ///Builder for [`Client::enrol`]
-    ///
-    ///[`Client::enrol`]: super::Client::enrol
+    #[doc = "Builder for [`Client::enrol`]\n\n[`Client::enrol`]: super::Client::enrol"]
     #[derive(Debug, Clone)]
     pub struct Enrol<'a> {
         client: &'a super::Client,
@@ -1476,7 +1417,7 @@ pub mod builder {
             self
         }
 
-        ///Sends a `POST` request to `/enrol`
+        #[doc = "Sends a `POST` request to `/enrol`"]
         pub async fn send(self) -> Result<ResponseValue<()>, Error<()>> {
             let Self {
                 client,
@@ -1515,9 +1456,7 @@ pub mod builder {
         }
     }
 
-    ///Builder for [`Client::global_jobs`]
-    ///
-    ///[`Client::global_jobs`]: super::Client::global_jobs
+    #[doc = "Builder for [`Client::global_jobs`]\n\n[`Client::global_jobs`]: super::Client::global_jobs"]
     #[derive(Debug, Clone)]
     pub struct GlobalJobs<'a> {
         client: &'a super::Client,
@@ -1542,7 +1481,7 @@ pub mod builder {
             self
         }
 
-        ///Sends a `GET` request to `/global/jobs`
+        #[doc = "Sends a `GET` request to `/global/jobs`"]
         pub async fn send(self) -> Result<ResponseValue<types::GlobalJobsResult>, Error<()>> {
             let Self {
                 client,
@@ -1580,9 +1519,7 @@ pub mod builder {
         }
     }
 
-    ///Builder for [`Client::ping`]
-    ///
-    ///[`Client::ping`]: super::Client::ping
+    #[doc = "Builder for [`Client::ping`]\n\n[`Client::ping`]: super::Client::ping"]
     #[derive(Debug, Clone)]
     pub struct Ping<'a> {
         client: &'a super::Client,
@@ -1607,7 +1544,7 @@ pub mod builder {
             self
         }
 
-        ///Sends a `GET` request to `/ping`
+        #[doc = "Sends a `GET` request to `/ping`"]
         pub async fn send(self) -> Result<ResponseValue<types::PingResult>, Error<()>> {
             let Self {
                 client,
@@ -1645,9 +1582,7 @@ pub mod builder {
         }
     }
 
-    ///Builder for [`Client::report_finish`]
-    ///
-    ///[`Client::report_finish`]: super::Client::report_finish
+    #[doc = "Builder for [`Client::report_finish`]\n\n[`Client::report_finish`]: super::Client::report_finish"]
     #[derive(Debug, Clone)]
     pub struct ReportFinish<'a> {
         client: &'a super::Client,
@@ -1696,7 +1631,7 @@ pub mod builder {
             self
         }
 
-        ///Sends a `POST` request to `/report/finish`
+        #[doc = "Sends a `POST` request to `/report/finish`"]
         pub async fn send(self) -> Result<ResponseValue<types::ReportResult>, Error<()>> {
             let Self {
                 client,
@@ -1739,9 +1674,7 @@ pub mod builder {
         }
     }
 
-    ///Builder for [`Client::report_output`]
-    ///
-    ///[`Client::report_output`]: super::Client::report_output
+    #[doc = "Builder for [`Client::report_output`]\n\n[`Client::report_output`]: super::Client::report_output"]
     #[derive(Debug, Clone)]
     pub struct ReportOutput<'a> {
         client: &'a super::Client,
@@ -1790,7 +1723,7 @@ pub mod builder {
             self
         }
 
-        ///Sends a `POST` request to `/report/output`
+        #[doc = "Sends a `POST` request to `/report/output`"]
         pub async fn send(self) -> Result<ResponseValue<types::ReportResult>, Error<()>> {
             let Self {
                 client,
@@ -1833,9 +1766,7 @@ pub mod builder {
         }
     }
 
-    ///Builder for [`Client::report_start`]
-    ///
-    ///[`Client::report_start`]: super::Client::report_start
+    #[doc = "Builder for [`Client::report_start`]\n\n[`Client::report_start`]: super::Client::report_start"]
     #[derive(Debug, Clone)]
     pub struct ReportStart<'a> {
         client: &'a super::Client,
@@ -1882,7 +1813,7 @@ pub mod builder {
             self
         }
 
-        ///Sends a `POST` request to `/report/start`
+        #[doc = "Sends a `POST` request to `/report/start`"]
         pub async fn send(self) -> Result<ResponseValue<types::ReportResult>, Error<()>> {
             let Self {
                 client,
@@ -1926,7 +1857,7 @@ pub mod builder {
     }
 }
 
-/// Items consumers will typically use such as the Client.
+#[doc = r" Items consumers will typically use such as the Client."]
 pub mod prelude {
     pub use self::super::Client;
 }

@@ -59,8 +59,8 @@ pub trait ClientInfo<Inner> {
     /// Get the base URL to which requests are made.
     fn baseurl(&self) -> &str;
 
-    /// Get the internal `reqwest::Client` used to make requests.
-    fn client(&self) -> &reqwest::Client;
+    /// Get the internal `reqwest_middleware::ClientWithMiddleware` used to make requests.
+    fn client(&self) -> &reqwest_middleware::ClientWithMiddleware;
 
     /// Get the inner value of type `T` if one is specified.
     fn inner(&self) -> &Inner;
@@ -78,7 +78,7 @@ where
         (*self).baseurl()
     }
 
-    fn client(&self) -> &reqwest::Client {
+    fn client(&self) -> &reqwest_middleware::ClientWithMiddleware {
         (*self).client()
     }
 
@@ -115,7 +115,7 @@ where
     /// Runs after completion of the request.
     async fn post<E>(
         &self,
-        result: &reqwest::Result<reqwest::Response>,
+        result: &Result<reqwest::Response, reqwest_middleware::Error>,
         info: &OperationInfo,
     ) -> std::result::Result<(), Error<E>> {
         Ok(())
@@ -146,7 +146,7 @@ where
         &self,
         request: reqwest::Request,
         info: &OperationInfo,
-    ) -> reqwest::Result<reqwest::Response> {
+    ) -> Result<reqwest::Response, reqwest_middleware::Error> {
         self.client().execute(request).await
     }
 }
@@ -157,8 +157,8 @@ where
 /// generated from the server (see [`Error::ErrorResponse`])
 pub struct ResponseValue<T> {
     inner: T,
-    status: reqwest::StatusCode,
-    headers: reqwest::header::HeaderMap,
+    status: http::StatusCode,
+    headers: http::HeaderMap,
     // TODO cookies?
 }
 
@@ -167,7 +167,7 @@ impl<T: DeserializeOwned> ResponseValue<T> {
     pub async fn from_response<E>(response: reqwest::Response) -> Result<Self, Error<E>> {
         let status = response.status();
         let headers = response.headers().clone();
-        let full = response.bytes().await.map_err(Error::ResponseBodyError)?;
+        let full = response.bytes().await.map_err(|e| Error::ResponseBodyError(e.into()))?;
         let inner =
             serde_json::from_slice(&full).map_err(|e| Error::InvalidResponsePayload(full, e))?;
 
@@ -187,8 +187,8 @@ impl ResponseValue<reqwest::Upgraded> {
     ) -> Result<Self, Error<E>> {
         let status = response.status();
         let headers = response.headers().clone();
-        if status == reqwest::StatusCode::SWITCHING_PROTOCOLS {
-            let inner = response.upgrade().await.map_err(Error::InvalidUpgrade)?;
+        if status == http::StatusCode::SWITCHING_PROTOCOLS {
+            let inner = response.upgrade().await.map_err(|e| Error::InvalidUpgrade(e.into()))?;
 
             Ok(Self {
                 inner,
@@ -233,7 +233,7 @@ impl<T> ResponseValue<T> {
     /// Creates a [`ResponseValue`] from the inner type, status, and headers.
     ///
     /// Useful for generating test fixtures.
-    pub fn new(inner: T, status: reqwest::StatusCode, headers: reqwest::header::HeaderMap) -> Self {
+    pub fn new(inner: T, status: http::StatusCode, headers: http::HeaderMap) -> Self {
         Self {
             inner,
             status,
@@ -247,12 +247,12 @@ impl<T> ResponseValue<T> {
     }
 
     /// Gets the status from this response.
-    pub fn status(&self) -> reqwest::StatusCode {
+    pub fn status(&self) -> http::StatusCode {
         self.status
     }
 
     /// Gets the headers from this response.
-    pub fn headers(&self) -> &reqwest::header::HeaderMap {
+    pub fn headers(&self) -> &http::HeaderMap {
         &self.headers
     }
 
@@ -260,7 +260,7 @@ impl<T> ResponseValue<T> {
     /// valid.
     pub fn content_length(&self) -> Option<u64> {
         self.headers
-            .get(reqwest::header::CONTENT_LENGTH)?
+            .get(http::header::CONTENT_LENGTH)?
             .to_str()
             .ok()?
             .parse::<u64>()
@@ -329,16 +329,16 @@ pub enum Error<E = ()> {
     InvalidRequest(String),
 
     /// A server error either due to the data, or with the connection.
-    CommunicationError(reqwest::Error),
+    CommunicationError(reqwest_middleware::Error),
 
     /// An expected response when upgrading connection.
-    InvalidUpgrade(reqwest::Error),
+    InvalidUpgrade(reqwest_middleware::Error),
 
     /// A documented, expected error response.
     ErrorResponse(ResponseValue<E>),
 
     /// Encountered an error reading the body for an expected response.
-    ResponseBodyError(reqwest::Error),
+    ResponseBodyError(reqwest_middleware::Error),
 
     /// An expected response code whose deserialization failed.
     InvalidResponsePayload(Bytes, serde_json::Error),
@@ -353,7 +353,7 @@ pub enum Error<E = ()> {
 
 impl<E> Error<E> {
     /// Returns the status code, if the error was generated from a response.
-    pub fn status(&self) -> Option<reqwest::StatusCode> {
+    pub fn status(&self) -> Option<http::StatusCode> {
         match self {
             Error::InvalidRequest(_) => None,
             Error::Custom(_) => None,
@@ -398,14 +398,20 @@ impl<E> From<std::convert::Infallible> for Error<E> {
     }
 }
 
-impl<E> From<reqwest::Error> for Error<E> {
-    fn from(e: reqwest::Error) -> Self {
+impl<E> From<reqwest_middleware::Error> for Error<E> {
+    fn from(e: reqwest_middleware::Error) -> Self {
         Self::CommunicationError(e)
     }
 }
 
-impl<E> From<reqwest::header::InvalidHeaderValue> for Error<E> {
-    fn from(e: reqwest::header::InvalidHeaderValue) -> Self {
+impl<E> From<reqwest::Error> for Error<E> {
+    fn from(e: reqwest::Error) -> Self {
+        Self::CommunicationError(e.into())
+    }
+}
+
+impl<E> From<http::header::InvalidHeaderValue> for Error<E> {
+    fn from(e: http::header::InvalidHeaderValue) -> Self {
         Self::InvalidRequest(e.to_string())
     }
 }
@@ -535,8 +541,8 @@ impl<E> RequestBuilderExt<E> for RequestBuilder {
     fn form_urlencoded<T: Serialize + ?Sized>(self, body: &T) -> Result<Self, Error<E>> {
         Ok(self
             .header(
-                reqwest::header::CONTENT_TYPE,
-                reqwest::header::HeaderValue::from_static("application/x-www-form-urlencoded"),
+                http::header::CONTENT_TYPE,
+                http::header::HeaderValue::from_static("application/x-www-form-urlencoded"),
             )
             .body(
                 serde_urlencoded::to_string(body)

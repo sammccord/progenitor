@@ -2,12 +2,12 @@
 use progenitor_client::{encode_path, ClientHooks, OperationInfo, RequestBuilderExt};
 #[allow(unused_imports)]
 pub use progenitor_client::{ByteStream, ClientInfo, Error, ResponseValue};
-/// Types used as operation parameters and responses.
+#[doc = r" Types used as operation parameters and responses."]
 #[allow(clippy::all)]
 pub mod types {
-    /// Error types.
+    #[doc = r" Error types."]
     pub mod error {
-        /// Error from a `TryFrom` or `FromStr` implementation.
+        #[doc = r" Error from a `TryFrom` or `FromStr` implementation."]
         pub struct ConversionError(::std::borrow::Cow<'static, str>);
         impl ::std::error::Error for ConversionError {}
         impl ::std::fmt::Display for ConversionError {
@@ -35,26 +35,26 @@ pub mod types {
         }
     }
 
-    ///`GetThingOrThingsId`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "oneOf": [
-    ///    {
-    ///      "type": "string"
-    ///    },
-    ///    {
-    ///      "type": "array",
-    ///      "items": {
-    ///        "type": "string"
-    ///      }
-    ///    }
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`GetThingOrThingsId`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"oneOf\": ["]
+    #[doc = "    {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    {"]
+    #[doc = "      \"type\": \"array\","]
+    #[doc = "      \"items\": {"]
+    #[doc = "        \"type\": \"string\""]
+    #[doc = "      }"]
+    #[doc = "    }"]
+    #[doc = "  ]"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     #[serde(untagged)]
     pub enum GetThingOrThingsId {
@@ -74,21 +74,21 @@ pub mod types {
         }
     }
 
-    ///`HeaderArgAcceptLanguage`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "default": "en",
-    ///  "type": "string",
-    ///  "enum": [
-    ///    "de",
-    ///    "en"
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`HeaderArgAcceptLanguage`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"default\": \"en\","]
+    #[doc = "  \"type\": \"string\","]
+    #[doc = "  \"enum\": ["]
+    #[doc = "    \"de\","]
+    #[doc = "    \"en\""]
+    #[doc = "  ]"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(
         :: serde :: Deserialize,
         :: serde :: Serialize,
@@ -165,59 +165,59 @@ pub mod types {
         }
     }
 
-    ///`ObjWithOptionArray`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "required": [
-    ///    "stranger-things",
-    ///    "things"
-    ///  ],
-    ///  "properties": {
-    ///    "stranger-things": {
-    ///      "type": "array",
-    ///      "items": {
-    ///        "oneOf": [
-    ///          {
-    ///            "type": "null"
-    ///          },
-    ///          {
-    ///            "allOf": [
-    ///              {
-    ///                "$ref": "#/components/schemas/Task"
-    ///              }
-    ///            ],
-    ///            "oneOf": [
-    ///              {}
-    ///            ]
-    ///          }
-    ///        ]
-    ///      }
-    ///    },
-    ///    "things": {
-    ///      "type": "array",
-    ///      "items": {
-    ///        "oneOf": [
-    ///          {
-    ///            "type": "null"
-    ///          },
-    ///          {
-    ///            "allOf": [
-    ///              {
-    ///                "$ref": "#/components/schemas/Task"
-    ///              }
-    ///            ]
-    ///          }
-    ///        ]
-    ///      }
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`ObjWithOptionArray`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"stranger-things\","]
+    #[doc = "    \"things\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"stranger-things\": {"]
+    #[doc = "      \"type\": \"array\","]
+    #[doc = "      \"items\": {"]
+    #[doc = "        \"oneOf\": ["]
+    #[doc = "          {"]
+    #[doc = "            \"type\": \"null\""]
+    #[doc = "          },"]
+    #[doc = "          {"]
+    #[doc = "            \"allOf\": ["]
+    #[doc = "              {"]
+    #[doc = "                \"$ref\": \"#/components/schemas/Task\""]
+    #[doc = "              }"]
+    #[doc = "            ],"]
+    #[doc = "            \"oneOf\": ["]
+    #[doc = "              {}"]
+    #[doc = "            ]"]
+    #[doc = "          }"]
+    #[doc = "        ]"]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    \"things\": {"]
+    #[doc = "      \"type\": \"array\","]
+    #[doc = "      \"items\": {"]
+    #[doc = "        \"oneOf\": ["]
+    #[doc = "          {"]
+    #[doc = "            \"type\": \"null\""]
+    #[doc = "          },"]
+    #[doc = "          {"]
+    #[doc = "            \"allOf\": ["]
+    #[doc = "              {"]
+    #[doc = "                \"$ref\": \"#/components/schemas/Task\""]
+    #[doc = "              }"]
+    #[doc = "            ]"]
+    #[doc = "          }"]
+    #[doc = "        ]"]
+    #[doc = "      }"]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct ObjWithOptionArray {
         #[serde(rename = "stranger-things")]
@@ -231,43 +231,43 @@ pub mod types {
         }
     }
 
-    ///`Task`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "required": [
-    ///    "id",
-    ///    "name",
-    ///    "output_rules",
-    ///    "script",
-    ///    "state"
-    ///  ],
-    ///  "properties": {
-    ///    "id": {
-    ///      "type": "string"
-    ///    },
-    ///    "name": {
-    ///      "type": "string"
-    ///    },
-    ///    "output_rules": {
-    ///      "type": "array",
-    ///      "items": {
-    ///        "type": "string"
-    ///      }
-    ///    },
-    ///    "script": {
-    ///      "type": "string"
-    ///    },
-    ///    "state": {
-    ///      "type": "string"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`Task`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"id\","]
+    #[doc = "    \"name\","]
+    #[doc = "    \"output_rules\","]
+    #[doc = "    \"script\","]
+    #[doc = "    \"state\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"id\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"name\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"output_rules\": {"]
+    #[doc = "      \"type\": \"array\","]
+    #[doc = "      \"items\": {"]
+    #[doc = "        \"type\": \"string\""]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    \"script\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"state\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct Task {
         pub id: ::std::string::String,
@@ -283,39 +283,39 @@ pub mod types {
         }
     }
 
-    ///`TaskEvent`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "required": [
-    ///    "payload",
-    ///    "seq",
-    ///    "stream",
-    ///    "time"
-    ///  ],
-    ///  "properties": {
-    ///    "payload": {
-    ///      "type": "string"
-    ///    },
-    ///    "seq": {
-    ///      "type": "integer",
-    ///      "format": "uint",
-    ///      "minimum": 0.0
-    ///    },
-    ///    "stream": {
-    ///      "type": "string"
-    ///    },
-    ///    "time": {
-    ///      "type": "string",
-    ///      "format": "date-time"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`TaskEvent`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"payload\","]
+    #[doc = "    \"seq\","]
+    #[doc = "    \"stream\","]
+    #[doc = "    \"time\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"payload\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"seq\": {"]
+    #[doc = "      \"type\": \"integer\","]
+    #[doc = "      \"format\": \"uint\","]
+    #[doc = "      \"minimum\": 0.0"]
+    #[doc = "    },"]
+    #[doc = "    \"stream\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"time\": {"]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"date-time\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct TaskEvent {
         pub payload: ::std::string::String,
@@ -330,34 +330,34 @@ pub mod types {
         }
     }
 
-    ///`TaskOutput`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "required": [
-    ///    "id",
-    ///    "path",
-    ///    "size"
-    ///  ],
-    ///  "properties": {
-    ///    "id": {
-    ///      "type": "string"
-    ///    },
-    ///    "path": {
-    ///      "type": "string"
-    ///    },
-    ///    "size": {
-    ///      "type": "integer",
-    ///      "format": "uint64",
-    ///      "minimum": 0.0
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`TaskOutput`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"id\","]
+    #[doc = "    \"path\","]
+    #[doc = "    \"size\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"id\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"path\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"size\": {"]
+    #[doc = "      \"type\": \"integer\","]
+    #[doc = "      \"format\": \"uint64\","]
+    #[doc = "      \"minimum\": 0.0"]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct TaskOutput {
         pub id: ::std::string::String,
@@ -371,38 +371,38 @@ pub mod types {
         }
     }
 
-    ///`TaskSubmit`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "required": [
-    ///    "default",
-    ///    "name",
-    ///    "script"
-    ///  ],
-    ///  "properties": {
-    ///    "default": {
-    ///      "type": "boolean"
-    ///    },
-    ///    "name": {
-    ///      "type": "string"
-    ///    },
-    ///    "output_rules": {
-    ///      "type": "array",
-    ///      "items": {
-    ///        "type": "string"
-    ///      }
-    ///    },
-    ///    "script": {
-    ///      "type": "string"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`TaskSubmit`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"default\","]
+    #[doc = "    \"name\","]
+    #[doc = "    \"script\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"default\": {"]
+    #[doc = "      \"type\": \"boolean\""]
+    #[doc = "    },"]
+    #[doc = "    \"name\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"output_rules\": {"]
+    #[doc = "      \"type\": \"array\","]
+    #[doc = "      \"items\": {"]
+    #[doc = "        \"type\": \"string\""]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    \"script\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct TaskSubmit {
         pub default: bool,
@@ -418,24 +418,24 @@ pub mod types {
         }
     }
 
-    ///`TaskSubmitResult`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "required": [
-    ///    "id"
-    ///  ],
-    ///  "properties": {
-    ///    "id": {
-    ///      "type": "string"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`TaskSubmitResult`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"id\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"id\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct TaskSubmitResult {
         pub id: ::std::string::String,
@@ -447,24 +447,24 @@ pub mod types {
         }
     }
 
-    ///`UploadedChunk`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "required": [
-    ///    "id"
-    ///  ],
-    ///  "properties": {
-    ///    "id": {
-    ///      "type": "string"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`UploadedChunk`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"id\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"id\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct UploadedChunk {
         pub id: ::std::string::String,
@@ -476,24 +476,24 @@ pub mod types {
         }
     }
 
-    ///`UserCreate`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "required": [
-    ///    "name"
-    ///  ],
-    ///  "properties": {
-    ///    "name": {
-    ///      "type": "string"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`UserCreate`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"name\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"name\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct UserCreate {
         pub name: ::std::string::String,
@@ -505,32 +505,32 @@ pub mod types {
         }
     }
 
-    ///`UserCreateResult`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "required": [
-    ///    "id",
-    ///    "name",
-    ///    "token"
-    ///  ],
-    ///  "properties": {
-    ///    "id": {
-    ///      "type": "string"
-    ///    },
-    ///    "name": {
-    ///      "type": "string"
-    ///    },
-    ///    "token": {
-    ///      "type": "string"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`UserCreateResult`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"id\","]
+    #[doc = "    \"name\","]
+    #[doc = "    \"token\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"id\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"name\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"token\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct UserCreateResult {
         pub id: ::std::string::String,
@@ -544,28 +544,28 @@ pub mod types {
         }
     }
 
-    ///`WhoamiResult`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "required": [
-    ///    "id",
-    ///    "name"
-    ///  ],
-    ///  "properties": {
-    ///    "id": {
-    ///      "type": "string"
-    ///    },
-    ///    "name": {
-    ///      "type": "string"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`WhoamiResult`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"id\","]
+    #[doc = "    \"name\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"id\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"name\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct WhoamiResult {
         pub id: ::std::string::String,
@@ -578,46 +578,46 @@ pub mod types {
         }
     }
 
-    ///`Worker`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "required": [
-    ///    "deleted",
-    ///    "id",
-    ///    "recycle",
-    ///    "tasks"
-    ///  ],
-    ///  "properties": {
-    ///    "deleted": {
-    ///      "type": "boolean"
-    ///    },
-    ///    "id": {
-    ///      "type": "string"
-    ///    },
-    ///    "instance_id": {
-    ///      "type": "string"
-    ///    },
-    ///    "lastping": {
-    ///      "type": "string",
-    ///      "format": "date-time"
-    ///    },
-    ///    "recycle": {
-    ///      "type": "boolean"
-    ///    },
-    ///    "tasks": {
-    ///      "type": "array",
-    ///      "items": {
-    ///        "$ref": "#/components/schemas/WorkerTask"
-    ///      }
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`Worker`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"deleted\","]
+    #[doc = "    \"id\","]
+    #[doc = "    \"recycle\","]
+    #[doc = "    \"tasks\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"deleted\": {"]
+    #[doc = "      \"type\": \"boolean\""]
+    #[doc = "    },"]
+    #[doc = "    \"id\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"instance_id\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"lastping\": {"]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"date-time\""]
+    #[doc = "    },"]
+    #[doc = "    \"recycle\": {"]
+    #[doc = "      \"type\": \"boolean\""]
+    #[doc = "    },"]
+    #[doc = "    \"tasks\": {"]
+    #[doc = "      \"type\": \"array\","]
+    #[doc = "      \"items\": {"]
+    #[doc = "        \"$ref\": \"#/components/schemas/WorkerTask\""]
+    #[doc = "      }"]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct Worker {
         pub deleted: bool,
@@ -636,36 +636,36 @@ pub mod types {
         }
     }
 
-    ///`WorkerAddOutput`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "required": [
-    ///    "chunks",
-    ///    "path",
-    ///    "size"
-    ///  ],
-    ///  "properties": {
-    ///    "chunks": {
-    ///      "type": "array",
-    ///      "items": {
-    ///        "type": "string"
-    ///      }
-    ///    },
-    ///    "path": {
-    ///      "type": "string"
-    ///    },
-    ///    "size": {
-    ///      "type": "integer",
-    ///      "format": "int64"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`WorkerAddOutput`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"chunks\","]
+    #[doc = "    \"path\","]
+    #[doc = "    \"size\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"chunks\": {"]
+    #[doc = "      \"type\": \"array\","]
+    #[doc = "      \"items\": {"]
+    #[doc = "        \"type\": \"string\""]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    \"path\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"size\": {"]
+    #[doc = "      \"type\": \"integer\","]
+    #[doc = "      \"format\": \"int64\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct WorkerAddOutput {
         pub chunks: ::std::vec::Vec<::std::string::String>,
@@ -679,33 +679,33 @@ pub mod types {
         }
     }
 
-    ///`WorkerAppendTask`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "required": [
-    ///    "payload",
-    ///    "stream",
-    ///    "time"
-    ///  ],
-    ///  "properties": {
-    ///    "payload": {
-    ///      "type": "string"
-    ///    },
-    ///    "stream": {
-    ///      "type": "string"
-    ///    },
-    ///    "time": {
-    ///      "type": "string",
-    ///      "format": "date-time"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`WorkerAppendTask`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"payload\","]
+    #[doc = "    \"stream\","]
+    #[doc = "    \"time\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"payload\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"stream\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"time\": {"]
+    #[doc = "      \"type\": \"string\","]
+    #[doc = "      \"format\": \"date-time\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct WorkerAppendTask {
         pub payload: ::std::string::String,
@@ -719,28 +719,28 @@ pub mod types {
         }
     }
 
-    ///`WorkerBootstrap`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "required": [
-    ///    "bootstrap",
-    ///    "token"
-    ///  ],
-    ///  "properties": {
-    ///    "bootstrap": {
-    ///      "type": "string"
-    ///    },
-    ///    "token": {
-    ///      "type": "string"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`WorkerBootstrap`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"bootstrap\","]
+    #[doc = "    \"token\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"bootstrap\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"token\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct WorkerBootstrap {
         pub bootstrap: ::std::string::String,
@@ -753,24 +753,24 @@ pub mod types {
         }
     }
 
-    ///`WorkerBootstrapResult`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "required": [
-    ///    "id"
-    ///  ],
-    ///  "properties": {
-    ///    "id": {
-    ///      "type": "string"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`WorkerBootstrapResult`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"id\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"id\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct WorkerBootstrapResult {
         pub id: ::std::string::String,
@@ -782,24 +782,24 @@ pub mod types {
         }
     }
 
-    ///`WorkerCompleteTask`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "required": [
-    ///    "failed"
-    ///  ],
-    ///  "properties": {
-    ///    "failed": {
-    ///      "type": "boolean"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`WorkerCompleteTask`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"failed\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"failed\": {"]
+    #[doc = "      \"type\": \"boolean\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct WorkerCompleteTask {
         pub failed: bool,
@@ -811,27 +811,27 @@ pub mod types {
         }
     }
 
-    ///`WorkerPingResult`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "required": [
-    ///    "poweroff"
-    ///  ],
-    ///  "properties": {
-    ///    "poweroff": {
-    ///      "type": "boolean"
-    ///    },
-    ///    "task": {
-    ///      "$ref": "#/components/schemas/WorkerPingTask"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`WorkerPingResult`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"poweroff\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"poweroff\": {"]
+    #[doc = "      \"type\": \"boolean\""]
+    #[doc = "    },"]
+    #[doc = "    \"task\": {"]
+    #[doc = "      \"$ref\": \"#/components/schemas/WorkerPingTask\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct WorkerPingResult {
         pub poweroff: bool,
@@ -845,35 +845,35 @@ pub mod types {
         }
     }
 
-    ///`WorkerPingTask`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "required": [
-    ///    "id",
-    ///    "output_rules",
-    ///    "script"
-    ///  ],
-    ///  "properties": {
-    ///    "id": {
-    ///      "type": "string"
-    ///    },
-    ///    "output_rules": {
-    ///      "type": "array",
-    ///      "items": {
-    ///        "type": "string"
-    ///      }
-    ///    },
-    ///    "script": {
-    ///      "type": "string"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`WorkerPingTask`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"id\","]
+    #[doc = "    \"output_rules\","]
+    #[doc = "    \"script\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"id\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"output_rules\": {"]
+    #[doc = "      \"type\": \"array\","]
+    #[doc = "      \"items\": {"]
+    #[doc = "        \"type\": \"string\""]
+    #[doc = "      }"]
+    #[doc = "    },"]
+    #[doc = "    \"script\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct WorkerPingTask {
         pub id: ::std::string::String,
@@ -887,32 +887,32 @@ pub mod types {
         }
     }
 
-    ///`WorkerTask`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "required": [
-    ///    "id",
-    ///    "name",
-    ///    "owner"
-    ///  ],
-    ///  "properties": {
-    ///    "id": {
-    ///      "type": "string"
-    ///    },
-    ///    "name": {
-    ///      "type": "string"
-    ///    },
-    ///    "owner": {
-    ///      "type": "string"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`WorkerTask`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"id\","]
+    #[doc = "    \"name\","]
+    #[doc = "    \"owner\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"id\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"name\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    },"]
+    #[doc = "    \"owner\": {"]
+    #[doc = "      \"type\": \"string\""]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct WorkerTask {
         pub id: ::std::string::String,
@@ -926,27 +926,27 @@ pub mod types {
         }
     }
 
-    ///`WorkersResult`
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "required": [
-    ///    "workers"
-    ///  ],
-    ///  "properties": {
-    ///    "workers": {
-    ///      "type": "array",
-    ///      "items": {
-    ///        "$ref": "#/components/schemas/Worker"
-    ///      }
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
+    #[doc = "`WorkersResult`"]
+    #[doc = r""]
+    #[doc = r" <details><summary>JSON schema</summary>"]
+    #[doc = r""]
+    #[doc = r" ```json"]
+    #[doc = "{"]
+    #[doc = "  \"type\": \"object\","]
+    #[doc = "  \"required\": ["]
+    #[doc = "    \"workers\""]
+    #[doc = "  ],"]
+    #[doc = "  \"properties\": {"]
+    #[doc = "    \"workers\": {"]
+    #[doc = "      \"type\": \"array\","]
+    #[doc = "      \"items\": {"]
+    #[doc = "        \"$ref\": \"#/components/schemas/Worker\""]
+    #[doc = "      }"]
+    #[doc = "    }"]
+    #[doc = "  }"]
+    #[doc = "}"]
+    #[doc = r" ```"]
+    #[doc = r" </details>"]
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct WorkersResult {
         pub workers: ::std::vec::Vec<Worker>,
@@ -960,40 +960,47 @@ pub mod types {
 }
 
 #[derive(Clone, Debug)]
-///Client for Buildomat
-///
-///Version: 1.0
+#[doc = "Client for Buildomat\n\nVersion: 1.0"]
 pub struct Client {
     pub(crate) baseurl: String,
-    pub(crate) client: reqwest::Client,
+    pub(crate) client: reqwest_middleware::ClientWithMiddleware,
 }
 
 impl Client {
-    /// Create a new client.
-    ///
-    /// `baseurl` is the base URL provided to the internal
-    /// `reqwest::Client`, and should include a scheme and hostname,
-    /// as well as port and a path stem if applicable.
+    #[doc = r" Create a new client."]
+    #[doc = r""]
+    #[doc = r" `baseurl` is the base URL provided to the internal"]
+    #[doc = r" `reqwest::Client`, and should include a scheme and hostname,"]
+    #[doc = r" as well as port and a path stem if applicable."]
     pub fn new(baseurl: &str) -> Self {
         #[cfg(not(target_arch = "wasm32"))]
         let client = {
             let dur = std::time::Duration::from_secs(15);
-            reqwest::ClientBuilder::new()
+            let reqwest_client = reqwest::ClientBuilder::new()
                 .connect_timeout(dur)
                 .timeout(dur)
+                .build()
+                .unwrap();
+            reqwest_middleware::ClientBuilder::new(reqwest_client).build()
         };
         #[cfg(target_arch = "wasm32")]
-        let client = reqwest::ClientBuilder::new();
-        Self::new_with_client(baseurl, client.build().unwrap())
+        let client = {
+            let reqwest_client = reqwest::ClientBuilder::new().build().unwrap();
+            reqwest_middleware::ClientBuilder::new(reqwest_client).build()
+        };
+        Self::new_with_client(baseurl, client)
     }
 
-    /// Construct a new client with an existing `reqwest::Client`,
-    /// allowing more control over its configuration.
-    ///
-    /// `baseurl` is the base URL provided to the internal
-    /// `reqwest::Client`, and should include a scheme and hostname,
-    /// as well as port and a path stem if applicable.
-    pub fn new_with_client(baseurl: &str, client: reqwest::Client) -> Self {
+    #[doc = r" Construct a new client with an existing `reqwest_middleware::ClientWithMiddleware`,"]
+    #[doc = r" allowing more control over its configuration."]
+    #[doc = r""]
+    #[doc = r" `baseurl` is the base URL provided to the internal"]
+    #[doc = r" `reqwest_middleware::ClientWithMiddleware`, and should include a scheme and hostname,"]
+    #[doc = r" as well as port and a path stem if applicable."]
+    pub fn new_with_client(
+        baseurl: &str,
+        client: reqwest_middleware::ClientWithMiddleware,
+    ) -> Self {
         Self {
             baseurl: baseurl.to_string(),
             client,
@@ -1010,7 +1017,7 @@ impl ClientInfo<()> for Client {
         self.baseurl.as_str()
     }
 
-    fn client(&self) -> &reqwest::Client {
+    fn client(&self) -> &reqwest_middleware::ClientWithMiddleware {
         &self.client
     }
 
@@ -1022,7 +1029,7 @@ impl ClientInfo<()> for Client {
 impl ClientHooks<()> for &Client {}
 #[allow(clippy::all)]
 impl Client {
-    ///Sends a `POST` request to `/v1/control/hold`
+    #[doc = "Sends a `POST` request to `/v1/control/hold`\n\n"]
     pub async fn control_hold<'a>(&'a self) -> Result<ResponseValue<()>, Error<()>> {
         let url = format!("{}/v1/control/hold", self.baseurl,);
         let mut header_map = ::reqwest::header::HeaderMap::with_capacity(1usize);
@@ -1053,7 +1060,7 @@ impl Client {
         }
     }
 
-    ///Sends a `POST` request to `/v1/control/resume`
+    #[doc = "Sends a `POST` request to `/v1/control/resume`\n\n"]
     pub async fn control_resume<'a>(&'a self) -> Result<ResponseValue<()>, Error<()>> {
         let url = format!("{}/v1/control/resume", self.baseurl,);
         let mut header_map = ::reqwest::header::HeaderMap::with_capacity(1usize);
@@ -1076,7 +1083,7 @@ impl Client {
         }
     }
 
-    ///Sends a `GET` request to `/v1/task/{Task}`
+    #[doc = "Sends a `GET` request to `/v1/task/{Task}`\n\n"]
     pub async fn task_get<'a>(
         &'a self,
         task: &'a str,
@@ -1114,7 +1121,7 @@ impl Client {
         }
     }
 
-    ///Sends a `GET` request to `/v1/tasks`
+    #[doc = "Sends a `GET` request to `/v1/tasks`\n\n"]
     pub async fn tasks_get<'a>(
         &'a self,
     ) -> Result<ResponseValue<::std::vec::Vec<types::Task>>, Error<()>> {
@@ -1147,7 +1154,7 @@ impl Client {
         }
     }
 
-    ///Sends a `POST` request to `/v1/tasks`
+    #[doc = "Sends a `POST` request to `/v1/tasks`\n\n"]
     pub async fn task_submit<'a>(
         &'a self,
         body: &'a types::TaskSubmit,
@@ -1182,7 +1189,7 @@ impl Client {
         }
     }
 
-    ///Sends a `GET` request to `/v1/tasks/{task}/events`
+    #[doc = "Sends a `GET` request to `/v1/tasks/{task}/events`\n\n"]
     pub async fn task_events_get<'a>(
         &'a self,
         task: &'a str,
@@ -1222,7 +1229,7 @@ impl Client {
         }
     }
 
-    ///Sends a `GET` request to `/v1/tasks/{task}/outputs`
+    #[doc = "Sends a `GET` request to `/v1/tasks/{task}/outputs`\n\n"]
     pub async fn task_outputs_get<'a>(
         &'a self,
         task: &'a str,
@@ -1260,7 +1267,7 @@ impl Client {
         }
     }
 
-    ///Sends a `GET` request to `/v1/tasks/{task}/outputs/{output}`
+    #[doc = "Sends a `GET` request to `/v1/tasks/{task}/outputs/{output}`\n\n"]
     pub async fn task_output_download<'a>(
         &'a self,
         task: &'a str,
@@ -1292,7 +1299,7 @@ impl Client {
         }
     }
 
-    ///Sends a `POST` request to `/v1/users`
+    #[doc = "Sends a `POST` request to `/v1/users`\n\n"]
     pub async fn user_create<'a>(
         &'a self,
         body: &'a types::UserCreate,
@@ -1327,7 +1334,7 @@ impl Client {
         }
     }
 
-    ///Sends a `GET` request to `/v1/whoami`
+    #[doc = "Sends a `GET` request to `/v1/whoami`\n\n"]
     pub async fn whoami<'a>(&'a self) -> Result<ResponseValue<types::WhoamiResult>, Error<()>> {
         let url = format!("{}/v1/whoami", self.baseurl,);
         let mut header_map = ::reqwest::header::HeaderMap::with_capacity(1usize);
@@ -1358,7 +1365,7 @@ impl Client {
         }
     }
 
-    ///Sends a `PUT` request to `/v1/whoami/name`
+    #[doc = "Sends a `PUT` request to `/v1/whoami/name`\n\n"]
     pub async fn whoami_put_name<'a>(
         &'a self,
         body: String,
@@ -1393,7 +1400,7 @@ impl Client {
         }
     }
 
-    ///Sends a `POST` request to `/v1/worker/bootstrap`
+    #[doc = "Sends a `POST` request to `/v1/worker/bootstrap`\n\n"]
     pub async fn worker_bootstrap<'a>(
         &'a self,
         body: &'a types::WorkerBootstrap,
@@ -1428,7 +1435,7 @@ impl Client {
         }
     }
 
-    ///Sends a `GET` request to `/v1/worker/ping`
+    #[doc = "Sends a `GET` request to `/v1/worker/ping`\n\n"]
     pub async fn worker_ping<'a>(
         &'a self,
     ) -> Result<ResponseValue<types::WorkerPingResult>, Error<()>> {
@@ -1461,7 +1468,7 @@ impl Client {
         }
     }
 
-    ///Sends a `POST` request to `/v1/worker/task/{task}/append`
+    #[doc = "Sends a `POST` request to `/v1/worker/task/{task}/append`\n\n"]
     pub async fn worker_task_append<'a>(
         &'a self,
         task: &'a str,
@@ -1497,7 +1504,7 @@ impl Client {
         }
     }
 
-    ///Sends a `POST` request to `/v1/worker/task/{task}/chunk`
+    #[doc = "Sends a `POST` request to `/v1/worker/task/{task}/chunk`\n\n"]
     pub async fn worker_task_upload_chunk<'a, B: Into<reqwest::Body>>(
         &'a self,
         task: &'a str,
@@ -1541,7 +1548,7 @@ impl Client {
         }
     }
 
-    ///Sends a `POST` request to `/v1/worker/task/{task}/complete`
+    #[doc = "Sends a `POST` request to `/v1/worker/task/{task}/complete`\n\n"]
     pub async fn worker_task_complete<'a>(
         &'a self,
         task: &'a str,
@@ -1577,7 +1584,7 @@ impl Client {
         }
     }
 
-    ///Sends a `POST` request to `/v1/worker/task/{task}/output`
+    #[doc = "Sends a `POST` request to `/v1/worker/task/{task}/output`\n\n"]
     pub async fn worker_task_add_output<'a>(
         &'a self,
         task: &'a str,
@@ -1613,7 +1620,7 @@ impl Client {
         }
     }
 
-    ///Sends a `GET` request to `/v1/workers`
+    #[doc = "Sends a `GET` request to `/v1/workers`\n\n"]
     pub async fn workers_list<'a>(
         &'a self,
     ) -> Result<ResponseValue<types::WorkersResult>, Error<()>> {
@@ -1646,7 +1653,7 @@ impl Client {
         }
     }
 
-    ///Sends a `POST` request to `/v1/workers/recycle`
+    #[doc = "Sends a `POST` request to `/v1/workers/recycle`\n\n"]
     pub async fn workers_recycle<'a>(&'a self) -> Result<ResponseValue<()>, Error<()>> {
         let url = format!("{}/v1/workers/recycle", self.baseurl,);
         let mut header_map = ::reqwest::header::HeaderMap::with_capacity(1usize);
@@ -1669,7 +1676,7 @@ impl Client {
         }
     }
 
-    ///Sends a `GET` request to `/v1/things`
+    #[doc = "Sends a `GET` request to `/v1/things`\n\n"]
     pub async fn get_thing_or_things<'a>(
         &'a self,
         id: Option<&'a types::GetThingOrThingsId>,
@@ -1704,7 +1711,7 @@ impl Client {
         }
     }
 
-    ///Sends a `GET` request to `/v1/header-arg`
+    #[doc = "Sends a `GET` request to `/v1/header-arg`\n\n"]
     pub async fn header_arg<'a>(
         &'a self,
         accept_language: Option<types::HeaderArgAcceptLanguage>,
@@ -1735,7 +1742,7 @@ impl Client {
     }
 }
 
-/// Items consumers will typically use such as the Client.
+#[doc = r" Items consumers will typically use such as the Client."]
 pub mod prelude {
     #[allow(unused_imports)]
     pub use super::Client;

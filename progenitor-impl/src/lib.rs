@@ -431,7 +431,7 @@ impl Generator {
             #[doc = #client_docstring]
             pub struct Client {
                 pub(crate) baseurl: String,
-                pub(crate) client: reqwest::Client,
+                pub(crate) client: reqwest_middleware::ClientWithMiddleware,
                 #inner_property
             }
 
@@ -449,25 +449,37 @@ impl Generator {
                     let client = {
                         let dur = std::time::Duration::from_secs(15);
 
-                        reqwest::ClientBuilder::new()
+                        let reqwest_client = reqwest::ClientBuilder::new()
                             .connect_timeout(dur)
                             .timeout(dur)
+                            .build()
+                            .unwrap();
+
+                        reqwest_middleware::ClientBuilder::new(reqwest_client)
+                            .build()
                     };
                     #[cfg(target_arch = "wasm32")]
-                    let client = reqwest::ClientBuilder::new();
+                    let client = {
+                        let reqwest_client = reqwest::ClientBuilder::new()
+                            .build()
+                            .unwrap();
 
-                    Self::new_with_client(baseurl, client.build().unwrap(), #inner_value)
+                        reqwest_middleware::ClientBuilder::new(reqwest_client)
+                            .build()
+                    };
+
+                    Self::new_with_client(baseurl, client, #inner_value)
                 }
 
-                /// Construct a new client with an existing `reqwest::Client`,
+                /// Construct a new client with an existing `reqwest_middleware::ClientWithMiddleware`,
                 /// allowing more control over its configuration.
                 ///
                 /// `baseurl` is the base URL provided to the internal
-                /// `reqwest::Client`, and should include a scheme and hostname,
+                /// `reqwest_middleware::ClientWithMiddleware`, and should include a scheme and hostname,
                 /// as well as port and a path stem if applicable.
                 pub fn new_with_client(
                     baseurl: &str,
-                    client: reqwest::Client,
+                    client: reqwest_middleware::ClientWithMiddleware,
                     #inner_parameter
                 ) -> Self {
                     Self {
@@ -487,7 +499,7 @@ impl Generator {
                     self.baseurl.as_str()
                 }
 
-                fn client(&self) -> &reqwest::Client {
+                fn client(&self) -> &reqwest_middleware::ClientWithMiddleware {
                     &self.client
                 }
 

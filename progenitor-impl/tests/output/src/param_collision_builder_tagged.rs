@@ -2,12 +2,12 @@
 use progenitor_client::{encode_path, ClientHooks, OperationInfo, RequestBuilderExt};
 #[allow(unused_imports)]
 pub use progenitor_client::{ByteStream, ClientInfo, Error, ResponseValue};
-/// Types used as operation parameters and responses.
+#[doc = r" Types used as operation parameters and responses."]
 #[allow(clippy::all)]
 pub mod types {
-    /// Error types.
+    #[doc = r" Error types."]
     pub mod error {
-        /// Error from a `TryFrom` or `FromStr` implementation.
+        #[doc = r" Error from a `TryFrom` or `FromStr` implementation."]
         pub struct ConversionError(::std::borrow::Cow<'static, str>);
         impl ::std::error::Error for ConversionError {}
         impl ::std::fmt::Display for ConversionError {
@@ -37,42 +37,47 @@ pub mod types {
 }
 
 #[derive(Clone, Debug)]
-///Client for Parameter name collision test
-///
-///Minimal API for testing collision between parameter names and generated code
-///
-///Version: v1
+#[doc = "Client for Parameter name collision test\n\nMinimal API for testing collision between parameter names and generated code\n\nVersion: v1"]
 pub struct Client {
     pub(crate) baseurl: String,
-    pub(crate) client: reqwest::Client,
+    pub(crate) client: reqwest_middleware::ClientWithMiddleware,
 }
 
 impl Client {
-    /// Create a new client.
-    ///
-    /// `baseurl` is the base URL provided to the internal
-    /// `reqwest::Client`, and should include a scheme and hostname,
-    /// as well as port and a path stem if applicable.
+    #[doc = r" Create a new client."]
+    #[doc = r""]
+    #[doc = r" `baseurl` is the base URL provided to the internal"]
+    #[doc = r" `reqwest::Client`, and should include a scheme and hostname,"]
+    #[doc = r" as well as port and a path stem if applicable."]
     pub fn new(baseurl: &str) -> Self {
         #[cfg(not(target_arch = "wasm32"))]
         let client = {
             let dur = std::time::Duration::from_secs(15);
-            reqwest::ClientBuilder::new()
+            let reqwest_client = reqwest::ClientBuilder::new()
                 .connect_timeout(dur)
                 .timeout(dur)
+                .build()
+                .unwrap();
+            reqwest_middleware::ClientBuilder::new(reqwest_client).build()
         };
         #[cfg(target_arch = "wasm32")]
-        let client = reqwest::ClientBuilder::new();
-        Self::new_with_client(baseurl, client.build().unwrap())
+        let client = {
+            let reqwest_client = reqwest::ClientBuilder::new().build().unwrap();
+            reqwest_middleware::ClientBuilder::new(reqwest_client).build()
+        };
+        Self::new_with_client(baseurl, client)
     }
 
-    /// Construct a new client with an existing `reqwest::Client`,
-    /// allowing more control over its configuration.
-    ///
-    /// `baseurl` is the base URL provided to the internal
-    /// `reqwest::Client`, and should include a scheme and hostname,
-    /// as well as port and a path stem if applicable.
-    pub fn new_with_client(baseurl: &str, client: reqwest::Client) -> Self {
+    #[doc = r" Construct a new client with an existing `reqwest_middleware::ClientWithMiddleware`,"]
+    #[doc = r" allowing more control over its configuration."]
+    #[doc = r""]
+    #[doc = r" `baseurl` is the base URL provided to the internal"]
+    #[doc = r" `reqwest_middleware::ClientWithMiddleware`, and should include a scheme and hostname,"]
+    #[doc = r" as well as port and a path stem if applicable."]
+    pub fn new_with_client(
+        baseurl: &str,
+        client: reqwest_middleware::ClientWithMiddleware,
+    ) -> Self {
         Self {
             baseurl: baseurl.to_string(),
             client,
@@ -89,7 +94,7 @@ impl ClientInfo<()> for Client {
         self.baseurl.as_str()
     }
 
-    fn client(&self) -> &reqwest::Client {
+    fn client(&self) -> &reqwest_middleware::ClientWithMiddleware {
         &self.client
     }
 
@@ -100,34 +105,13 @@ impl ClientInfo<()> for Client {
 
 impl ClientHooks<()> for &Client {}
 impl Client {
-    ///Gets a key
-    ///
-    ///Sends a `GET` request to `/key/{query}`
-    ///
-    ///Arguments:
-    /// - `query`: Parameter name that was previously colliding
-    /// - `client`: Parameter name that was previously colliding
-    /// - `request`: Parameter name that was previously colliding
-    /// - `response`: Parameter name that was previously colliding
-    /// - `result`: Parameter name that was previously colliding
-    /// - `url`: Parameter name that was previously colliding
-    ///```ignore
-    /// let response = client.key_get()
-    ///    .query(query)
-    ///    .client(client)
-    ///    .request(request)
-    ///    .response(response)
-    ///    .result(result)
-    ///    .url(url)
-    ///    .send()
-    ///    .await;
-    /// ```
+    #[doc = "Gets a key\n\nSends a `GET` request to `/key/{query}`\n\nArguments:\n- `query`: Parameter name that was previously colliding\n- `client`: Parameter name that was previously colliding\n- `request`: Parameter name that was previously colliding\n- `response`: Parameter name that was previously colliding\n- `result`: Parameter name that was previously colliding\n- `url`: Parameter name that was previously colliding\n```ignore\nlet response = client.key_get()\n    .query(query)\n    .client(client)\n    .request(request)\n    .response(response)\n    .result(result)\n    .url(url)\n    .send()\n    .await;\n```"]
     pub fn key_get(&self) -> builder::KeyGet<'_> {
         builder::KeyGet::new(self)
     }
 }
 
-/// Types for composing operation parameters.
+#[doc = r" Types for composing operation parameters."]
 #[allow(clippy::all)]
 pub mod builder {
     use super::types;
@@ -136,9 +120,7 @@ pub mod builder {
         encode_path, ByteStream, ClientHooks, ClientInfo, Error, OperationInfo, RequestBuilderExt,
         ResponseValue,
     };
-    ///Builder for [`Client::key_get`]
-    ///
-    ///[`Client::key_get`]: super::Client::key_get
+    #[doc = "Builder for [`Client::key_get`]\n\n[`Client::key_get`]: super::Client::key_get"]
     #[derive(Debug, Clone)]
     pub struct KeyGet<'a> {
         _client: &'a super::Client,
@@ -223,7 +205,7 @@ pub mod builder {
             self
         }
 
-        ///Sends a `GET` request to `/key/{query}`
+        #[doc = "Sends a `GET` request to `/key/{query}`"]
         pub async fn send(self) -> Result<ResponseValue<()>, Error<()>> {
             let Self {
                 _client,
@@ -276,8 +258,8 @@ pub mod builder {
     }
 }
 
-/// Items consumers will typically use such as the Client and
-/// extension traits.
+#[doc = r" Items consumers will typically use such as the Client and"]
+#[doc = r" extension traits."]
 pub mod prelude {
     #[allow(unused_imports)]
     pub use super::Client;
