@@ -8,7 +8,7 @@ use dropshot::{
 use futures::StreamExt;
 use http::Response;
 use openapiv3::OpenAPI;
-use progenitor_impl::{space_out_items, GenerationSettings, Generator, InterfaceStyle};
+use progenitor_middleware_impl::{space_out_items, GenerationSettings, Generator, InterfaceStyle};
 use schemars::JsonSchema;
 use serde::Deserialize;
 use std::{

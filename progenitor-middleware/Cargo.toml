@@ -1,6 +1,6 @@
 [package]
 name = "progenitor-middleware"
-version = "0.11.0"
+version = "0.12.0"
 edition = "2021"
 license = "MPL-2.0"
 description = "An OpenAPI client generator"
@@ -11,12 +11,12 @@ categories = ["api-bindings", "compilers"]
 
 [features]
 default = ["macro"]
-macro = ["dep:progenitor-middleware-client", "dep:progenitor-macro"]
+macro = ["dep:progenitor-middleware-client", "dep:progenitor-middleware-macro"]
 
 [dependencies]
 progenitor-middleware-client = { workspace = true, optional = true }
-progenitor-impl = { workspace = true }
-progenitor-macro = { workspace = true, optional = true }
+progenitor-middleware-impl = { workspace = true }
+progenitor-middleware-macro = { workspace = true, optional = true }
 
 [dev-dependencies]
 base64 = { workspace = true }

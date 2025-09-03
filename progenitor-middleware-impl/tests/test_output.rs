@@ -5,7 +5,7 @@ use std::{
     path::{Path, PathBuf},
 };
 
-use progenitor_impl::{
+use progenitor_middleware_impl::{
     space_out_items, GenerationSettings, Generator, InterfaceStyle, TagStyle, TypeImpl, TypePatch,
 };
 
@@ -111,7 +111,7 @@ fn verify_apis(openapi_file: &str) {
     )
     .unwrap();
 
-    let output = progenitor_impl::space_out_items(output).unwrap();
+    let output = progenitor_middleware_impl::space_out_items(output).unwrap();
     expectorate::assert_contents(
         format!("tests/output/src/{}_httpmock.rs", openapi_stem),
         &output,

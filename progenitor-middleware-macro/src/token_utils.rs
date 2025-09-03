@@ -10,7 +10,7 @@ use syn::{
     Ident, Path, Token, TraitBoundModifier,
 };
 
-use progenitor_impl::TypeImpl;
+use progenitor_middleware_impl::TypeImpl;
 
 #[derive(Debug)]
 pub struct TypeAndImpls {
