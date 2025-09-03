@@ -1,9 +1,9 @@
 [package]
-name = "progenitor-client"
+name = "progenitor-middleware-client"
 version = "0.11.0"
 edition = "2021"
 license = "MPL-2.0"
-repository = "https://github.com/oxidecomputer/progenitor.git"
+repository = "https://github.com/sammccord/progenitor.git"
 description = "An OpenAPI client generator - client support"
 
 [dependencies]

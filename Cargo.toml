@@ -5,7 +5,7 @@ members = [
 	"example-macro",
 	"example-wasm",
 	"progenitor",
-	"progenitor-client",
+	"progenitor-middleware-client",
 	"progenitor-impl",
 	"progenitor-macro",
 ]
@@ -14,7 +14,7 @@ resolver = "2"
 
 [workspace.dependencies]
 progenitor = { version = "0.11.0", path = "progenitor", default-features = false }
-progenitor-client = { version = "0.11.0", path = "progenitor-client" }
+progenitor-middleware-client = { version = "0.11.0", path = "progenitor-middleware-client" }
 progenitor-impl = { version = "0.11.0", path = "progenitor-impl" }
 progenitor-macro = { version = "0.11.0", path = "progenitor-macro" }
 
@@ -54,8 +54,8 @@ syn = { version = "2.0.104", features = ["parsing"] }
 thiserror = "2.0.12"
 tokio = { version = "1.45.1", features = ["rt", "net"] }
 # change when publishing
-#typify = { version = "0.4.2" }
-typify = { git = "https://github.com/oxidecomputer/typify" }
+typify = { version = "0.4.2" }
+# typify = { git = "https://github.com/oxidecomputer/typify" }
 url = "2.5.4"
 unicode-ident = "1.0.18"
 uuid = { version = "1.18.0", features = ["serde", "v4"] }

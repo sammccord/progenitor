@@ -407,14 +407,14 @@ impl Generator {
         let file = quote! {
             // Re-export types that are used by the public interface of Client.
             #[allow(unused_imports)]
-            pub use progenitor_client::{
+            pub use progenitor_middleware_client::{
                 ByteStream,
                 ClientInfo,
                 Error,
                 ResponseValue,
             };
             #[allow(unused_imports)]
-            use progenitor_client::{
+            use progenitor_middleware_client::{
                 encode_path,
                 ClientHooks,
                 OperationInfo,

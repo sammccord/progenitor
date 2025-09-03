@@ -95,7 +95,7 @@ mod builder {
 ```
 
 For more info on the `ResponseValue<T>` and `Error<E>` types, see
-[progenitor_client](./progenitor-client.md).
+[progenitor_middleware_client](./progenitor-middleware-client.md).
 
 Note that `send` methods are `async` so must be `await`ed to get the response value.
 

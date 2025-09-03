@@ -1,7 +1,7 @@
 #[allow(unused_imports)]
-use progenitor_client::{encode_path, ClientHooks, OperationInfo, RequestBuilderExt};
+use progenitor_middleware_client::{encode_path, ClientHooks, OperationInfo, RequestBuilderExt};
 #[allow(unused_imports)]
-pub use progenitor_client::{ByteStream, ClientInfo, Error, ResponseValue};
+pub use progenitor_middleware_client::{ByteStream, ClientInfo, Error, ResponseValue};
 #[doc = r" Types used as operation parameters and responses."]
 #[allow(clippy::all)]
 pub mod types {
@@ -177,8 +177,8 @@ pub mod builder {
             let mut request = client
                 .client
                 .get(url)
-                .query(&progenitor_client::QueryParam::new("key", &key))
-                .query(&progenitor_client::QueryParam::new(
+                .query(&progenitor_middleware_client::QueryParam::new("key", &key))
+                .query(&progenitor_middleware_client::QueryParam::new(
                     "uniqueKey",
                     &unique_key,
                 ))

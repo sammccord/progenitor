@@ -13,7 +13,7 @@ default-run = "cargo-progenitor"
 
 [dependencies]
 progenitor = { workspace = true, default-features = false }
-progenitor-client = { workspace = true }
+progenitor-middleware-client = { workspace = true }
 progenitor-impl = { workspace = true }
 
 anyhow = { workspace = true }

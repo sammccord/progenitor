@@ -12,7 +12,7 @@ chrono = { version = "0.4", features = ["serde"] }
 clap = { version = "4", features = ["string"] }
 futures = "0.3"
 httpmock = "0.7"
-progenitor-client = { path = "../../../progenitor-client" }
+progenitor-middleware-client = { path = "../../../progenitor-middleware-client" }
 rand = { version = "0.8", features = ["serde1"] }
 regex = "1.10"
 regress = "0.7"

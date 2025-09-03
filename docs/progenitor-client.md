@@ -1,6 +1,6 @@
 # Progenitor Client
 
-The `progenitor-client` crate contains types that are exported by generated
+The `progenitor-middleware-client` crate contains types that are exported by generated
 clients as well as functions that are used internally by generated clients.
 Depending on how `progenitor` is being used, the crate will be included in
 different ways (see ["Using Progenitor"](../README.md#using_progenitor)).
@@ -10,9 +10,9 @@ different ways (see ["Using Progenitor"](../README.md#using_progenitor)).
 - For builder consumers, it must be specified under `[dependencies]` (while `progenitor` is under `[build-dependencies]`).
 
 - For statically generated consumers, the code is emitted into
-  `src/progenitor_client.rs`.
+  `src/progenitor_middleware_client.rs`.
 
-The two types that `progenitor-client` exports are `Error<E>` and
+The two types that `progenitor-middleware-client` exports are `Error<E>` and
 `ResponseValue<T>`. A typical generated method will use these types in its
 signature:
 

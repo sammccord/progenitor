@@ -791,7 +791,7 @@ impl Generator {
                     let qn = &param.api_name;
                     let qn_ident = format_ident!("{}", &param.name);
                     Some(quote! {
-                        &progenitor_client::QueryParam::new(#qn, &#qn_ident)
+                        &progenitor_middleware_client::QueryParam::new(#qn, &#qn_ident)
                     })
                 }
                 _ => None,
@@ -914,7 +914,7 @@ impl Generator {
                     OperationParameterKind::Body(BodyContentType::FormUrlencoded),
                     OperationParameterType::Type(_),
                 ) => Some(quote! {
-                    // This uses progenitor_client::RequestBuilderExt which
+                    // This uses progenitor_middleware_client::RequestBuilderExt which
                     // returns an error in the case of a serialization failure.
                     .form_urlencoded(&body)?
                 }),
@@ -1399,7 +1399,7 @@ impl Generator {
     ///             param_1,
     ///             param_2,
     ///         } = self;
-    ///     
+    ///
     ///         let param_1 = param_1.map_err(Error::InvalidRequest)?;
     ///         let param_2 = param_1.map_err(Error::InvalidRequest)?;
     ///

@@ -51,7 +51,7 @@ struct Args {
     /// SDK tag style
     #[clap(value_enum, long, default_value_t = TagArg::Merged)]
     tags: TagArg,
-    /// Include client code rather than depending on progenitor-client
+    /// Include client code rather than depending on progenitor-middleware-client
     #[clap(default_value = match is_non_release() { true => "true", false => "false" }, long, action = clap::ArgAction::Set)]
     include_client: bool,
 }
@@ -178,7 +178,7 @@ fn main() -> Result<()> {
 
             // Create the Rust source file containing the generated client:
             let lib_code = if args.include_client {
-                format!("mod progenitor_client;\n\n{}", api_code)
+                format!("mod progenitor_middleware_client;\n\n{}", api_code)
             } else {
                 api_code.to_string()
             };
@@ -190,10 +190,10 @@ fn main() -> Result<()> {
 
             // Create the Rust source file containing the support code:
             if args.include_client {
-                let progenitor_client_code = progenitor_client::code();
+                let progenitor_middleware_client_code = progenitor_middleware_client::code();
                 let mut clientrs = src;
-                clientrs.push("progenitor_client.rs");
-                save(clientrs, progenitor_client_code)?;
+                clientrs.push("progenitor_middleware_client.rs");
+                save(clientrs, progenitor_middleware_client_code)?;
             }
         }
 
@@ -252,7 +252,7 @@ pub fn dependencies(builder: Generator, include_client: bool) -> Vec<String> {
     let mut needs_serde_json = false;
 
     if include_client {
-        // code included from progenitor-client needs extra dependencies
+        // code included from progenitor-middleware-client needs extra dependencies
         deps.push(format!(
             "percent-encoding = \"{}\"",
             DEPENDENCIES.percent_encoding
@@ -265,7 +265,7 @@ pub fn dependencies(builder: Generator, include_client: bool) -> Vec<String> {
             } else {
                 "*"
             };
-        let client_version_dep = format!("progenitor-client = \"{}\"", crate_version);
+        let client_version_dep = format!("progenitor-middleware-client = \"{}\"", crate_version);
         deps.push(client_version_dep);
     }
 

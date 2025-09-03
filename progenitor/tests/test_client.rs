@@ -16,11 +16,11 @@ fn test_error() {
     let mine = MyErr {
         msg: "things went bad".to_string(),
     };
-    let e = progenitor_client::Error::ErrorResponse(progenitor_client::ResponseValue::new(
+    let e = progenitor_middleware_client::Error::ErrorResponse(progenitor_middleware_client::ResponseValue::new(
         mine,
         reqwest::StatusCode::FORBIDDEN,
         reqwest::header::HeaderMap::default(),
     ));
 
-    (Err(e) as Result<(), progenitor_client::Error<MyErr>>).unwrap();
+    (Err(e) as Result<(), progenitor_middleware_client::Error<MyErr>>).unwrap();
 }
