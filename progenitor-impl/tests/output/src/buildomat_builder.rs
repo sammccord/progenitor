@@ -1,7 +1,7 @@
 #[allow(unused_imports)]
-use progenitor_client::{encode_path, ClientHooks, OperationInfo, RequestBuilderExt};
+use progenitor_middleware_client::{encode_path, ClientHooks, OperationInfo, RequestBuilderExt};
 #[allow(unused_imports)]
-pub use progenitor_client::{ByteStream, ClientInfo, Error, ResponseValue};
+pub use progenitor_middleware_client::{ByteStream, ClientInfo, Error, ResponseValue};
 #[doc = r" Types used as operation parameters and responses."]
 #[allow(clippy::all)]
 pub mod types {
@@ -2988,7 +2988,7 @@ pub mod builder {
                     ::reqwest::header::ACCEPT,
                     ::reqwest::header::HeaderValue::from_static("application/json"),
                 )
-                .query(&progenitor_client::QueryParam::new("minseq", &minseq))
+                .query(&progenitor_middleware_client::QueryParam::new("minseq", &minseq))
                 .headers(header_map)
                 .build()?;
             let info = OperationInfo {
@@ -3900,7 +3900,7 @@ pub mod builder {
                     ::reqwest::header::ACCEPT,
                     ::reqwest::header::HeaderValue::from_static("application/json"),
                 )
-                .query(&progenitor_client::QueryParam::new("id", &id))
+                .query(&progenitor_middleware_client::QueryParam::new("id", &id))
                 .headers(header_map)
                 .build()?;
             let info = OperationInfo {

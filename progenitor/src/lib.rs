@@ -13,7 +13,7 @@
 #![deny(missing_docs)]
 
 #[cfg(feature = "macro")]
-pub use progenitor_client;
+pub use progenitor_middleware_client;
 pub use progenitor_impl::CrateVers;
 pub use progenitor_impl::Error;
 pub use progenitor_impl::GenerationSettings;

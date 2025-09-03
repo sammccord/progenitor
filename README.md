@@ -132,7 +132,7 @@ You'll need to add the following to `Cargo.toml`:
 ```toml
 [dependencies]
 futures = "0.3"
-progenitor-client = { git = "https://github.com/oxidecomputer/progenitor" }
+progenitor-middleware-client = { git = "https://github.com/oxidecomputer/progenitor" }
 reqwest = { version = "0.12", features = ["json", "stream"] }
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
@@ -147,7 +147,7 @@ syn = "2.0"
 (`chrono`, `uuid`, `base64`, and `rand` as above)
 
 Note that `progenitor` is used by `build.rs`, but the generated code required
-`progenitor-client`.
+`progenitor-middleware-client`.
 
 ### Static Crate
 
@@ -184,12 +184,12 @@ This will produce a package in the specified directory.
 Options `--license` and `--registry-name` may also be used to improve metadata
 before publishing the static crate.
 
-The output will use the published `progenitor-client` crate by default
+The output will use the published `progenitor-middleware-client` crate by default
 if progenitor is built in release mode. When built in debug mode, the
-`progenitor-client` will be inlined into the generated crate by default. The
+`progenitor-middleware-client` will be inlined into the generated crate by default. The
 command line flag `--include-client true|false` can be used to override the
 default behavior. A value of `true` copies in the client code; a value of
-`false` includes a dependency on `progenitor-client` in the generated
+`false` includes a dependency on `progenitor-middleware-client` in the generated
 `Cargo.toml` file.
 
 Here is an excerpt from the emitted `Cargo.toml`:
@@ -199,7 +199,7 @@ Here is an excerpt from the emitted `Cargo.toml`:
 bytes = "1.9"
 chrono = { version = "0.4", default-features=false, features = ["serde"] }
 futures-core = "0.3"
-progenitor-client = "0.9.1"
+progenitor-middleware-client = "0.9.1"
 reqwest = { version = "0.12", default-features=false, features = ["json", "stream"] }
 serde = { version = "1.0", features = ["derive"] }
 serde_urlencoded = "0.7"
@@ -378,7 +378,7 @@ Currently, the generated code doesn't deal with request headers. To add default 
 
 ```rust
     let baseurl = std::env::var("API_URL").expect("$API_URL not set");
-    
+
     let access_token = std::env::var("API_ACCESS_TOKEN").expect("$API_ACCESS_TOKEN not set");
     let authorization_header = format!("Bearer {}", access_token);
 

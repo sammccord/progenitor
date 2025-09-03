@@ -260,8 +260,8 @@ dependencies = [
  "expectorate",
  "openapiv3",
  "progenitor",
- "progenitor-client",
  "progenitor-impl",
+ "progenitor-middleware-client",
  "rustfmt-wrapper",
  "serde_json",
  "serde_yaml",
@@ -625,7 +625,7 @@ dependencies = [
  "http",
  "prettyplease",
  "progenitor",
- "progenitor-client",
+ "progenitor-middleware-client",
  "rand",
  "reqwest",
  "reqwest-middleware 0.3.3",
@@ -658,7 +658,7 @@ dependencies = [
  "http",
  "prettyplease",
  "progenitor",
- "progenitor-client",
+ "progenitor-middleware-client",
  "reqwest",
  "reqwest-middleware 0.3.3",
  "serde",
@@ -1616,9 +1616,9 @@ dependencies = [
  "futures",
  "http",
  "percent-encoding",
- "progenitor-client",
  "progenitor-impl",
  "progenitor-macro",
+ "progenitor-middleware-client",
  "rand",
  "regress",
  "reqwest",
@@ -1627,23 +1627,6 @@ dependencies = [
  "serde",
  "serde_json",
  "tokio",
- "uuid",
-]
-
-[[package]]
-name = "progenitor-client"
-version = "0.11.0"
-dependencies = [
- "bytes",
- "futures-core",
- "http",
- "percent-encoding",
- "reqwest",
- "reqwest-middleware 0.4.2",
- "serde",
- "serde_json",
- "serde_urlencoded",
- "url",
  "uuid",
 ]
 
@@ -1660,7 +1643,7 @@ dependencies = [
  "indexmap",
  "openapiv3",
  "proc-macro2",
- "progenitor-client",
+ "progenitor-middleware-client",
  "quote",
  "regex",
  "reqwest",
@@ -1691,6 +1674,23 @@ dependencies = [
  "serde_tokenstream",
  "serde_yaml",
  "syn",
+]
+
+[[package]]
+name = "progenitor-middleware-client"
+version = "0.11.0"
+dependencies = [
+ "bytes",
+ "futures-core",
+ "http",
+ "percent-encoding",
+ "reqwest",
+ "reqwest-middleware 0.4.2",
+ "serde",
+ "serde_json",
+ "serde_urlencoded",
+ "url",
+ "uuid",
 ]
 
 [[package]]
@@ -2694,8 +2694,9 @@ checksum = "dcf81ac59edc17cc8697ff311e8f5ef2d99fcbd9817b34cec66f90b6c3dfd987"
 
 [[package]]
 name = "typify"
-version = "0.4.2"
-source = "git+https://github.com/oxidecomputer/typify#e2a1638925e70d285051582d7c90ba638a143f49"
+version = "0.4.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "7144144e97e987c94758a3017c920a027feac0799df325d6df4fc8f08d02068e"
 dependencies = [
  "typify-impl",
  "typify-macro",
@@ -2703,8 +2704,9 @@ dependencies = [
 
 [[package]]
 name = "typify-impl"
-version = "0.4.2"
-source = "git+https://github.com/oxidecomputer/typify#e2a1638925e70d285051582d7c90ba638a143f49"
+version = "0.4.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "062879d46aa4c9dfe0d33b035bbaf512da192131645d05deacb7033ec8581a09"
 dependencies = [
  "heck",
  "log",
@@ -2722,8 +2724,9 @@ dependencies = [
 
 [[package]]
 name = "typify-macro"
-version = "0.4.2"
-source = "git+https://github.com/oxidecomputer/typify#e2a1638925e70d285051582d7c90ba638a143f49"
+version = "0.4.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "9708a3ceb6660ba3f8d2b8f0567e7d4b8b198e2b94d093b8a6077a751425de9e"
 dependencies = [
  "proc-macro2",
  "quote",

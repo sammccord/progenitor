@@ -385,9 +385,9 @@ fn do_generate_api(item: TokenStream) -> Result<TokenStream, syn::Error> {
     })?;
 
     let output = quote! {
-        // The progenitor_client is tautologically visible from macro
+        // The progenitor_middleware_client is tautologically visible from macro
         // consumers.
-        use progenitor::progenitor_client;
+        use progenitor::progenitor_middleware_client;
 
         #code
 
