@@ -17,6 +17,6 @@ uuid = { version = "1.18", features = ["serde", "v4"] }
 
 [build-dependencies]
 prettyplease = "0.2.36"
-progenitor = { path = "../progenitor", default-features = false }
+progenitor-middleware = { path = "../progenitor-middleware", default-features = false }
 serde_json = "1.0"
 syn = "2.0"
