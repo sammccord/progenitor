@@ -1,6 +1,6 @@
 [package]
 name = "cargo-progenitor"
-version = "0.11.0"
+version = "0.12.0"
 edition = "2021"
 license = "MPL-2.0"
 description = "A cargo command to generate a Rust client SDK from OpenAPI"
@@ -14,7 +14,7 @@ default-run = "cargo-progenitor"
 [dependencies]
 progenitor-middleware = { workspace = true, default-features = false }
 progenitor-middleware-client = { workspace = true }
-progenitor-impl = { workspace = true }
+progenitor-middleware-impl = { workspace = true }
 
 anyhow = { workspace = true }
 assert_cmd = { workspace = true }

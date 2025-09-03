@@ -14,13 +14,13 @@
 
 #[cfg(feature = "macro")]
 pub use progenitor_middleware_client;
-pub use progenitor_impl::CrateVers;
-pub use progenitor_impl::Error;
-pub use progenitor_impl::GenerationSettings;
-pub use progenitor_impl::Generator;
-pub use progenitor_impl::InterfaceStyle;
-pub use progenitor_impl::TagStyle;
-pub use progenitor_impl::TypeImpl;
-pub use progenitor_impl::TypePatch;
+pub use progenitor_middleware_impl::CrateVers;
+pub use progenitor_middleware_impl::Error;
+pub use progenitor_middleware_impl::GenerationSettings;
+pub use progenitor_middleware_impl::Generator;
+pub use progenitor_middleware_impl::InterfaceStyle;
+pub use progenitor_middleware_impl::TagStyle;
+pub use progenitor_middleware_impl::TypeImpl;
+pub use progenitor_middleware_impl::TypePatch;
 #[cfg(feature = "macro")]
-pub use progenitor_macro::generate_api;
+pub use progenitor_middleware_macro::generate_api;

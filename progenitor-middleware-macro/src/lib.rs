@@ -13,7 +13,7 @@ use std::{
 
 use openapiv3::OpenAPI;
 use proc_macro::TokenStream;
-use progenitor_impl::{
+use progenitor_middleware_impl::{
     CrateVers, GenerationSettings, Generator, InterfaceStyle, TagStyle, TypePatch, UnknownPolicy,
 };
 use quote::{quote, ToTokens};
