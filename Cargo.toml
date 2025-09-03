@@ -4,7 +4,7 @@ members = [
 	"example-build",
 	"example-macro",
 	"example-wasm",
-	"progenitor",
+	"progenitor-middleware",
 	"progenitor-middleware-client",
 	"progenitor-impl",
 	"progenitor-macro",
@@ -13,7 +13,7 @@ members = [
 resolver = "2"
 
 [workspace.dependencies]
-progenitor = { version = "0.11.0", path = "progenitor", default-features = false }
+progenitor-middleware = { version = "0.11.0", path = "progenitor-middleware", default-features = false }
 progenitor-middleware-client = { version = "0.11.0", path = "progenitor-middleware-client" }
 progenitor-impl = { version = "0.11.0", path = "progenitor-impl" }
 progenitor-macro = { version = "0.11.0", path = "progenitor-macro" }

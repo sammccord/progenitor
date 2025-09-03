@@ -1,6 +1,6 @@
 // Copyright 2022 Oxide Computer Company
 
-use progenitor::generate_api;
+use progenitor_middleware::generate_api;
 
 generate_api!(
     spec = "../sample_openapi/keeper.json",
@@ -30,7 +30,7 @@ async fn add_auth_headers(
 fn all_done(_result: &Result<reqwest::Response, reqwest_middleware::Error>) {}
 
 mod buildomat {
-    use progenitor::generate_api;
+    use progenitor_middleware::generate_api;
 
     generate_api!("../sample_openapi/buildomat.json");
 }

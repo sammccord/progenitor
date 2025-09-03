@@ -9,7 +9,7 @@ use std::{
 use anyhow::{bail, Result};
 use clap::{Parser, ValueEnum};
 use openapiv3::OpenAPI;
-use progenitor::{GenerationSettings, Generator, InterfaceStyle, TagStyle};
+use progenitor_middleware::{GenerationSettings, Generator, InterfaceStyle, TagStyle};
 use progenitor_impl::space_out_items;
 
 fn is_non_release() -> bool {

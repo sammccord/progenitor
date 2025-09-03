@@ -259,8 +259,8 @@ dependencies = [
  "env_logger",
  "expectorate",
  "openapiv3",
- "progenitor",
  "progenitor-impl",
+ "progenitor-middleware",
  "progenitor-middleware-client",
  "rustfmt-wrapper",
  "serde_json",
@@ -624,7 +624,7 @@ dependencies = [
  "chrono",
  "http",
  "prettyplease",
- "progenitor",
+ "progenitor-middleware",
  "progenitor-middleware-client",
  "rand",
  "reqwest",
@@ -641,7 +641,7 @@ version = "0.0.1"
 dependencies = [
  "chrono",
  "http",
- "progenitor",
+ "progenitor-middleware",
  "reqwest",
  "reqwest-middleware 0.3.3",
  "schemars",
@@ -657,7 +657,7 @@ dependencies = [
  "chrono",
  "http",
  "prettyplease",
- "progenitor",
+ "progenitor-middleware",
  "progenitor-middleware-client",
  "reqwest",
  "reqwest-middleware 0.3.3",
@@ -1608,29 +1608,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "progenitor"
-version = "0.11.0"
-dependencies = [
- "base64",
- "chrono",
- "futures",
- "http",
- "percent-encoding",
- "progenitor-impl",
- "progenitor-macro",
- "progenitor-middleware-client",
- "rand",
- "regress",
- "reqwest",
- "reqwest-middleware 0.4.2",
- "schemars",
- "serde",
- "serde_json",
- "tokio",
- "uuid",
-]
-
-[[package]]
 name = "progenitor-impl"
 version = "0.11.0"
 dependencies = [
@@ -1674,6 +1651,29 @@ dependencies = [
  "serde_tokenstream",
  "serde_yaml",
  "syn",
+]
+
+[[package]]
+name = "progenitor-middleware"
+version = "0.11.0"
+dependencies = [
+ "base64",
+ "chrono",
+ "futures",
+ "http",
+ "percent-encoding",
+ "progenitor-impl",
+ "progenitor-macro",
+ "progenitor-middleware-client",
+ "rand",
+ "regress",
+ "reqwest",
+ "reqwest-middleware 0.4.2",
+ "schemars",
+ "serde",
+ "serde_json",
+ "tokio",
+ "uuid",
 ]
 
 [[package]]

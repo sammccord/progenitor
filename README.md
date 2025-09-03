@@ -39,7 +39,7 @@ You'll need to add the following to `Cargo.toml`:
 ```toml
 [dependencies]
 futures = "0.3"
-progenitor = { git = "https://github.com/oxidecomputer/progenitor" }
+progenitor-middleware = { git = "https://github.com/oxidecomputer/progenitor" }
 reqwest = { version = "0.12", features = ["json", "stream"] }
 serde = { version = "1.0", features = ["derive"] }
 ```
@@ -107,7 +107,7 @@ fn main() {
     println!("cargo:rerun-if-changed={}", src);
     let file = std::fs::File::open(src).unwrap();
     let spec = serde_json::from_reader(file).unwrap();
-    let mut generator = progenitor::Generator::default();
+    let mut generator = progenitor_middleware::Generator::default();
 
     let tokens = generator.generate_tokens(&spec).unwrap();
     let ast = syn::parse2(tokens).unwrap();
@@ -139,7 +139,7 @@ serde_json = "1.0"
 
 [build-dependencies]
 prettyplease = "0.2.22"
-progenitor = { git = "https://github.com/oxidecomputer/progenitor" }
+progenitor-middleware = { git = "https://github.com/sammccord/progenitor" }
 serde_json = "1.0"
 syn = "2.0"
 ```
@@ -360,7 +360,7 @@ fn main() {
     let spec = serde_json::from_reader(file).unwrap();
     let mut binding = GenerationSettings::default();
     let settings = binding.with_interface(InterfaceStyle::Builder);
-    let mut generator = progenitor::Generator::new(&settings);
+    let mut generator = progenitor_middleware::Generator::new(&settings);
     let tokens = generator.generate_tokens(&spec).unwrap();
     let ast = syn::parse2(tokens).unwrap();
     let content = prettyplease::unparse(&ast);

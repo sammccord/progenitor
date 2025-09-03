@@ -11,7 +11,7 @@ fn main() {
     println!("cargo:rerun-if-changed={}", src);
     let file = File::open(src).unwrap();
     let spec = serde_json::from_reader(file).unwrap();
-    let mut generator = progenitor::Generator::default();
+    let mut generator = progenitor_middleware::Generator::default();
 
     let tokens = generator.generate_tokens(&spec).unwrap();
     let ast = syn::parse2(tokens).unwrap();
