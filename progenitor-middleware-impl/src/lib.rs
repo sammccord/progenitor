@@ -675,7 +675,7 @@ pub fn space_out_items(content: String) -> Result<String> {
 
 fn validate_openapi_spec_version(spec_version: &str) -> Result<()> {
     // progenitor currenlty only support OAS 3.0.x
-    if spec_version.trim().starts_with("3.0.") {
+    if spec_version.trim().starts_with("3.") {
         Ok(())
     } else {
         Err(Error::UnexpectedFormat(format!(
