@@ -30,6 +30,28 @@ pub(crate) struct OperationMethod {
     pub responses: Vec<OperationResponse>,
     pub dropshot_paginated: Option<DropshotPagination>,
     dropshot_websocket: bool,
+    pub error_enum_name: Option<String>,
+}
+
+/// Represents the error response type for an operation.
+/// Can be a single type (backwards compatible) or multiple types requiring an enum.
+#[derive(Debug, Clone)]
+pub enum ErrorResponseType {
+    /// Single error type - no enum needed (backwards compatible)
+    Single(OperationResponseKind),
+    /// Multiple error types - generates an enum
+    Multiple {
+        enum_name: String,
+        variants: Vec<ErrorVariant>,
+    },
+}
+
+/// Represents a variant in a generated error enum.
+#[derive(Debug, Clone)]
+pub struct ErrorVariant {
+    pub variant_name: String,
+    pub typ: OperationResponseKind,
+    pub status_codes: Vec<OperationResponseStatus>,
 }
 
 pub enum HttpMethod {
@@ -545,6 +567,7 @@ impl Generator {
             responses,
             dropshot_paginated,
             dropshot_websocket,
+            error_enum_name: None, // Will be set during error response extraction
         })
     }
 
@@ -930,6 +953,22 @@ impl Generator {
         let (success_response_items, response_type) =
             self.extract_responses(method, OperationResponseStatus::is_success_or_default);
 
+        // Errors... (get error responses early so we can use the type for annotations in success responses)
+        let (error_response_items, error_response_type) =
+            self.extract_responses(method, OperationResponseStatus::is_error_or_default);
+
+        // Get the error type tokens for type annotations in success responses
+        let error_type_annotation = match &error_response_type {
+            ErrorResponseType::Single(kind) => {
+                let error_tokens = kind.clone().into_tokens(&self.type_space);
+                quote! { #error_tokens }
+            }
+            ErrorResponseType::Multiple { enum_name, .. } => {
+                let enum_ident = format_ident!("{}", enum_name);
+                quote! { types::#enum_ident }
+            }
+        };
+
         let success_response_matches = success_response_items.iter().map(|response| {
             let pat = match &response.status_code {
                 OperationResponseStatus::Code(code) => quote! { #code },
@@ -941,7 +980,7 @@ impl Generator {
             let decode = match &response.typ {
                 OperationResponseKind::Type(_) => {
                     quote! {
-                        ResponseValue::from_response(#response_ident).await
+                        ResponseValue::from_response::<#error_type_annotation>(#response_ident).await
                     }
                 }
                 OperationResponseKind::None => {
@@ -956,7 +995,7 @@ impl Generator {
                 }
                 OperationResponseKind::Upgrade => {
                     quote! {
-                        ResponseValue::upgrade(#response_ident).await
+                        ResponseValue::upgrade::<#error_type_annotation>(#response_ident).await
                     }
                 }
             };
@@ -964,11 +1003,10 @@ impl Generator {
             quote! { #pat => { #decode } }
         });
 
-        // Errors...
-        let (error_response_items, error_type) =
-            self.extract_responses(method, OperationResponseStatus::is_error_or_default);
-
-        let error_response_matches = error_response_items.iter().map(|response| {
+        // Helper closure defined here (before use) - error_response_items and error_response_type already retrieved above
+        let generate_error_match_arm = |response: &OperationResponse,
+                                        enum_info: Option<(&str, &str)>|
+         -> TokenStream {
             let pat = match &response.status_code {
                 OperationResponseStatus::Code(code) => {
                     quote! { #code }
@@ -978,33 +1016,93 @@ impl Generator {
                     let max = min + 99;
                     quote! { #min ..= #max }
                 }
-
                 OperationResponseStatus::Default => {
                     quote! { _ }
                 }
             };
 
             let decode = match &response.typ {
-                OperationResponseKind::Type(_) => {
-                    quote! {
-                        Err(Error::ErrorResponse(
-                            ResponseValue::from_response(#response_ident)
-                                .await?
-                        ))
+                OperationResponseKind::Type(type_id) => {
+                    if let Some((enum_name, variant_name)) = enum_info {
+                        let enum_ident = format_ident!("{}", enum_name);
+                        let variant_ident = format_ident!("{}", variant_name);
+                        // Get the inner type for this error response
+                        let inner_type_tokens = response.typ.clone().into_tokens(&self.type_space);
+
+                        quote! {
+                            {
+                                let inner_value: ResponseValue<#inner_type_tokens> = ResponseValue::from_response::<types::#enum_ident>(#response_ident).await?;
+                                let status = inner_value.status();
+                                let headers = inner_value.headers().clone();
+                                let inner = inner_value.into_inner();
+                                Err(Error::ErrorResponse(
+                                    ResponseValue::new(
+                                        types::#enum_ident::#variant_ident(inner),
+                                        status,
+                                        headers
+                                    )
+                                ))
+                            }
+                        }
+                    } else {
+                        quote! {
+                            Err(Error::ErrorResponse(
+                                ResponseValue::from_response(#response_ident).await?
+                            ))
+                        }
                     }
                 }
                 OperationResponseKind::None => {
-                    quote! {
-                        Err(Error::ErrorResponse(
-                            ResponseValue::empty(#response_ident)
-                        ))
+                    if let Some((enum_name, variant_name)) = enum_info {
+                        let enum_ident = format_ident!("{}", enum_name);
+                        let variant_ident = format_ident!("{}", variant_name);
+                        quote! {
+                            {
+                                let inner_value = ResponseValue::empty(#response_ident);
+                                let status = inner_value.status();
+                                let headers = inner_value.headers().clone();
+                                Err(Error::ErrorResponse(
+                                    ResponseValue::new(
+                                        types::#enum_ident::#variant_ident,
+                                        status,
+                                        headers
+                                    )
+                                ))
+                            }
+                        }
+                    } else {
+                        quote! {
+                            Err(Error::ErrorResponse(
+                                ResponseValue::empty(#response_ident)
+                            ))
+                        }
                     }
                 }
                 OperationResponseKind::Raw => {
-                    quote! {
-                        Err(Error::ErrorResponse(
-                            ResponseValue::stream(#response_ident)
-                        ))
+                    if let Some((enum_name, variant_name)) = enum_info {
+                        let enum_ident = format_ident!("{}", enum_name);
+                        let variant_ident = format_ident!("{}", variant_name);
+                        quote! {
+                            {
+                                let inner_value = ResponseValue::stream(#response_ident);
+                                let status = inner_value.status();
+                                let headers = inner_value.headers().clone();
+                                let inner = inner_value.into_inner_stream();
+                                Err(Error::ErrorResponse(
+                                    ResponseValue::new(
+                                        types::#enum_ident::#variant_ident(inner),
+                                        status,
+                                        headers
+                                    )
+                                ))
+                            }
+                        }
+                    } else {
+                        quote! {
+                            Err(Error::ErrorResponse(
+                                ResponseValue::stream(#response_ident)
+                            ))
+                        }
                     }
                 }
                 OperationResponseKind::Upgrade => {
@@ -1013,20 +1111,63 @@ impl Generator {
                     } else {
                         todo!(
                             "non-default error response handling for \
-                                upgrade requests is not yet implemented"
+                                    upgrade requests is not yet implemented"
                         );
                     }
                 }
             };
 
             quote! { #pat => { #decode } }
-        });
+        };
 
-        let accept_header = matches!(
-            (&response_type, &error_type),
-            (OperationResponseKind::Type(_), _)
-                | (OperationResponseKind::None, OperationResponseKind::Type(_))
-        )
+        let error_response_matches = match &error_response_type {
+            ErrorResponseType::Single(_) => {
+                // Single error type - generate existing style matches
+                error_response_items
+                    .iter()
+                    .map(|response| generate_error_match_arm(response, None))
+                    .collect::<Vec<_>>()
+            }
+            ErrorResponseType::Multiple {
+                enum_name,
+                variants,
+            } => {
+                // Multiple error types - wrap in enum variants
+                error_response_items
+                    .iter()
+                    .map(|response| {
+                        // Find which variant this response belongs to
+                        let variant = variants
+                            .iter()
+                            .find(|v| v.status_codes.contains(&response.status_code))
+                            .expect("Response must map to a variant");
+
+                        generate_error_match_arm(
+                            response,
+                            Some((enum_name.as_str(), variant.variant_name.as_str())),
+                        )
+                    })
+                    .collect::<Vec<_>>()
+            }
+        };
+
+        let accept_header = {
+            let has_error_type = match &error_response_type {
+                ErrorResponseType::Single(kind) => matches!(kind, OperationResponseKind::Type(_)),
+                ErrorResponseType::Multiple { .. } => true, // Enums always need JSON accept
+            };
+
+            let has_success_type = match &response_type {
+                ErrorResponseType::Single(kind) => matches!(kind, OperationResponseKind::Type(_)),
+                ErrorResponseType::Multiple { .. } => true,
+            };
+            let has_success_none = match &response_type {
+                ErrorResponseType::Single(kind) => matches!(kind, OperationResponseKind::None),
+                ErrorResponseType::Multiple { .. } => false,
+            };
+
+            has_success_type || (has_success_none && has_error_type)
+        }
         .then(|| {
             quote! {
                     .header(
@@ -1158,22 +1299,38 @@ impl Generator {
             }
         };
 
+        let error_type_tokens = match &error_response_type {
+            ErrorResponseType::Single(kind) => kind.clone().into_tokens(&self.type_space),
+            ErrorResponseType::Multiple { enum_name, .. } => {
+                let enum_ident = format_ident!("{}", enum_name);
+                quote! { types::#enum_ident }
+            }
+        };
+
+        let success_type_tokens = match &response_type {
+            ErrorResponseType::Single(kind) => kind.clone().into_tokens(&self.type_space),
+            ErrorResponseType::Multiple { enum_name, .. } => {
+                let enum_ident = format_ident!("{}", enum_name);
+                quote! { types::#enum_ident }
+            }
+        };
+
         Ok(MethodSigBody {
-            success: response_type.into_tokens(&self.type_space),
-            error: error_type.into_tokens(&self.type_space),
+            success: success_type_tokens,
+            error: error_type_tokens,
             body: body_impl,
         })
     }
 
     /// Extract responses that match criteria specified by the `filter`. The
     /// result is a `Vec<OperationResponse>` that enumerates the cases matching
-    /// the filter, and a `TokenStream` that represents the generated type for
-    /// those cases.
-    pub(crate) fn extract_responses<'a>(
+    /// the filter, and an `ErrorResponseType` that represents the generated type(s)
+    /// for those cases.
+    pub fn extract_responses<'a>(
         &self,
         method: &'a OperationMethod,
         filter: fn(&OperationResponseStatus) -> bool,
-    ) -> (Vec<&'a OperationResponse>, OperationResponseKind) {
+    ) -> (Vec<&'a OperationResponse>, ErrorResponseType) {
         let mut response_items = method
             .responses
             .iter()
@@ -1206,15 +1363,94 @@ impl Generator {
             .map(|response| response.typ.clone())
             .collect::<BTreeSet<_>>();
 
-        // TODO to deal with multiple response types, we'll need to create an
-        // enum type with variants for each of the response types.
-        assert!(response_types.len() <= 1);
-        let response_type = response_types
-            .into_iter()
-            .next()
-            // TODO should this be OperationResponseType::Raw?
-            .unwrap_or(OperationResponseKind::None);
-        (response_items, response_type)
+        // Handle single error type (backwards compatible)
+        if response_types.len() <= 1 {
+            let response_type = response_types
+                .into_iter()
+                .next()
+                .unwrap_or(OperationResponseKind::None);
+            return (response_items, ErrorResponseType::Single(response_type));
+        }
+
+        // Multiple error types: create enum
+        let enum_name = format!("{}Error", sanitize(&method.operation_id, Case::Pascal));
+        let variants = self.create_error_variants(&response_items);
+
+        (
+            response_items,
+            ErrorResponseType::Multiple {
+                enum_name,
+                variants,
+            },
+        )
+    }
+
+    /// Generates an error enum type for operations with multiple error response types.
+    pub fn generate_error_enum(&self, enum_name: &str, variants: &[ErrorVariant]) -> TokenStream {
+        let enum_ident = format_ident!("{}", enum_name);
+
+        let variant_defs = variants.iter().map(|v| {
+            let variant_ident = format_ident!("{}", v.variant_name);
+
+            match &v.typ {
+                OperationResponseKind::Type(_) => {
+                    // Get the type tokens which include "types::" prefix
+                    let typ_tokens = v.typ.clone().into_tokens(&self.type_space);
+
+                    // Convert to string and remove "types::" prefix since we're inside the types module
+                    let typ_string = typ_tokens.to_string();
+                    let typ_without_prefix =
+                        typ_string.strip_prefix("types :: ").unwrap_or(&typ_string);
+
+                    // Parse back to TokenStream
+                    let typ_tokens: TokenStream = typ_without_prefix.parse().expect(&format!(
+                        "Failed to parse type tokens: {}",
+                        typ_without_prefix
+                    ));
+
+                    quote! { #variant_ident(#typ_tokens) }
+                }
+                OperationResponseKind::None => {
+                    quote! { #variant_ident }
+                }
+                OperationResponseKind::Raw => {
+                    // ByteStream is imported into types module from super
+                    quote! { #variant_ident(ByteStream) }
+                }
+                OperationResponseKind::Upgrade => {
+                    quote! { #variant_ident(reqwest::Upgraded) }
+                }
+            }
+        });
+
+        quote! {
+            #[derive(Debug)]
+            pub enum #enum_ident {
+                #(#variant_defs,)*
+            }
+        }
+    }
+
+    /// Creates enum variants from a list of error responses, creating one variant per status code.
+    fn create_error_variants(&self, responses: &[&OperationResponse]) -> Vec<ErrorVariant> {
+        let mut variants = Vec::new();
+
+        // Create one variant per response, even if types are duplicated
+        for response in responses {
+            let variant_name = match &response.status_code {
+                OperationResponseStatus::Code(code) => format!("Status{}", code),
+                OperationResponseStatus::Range(r) => format!("Status{}xx", r),
+                OperationResponseStatus::Default => "DefaultResponse".to_string(),
+            };
+
+            variants.push(ErrorVariant {
+                variant_name,
+                typ: response.typ.clone(),
+                status_codes: vec![response.status_code.clone()],
+            });
+        }
+
+        variants
     }
 
     // Validates all the necessary conditions for Dropshot pagination. Returns

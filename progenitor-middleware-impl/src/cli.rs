@@ -200,10 +200,25 @@ impl Generator {
         let fn_name = format_ident!("execute_{}", &method.operation_id);
         let op_name = format_ident!("{}", &method.operation_id);
 
-        let (_, success_kind) =
+        let (_, success_response_type) =
             self.extract_responses(method, OperationResponseStatus::is_success_or_default);
-        let (_, error_kind) =
+        let (_, error_response_type) =
             self.extract_responses(method, OperationResponseStatus::is_error_or_default);
+
+        // Extract the underlying OperationResponseKind from ErrorResponseType
+        // For CLI, we only support Single error types (not Multiple)
+        let success_kind = match success_response_type {
+            crate::method::ErrorResponseType::Single(kind) => kind,
+            crate::method::ErrorResponseType::Multiple { .. } => {
+                panic!("CLI generation does not support operations with multiple success types");
+            }
+        };
+        let error_kind = match error_response_type {
+            crate::method::ErrorResponseType::Single(kind) => kind,
+            crate::method::ErrorResponseType::Multiple { .. } => {
+                panic!("CLI generation does not support operations with multiple error types");
+            }
+        };
 
         let execute_and_output = match method.dropshot_paginated {
             // Normal, one-shot API calls.

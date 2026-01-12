@@ -358,6 +358,9 @@ impl Generator {
             }
         }?;
 
+        // Generate error enums for operations with multiple error types
+        let error_enums = self.generate_error_enums(&raw_methods);
+
         let types = self.type_space.to_stream();
 
         let (inner_type, inner_fn_value) = match self.settings.inner_type.as_ref() {
@@ -424,7 +427,13 @@ impl Generator {
             /// Types used as operation parameters and responses.
             #[allow(clippy::all)]
             pub mod types {
+                #[allow(unused_imports)]
+                use super::{ByteStream, ResponseValue};
+
                 #types
+
+                // Error enums for operations with multiple error response types
+                #(#error_enums)*
             }
 
             #[derive(Clone, Debug)]
@@ -543,6 +552,28 @@ impl Generator {
             }
         };
         Ok(out)
+    }
+
+    /// Generate error enum types for operations with multiple error response types.
+    fn generate_error_enums(&self, methods: &[method::OperationMethod]) -> Vec<TokenStream> {
+        methods
+            .iter()
+            .filter_map(|method| {
+                // Extract error responses to determine if we need an enum
+                let (_, error_response_type) = self.extract_responses(
+                    method,
+                    method::OperationResponseStatus::is_error_or_default,
+                );
+
+                match error_response_type {
+                    method::ErrorResponseType::Multiple {
+                        enum_name,
+                        variants,
+                    } => Some(self.generate_error_enum(&enum_name, &variants)),
+                    method::ErrorResponseType::Single(_) => None,
+                }
+            })
+            .collect()
     }
 
     fn generate_tokens_builder_merged(
