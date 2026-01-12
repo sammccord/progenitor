@@ -1,0 +1,1312 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+        "title": "Coinbase Developer Platform APIs",
+        "description": "The Coinbase Developer Platform APIs - leading the world's transition onchain.",
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        },
+        "version": "2.0.0",
+        "contact": {
+            "name": "Coinbase Developer Platform",
+            "email": "cdp@coinbase.com",
+            "url": "https://cdp.coinbase.com"
+        }
+    },
+    "servers": [
+        {
+            "url": "https://api.cdp.coinbase.com/platform",
+            "description": "The production server of the CDP APIs."
+        }
+    ],
+    "security": [
+        {
+            "apiKeyAuth": []
+        }
+    ],
+    "tags": [
+        {
+            "name": "End User Accounts",
+            "x-audience": "public",
+            "description": "The End User Accounts APIs enable developers to manage the accounts belonging to their end users. End User Accounts are typically created by end users themselves when they sign in to the developer's application via the CDP Web SDK. However, developers also have the option of creating End User Accounts on behalf of their end users. Critically, developers do not have the ability to sign transactions or messages on behalf of the end user; only end users can do this.\n\nEnd User Accounts APIs are accessed by the developer's servers and authenticated by the developer's CDP API key."
+        },
+        {
+            "name": "EVM Accounts",
+            "x-audience": "public",
+            "description": "The EVM Account APIs enable you to create and use accounts across blockchains that are compatible with the Ethereum Virtual Machine (EVM).\n\nAn **account** is a private/public key pair that is used to sign transactions and messages. The private key is generated and used only in CDP's Trusted Execution Environment (TEE), and never exposed to Coinbase or the developer.\n\nAn EVM account is identified by its **address**, which is a 0x-prefixed hexadecimal string. The same address can be used across multiple EVM networks.\n\nAccounts can optionally be assigned an **account name** at creation time for easier identification in subsequent API calls. EVM account names must be globally unique across all EVM accounts in the developer's CDP Project.\n\n## Authentication\n\nThe EVM Account API uses two layers of authentication to ensure the security of your accounts' private keys:\n\n- **CDP Secret API Key**: This key is used to authenticate all requests to the entire suite of\n   REST APIs offered on Coinbase Developer Platform.\n- **Wallet Secret**: This secret is used specifically to authenticate sensitive wallet operations\n  to `POST` and `DELETE` endpoints in the EVM and Solana Account APIs.\n\n\nTo learn more about creating and using these keys, visit our [Authentication docs](https://docs.cdp.coinbase.com/api-reference/v2/authentication).\n\n<Tip>\n\n\n**Use our SDK**\n\n\nThe [CDP SDK](https://github.com/coinbase/cdp-sdk) automatically authenticates requests using your CDP Secret API Key and Wallet Secret. Use the CDP SDK for a more convenient access to our APIs.\n\n\n</Tip>"
+        },
+        {
+            "name": "EVM Smart Accounts",
+            "x-audience": "public",
+            "description": "The EVM Smart Account APIs enable you to create and manage Smart Account wallets across EVM-compatible blockchains.\n\nA **Smart Account** is an EVM account that enables enhanced functionality such as account abstraction, batched transactions, and gas sponsorship through [ERC-4337](https://eips.ethereum.org/EIPS/eip-4337). Smart Accounts allow users to create and manage \"user operations\" instead of traditional EVM transactions.\nSmart Accounts are identified by their **address**, which is a 0x-prefixed hexadecimal string.\nSmart Accounts can be assigned an optional **name** at creation time for easier identification in subsequent API calls.\n\nA Smart Account has a single owner, which is another EVM Account which signs the Smart Account's transactions. The owner can be a CDP EVM account, or an account managed solely by the developer."
+        },
+        {
+            "name": "EVM Swaps",
+            "x-audience": "public",
+            "description": "A swap refers to the act of exchanging one token for another. The EVM Swap APIs enable you to create and manage swaps. A swap process involves:\n\n 1. A user approves token spending via smart contract.\n 2. The smart contract determines the exchange rate and facilitates the swap between the two tokens.\n 3. The transaction is completed atomically and the tokens are transferred to the user's wallet.\n\nThe Swap API supports:\n\n - **Getting a price**: Estimate the amount of tokens you will receive for a given amount of exchanged tokens.\n - **Creating a swap quote**: Return a swap transaction payload that you can use to sign and submit in order to execute the swap.\n\nFor the easiest experience creating, signing, and submitting a swap, we recommend using the [CDP SDK](https://github.com/coinbase/cdp-sdk/).\n- [Python SDK examples](https://github.com/coinbase/cdp-sdk/tree/main/python#evm-swaps)\n- [TypeScript SDK examples](https://github.com/coinbase/cdp-sdk/tree/main/typescript#evm-swaps)\n\nTo read more about using the EVM Swap APIs, please see our [Swap API docs](https://docs.cdp.coinbase.com/swaps/docs/welcome)."
+        },
+        {
+            "name": "EVM Token Balances",
+            "x-audience": "public",
+            "description": "The EVM Token Balances APIs enable you to retrieve the balances of EVM addresses.\nThis includes tokens (i.e. ERC-20s) and the native gas token of the network.\n## Denomination\n- 'amount' is denominated in the smallest indivisible unit of the token. For ETH, the smallest indivisible unit is Wei (10^-18 ETH). For ERC-20s, the smallest unit is the unit returned from `function totalSupply() public view returns (uint256)`.\n- 'decimals' is the exponential value N that satisfies the equation `amount * 10^-N = standard_denomination`. The standard denomination is the most commonly used denomination for the token.\n\n  - In the case of the native gas token, `decimals` is defined via convention. As an example, for ETH of Ethereum mainnet, the standard denomination is 10^-18 the smallest denomination (Wei). As such, for ETH on Ethereum mainnet, `decimals` is 18.\n  - In the case of ERC-20 tokens, `decimals` is defined via configuration. `decimals` will be the number returned by `function decimals() public view returns (uint8)` on the underlying token contract."
+        },
+        {
+            "name": "Faucets",
+            "x-audience": "public",
+            "description": "The Faucet APIs enable you to request funds on supported test networks. Faucets are for testing purposes and make development easier by providing a source of funds."
+        },
+        {
+            "name": "Onchain Data",
+            "x-audience": "public",
+            "description": "Query and analyze blockchain data with high performance and reliability. Features include real-time token balances, token discovery, and transaction history with freshness, accuracy, and completeness like never before."
+        },
+        {
+            "name": "Onramp",
+            "x-audience": "public",
+            "description": "The v2 Onramp APIs are an evolution of our [v1 APIs](https://docs.cdp.coinbase.com/api-reference/rest-api/onramp-offramp/), designed to make the fiat-to-crypto experience feel native to your applications for higher conversion and less friction. These APIs only cover a subset of Coinbase Onramp functionality as described below, for all other use cases please refer to our [v1 APIs](https://docs.cdp.coinbase.com/api-reference/rest-api/onramp-offramp/).\n\n## Supported Use Cases\n\n#### Apple Pay Onramp\n\nThis use case allows you to offer an Apple Pay onramp experience with debit cards in your app without users needing to create or log into a Coinbase account. Our API returns a `paymentLink` URL that renders an Apple Pay button for you to load in a webview or iframe in your app, making the onramp experience feel native to your application.\n\nRefer to our [detailed integration guide](https://docs.cdp.coinbase.com/onramp-&-offramp/onramp-apis/apple-pay-onramp-api) for more information on the limitations and requirements of this use case. See our [onramp mobile demo app](https://github.com/coinbase/onramp-demo-mobile) for a reference implementation.\n\n#### Hosted UI Onramp\n\nThis use case enables you to offer a full-featured onramp experience by redirecting users to a Coinbase-hosted page where they can choose to log into their existing Coinbase account or proceed as a guest. The Onramp Session API generates secure, single-use Onramp URLs with customizable parameters, allowing you to control available payment methods, preset transaction amounts, and cryptocurrencies for a tailored user experience.\n\nRefer to our [guide](https://docs.cdp.coinbase.com/onramp-&-offramp/onramp-apis/generating-onramp-url) for implementation details and customization options for this use case."
+        },
+        {
+            "name": "Policy Engine",
+            "x-audience": "public",
+            "description": "The Policy Engine APIs evaluate policies (a set of rules) to govern the behavior of accounts or projects, such as enforce allowlists and denylists.\n- A **policy** is a collection of `rules` with defined criteria.\n- Each **rule** contains a specified `action`, `operation`, and `criteria`:\n  - An `action` can either `accept` or `reject` a transaction if the criteria in the rule are met.\n  - `criteria` is an array of logical expressions. All parameters must evaluate to true for the action to be applied.\n  - An `operation` corresponds to a CDP v2 API:\n      - `signEvmTransaction` or `signSolTransaction` for signing transactions (to set a transaction limit).\n      - `sendEvmTransaction` for signing a transaction, and sending it to a supported network.\n      - `signEvmHash` for signing an arbitrary 32 byte hash.\n      - `signEvmMessage` for signing an [EIP-191](https://eips.ethereum.org/EIPS/eip-191) message.\n      - `prepareUserOperation` for preparing user operations on a smart account.\n      - `sendUserOperation` for sending user operations using a smart account.\n- A **rule** indicates how an operation should behave, specifying whether a request with defined criteria should be accepted or rejected.\n## Policy Scope\nPolicies can be applied at the project and/or account level:\n- **Project-level policy**: A `project`-level policy applies to all accounts in a CDP Project. Only one project-level policy can be applied to accounts within a CDP Project at any given time.\n- **Account-level policy**: An `account`-level policy applies to one or more accounts. An account\n  can have at most one account-level policy at any given time.\n\nThus, a single account can be assigned at most two policies at any given time: one project-level policy and one account-level policy.\n\nScope is specified in the `scope` field of a policy:\n```json {\n  \"description\": \"Project-level policy\",\n  \"scope\": \"account\",\n  ...\n```\n## Policy Evaluation\n**Project-level policies** are evaluated first, followed by **account-level policies**.\nThe Policy Engine will process the request against each rule in the order it is defined within the `rules` array:\n\n  1. If the rule's `criteria` (processed as a logical **AND** operation applied to a list of independently evaluated boolean expressions) are met, `accept` or `reject` behavior is applied immediately and the engine stops further evaluation of the policy.\n  1. If after policy evaluation, no rule's `criteria` are met, the engine moves to processing the next policy (i.e., an `account`-level policy).\n  1. If no further policies exist, the request is rejected.\n\nFor example, the following policy is a project-level policy with two rules. The Policy Engine will:\n\n   1. **Evaluate the first rule:** For a `signEvmTransaction` request, accept the request if the transaction is less than or equal to 1000000000000000000 wei OR\n   1. **Evaluate the second rule:** if the request is a `signEvmTransaction` request, accept the request if the transaction is less than or equal to 2000000000000000000 wei AND the request is made to the address `0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE`.\n   1. **If the request does not meet the criteria of either rule**, the engine will move on to evaluate an `account`-level policy (if one exists).\n   1. Otherwise, the request is rejected.\n\nRules are processed in the order they are defined. Once a rule applies to an operation, subsequent rules are ignored.\n```json\n{\n  \"description\": \"Project-level policy\",\n  \"scope\": \"project\",\n  \"rules\": [\n    {\n      \"action\": \"accept\",\n      \"operation\": \"signEvmTransaction\",\n      \"criteria\": [\n        {\n          \"type\": \"ethValue\",\n          \"ethValue\": \"1000000000000000000\",\n          \"operator\": \"<=\"\n        }\n      ]\n    },\n    {\n      \"action\": \"accept\",\n      \"operation\": \"signEvmTransaction\",\n      \"criteria\": [\n        {\n          \"type\": \"ethValue\",\n          \"ethValue\": \"2000000000000000000\",\n          \"operator\": \"<=\"\n        },\n        {\n          \"type\": \"evmAddress\",\n          \"addresses\": [\n            \"0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE\"\n          ],\n          \"operator\": \"in\"\n        }\n      ]\n    }\n  ]\n}\n```\n\n## Policy Application\n\nProject-level policies are applied to all accounts in a CDP Project. They will apply retroactively even if the project-level policy is created after the account was created. To disable a project-level policy, you must remove the project-level policy from the CDP Project using the `deletePolicy` operation.\n\nAccount-level policies can be applied in two ways:\n- By specifying the `accountPolicy` field in the request body of the `createEvmAccount` and\n  `createSolAccount` operations.\n\n- By specifying the `accountPolicy` field in the request body of the `updateEvmAccount` and\n  `updateSolanaAccount` operations.\n\n\n## Criteria\n\nThe following criteria are supported:\n\n### SignEvmTransaction Criteria\n#### ethValue\nA criterion based on the value of the transaction. The transaction's `value` field is compared to the criterion's `ethValue` field using the `operator` field.\n#### evmAddress\nA criterion based on the recipient address of the transaction. The transaction's `to` field is compared to the criterion's `addresses` field using the `operator` field.\n#### evmData\nA criterion based on encoded transaction data that evaluates the function being called, as well as any number of arguments accessed by either name or index. Currently this criterion only supports primitive types; `string`, `bool`, `uint(8,16,32,64,256)`, `int(8,16,32,64,256)`, `address`, and both fixed and dynamic length `bytes`.\n#### netUSDChange\nA criterion based on the USD denominated market value of assets being transferred, or exposing the sender to. The types of assets included in the calculation include native assets, `ERC20`, `ERC721`, and `ERC1155` tokens. The sum total USD amount of assets being transferred and exposed is compared to the criterion's `changeCents` field using the `operator` field. If signing a testnet transaction, then this criterion configuration will be ignored.\n### SendEvmTransaction Criteria\n#### ethValue\nA criterion based on the value of the transaction. The transaction's `value` field is compared to the criterion's `ethValue` field using the `operator` field.\n#### evmAddress\nA criterion based on the recipient address of the transaction. The transaction's `to` field is compared to the criterion's `addresses` field using the `operator` field.\n#### evmNetwork\nA criterion based on the intended network of the transaction. The `network` field in the `sendEvmTransaction` request body is compared to the criterion's `networks` field using the `operator` field.\nValid networks for this criterion include:\n  - `base`\n  - `base-sepolia`\n  - `ethereum`\n  - `ethereum-sepolia`\n  - `avalanche`\n  - `polygon`\n  - `optimism`\n  - `arbitrum`\n\n#### evmData\nA criterion based on encoded transaction data that evaluates the function being called, as well as any number of arguments accessed by either name or index. Currently this criterion only supports primitive types; `string`, `bool`, `uint(8,16,32,64,256)`, `int(8,16,32,64,256)`, `address`, and both fixed and dynamic length `bytes`.\n#### netUSDChange\nA criterion based on the USD denominated market value of assets being transferred, or exposing the sender to. The types of assets included in the calculation include native assets, `ERC20`, `ERC721`, and `ERC1155` tokens. The sum total USD amount of assets being transferred and exposed is compared to the criterion's `changeCents` field using the `operator` field. If sending a testnet transaction, then this criterion configuration will be ignored.\n### SendUserOperation Criteria\n#### ethValue\nA criterion based on the value of the user operation. The operation's `value` fields are compared to the criterion's `ethValue` field using the `operator` field.\n#### evmAddress\nA criterion based on the recipient address of the operation. The operation's `to` fields are compared to the criterion's `addresses` field using the `operator` field.\n#### evmData\nA criterion based on encoded transaction data that evaluates the function being called, as well as any number of arguments accessed by either name or index. Currently this criterion only supports primitive types; `string`, `bool`, `uint(8,16,32,64,256)`, `int(8,16,32,64,256)`, `address`, and both fixed and dynamic length `bytes`.\n### PrepareUserOperation Criteria\n#### ethValue\nA criterion based on the value of the user operation. The operation's `value` fields are compared to the criterion's `ethValue` field using the `operator` field.\n#### evmAddress\nA criterion based on the recipient address of the user operation. The operation's `to` fields are compared to the criterion's `addresses` field using the `operator` field.\n#### evmNetwork\nA criterion based on the intended network of the user operation. The `network` field in the `prepareUserOperation` request body is compared to the criterion's `networks` field using the `operator` field.\nValid networks for this criterion include:\n  - `base-sepolia`\n  - `base`\n  - `arbitrum`\n  - `optimism`\n  - `zora`\n  - `polygon`\n  - `bnb`\n  - `avalanche`\n  - `ethereum`\n  - `ethereum-sepolia`\n\n#### evmData\nA criterion based on encoded transaction data that evaluates the function being called, as well as any number of arguments accessed by either name or index. Currently this criterion only supports primitive types; `string`, `bool`, `uint(8,16,32,64,256)`, `int(8,16,32,64,256)`, `address`, and both fixed and dynamic length `bytes`.\n### SignEvmHash Criteria\nThe `signEvmHash` operation does not accept any criteria. To prevent this operation from being executed by any account, specify a rule with `signEvmHash` as the operation, and `reject` as its action.\n### SignEvmMessage Criteria\n#### evmMessage\nA criterion based on the intended message to be signed. The `match` field in the criteria is a [RE2](https://github.com/google/re2/wiki/Syntax) compliant regular expression that will be executed against the message in the API request.\n### SignSolMessage Criteria\n#### solMessage\nA criterion based on the intended message to be signed. The `match` field in the criteria is a [RE2](https://github.com/google/re2/wiki/Syntax) compliant regular expression that will be executed against the message in the API request.\n### SignSolTransaction Criteria\n#### solAddress\nA criterion based on the recipient addresses of the transaction. The criterion's `address` field is compared to the list of addresses in the transaction's `accountKeys` (for legacy transactions) or `staticAccountKeys` (for V0 transactions) array using the `operator` field.\n#### solValue\nA criterion based on the value of the transaction. The criterion's `solValue` field is compared to the transaction's `value`, which is the amount of SOL in lamports being transferred, using the `operator` field.\n#### splAddress\nA criterion based on the recipient addresses of SPL token transfer instructions in the transaction. The criterion's `addresses` field is compared to the list of SPL token transfer recipient addresses in the transaction's `accountKeys` (for legacy transactions) or `staticAccountKeys` (for V0 transactions) array using the `operator` field.\n#### splValue\nA criterion based on the SPL token value of SPL token transfer instructions in the transaction. The criterion's `splValue` field is compared to the transaction instruction's `value` field, which is the amount of the SPL token being transferred, using the `operator` field.\n#### mintAddress\nA criterion based on the token mint addresses of SPL token transfer instructions in the transaction. The criterion's `addresses` field is compared to the list of token mint addresses in the transaction's `accountKeys` (for legacy transactions) or `staticAccountKeys` (for V0 transactions) array using the `operator` field.\n#### solData\nA criterion based on Solana transaction instruction data. The criterion uses Interface Definition Language (IDL) specifications to decode and validate instruction data against specific rules. The `idls` field specifies which Solana programs to validate against (either known program names like \"SystemProgram\" and \"TokenProgram\", or custom IDL objects), and the `conditions` field defines instruction-specific validation rules including instruction names and parameter constraints.\n#### programId\nA criterion based on the program IDs of a transaction's instructions. The criterion's `programIds` field is compared to the list of program IDs in the transaction's instructions using the `operator` field.\n### SendSolTransaction Criteria\n#### solAddress\nA criterion based on the recipient addresses of the transaction. The criterion's `address` field is compared to the list of addresses in the transaction's `accountKeys` (for legacy transactions) or `staticAccountKeys` (for V0 transactions) array using the `operator` field.\n#### solValue\nA criterion based on the value of the transaction. The criterion's `solValue` field is compared to the transaction's `value`, which is the amount of SOL in lamports being transferred, using the `operator` field.\n#### splAddress\nA criterion based on the recipient addresses of SPL token transfer instructions in the transaction. The criterion's `addresses` field is compared to the list of SPL token transfer recipient addresses in the transaction's `accountKeys` (for legacy transactions) or `staticAccountKeys` (for V0 transactions) array using the `operator` field.\n#### splValue\nA criterion based on the SPL token value of SPL token transfer instructions in the transaction. The criterion's `splValue` field is compared to the transaction instruction's `value` field, which is the amount of the SPL token being transferred, using the `operator` field.\n#### mintAddress\nA criterion based on the token mint addresses of SPL token transfer instructions in the transaction. The criterion's `addresses` field is compared to the list of token mint addresses in the transaction's `accountKeys` (for legacy transactions) or `staticAccountKeys` (for V0 transactions) array using the `operator` field.\n#### solData\nA criterion based on Solana transaction instruction data. The criterion uses Interface Definition Language (IDL) specifications to decode and validate instruction data against specific rules. The `idls` field specifies which Solana programs to validate against (either known program names like \"SystemProgram\" and \"TokenProgram\", or custom IDL objects), and the `conditions` field defines instruction-specific validation rules including instruction names and parameter constraints.\n#### programId\nA criterion based on the program IDs of a transaction's instructions. The criterion's `programIds` field is compared to the list of program IDs in the transaction's instructions using the `operator` field.\n#### solNetwork\nA criterion based on the intended network of the transaction. The `network` field in the `sendSolanaTransaction` request body is compared to the criterion's `networks` field using the `operator` field.\nValid networks for this criterion include:\n  - `solana-devnet`\n  - `solana`\n\n## Restricting Contract Interactions on Ethereum\nSmart contract function restrictions serve as a critical security and governance mechanism in decentralized applications, allowing developers and organizations to implement fine-grained access controls over their protocol interactions.\nOne of the primary use cases for function restrictions is protecting high-risk operations from unauthorized access such as:\n- Fund transfers - Contract upgrades - Parameter modifications - Emergency pauses\nPolicy Engine supports such restrictions that evaluate against transaction data with the `evmData` criterion for the `signEvmTransaction`, and `sendEvmTransaction` operations.\n## Examples\n### USD Limits\nThe following example demonstrates a policy that only allows transactions to transfer, or expose the sender to, less than $100.00 worth of assets at a time. This USD denominated amount includes native assets, `ERC20`, `ERC721`, and `ERC1155` tokens calculated using current market prices.\n```json {\n  \"scope\": \"account\",\n  \"description\": \"Reject assets out over 100 USD\",\n  \"rules\": [\n    {\n      \"action\": \"reject\",\n      \"operation\": \"sendEvmTransaction\",\n      \"criteria\": [\n        {\n          \"type\": \"netUSDChange\",\n          \"changeCents\": 10000,\n          \"operator\": \">\",\n        },\n      ],\n    },\n    {\n      \"action\": \"reject\",\n      \"operation\": \"signEvmTransaction\",\n      \"criteria\": [\n        {\n          \"type\": \"netUSDChange\",\n          \"changeCents\": 10000,\n          \"operator\": \">\",\n        },\n      ],\n    },\n  ],\n} ```\n### Limiting USDC Spend\nThis policy restricts USDC transactions on the Base network to transfers of 10,000 tokens or less. It applies to both signing and sending transactions to the USDC contract address, using the ERC20 ABI to validate that only `transfer` function calls with a `value` parameter under the specified limit are permitted.\n```json {\n  \"description\": \"Limit USDC Spend\",\n  \"scope\": \"account\",\n  \"rules\": [\n    {\n      \"action\": \"accept\",\n      \"operation\": \"sendEvmTransaction\",\n      \"criteria\": [\n        {\n          \"type\": \"evmNetwork\",\n          \"networks\": [\"base\"],\n          \"operator\": \"in\"\n        },\n        {\n          \"type\": \"evmAddress\",\n          \"addresses\": [\"0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913\"],\n          \"operator\": \"in\"\n        },\n        {\n          \"type\": \"evmData\",\n          \"abi\": \"erc20\",\n          \"conditions\": [\n            {\n              \"function\": \"transfer\",\n              \"params\": [\n                {\n                  \"name\": \"value\",\n                  \"operator\": \"<=\",\n                  \"value\": \"10000\"\n                }\n              ]\n            }\n          ]\n        }\n      ]\n    },\n    {\n      \"action\": \"accept\",\n      \"operation\": \"signEvmTransaction\",\n      \"criteria\": [\n        {\n          \"type\": \"evmAddress\",\n          \"addresses\": [\"0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913\"],\n          \"operator\": \"in\"\n        },\n        {\n          \"type\": \"evmData\",\n          \"abi\": \"erc20\",\n          \"conditions\": [\n            {\n              \"function\": \"transfer\",\n              \"params\": [\n                {\n                  \"name\": \"value\",\n                  \"operator\": \"<=\",\n                  \"value\": \"10000\"\n                }\n              ]\n            }\n          ]\n        }\n      ]\n    }\n  ]\n} ```."
+        },
+        {
+            "name": "Solana Accounts",
+            "x-audience": "public",
+            "description": "The Solana Account APIs enable you to create and use Solana accounts across SVM-compatible blockchains.\n\nAn **account** is a private/public key pair that is used to sign transactions and messages. The private key is generated and used only in CDP's Trusted Execution Environment (TEE), and never exposed to Coinbase or the developer.\n\nA Solana account is identified by its **address**, which is a base-58 encoded string.\n\nAccounts can optionally be assigned an **account name** at creation time for easier identification in subsequent API calls. Solana account names must be globally unique across all Solana accounts in the developer's CDP Project.\n\n## Authentication\n\nThe Solana Account APIs use two layers of authentication to ensure the security of your accounts' private keys:\n\n- **CDP Secret API Key**: This key is used to authenticate all requests to the entire suite of\n   REST APIs offered on Coinbase Developer Platform.\n- **Wallet Secret**: This secret is used specifically to authenticate sensitive wallet operations\n  to `POST` and `DELETE` endpoints in the EVM and Solana Account APIs.\n\n\nTo learn more about creating and using these keys, visit our [Authentication docs](https://docs.cdp.coinbase.com/api-reference/v2/authentication).\n\n<Tip>\n\n\n**Use our SDK**\n\n\nThe [CDP SDK](https://github.com/coinbase/cdp-sdk) automatically authenticates requests using your CDP Secret API Key and Wallet Secret. Use the CDP SDK for a more convenient access to our APIs.\n\n\n</Tip>"
+        },
+        {
+            "name": "Solana Token Balances",
+            "x-audience": "public",
+            "description": "The Solana Token Balances APIs enable you to retrieve the balances of Solana addresses.\nThis includes SPL tokens and the native SOL token of the network.\n## Denomination\n- 'amount' is denominated in the smallest indivisible unit of the token. For SOL, the smallest indivisible unit is lamports (10^-9 SOL). For SPL tokens, the smallest unit is defined by the token's decimals configuration.\n- 'decimals' is the exponential value N that satisfies the equation `amount * 10^-N = standard_denomination`. The standard denomination is the most commonly used denomination for the token.\n\n  - For native SOL, `decimals` is 9 (1 SOL = 10^9 lamports).\n  - For SPL tokens, `decimals` is defined in the token's mint configuration."
+        },
+        {
+            "name": "SQL API (Alpha)",
+            "x-audience": "public",
+            "description": "The SQL APIs enable you to write performant, high-freshness, and endlessly flexible SQL queries against onchain data."
+        },
+        {
+            "name": "Webhooks",
+            "x-audience": "public",
+            "description": "Subscribe to real-time events across CDP products. Monitor onchain activity on Base mainnet, track onramp/offramp transactions, and receive instant notifications for wallet events."
+        },
+        {
+            "name": "x402 Facilitator",
+            "x-audience": "public",
+            "description": "The x402 payment protocol is an HTTP-based payment protocol that enables developers running resource servers to accept payments from users using a variety of payment methods.\nFor more details on the x402 payment protocol, please see the [x402 specification](https://www.x402.org/).\nThe x402 Facilitator APIs enable you to facilitate payments using the x402 payment protocol by exposing two APIs:\n- `POST /v2/x402/verify`: Verify a payment with a supported scheme and network.\n- `POST /v2/x402/settle`: Settle a payment with a supported scheme and network."
+        }
+    ],
+    "paths": {
+        "/v2/x402/verify": {
+            "post": {
+                "x-audience": "public",
+                "summary": "Verify a payment",
+                "description": "Verify an x402 protocol payment with a specific scheme and network.",
+                "operationId": "verifyX402Payment",
+                "tags": [
+                    "x402 Facilitator"
+                ],
+                "security": [
+                    {
+                        "apiKeyAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "x402Version": {
+                                        "$ref": "#/components/schemas/X402Version"
+                                    },
+                                    "paymentPayload": {
+                                        "$ref": "#/components/schemas/x402PaymentPayload"
+                                    },
+                                    "paymentRequirements": {
+                                        "$ref": "#/components/schemas/x402PaymentRequirements"
+                                    }
+                                },
+                                "required": [
+                                    "x402Version",
+                                    "paymentPayload",
+                                    "paymentRequirements"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/x402VerifyResponse"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/x402VerifyInvalidError"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/InternalServerError"
+                    },
+                    "502": {
+                        "$ref": "#/components/responses/BadGatewayError"
+                    },
+                    "503": {
+                        "$ref": "#/components/responses/ServiceUnavailableError"
+                    }
+                }
+            }
+        },
+        "/v2/x402/settle": {
+            "post": {
+                "x-audience": "public",
+                "summary": "Settle a payment",
+                "description": "Settle an x402 protocol payment with a specific scheme and network.",
+                "operationId": "settleX402Payment",
+                "tags": [
+                    "x402 Facilitator"
+                ],
+                "security": [
+                    {
+                        "apiKeyAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "x402Version": {
+                                        "$ref": "#/components/schemas/X402Version"
+                                    },
+                                    "paymentPayload": {
+                                        "$ref": "#/components/schemas/x402PaymentPayload"
+                                    },
+                                    "paymentRequirements": {
+                                        "$ref": "#/components/schemas/x402PaymentRequirements"
+                                    }
+                                },
+                                "required": [
+                                    "x402Version",
+                                    "paymentPayload",
+                                    "paymentRequirements"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/x402SettleResponse"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/x402SettleError"
+                    },
+                    "402": {
+                        "$ref": "#/components/responses/PaymentMethodRequiredError"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/InternalServerError"
+                    },
+                    "502": {
+                        "$ref": "#/components/responses/BadGatewayError"
+                    },
+                    "503": {
+                        "$ref": "#/components/responses/ServiceUnavailableError"
+                    }
+                }
+            }
+        },
+        "/v2/x402/supported": {
+            "get": {
+                "x-audience": "public",
+                "summary": "Get supported payment schemes and networks",
+                "description": "Get the supported x402 protocol payment schemes and networks that the facilitator is able to verify and settle payments for.",
+                "operationId": "supportedX402PaymentKinds",
+                "tags": [
+                    "x402 Facilitator"
+                ],
+                "security": [
+                    {
+                        "apiKeyAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/x402SupportedPaymentKindsResponse"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/InternalServerError"
+                    },
+                    "502": {
+                        "$ref": "#/components/responses/BadGatewayError"
+                    },
+                    "503": {
+                        "$ref": "#/components/responses/ServiceUnavailableError"
+                    }
+                }
+            }
+        }
+    },
+    "webhooks": {},
+    "components": {
+        "securitySchemes": {
+            "apiKeyAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT",
+                "description": "A JWT signed using your CDP API Key Secret, encoded in base64. Refer to the [Generate Bearer Token](https://docs.cdp.coinbase.com/api-reference/v2/authentication#2-generate-bearer-token) section of our Authentication docs for information on how to generate your Bearer Token."
+            }
+        },
+        "schemas": {
+            "X402Version": {
+                "type": "integer",
+                "description": "The version of the x402 protocol.",
+                "enum": [
+                    1,
+                    2
+                ],
+                "example": 1
+            },
+            "x402ExactEvmPayload": {
+                "type": "object",
+                "title": "x402ExactEvmPayload",
+                "description": "The x402 protocol exact scheme payload for EVM networks. The scheme is implemented using ERC-3009. For more details, please see [EVM Exact Scheme Details](https://github.com/coinbase/x402/blob/main/specs/schemes/exact/scheme_exact_evm.md).",
+                "properties": {
+                    "signature": {
+                        "type": "string",
+                        "description": "The EIP-712 hex-encoded signature of the ERC-3009 authorization message.",
+                        "example": "0xf3746613c2d920b5fdabc0856f2aeb2d4f88ee6037b8cc5d04a71a4462f13480"
+                    },
+                    "authorization": {
+                        "type": "object",
+                        "description": "The authorization data for the ERC-3009 authorization message.",
+                        "properties": {
+                            "from": {
+                                "type": "string",
+                                "pattern": "^0x[0-9a-fA-F]{40}$",
+                                "description": "The 0x-prefixed, checksum EVM address of the sender of the payment.",
+                                "example": "0x742d35Cc6634C0532925a3b844Bc454e4438f44e"
+                            },
+                            "to": {
+                                "type": "string",
+                                "pattern": "^0x[0-9a-fA-F]{40}$",
+                                "description": "The 0x-prefixed, checksum EVM address of the recipient of the payment.",
+                                "example": "0x742d35Cc6634C0532925a3b844Bc454e4438f44e"
+                            },
+                            "value": {
+                                "type": "string",
+                                "description": "The value of the payment, in atomic units of the payment asset.",
+                                "example": "1000000000000000000"
+                            },
+                            "validAfter": {
+                                "type": "string",
+                                "description": "The unix timestamp after which the payment is valid.",
+                                "example": "1716150000"
+                            },
+                            "validBefore": {
+                                "type": "string",
+                                "description": "The unix timestamp before which the payment is valid.",
+                                "example": "1716150000"
+                            },
+                            "nonce": {
+                                "type": "string",
+                                "description": "The hex-encoded nonce of the payment.",
+                                "example": "0x1234567890abcdef1234567890abcdef12345678"
+                            }
+                        },
+                        "example": {
+                            "from": "0x742d35Cc6634C0532925a3b844Bc454e4438f44e",
+                            "to": "0x742d35Cc6634C0532925a3b844Bc454e4438f44e",
+                            "value": "1000000000000000000",
+                            "validAfter": "1716150000",
+                            "validBefore": "1716150000",
+                            "nonce": "0x1234567890abcdef1234567890abcdef12345678"
+                        },
+                        "required": [
+                            "from",
+                            "to",
+                            "value",
+                            "validAfter",
+                            "validBefore",
+                            "nonce"
+                        ]
+                    }
+                },
+                "example": {
+                    "signature": "0xf3746613c2d920b5fdabc0856f2aeb2d4f88ee6037b8cc5d04a71a4462f13480",
+                    "authorization": {
+                        "from": "0x742d35Cc6634C0532925a3b844Bc454e4438f44e",
+                        "to": "0x742d35Cc6634C0532925a3b844Bc454e4438f44e",
+                        "value": "1000000000000000000",
+                        "validAfter": "1716150000",
+                        "validBefore": "1716150000",
+                        "nonce": "0x1234567890abcdef1234567890abcdef12345678"
+                    }
+                },
+                "required": [
+                    "signature",
+                    "authorization"
+                ]
+            },
+            "x402ExactSolanaPayload": {
+                "type": "object",
+                "title": "x402ExactSolanaPayload",
+                "description": "The x402 protocol exact scheme payload for Solana networks. For more details, please see [Solana Exact Scheme Details](https://github.com/coinbase/x402/blob/main/specs/schemes/exact/scheme_exact_svm.md).",
+                "properties": {
+                    "transaction": {
+                        "type": "string",
+                        "description": "The base64-encoded Solana transaction.",
+                        "example": "AQABAgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQABAQECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8CBgMBAQAAAAIBAwQAAAAABgIAAAAAAAYDBQEBAAAGBAgAAAAABgUAAAAA6AMAAAAAAAAGBgUBAQEBBgcEAQAAAAYICgMBAQIDBgkCBgAAAAYKAwABAQEGCwMGAQEBBgwDAAABAQAAAAA="
+                    }
+                },
+                "example": {
+                    "transaction": "AQABAgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQABAQECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8CBgMBAQAAAAIBAwQAAAAABgIAAAAAAAYDBQEBAAAGBAgAAAAABgUAAAAA6AMAAAAAAAAGBgUBAQEBBgcEAQAAAAYICgMBAQIDBgkCBgAAAAYKAwABAQEGCwMGAQEBBgwDAAABAQAAAAA="
+                },
+                "required": [
+                    "transaction"
+                ]
+            },
+            "x402V1PaymentPayload": {
+                "type": "object",
+                "description": "The x402 protocol payment payload that the client attaches to x402-paid API requests to the resource server in the X-PAYMENT header.",
+                "properties": {
+                    "x402Version": {
+                        "$ref": "#/components/schemas/X402Version"
+                    },
+                    "scheme": {
+                        "type": "string",
+                        "description": "The scheme of the payment protocol to use. Currently, the only supported scheme is `exact`.",
+                        "enum": [
+                            "exact"
+                        ],
+                        "example": "exact"
+                    },
+                    "network": {
+                        "type": "string",
+                        "description": "The network of the blockchain to send payment on.",
+                        "enum": [
+                            "base-sepolia",
+                            "base",
+                            "solana-devnet",
+                            "solana"
+                        ],
+                        "example": "base"
+                    },
+                    "payload": {
+                        "type": "object",
+                        "description": "The payload of the payment depending on the x402Version, scheme, and network.",
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/x402ExactEvmPayload"
+                            },
+                            {
+                                "$ref": "#/components/schemas/x402ExactSolanaPayload"
+                            }
+                        ],
+                        "example": {
+                            "signature": "0xf3746613c2d920b5fdabc0856f2aeb2d4f88ee6037b8cc5d04a71a4462f13480",
+                            "authorization": {
+                                "from": "0x742d35Cc6634C0532925a3b844Bc454e4438f44e",
+                                "to": "0x742d35Cc6634C0532925a3b844Bc454e4438f44e",
+                                "value": "1000000000000000000",
+                                "validAfter": "1716150000",
+                                "validBefore": "1716150000",
+                                "nonce": "0x1234567890abcdef1234567890abcdef12345678"
+                            }
+                        }
+                    }
+                },
+                "example": {
+                    "x402Version": 1,
+                    "scheme": "exact",
+                    "network": "base",
+                    "payload": {
+                        "signature": "0xf3746613c2d920b5fdabc0856f2aeb2d4f88ee6037b8cc5d04a71a4462f13480",
+                        "authorization": {
+                            "from": "0x742d35Cc6634C0532925a3b844Bc454e4438f44e",
+                            "to": "0x742d35Cc6634C0532925a3b844Bc454e4438f44e",
+                            "value": "1000000000000000000",
+                            "validAfter": "1716150000",
+                            "validBefore": "1716150000",
+                            "nonce": "0x1234567890abcdef1234567890abcdef12345678"
+                        }
+                    }
+                },
+                "required": [
+                    "x402Version",
+                    "scheme",
+                    "network",
+                    "payload"
+                ]
+            },
+            "x402V2PaymentRequirements": {
+                "type": "object",
+                "description": "The x402 protocol payment requirements that the resource server expects the client's payment payload to meet.",
+                "properties": {
+                    "scheme": {
+                        "type": "string",
+                        "description": "The scheme of the payment protocol to use. Currently, the only supported scheme is `exact`.",
+                        "enum": [
+                            "exact"
+                        ],
+                        "example": "exact"
+                    },
+                    "network": {
+                        "type": "string",
+                        "description": "The network of the blockchain to send payment on in caip2 format.",
+                        "example": "eip155:1"
+                    },
+                    "asset": {
+                        "type": "string",
+                        "description": "The asset to pay with.\n\nFor EVM networks, the asset will be a 0x-prefixed, checksum EVM address.\n\nFor Solana-based networks, the asset will be a base58-encoded Solana address.",
+                        "pattern": "^(0x[a-fA-F0-9]{40}|[1-9A-HJ-NP-Za-km-z]{32,44})$",
+                        "example": "0x742d35Cc6634C0532925a3b844Bc454e4438f44e"
+                    },
+                    "amount": {
+                        "type": "string",
+                        "description": "The amount to pay for the resource in atomic units of the payment asset.",
+                        "example": "1000000"
+                    },
+                    "payTo": {
+                        "type": "string",
+                        "description": "The destination to pay value to.\n\nFor EVM networks, payTo will be a 0x-prefixed, checksum EVM address.\n\nFor Solana-based networks, payTo will be a base58-encoded Solana address.",
+                        "pattern": "^(0x[a-fA-F0-9]{40}|[1-9A-HJ-NP-Za-km-z]{32,44})$",
+                        "example": "0x742d35Cc6634C0532925a3b844Bc454e4438f44e"
+                    },
+                    "maxTimeoutSeconds": {
+                        "type": "integer",
+                        "description": "The maximum time in seconds for the resource server to respond.",
+                        "example": 10
+                    },
+                    "extra": {
+                        "type": "object",
+                        "description": "The optional additional scheme-specific payment info.",
+                        "additionalProperties": true,
+                        "example": {
+                            "name": "USDC",
+                            "version": "2"
+                        }
+                    }
+                },
+                "required": [
+                    "scheme",
+                    "network",
+                    "asset",
+                    "amount",
+                    "payTo",
+                    "maxTimeoutSeconds"
+                ]
+            },
+            "x402ResourceInfo": {
+                "type": "object",
+                "description": "Describes the resource being accessed in x402 protocol.",
+                "properties": {
+                    "url": {
+                        "type": "string",
+                        "description": "The URL of the resource.",
+                        "example": "https://api.example.com/premium/resource/123"
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "The description of the resource.",
+                        "example": "Premium API access for data analysis"
+                    },
+                    "mimeType": {
+                        "type": "string",
+                        "description": "The MIME type of the resource response.",
+                        "example": "application/json"
+                    }
+                }
+            },
+            "x402V2PaymentPayload": {
+                "type": "object",
+                "description": "The x402 protocol payment payload that the client attaches to x402-paid API requests to the resource server in the X-PAYMENT header.",
+                "properties": {
+                    "x402Version": {
+                        "$ref": "#/components/schemas/X402Version"
+                    },
+                    "payload": {
+                        "type": "object",
+                        "description": "The payload of the payment depending on the x402Version, scheme, and network.",
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/x402ExactEvmPayload"
+                            },
+                            {
+                                "$ref": "#/components/schemas/x402ExactSolanaPayload"
+                            }
+                        ],
+                        "example": {
+                            "signature": "0xf3746613c2d920b5fdabc0856f2aeb2d4f88ee6037b8cc5d04a71a4462f13480",
+                            "authorization": {
+                                "from": "0x742d35Cc6634C0532925a3b844Bc454e4438f44e",
+                                "to": "0x742d35Cc6634C0532925a3b844Bc454e4438f44e",
+                                "value": "1000000000000000000",
+                                "validAfter": "1716150000",
+                                "validBefore": "1716150000",
+                                "nonce": "0x1234567890abcdef1234567890abcdef12345678"
+                            }
+                        }
+                    },
+                    "accepted": {
+                        "$ref": "#/components/schemas/x402V2PaymentRequirements"
+                    },
+                    "resource": {
+                        "$ref": "#/components/schemas/x402ResourceInfo"
+                    },
+                    "extensions": {
+                        "type": "object",
+                        "description": "Optional protocol extensions.",
+                        "additionalProperties": true,
+                        "example": {
+                            "bazaar": {
+                                "discoveryEnabled": true
+                            }
+                        }
+                    }
+                },
+                "example": {
+                    "x402Version": 2,
+                    "accepted": {
+                        "scheme": "exact",
+                        "network": "eip155:84532",
+                        "asset": "0x036CbD53842c5426634e7929541eC2318f3dCF7e",
+                        "amount": "1000",
+                        "payTo": "0x122F8Fcaf2152420445Aa424E1D8C0306935B5c9",
+                        "maxTimeoutSeconds": 60,
+                        "extra": {
+                            "name": "USDC",
+                            "version": "2"
+                        }
+                    },
+                    "payload": {
+                        "signature": "0xf3746613c2d920b5fdabc0856f2aeb2d4f88ee6037b8cc5d04a71a4462f13480",
+                        "authorization": {
+                            "from": "0x742d35Cc6634C0532925a3b844Bc454e4438f44e",
+                            "to": "0x742d35Cc6634C0532925a3b844Bc454e4438f44e",
+                            "value": "1000000000000000000",
+                            "validAfter": "1716150000",
+                            "validBefore": "1716150000",
+                            "nonce": "0x1234567890abcdef1234567890abcdef12345678"
+                        }
+                    },
+                    "resource": {
+                        "url": "https://api.example.com/premium/resource/123",
+                        "description": "Premium API access for data analysis.",
+                        "mimeType": "application/json"
+                    }
+                },
+                "required": [
+                    "x402Version",
+                    "accepted",
+                    "payload"
+                ]
+            },
+            "x402PaymentPayload": {
+                "type": "object",
+                "description": "The x402 protocol payment payload that the client attaches to x402-paid API requests to the resource server in the X-PAYMENT header.",
+                "oneOf": [
+                    {
+                        "$ref": "#/components/schemas/x402V1PaymentPayload"
+                    },
+                    {
+                        "$ref": "#/components/schemas/x402V2PaymentPayload"
+                    }
+                ]
+            },
+            "x402V1PaymentRequirements": {
+                "type": "object",
+                "description": "The x402 protocol payment requirements that the resource server expects the client's payment payload to meet.",
+                "properties": {
+                    "scheme": {
+                        "type": "string",
+                        "description": "The scheme of the payment protocol to use. Currently, the only supported scheme is `exact`.",
+                        "enum": [
+                            "exact"
+                        ],
+                        "example": "exact"
+                    },
+                    "network": {
+                        "type": "string",
+                        "description": "The network of the blockchain to send payment on.",
+                        "enum": [
+                            "base-sepolia",
+                            "base",
+                            "solana-devnet",
+                            "solana"
+                        ],
+                        "example": "base"
+                    },
+                    "maxAmountRequired": {
+                        "type": "string",
+                        "description": "The maximum amount required to pay for the resource in atomic units of the payment asset.",
+                        "example": "1000000"
+                    },
+                    "resource": {
+                        "type": "string",
+                        "description": "The URL of the resource to pay for.",
+                        "example": "https://api.example.com/premium/resource/123"
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "The description of the resource.",
+                        "example": "Premium API access for data analysis"
+                    },
+                    "mimeType": {
+                        "type": "string",
+                        "description": "The MIME type of the resource response.",
+                        "example": "application/json"
+                    },
+                    "outputSchema": {
+                        "type": "object",
+                        "description": "The optional JSON schema describing the resource output.",
+                        "additionalProperties": true,
+                        "example": {
+                            "data": "string"
+                        }
+                    },
+                    "payTo": {
+                        "type": "string",
+                        "description": "The destination to pay value to.\n\nFor EVM networks, payTo will be a 0x-prefixed, checksum EVM address.\n\nFor Solana-based networks, payTo will be a base58-encoded Solana address.",
+                        "pattern": "^(0x[a-fA-F0-9]{40}|[1-9A-HJ-NP-Za-km-z]{32,44})$",
+                        "example": "0x742d35Cc6634C0532925a3b844Bc454e4438f44e"
+                    },
+                    "maxTimeoutSeconds": {
+                        "type": "integer",
+                        "description": "The maximum time in seconds for the resource server to respond.",
+                        "example": 10
+                    },
+                    "asset": {
+                        "type": "string",
+                        "description": "The asset to pay with.\n\nFor EVM networks, the asset will be a 0x-prefixed, checksum EVM address.\n\nFor Solana-based networks, the asset will be a base58-encoded Solana address.",
+                        "pattern": "^(0x[a-fA-F0-9]{40}|[1-9A-HJ-NP-Za-km-z]{32,44})$",
+                        "example": "0x742d35Cc6634C0532925a3b844Bc454e4438f44e"
+                    },
+                    "extra": {
+                        "type": "object",
+                        "description": "The optional additional scheme-specific payment info.",
+                        "additionalProperties": true,
+                        "example": {
+                            "gasLimit": "1000000"
+                        }
+                    }
+                },
+                "required": [
+                    "scheme",
+                    "network",
+                    "maxAmountRequired",
+                    "resource",
+                    "description",
+                    "mimeType",
+                    "payTo",
+                    "asset",
+                    "maxTimeoutSeconds"
+                ]
+            },
+            "x402PaymentRequirements": {
+                "type": "object",
+                "description": "The x402 protocol payment requirements that the resource server expects the client's payment payload to meet.",
+                "oneOf": [
+                    {
+                        "$ref": "#/components/schemas/x402V1PaymentRequirements"
+                    },
+                    {
+                        "$ref": "#/components/schemas/x402V2PaymentRequirements"
+                    }
+                ]
+            },
+            "x402VerifyInvalidReason": {
+                "type": "string",
+                "description": "The reason the payment is invalid on the x402 protocol.",
+                "enum": [
+                    "insufficient_funds",
+                    "invalid_scheme",
+                    "invalid_network",
+                    "invalid_x402_version",
+                    "invalid_payment_requirements",
+                    "invalid_payload",
+                    "invalid_exact_evm_payload_authorization_value",
+                    "invalid_exact_evm_payload_authorization_value_too_low",
+                    "invalid_exact_evm_payload_authorization_valid_after",
+                    "invalid_exact_evm_payload_authorization_valid_before",
+                    "invalid_exact_evm_payload_authorization_typed_data_message",
+                    "invalid_exact_evm_payload_authorization_from_address_kyt",
+                    "invalid_exact_evm_payload_authorization_to_address_kyt",
+                    "invalid_exact_evm_payload_signature",
+                    "invalid_exact_evm_payload_signature_address",
+                    "invalid_exact_svm_payload_transaction",
+                    "invalid_exact_svm_payload_transaction_amount_mismatch",
+                    "invalid_exact_svm_payload_transaction_create_ata_instruction",
+                    "invalid_exact_svm_payload_transaction_create_ata_instruction_incorrect_payee",
+                    "invalid_exact_svm_payload_transaction_create_ata_instruction_incorrect_asset",
+                    "invalid_exact_svm_payload_transaction_instructions",
+                    "invalid_exact_svm_payload_transaction_instructions_length",
+                    "invalid_exact_svm_payload_transaction_instructions_compute_limit_instruction",
+                    "invalid_exact_svm_payload_transaction_instructions_compute_price_instruction",
+                    "invalid_exact_svm_payload_transaction_instructions_compute_price_instruction_too_high",
+                    "invalid_exact_svm_payload_transaction_instruction_not_spl_token_transfer_checked",
+                    "invalid_exact_svm_payload_transaction_instruction_not_token_2022_transfer_checked",
+                    "invalid_exact_svm_payload_transaction_not_a_transfer_instruction",
+                    "invalid_exact_svm_payload_transaction_cannot_derive_receiver_ata",
+                    "invalid_exact_svm_payload_transaction_receiver_ata_not_found",
+                    "invalid_exact_svm_payload_transaction_sender_ata_not_found",
+                    "invalid_exact_svm_payload_transaction_simulation_failed",
+                    "invalid_exact_svm_payload_transaction_transfer_to_incorrect_ata",
+                    "invalid_exact_svm_payload_transaction_fee_payer_included_in_instruction_accounts",
+                    "invalid_exact_svm_payload_transaction_fee_payer_transferring_funds"
+                ],
+                "example": "insufficient_funds"
+            },
+            "x402VerifyPaymentRejection": {
+                "type": "object",
+                "description": "The result when x402 payment verification fails.",
+                "properties": {
+                    "isValid": {
+                        "type": "boolean",
+                        "description": "Indicates whether the payment is valid.",
+                        "example": false
+                    },
+                    "invalidReason": {
+                        "$ref": "#/components/schemas/x402VerifyInvalidReason"
+                    },
+                    "payer": {
+                        "type": "string",
+                        "description": "The onchain address of the client that is paying for the resource.\n\nFor EVM networks, the payer will be a 0x-prefixed, checksum EVM address.\n\nFor Solana-based networks, the payer will be a base58-encoded Solana address.",
+                        "pattern": "^(0x[a-fA-F0-9]{40}|[1-9A-HJ-NP-Za-km-z]{32,44})$",
+                        "example": "0x742d35Cc6634C0532925a3b844Bc454e4438f44e"
+                    }
+                },
+                "required": [
+                    "isValid",
+                    "invalidReason"
+                ],
+                "example": {
+                    "isValid": false,
+                    "invalidReason": "insufficient_funds",
+                    "payer": "0x742d35Cc6634C0532925a3b844Bc454e4438f44e"
+                }
+            },
+            "ErrorType": {
+                "description": "The code that indicates the type of error that occurred. These error codes can be used to determine how to handle the error.",
+                "type": "string",
+                "example": "invalid_request",
+                "enum": [
+                    "already_exists",
+                    "bad_gateway",
+                    "faucet_limit_exceeded",
+                    "forbidden",
+                    "idempotency_error",
+                    "internal_server_error",
+                    "invalid_request",
+                    "invalid_sql_query",
+                    "invalid_signature",
+                    "malformed_transaction",
+                    "not_found",
+                    "payment_method_required",
+                    "rate_limit_exceeded",
+                    "request_canceled",
+                    "service_unavailable",
+                    "timed_out",
+                    "unauthorized",
+                    "policy_violation",
+                    "policy_in_use",
+                    "account_limit_exceeded",
+                    "network_not_tradable",
+                    "guest_permission_denied",
+                    "guest_region_forbidden",
+                    "guest_transaction_limit",
+                    "guest_transaction_count",
+                    "phone_number_verification_expired",
+                    "document_verification_failed",
+                    "recipient_allowlist_violation",
+                    "recipient_allowlist_pending",
+                    "travel_rules_recipient_violation",
+                    "transfer_amount_out_of_bounds",
+                    "transfer_recipient_address_invalid",
+                    "transfer_quote_expired",
+                    "mfa_already_enrolled",
+                    "mfa_invalid_code",
+                    "mfa_flow_expired",
+                    "mfa_required",
+                    "mfa_not_enrolled"
+                ],
+                "x-error-instructions": {
+                    "already_exists": "This error occurs when trying to create a resource that already exists.\n\n**Steps to resolve:**\n1. Check if the resource exists before creation\n2. Use GET endpoints to verify resource state\n3. Use unique identifiers/names for resources",
+                    "bad_gateway": "This error occurs when the CDP API is unable to connect to the backend service.\n\n**Steps to resolve:**\n1. Retry your request after a short delay\n2. If persistent, contact CDP support with:\n   - The timestamp of the error\n   - Request details\n3. Consider implementing retry logic with an exponential backoff\n\n**Note:** These errors are automatically logged and monitored by CDP.",
+                    "faucet_limit_exceeded": "This error occurs when you've exceeded the faucet request limits.\n\n**Steps to resolve:**\n1. Wait for the time window to reset\n2. Use funds more efficiently in your testing\n\nFor more information on faucet limits, please visit the [EVM Faucet endpoint](https://docs.cdp.coinbase.com/api-reference/v2/rest-api/faucets/request-funds-on-evm-test-networks) or the [Solana Faucet endpoint](https://docs.cdp.coinbase.com/api-reference/v2/rest-api/faucets/request-funds-on-solana-devnet).",
+                    "forbidden": "This error occurs when you don't have permission to access the resource.\n\n**Steps to resolve:**\n1. Verify your permissions to access the resource\n2. Ensure that you are the owner of the requested resource",
+                    "idempotency_error": "This error occurs when an idempotency key is reused with different parameters.\n\n**Steps to resolve:**\n1. Generate a new UUID v4 for each unique request\n2. Only reuse idempotency keys for exact request duplicates\n3. Track used keys within your application\n\n**Example idempotency key implementation:**\n```typescript lines wrap\nimport { v4 as uuidv4 } from 'uuid';\n\nfunction createIdempotencyKey() {\n  return uuidv4();\n}\n```",
+                    "internal_server_error": "This indicates an unexpected error that occurred on the CDP servers.\n\n**Important**: If you encounter this error, please note that your operation's status should be treated as unknown by your application, as it could have been a success within the CDP back-end.\n\n**Steps to resolve:**\n1. Retry your request after a short delay\n2. If persistent, contact CDP support with:\n   - Your correlation ID\n   - Timestamp of the error\n   - Request details\n3. Consider implementing retry logic with an exponential backoff\n\n**Note:** These errors are automatically logged and monitored by CDP.",
+                    "invalid_request": "This error occurs when the request is malformed or contains invalid data, including issues with the request body, query parameters, path parameters, or headers.\n\n**Steps to resolve:**\n1. Check all required fields and parameters are present\n2. Ensure request body (if applicable) follows the correct schema\n3. Verify all parameter formats match the API specification:\n   - Query parameters\n   - Path parameters\n   - Request headers\n4. Validate any addresses, IDs, or other formatted strings meet requirements\n\n**Common validation issues:**\n- Missing required parameters\n- Invalid parameter types or formats\n- Malformed JSON in request body\n- Invalid enum values",
+                    "invalid_sql_query": "This error occurs when the SQL query is invalid or not allowed.\n\n**Common causes:**\n- Using non-SELECT SQL statements (INSERT, UPDATE, DELETE, etc.)\n- Invalid table or column names\n- Syntax errors in SQL query\n- Query exceeds character limit\n- Too many JOIN operations",
+                    "invalid_signature": "This error occurs when the signature provided for the given user operation is invalid.\n\n**Steps to resolve:**\n1. Verify the signature was generated by the correct owner account\n2. Ensure the signature corresponds to the exact user operation hash\n3. Check that the signature format matches the expected format\n4. Confirm you're using the correct network for the Smart Account\n\n**Common causes:**\n- Using wrong owner account to sign\n- Signing modified/incorrect user operation data\n- Malformed signature encoding\n- Network mismatch between signature and broadcast",
+                    "malformed_transaction": "This error occurs when the transaction data provided is not properly formatted or is invalid.\n\n**Steps to resolve:**\n1. Verify transaction encoding:\n   - **EVM networks**: Check RLP encoding is correct\n   - **Solana**: Validate base64 encoding\n2. Ensure all required transaction fields are present\n3. Validate transaction parameters are within acceptable ranges\n4. Check that the transaction type is supported on the target network (see our [Supported Networks](https://docs.cdp.coinbase.com/get-started/supported-networks) page for more details)\n\n**Common causes:**\n- Invalid hex encoding for EVM transactions\n- Missing required transaction fields\n- Incorrect parameter formats\n- Unsupported transaction types\n- Network-specific transaction format mismatches",
+                    "not_found": "This error occurs when the resource specified in your request doesn't exist or you don't have access to it.\n\n**Steps to resolve:**\n1. Verify the resource ID/address/account exists\n2. Check your permissions to access the resource\n3. Ensure you're using the correct network/environment\n4. Confirm the resource hasn't been deleted\n\n**Common causes:**\n- Mistyped addresses\n- Accessing resources from the wrong CDP project\n- Resource was deleted or hasn't been created yet",
+                    "payment_method_required": "This error occurs when a payment method is required to complete the requested operation but none is configured or available.\n\n**Steps to resolve:**\n1. Add a valid payment method to your account using the [CDP Portal](https://portal.cdp.coinbase.com)\n2. Ensure your payment method is valid and not expired\n\n**Common causes:**\n- No payment method configured on the account\n- Payment method is expired",
+                    "rate_limit_exceeded": "This error occurs when you've exceeded the API rate limits.\n\n**Steps to resolve:**\n1. Implement exponential backoff\n2. Cache responses where possible\n3. Wait for rate limit window to reset\n\n**Best practices:**\n```typescript lines wrap\nasync function withRetry(fn: () => Promise<any>) {\n  let delay = 1000;\n  while (true) {\n    try {\n      return await fn();\n    } catch (e) {\n      if (e.errorType === \"rate_limit_exceeded\") {\n        await sleep(delay);\n        delay *= 2;\n        continue;\n      }\n      throw e;\n    }\n  }\n}\n```",
+                    "request_canceled": "This error occurs when the client cancels an in-progress request before it completes.\n\n**Steps to resolve:**\n1. Check client-side timeout configurations\n2. Review request cancellation logic in your code\n3. Consider increasing timeout thresholds for long-running operations\n4. Implement request tracking to identify premature cancellations\n\n**Best practices:**\n```typescript lines wrap\nasync function withTimeout<T>(promise: Promise<T>, timeoutMs: number): Promise<T> {\n  const timeout = new Promise((_, reject) => {\n    setTimeout(() => {\n      reject(new Error(\"Operation timed out\"));\n    }, timeoutMs);\n  });\n\n  try {\n    return await Promise.race([promise, timeout]);\n  } catch (error) {\n    // Handle timeout or cancellation\n    throw error;\n  }\n}\n```",
+                    "service_unavailable": "This error occurs when the CDP API is temporarily unable to handle requests due to maintenance or high load.\n\n**Steps to resolve:**\n1. Retry your request after a short delay\n2. If persistent, contact CDP support with:\n   - The timestamp of the error\n   - Request details\n3. Consider implementing retry logic with an exponential backoff\n\n**Note:** These errors are automatically logged and monitored by CDP.",
+                    "timed_out": "This error occurs when a request exceeds the maximum allowed processing time.\n\n**Steps to resolve:**\n1. Break down large requests into smaller chunks (if applicable)\n2. Implement retry logic with exponential backoff\n3. Use streaming endpoints for large data sets\n\n**Example retry implementation:**\n```typescript lines wrap\nasync function withRetryAndTimeout<T>(\n  operation: () => Promise<T>,\n  maxRetries = 3,\n  timeout = 30000,\n): Promise<T> {\n  let attempts = 0;\n  while (attempts < maxRetries) {\n    try {\n      return await Promise.race([\n        operation(),\n        new Promise((_, reject) =>\n          setTimeout(() => reject(new Error(\"Timeout\")), timeout)\n        ),\n      ]);\n    } catch (error) {\n      attempts++;\n      if (attempts === maxRetries) throw error;\n      // Exponential backoff\n      await new Promise(resolve =>\n        setTimeout(resolve, Math.pow(2, attempts) * 1000)\n      );\n    }\n  }\n  throw new Error(\"Max retries exceeded\");\n}\n```",
+                    "unauthorized": "This error occurs when authentication fails.\n\n**Steps to resolve:**\n1. Verify your CDP API credentials:\n   - Check that your API key is valid\n   - Check that your Wallet Secret is properly configured\n2. Validate JWT token:\n   - Not expired\n   - Properly signed\n   - Contains required claims\n3. Check request headers:\n   - Authorization header present\n   - X-Wallet-Auth header included when required\n\n**Security note:** Never share your Wallet Secret or API keys.",
+                    "policy_in_use": "This error occurs when trying to delete a Policy that is currently in use by at least one project or account.\n\n**Steps to resolve:**\n1. Update project or accounts to remove references to the Policy in question.\n2. Retry your delete request.",
+                    "network_not_tradable": "This error occurs when the selected asset cannot be purchased on the selected network in the user's location.\n\n**Steps to resolve:**\n1. Verify the asset is tradable on the selected network\n2. Check the user's location to ensure it is allowed to purchase the asset on the selected network\n\n**Common causes:**\n- Users in NY are not allowed to purchase USDC on any network other than Ethereum",
+                    "guest_permission_denied": "This error occurs when the user is not allowed to complete onramp transactions as a guest.\n\n**Steps to resolve:**\n1. Redirect the user to create a Coinbase account to buy and send crypto.",
+                    "guest_region_forbidden": "This error occurs when guest onramp transactions are not allowed in the user's region.\n\n**Steps to resolve:**\n1. Redirect the user to create a Coinbase account to buy and send crypto.",
+                    "guest_transaction_limit": "This error occurs when the user has reached the weekly guest onramp transaction limit.\n\n**Steps to resolve:**\n1. Inform the user they have reached their weekly limit and will have to wait until next week.",
+                    "guest_transaction_count": "This error occurs when the user has reached the lifetime guest onramp transaction count limit.\n\n**Steps to resolve:**\n1. Redirect the user to create a Coinbase account to buy and send crypto.",
+                    "phone_number_verification_expired": "This error occurs when the user's phone number verification has expired. Use of guest Onramp requires the user's\nphone number to be verified every 60 days.\n\n**Steps to resolve:**\n1. Re-verify the user's phone number via OTP.\n2. Retry the request with the phoneNumberVerifiedAt field set to new verification timestamp.",
+                    "document_verification_failed": "This error occurs when the user has not verified their identity for their coinbase.com account.\n**Steps to resolve:**\n1. Verify your coinbase account identity with valid documents at https://www.coinbase.com/settings/account-levels.",
+                    "recipient_allowlist_violation": "This error occurs when the user is not allowed to receive funds at this address, according to their coinbase account allowlist.\n**Steps to resolve:**\n1. Either disable the allowlist or add the wallet address at https://www.coinbase.com/settings/allowlist\n2. Wait approximately 2 days for updates to take effect.",
+                    "recipient_allowlist_pending": "This error occurs when the user is not allowed to receive funds at this address, because changes to their coinbase account allowlist are pending.\n**Steps to resolve:**\n1. Wait approximately 2 days for updates to take effect.",
+                    "travel_rules_recipient_violation": "This error occurs when the user is not allowed to receive funds at this address, because it violates travel rules.\n**Steps to resolve:**\n1. Ensure your desired transfer is not blocked by local travel regulations.",
+                    "transfer_amount_out_of_bounds": "This error occurs when the transfer amount is less than $1 USD equivalent amount or greater than the maximum transfer amount for the account.\n\n**Steps to resolve:**\n1. Verify the transfer amount is greater than $1 USD equivalent amount.\n2. Confirm that the account has sufficient funds to cover the transfer amount.",
+                    "transfer_recipient_address_invalid": "This error occurs when the recipient address is invalid for the specified network.\n**Steps to resolve:**\n1. Verify the network is supported for the transfer.\n2. Confirm that the recipient address is valid for the specified network.",
+                    "transfer_quote_expired": "This error occurs when the transfer quote has expired.\n**Steps to resolve:**\n1. Create a new quoted transfer and retry the request.",
+                    "mfa_already_enrolled": "This error occurs when attempting to enroll in an MFA method that the user has already enrolled in.\n\n**Steps to resolve:**\n1. Check if the user is already enrolled in the MFA method before initiating enrollment\n2. To update or reset MFA, remove the existing enrollment first (if supported)\n3. Use a different MFA method if multiple options are available",
+                    "mfa_invalid_code": "This error occurs when the MFA code provided is incorrect or has already been used.\n\n**Steps to resolve:**\n1. Verify the user entered the correct code from their authenticator app\n2. Ensure the code is current (TOTP codes expire after 30 seconds)\n3. Check that the device time is synchronized correctly\n4. Ask the user to generate a new code and try again\n\n**Common causes:**\n- Typing errors in the 6-digit code\n- Using an expired TOTP code\n- Device clock drift on user's authenticator app\n- Attempting to reuse a previously submitted code",
+                    "mfa_flow_expired": "This error occurs when the MFA enrollment or verification session has expired.\n\n**Steps to resolve:**\n1. Restart the MFA enrollment or verification flow\n2. Complete the flow within the allowed time window (typically 5 minutes)\n3. Ensure the user doesn't leave the flow idle for extended periods\n\n**Note:** MFA sessions expire automatically for security purposes.",
+                    "mfa_required": "This error occurs when attempting to perform a sensitive operation that requires MFA verification, but the user has not completed MFA verification.\n\n**Steps to resolve:**\n1. Initiate the MFA verification flow using the `/mfa/verify/{mfaMethod}/init` endpoint\n2. Prompt the user to enter their MFA code\n3. Submit the verification using the `/mfa/verify/{mfaMethod}/submit` endpoint\n4. Use the returned access token with MFA claim for the sensitive operation\n5. Retry the original request with the new MFA-verified token\n\n**Operations requiring MFA:**\n- Transactions Sign/Send\n- Key export\n- Account management actions (when configured)",
+                    "mfa_not_enrolled": "This error occurs when attempting to verify MFA for a user who has not enrolled in any MFA method.\n\n**Steps to resolve:**\n1. Check if the user has enrolled in MFA before attempting verification\n2. Guide the user through MFA enrollment first using the `/mfa/enroll/{mfaMethod}/init` endpoint\n3. Complete enrollment before requiring MFA verification"
+                }
+            },
+            "Url": {
+                "type": "string",
+                "format": "uri",
+                "minLength": 11,
+                "maxLength": 2048,
+                "pattern": "^https?://.*$",
+                "description": "A valid HTTP or HTTPS URL.",
+                "example": "https://example.com"
+            },
+            "Error": {
+                "description": "An error response including the code for the type of error and a human-readable message describing the error.",
+                "type": "object",
+                "properties": {
+                    "errorType": {
+                        "$ref": "#/components/schemas/ErrorType"
+                    },
+                    "errorMessage": {
+                        "description": "The error message.",
+                        "type": "string",
+                        "example": "Unable to create EVM account"
+                    },
+                    "correlationId": {
+                        "description": "A unique identifier for the request that generated the error. This can be used to help debug issues with the API.",
+                        "type": "string",
+                        "example": "41deb8d59a9dc9a7-IAD"
+                    },
+                    "errorLink": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/Url"
+                            }
+                        ],
+                        "description": "A link to the corresponding error documentation.",
+                        "example": "https://docs.cdp.coinbase.com/api-reference/v2/errors#invalid-request"
+                    }
+                },
+                "required": [
+                    "errorType",
+                    "errorMessage"
+                ],
+                "example": {
+                    "errorType": "invalid_request",
+                    "errorMessage": "Invalid request.",
+                    "correlationId": "41deb8d59a9dc9a7-IAD",
+                    "errorLink": "https://docs.cdp.coinbase.com/api-reference/v2/errors#invalid-request"
+                }
+            },
+            "x402SettleErrorReason": {
+                "type": "string",
+                "description": "The reason the payment settlement errored on the x402 protocol.",
+                "enum": [
+                    "insufficient_funds",
+                    "invalid_scheme",
+                    "invalid_network",
+                    "invalid_x402_version",
+                    "invalid_payment_requirements",
+                    "invalid_payload",
+                    "invalid_exact_evm_payload_authorization_value",
+                    "invalid_exact_evm_payload_authorization_value_too_low",
+                    "invalid_exact_evm_payload_authorization_valid_after",
+                    "invalid_exact_evm_payload_authorization_valid_before",
+                    "invalid_exact_evm_payload_authorization_typed_data_message",
+                    "invalid_exact_evm_payload_authorization_from_address_kyt",
+                    "invalid_exact_evm_payload_authorization_to_address_kyt",
+                    "invalid_exact_evm_payload_signature",
+                    "invalid_exact_evm_payload_signature_address",
+                    "invalid_exact_svm_payload_transaction",
+                    "invalid_exact_svm_payload_transaction_amount_mismatch",
+                    "invalid_exact_svm_payload_transaction_create_ata_instruction",
+                    "invalid_exact_svm_payload_transaction_create_ata_instruction_incorrect_payee",
+                    "invalid_exact_svm_payload_transaction_create_ata_instruction_incorrect_asset",
+                    "invalid_exact_svm_payload_transaction_instructions",
+                    "invalid_exact_svm_payload_transaction_instructions_length",
+                    "invalid_exact_svm_payload_transaction_instructions_compute_limit_instruction",
+                    "invalid_exact_svm_payload_transaction_instructions_compute_price_instruction",
+                    "invalid_exact_svm_payload_transaction_instructions_compute_price_instruction_too_high",
+                    "invalid_exact_svm_payload_transaction_instruction_not_spl_token_transfer_checked",
+                    "invalid_exact_svm_payload_transaction_instruction_not_token_2022_transfer_checked",
+                    "invalid_exact_svm_payload_transaction_not_a_transfer_instruction",
+                    "invalid_exact_svm_payload_transaction_cannot_derive_receiver_ata",
+                    "invalid_exact_svm_payload_transaction_receiver_ata_not_found",
+                    "invalid_exact_svm_payload_transaction_sender_ata_not_found",
+                    "invalid_exact_svm_payload_transaction_simulation_failed",
+                    "invalid_exact_svm_payload_transaction_transfer_to_incorrect_ata",
+                    "invalid_exact_svm_payload_transaction_fee_payer_included_in_instruction_accounts",
+                    "invalid_exact_svm_payload_transaction_fee_payer_transferring_funds",
+                    "settle_exact_evm_transaction_confirmation_timed_out",
+                    "settle_exact_node_failure",
+                    "settle_exact_failed_onchain",
+                    "settle_exact_svm_block_height_exceeded",
+                    "settle_exact_svm_transaction_confirmation_timed_out"
+                ],
+                "example": "insufficient_funds"
+            },
+            "x402SettlePaymentRejection": {
+                "type": "object",
+                "description": "The result when x402 payment settlement fails.",
+                "properties": {
+                    "success": {
+                        "type": "boolean",
+                        "description": "Indicates whether the payment settlement is successful.",
+                        "example": false
+                    },
+                    "errorReason": {
+                        "$ref": "#/components/schemas/x402SettleErrorReason"
+                    },
+                    "payer": {
+                        "type": "string",
+                        "description": "The onchain address of the client that is paying for the resource.\n\nFor EVM networks, the payer will be a 0x-prefixed, checksum EVM address.\n\nFor Solana-based networks, the payer will be a base58-encoded Solana address.",
+                        "pattern": "^(0x[a-fA-F0-9]{40}|[1-9A-HJ-NP-Za-km-z]{32,44})$",
+                        "example": "0x742d35Cc6634C0532925a3b844Bc454e4438f44e"
+                    },
+                    "transaction": {
+                        "type": "string",
+                        "description": "The transaction of the settlement.\nFor EVM networks, the transaction will be a 0x-prefixed, EVM transaction hash.\nFor Solana-based networks, the transaction will be a base58-encoded Solana signature.",
+                        "pattern": "^(0x[a-fA-F0-9]{64}|[1-9A-HJ-NP-Za-km-z]{87,88})$",
+                        "example": "0x89c91c789e57059b17285e7ba1716a1f5ff4c5dace0ea5a5135f26158d0421b9"
+                    },
+                    "network": {
+                        "type": "string",
+                        "description": "The network where the settlement occurred.",
+                        "example": "base"
+                    }
+                },
+                "required": [
+                    "success",
+                    "errorReason"
+                ],
+                "example": {
+                    "success": false,
+                    "errorReason": "insufficient_funds",
+                    "payer": "0x742d35Cc6634C0532925a3b844Bc454e4438f44e"
+                }
+            },
+            "x402SupportedPaymentKind": {
+                "type": "object",
+                "description": "The supported payment kind for the x402 protocol. A kind is comprised of a scheme and a network, which together uniquely identify a way to move money on the x402 protocol. For more details, please see [x402 Schemes](https://github.com/coinbase/x402?tab=readme-ov-file#schemes).",
+                "properties": {
+                    "x402Version": {
+                        "$ref": "#/components/schemas/X402Version"
+                    },
+                    "scheme": {
+                        "type": "string",
+                        "description": "The scheme of the payment protocol.",
+                        "enum": [
+                            "exact"
+                        ],
+                        "example": "exact"
+                    },
+                    "network": {
+                        "type": "string",
+                        "description": "The network of the blockchain.",
+                        "enum": [
+                            "base-sepolia",
+                            "base",
+                            "solana-devnet",
+                            "solana"
+                        ],
+                        "example": "base"
+                    },
+                    "extra": {
+                        "type": "object",
+                        "description": "The optional additional scheme-specific payment info.",
+                        "additionalProperties": true,
+                        "example": {
+                            "feePayer": "HpabPRRCFbBKSuJr5PdkVvQc85FyxyTWkFM2obBRSvHT"
+                        }
+                    }
+                },
+                "required": [
+                    "x402Version",
+                    "scheme",
+                    "network"
+                ]
+            }
+        },
+        "responses": {
+            "x402VerifyResponse": {
+                "description": "Successfully verified payment on the x402 protocol.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "isValid": {
+                                    "type": "boolean",
+                                    "description": "Indicates whether the payment is valid.",
+                                    "example": false
+                                },
+                                "invalidReason": {
+                                    "$ref": "#/components/schemas/x402VerifyInvalidReason"
+                                },
+                                "payer": {
+                                    "type": "string",
+                                    "description": "The onchain address of the client that is paying for the resource.\n\nFor EVM networks, the payer will be a 0x-prefixed, checksum EVM address.\n\nFor Solana-based networks, the payer will be a base58-encoded Solana address.",
+                                    "pattern": "^(0x[a-fA-F0-9]{40}|[1-9A-HJ-NP-Za-km-z]{32,44})$",
+                                    "example": "0x742d35Cc6634C0532925a3b844Bc454e4438f44e"
+                                }
+                            },
+                            "required": [
+                                "isValid",
+                                "payer"
+                            ]
+                        }
+                    }
+                }
+            },
+            "x402VerifyInvalidError": {
+                "description": "Invalid payment verification on the x402 protocol.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/x402VerifyPaymentRejection"
+                        },
+                        "examples": {
+                            "invalid_verification": {
+                                "value": {
+                                    "isValid": false,
+                                    "invalidReason": "insufficient_funds",
+                                    "payer": "0x742d35Cc6634C0532925a3b844Bc454e4438f44e"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "InternalServerError": {
+                "description": "Internal server error.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Error"
+                        },
+                        "examples": {
+                            "internal_server_error": {
+                                "value": {
+                                    "errorType": "internal_server_error",
+                                    "errorMessage": "An internal server error occurred. Please try again later."
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "BadGatewayError": {
+                "description": "Bad gateway.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Error"
+                        },
+                        "examples": {
+                            "bad_gateway": {
+                                "value": {
+                                    "errorType": "bad_gateway",
+                                    "errorMessage": "Bad gateway. Please try again later."
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "ServiceUnavailableError": {
+                "description": "Service unavailable.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Error"
+                        },
+                        "examples": {
+                            "service_unavailable": {
+                                "value": {
+                                    "errorType": "service_unavailable",
+                                    "errorMessage": "Service unavailable. Please try again later."
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "x402SettleResponse": {
+                "description": "Successfully settled payment on the x402 protocol.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "success": {
+                                    "type": "boolean",
+                                    "description": "Indicates whether the payment settlement is successful.",
+                                    "example": false
+                                },
+                                "errorReason": {
+                                    "$ref": "#/components/schemas/x402SettleErrorReason"
+                                },
+                                "payer": {
+                                    "type": "string",
+                                    "description": "The onchain address of the client that is paying for the resource.\n\nFor EVM networks, the payer will be a 0x-prefixed, checksum EVM address.\n\nFor Solana-based networks, the payer will be a base58-encoded Solana address.",
+                                    "pattern": "^(0x[a-fA-F0-9]{40}|[1-9A-HJ-NP-Za-km-z]{32,44})$",
+                                    "example": "0x742d35Cc6634C0532925a3b844Bc454e4438f44e"
+                                },
+                                "transaction": {
+                                    "type": "string",
+                                    "description": "The transaction of the settlement.\nFor EVM networks, the transaction will be a 0x-prefixed, EVM transaction hash.\nFor Solana-based networks, the transaction will be a base58-encoded Solana signature.",
+                                    "pattern": "^(0x[a-fA-F0-9]{64}|[1-9A-HJ-NP-Za-km-z]{87,88})$",
+                                    "example": "0x89c91c789e57059b17285e7ba1716a1f5ff4c5dace0ea5a5135f26158d0421b9"
+                                },
+                                "network": {
+                                    "type": "string",
+                                    "description": "The network where the settlement occurred.",
+                                    "example": "base"
+                                }
+                            },
+                            "required": [
+                                "success",
+                                "payer",
+                                "transaction",
+                                "network"
+                            ]
+                        }
+                    }
+                }
+            },
+            "x402SettleError": {
+                "description": "Unsuccessful payment settlement on the x402 protocol.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/x402SettlePaymentRejection"
+                        },
+                        "examples": {
+                            "unsuccessful_settlement": {
+                                "value": {
+                                    "success": false,
+                                    "errorReason": "insufficient_funds",
+                                    "payer": "0x742d35Cc6634C0532925a3b844Bc454e4438f44e"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "PaymentMethodRequiredError": {
+                "description": "A payment method is required to complete this operation.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Error"
+                        },
+                        "examples": {
+                            "payment_method_required": {
+                                "value": {
+                                    "errorType": "payment_method_required",
+                                    "errorMessage": "A valid payment method is required to complete this operation. Please add a payment method to your account at https://portal.cdp.coinbase.com."
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "x402SupportedPaymentKindsResponse": {
+                "description": "Successfully retrieved supported payment kinds for the x402 protocol.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "kinds": {
+                                    "type": "array",
+                                    "description": "The list of supported payment kinds.",
+                                    "items": {
+                                        "$ref": "#/components/schemas/x402SupportedPaymentKind"
+                                    },
+                                    "example": [
+                                        {
+                                            "x402Version": 1,
+                                            "scheme": "exact",
+                                            "network": "base"
+                                        },
+                                        {
+                                            "x402Version": 1,
+                                            "scheme": "exact",
+                                            "network": "base-sepolia"
+                                        },
+                                        {
+                                            "x402Version": 1,
+                                            "scheme": "exact",
+                                            "network": "solana"
+                                        },
+                                        {
+                                            "x402Version": 1,
+                                            "scheme": "exact",
+                                            "network": "solana-devnet"
+                                        }
+                                    ]
+                                },
+                                "extensions": {
+                                    "type": "array",
+                                    "description": "The list of supported x402 extensions.",
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "example": [
+                                        "bazaar"
+                                    ]
+                                },
+                                "signers": {
+                                    "type": "object",
+                                    "description": "A map of CAIP-2 network or protocol family patterns to their supported signer addresses.",
+                                    "additionalProperties": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "example": {
+                                        "eip155:*": [
+                                            "0x1234567890abcdef1234567890abcdef12345678",
+                                            "0xabcdef1234567890abcdef1234567890abcdef12"
+                                        ],
+                                        "solana:*": [
+                                            "5eykt4UsFv8P8NJdTREpY1vzqKqZKvdpKuc147dw2N9d"
+                                        ]
+                                    }
+                                }
+                            },
+                            "required": [
+                                "kinds",
+                                "extensions",
+                                "signers"
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

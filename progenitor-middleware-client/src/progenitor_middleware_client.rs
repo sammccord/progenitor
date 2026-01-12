@@ -167,7 +167,10 @@ impl<T: DeserializeOwned> ResponseValue<T> {
     pub async fn from_response<E>(response: reqwest::Response) -> Result<Self, Error<E>> {
         let status = response.status();
         let headers = response.headers().clone();
-        let full = response.bytes().await.map_err(|e| Error::ResponseBodyError(e.into()))?;
+        let full = response
+            .bytes()
+            .await
+            .map_err(|e| Error::ResponseBodyError(e.into()))?;
         let inner =
             serde_json::from_slice(&full).map_err(|e| Error::InvalidResponsePayload(full, e))?;
 
@@ -188,7 +191,10 @@ impl ResponseValue<reqwest::Upgraded> {
         let status = response.status();
         let headers = response.headers().clone();
         if status == http::StatusCode::SWITCHING_PROTOCOLS {
-            let inner = response.upgrade().await.map_err(|e| Error::InvalidUpgrade(e.into()))?;
+            let inner = response
+                .upgrade()
+                .await
+                .map_err(|e| Error::InvalidUpgrade(e.into()))?;
 
             Ok(Self {
                 inner,
