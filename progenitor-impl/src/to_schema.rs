@@ -134,7 +134,13 @@ impl Convert<schemars::schema::Schema> for openapiv3::Schema {
                 enum_values: enumeration.convert(),
                 string: Some(Box::new(schemars::schema::StringValidation {
                     max_length: max_length.convert(),
-                    min_length: min_length.convert(),
+                    // minLength: 0 is a no-op (usize is always >= 0), so
+                    // normalize it to None to avoid generating useless
+                    // comparisons like `value.chars().count() < 0usize`.
+                    min_length: match *min_length {
+                        None | Some(0) => None,
+                        Some(v) => Some(v as u32),
+                    },
                     pattern: pattern.clone(),
                 }))
                 .reduce(),
