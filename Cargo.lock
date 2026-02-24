@@ -1609,7 +1609,7 @@ dependencies = [
 
 [[package]]
 name = "progenitor-middleware"
-version = "0.12.3"
+version = "0.12.4"
 dependencies = [
  "base64",
  "chrono",
@@ -1649,7 +1649,7 @@ dependencies = [
 
 [[package]]
 name = "progenitor-middleware-impl"
-version = "0.12.3"
+version = "0.12.4"
 dependencies = [
  "dropshot",
  "expectorate",
@@ -1679,7 +1679,7 @@ dependencies = [
 
 [[package]]
 name = "progenitor-middleware-macro"
-version = "0.12.3"
+version = "0.12.4"
 dependencies = [
  "openapiv3",
  "proc-macro2",
