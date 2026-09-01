@@ -358,8 +358,8 @@ impl Generator {
             }
         }?;
 
-        // Generate error enums for operations with multiple error types
-        let error_enums = self.generate_error_enums(&raw_methods);
+        // Generate response enums for operations with multiple response types.
+        let response_enums = self.generate_response_enums(&raw_methods);
 
         let types = self.type_space.to_stream();
 
@@ -432,8 +432,8 @@ impl Generator {
 
                 #types
 
-                // Error enums for operations with multiple error response types
-                #(#error_enums)*
+                // Response enums for operations with multiple response types.
+                #(#response_enums)*
             }
 
             #[derive(Clone, Debug)]
@@ -554,24 +554,32 @@ impl Generator {
         Ok(out)
     }
 
-    /// Generate error enum types for operations with multiple error response types.
-    fn generate_error_enums(&self, methods: &[method::OperationMethod]) -> Vec<TokenStream> {
+    /// Generate response enums for operations with multiple response types.
+    fn generate_response_enums(&self, methods: &[method::OperationMethod]) -> Vec<TokenStream> {
         methods
             .iter()
-            .filter_map(|method| {
-                // Extract error responses to determine if we need an enum
-                let (_, error_response_type) = self.extract_responses(
-                    method,
-                    method::OperationResponseStatus::is_error_or_default,
-                );
-
-                match error_response_type {
-                    method::ErrorResponseType::Multiple {
-                        enum_name,
-                        variants,
-                    } => Some(self.generate_error_enum(&enum_name, &variants)),
-                    method::ErrorResponseType::Single(_) => None,
-                }
+            .flat_map(|method| {
+                [
+                    self.extract_responses(
+                        method,
+                        method::OperationResponseStatus::is_success_or_default,
+                        "Response",
+                    )
+                    .1,
+                    self.extract_responses(
+                        method,
+                        method::OperationResponseStatus::is_error_or_default,
+                        "Error",
+                    )
+                    .1,
+                ]
+            })
+            .filter_map(|response_type| match response_type {
+                method::ErrorResponseType::Multiple {
+                    enum_name,
+                    variants,
+                } => Some(self.generate_error_enum(&enum_name, &variants)),
+                method::ErrorResponseType::Single(_) => None,
             })
             .collect()
     }

@@ -563,6 +563,10 @@ impl Convert<schemars::schema::Schema> for openapiv3::Schema {
                             instance_type(schemars::schema::InstanceType::Integer, nullable);
                     }
 
+                    (Some("null"), _) => {
+                        so.instance_type = Some(schemars::schema::InstanceType::Null.into());
+                    }
+
                     (Some(typ), _) => todo!("invalid type: {}", typ),
 
                     // No types
