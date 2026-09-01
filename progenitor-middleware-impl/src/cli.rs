@@ -200,10 +200,16 @@ impl Generator {
         let fn_name = format_ident!("execute_{}", &method.operation_id);
         let op_name = format_ident!("{}", &method.operation_id);
 
-        let (_, success_response_type) =
-            self.extract_responses(method, OperationResponseStatus::is_success_or_default);
-        let (_, error_response_type) =
-            self.extract_responses(method, OperationResponseStatus::is_error_or_default);
+        let (_, success_response_type) = self.extract_responses(
+            method,
+            OperationResponseStatus::is_success_or_default,
+            "Response",
+        );
+        let (_, error_response_type) = self.extract_responses(
+            method,
+            OperationResponseStatus::is_error_or_default,
+            "Error",
+        );
 
         // Extract the underlying OperationResponseKind from ErrorResponseType
         // For CLI, we only support Single error types (not Multiple)

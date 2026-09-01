@@ -33,20 +33,22 @@ pub(crate) struct OperationMethod {
     pub error_enum_name: Option<String>,
 }
 
-/// Represents the error response type for an operation.
-/// Can be a single type (backwards compatible) or multiple types requiring an enum.
+/// Represents the response type for an operation.
+///
+/// It can be a single type (backwards compatible) or multiple types requiring
+/// a generated enum.
 #[derive(Debug, Clone)]
 pub enum ErrorResponseType {
-    /// Single error type - no enum needed (backwards compatible)
+    /// A single response type; no enum is needed.
     Single(OperationResponseKind),
-    /// Multiple error types - generates an enum
+    /// Multiple response types that require a generated enum.
     Multiple {
         enum_name: String,
         variants: Vec<ErrorVariant>,
     },
 }
 
-/// Represents a variant in a generated error enum.
+/// Represents a variant in a generated response enum.
 #[derive(Debug, Clone)]
 pub struct ErrorVariant {
     pub variant_name: String,
@@ -950,12 +952,18 @@ impl Generator {
         // ... and there can be at most one body.
         assert!(body_func.clone().count() <= 1);
 
-        let (success_response_items, response_type) =
-            self.extract_responses(method, OperationResponseStatus::is_success_or_default);
+        let (success_response_items, response_type) = self.extract_responses(
+            method,
+            OperationResponseStatus::is_success_or_default,
+            "Response",
+        );
 
         // Errors... (get error responses early so we can use the type for annotations in success responses)
-        let (error_response_items, error_response_type) =
-            self.extract_responses(method, OperationResponseStatus::is_error_or_default);
+        let (error_response_items, error_response_type) = self.extract_responses(
+            method,
+            OperationResponseStatus::is_error_or_default,
+            "Error",
+        );
 
         // Get the error type tokens for type annotations in success responses
         let error_type_annotation = match &error_response_type {
@@ -969,39 +977,131 @@ impl Generator {
             }
         };
 
-        let success_response_matches = success_response_items.iter().map(|response| {
-            let pat = match &response.status_code {
-                OperationResponseStatus::Code(code) => quote! { #code },
-                OperationResponseStatus::Range(_) | OperationResponseStatus::Default => {
-                    quote! { 200 ..= 299 }
-                }
-            };
+        let success_response_matches = match &response_type {
+            ErrorResponseType::Single(_) => success_response_items
+                .iter()
+                .map(|response| {
+                    let pat = match &response.status_code {
+                        OperationResponseStatus::Code(code) => quote! { #code },
+                        OperationResponseStatus::Range(_) | OperationResponseStatus::Default => {
+                            quote! { 200 ..= 299 }
+                        }
+                    };
 
-            let decode = match &response.typ {
-                OperationResponseKind::Type(_) => {
-                    quote! {
-                        ResponseValue::from_response::<#error_type_annotation>(#response_ident).await
-                    }
-                }
-                OperationResponseKind::None => {
-                    quote! {
-                        Ok(ResponseValue::empty(#response_ident))
-                    }
-                }
-                OperationResponseKind::Raw => {
-                    quote! {
-                        Ok(ResponseValue::stream(#response_ident))
-                    }
-                }
-                OperationResponseKind::Upgrade => {
-                    quote! {
-                        ResponseValue::upgrade::<#error_type_annotation>(#response_ident).await
-                    }
-                }
-            };
+                    let decode = match &response.typ {
+                        OperationResponseKind::Type(_) => {
+                            quote! {
+                                ResponseValue::from_response::<#error_type_annotation>(#response_ident).await
+                            }
+                        }
+                        OperationResponseKind::None => {
+                            quote! {
+                                Ok(ResponseValue::empty(#response_ident))
+                            }
+                        }
+                        OperationResponseKind::Raw => {
+                            quote! {
+                                Ok(ResponseValue::stream(#response_ident))
+                            }
+                        }
+                        OperationResponseKind::Upgrade => {
+                            quote! {
+                                ResponseValue::upgrade::<#error_type_annotation>(#response_ident).await
+                            }
+                        }
+                    };
 
-            quote! { #pat => { #decode } }
-        });
+                    quote! { #pat => { #decode } }
+                })
+                .collect::<Vec<_>>(),
+            ErrorResponseType::Multiple {
+                enum_name,
+                variants,
+            } => success_response_items
+                .iter()
+                .map(|response| {
+                    let variant = variants
+                        .iter()
+                        .find(|variant| variant.status_codes.contains(&response.status_code))
+                        .expect("Response must map to a variant");
+                    let enum_ident = format_ident!("{}", enum_name);
+                    let variant_ident = format_ident!("{}", variant.variant_name);
+                    let pat = match &response.status_code {
+                        OperationResponseStatus::Code(code) => quote! { #code },
+                        OperationResponseStatus::Range(_) | OperationResponseStatus::Default => {
+                            quote! { 200 ..= 299 }
+                        }
+                    };
+
+                    let decode = match &response.typ {
+                        OperationResponseKind::Type(_) => {
+                            let inner_type = response.typ.clone().into_tokens(&self.type_space);
+                            quote! {
+                                {
+                                    let inner_value: ResponseValue<#inner_type> =
+                                        ResponseValue::from_response::<#error_type_annotation>(#response_ident).await?;
+                                    let status = inner_value.status();
+                                    let headers = inner_value.headers().clone();
+                                    let inner = inner_value.into_inner();
+                                    Ok(ResponseValue::new(
+                                        types::#enum_ident::#variant_ident(inner),
+                                        status,
+                                        headers,
+                                    ))
+                                }
+                            }
+                        }
+                        OperationResponseKind::None => {
+                            quote! {
+                                {
+                                    let inner_value = ResponseValue::empty(#response_ident);
+                                    let status = inner_value.status();
+                                    let headers = inner_value.headers().clone();
+                                    Ok(ResponseValue::new(
+                                        types::#enum_ident::#variant_ident,
+                                        status,
+                                        headers,
+                                    ))
+                                }
+                            }
+                        }
+                        OperationResponseKind::Raw => {
+                            quote! {
+                                {
+                                    let inner_value = ResponseValue::stream(#response_ident);
+                                    let status = inner_value.status();
+                                    let headers = inner_value.headers().clone();
+                                    let inner = inner_value.into_inner();
+                                    Ok(ResponseValue::new(
+                                        types::#enum_ident::#variant_ident(inner),
+                                        status,
+                                        headers,
+                                    ))
+                                }
+                            }
+                        }
+                        OperationResponseKind::Upgrade => {
+                            quote! {
+                                {
+                                    let inner_value =
+                                        ResponseValue::upgrade::<#error_type_annotation>(#response_ident).await?;
+                                    let status = inner_value.status();
+                                    let headers = inner_value.headers().clone();
+                                    let inner = inner_value.into_inner();
+                                    Ok(ResponseValue::new(
+                                        types::#enum_ident::#variant_ident(inner),
+                                        status,
+                                        headers,
+                                    ))
+                                }
+                            }
+                        }
+                    };
+
+                    quote! { #pat => { #decode } }
+                })
+                .collect::<Vec<_>>(),
+        };
 
         // Helper closure defined here (before use) - error_response_items and error_response_type already retrieved above
         let generate_error_match_arm = |response: &OperationResponse,
@@ -1322,14 +1422,15 @@ impl Generator {
         })
     }
 
-    /// Extract responses that match criteria specified by the `filter`. The
-    /// result is a `Vec<OperationResponse>` that enumerates the cases matching
-    /// the filter, and an `ErrorResponseType` that represents the generated type(s)
-    /// for those cases.
+    /// Extract responses matching `filter` and determine the generated response type.
+    ///
+    /// The returned `ErrorResponseType` is used for both success and error responses;
+    /// `enum_suffix` keeps their generated enum names distinct.
     pub fn extract_responses<'a>(
         &self,
         method: &'a OperationMethod,
         filter: fn(&OperationResponseStatus) -> bool,
+        enum_suffix: &str,
     ) -> (Vec<&'a OperationResponse>, ErrorResponseType) {
         let mut response_items = method
             .responses
@@ -1363,7 +1464,7 @@ impl Generator {
             .map(|response| response.typ.clone())
             .collect::<BTreeSet<_>>();
 
-        // Handle single error type (backwards compatible)
+        // Handle a single response type without introducing an enum.
         if response_types.len() <= 1 {
             let response_type = response_types
                 .into_iter()
@@ -1372,8 +1473,12 @@ impl Generator {
             return (response_items, ErrorResponseType::Single(response_type));
         }
 
-        // Multiple error types: create enum
-        let enum_name = format!("{}Error", sanitize(&method.operation_id, Case::Pascal));
+        // Multiple response types require a generated enum.
+        let enum_name = format!(
+            "{}{}",
+            sanitize(&method.operation_id, Case::Pascal),
+            enum_suffix
+        );
         let variants = self.create_error_variants(&response_items);
 
         (
@@ -1385,7 +1490,7 @@ impl Generator {
         )
     }
 
-    /// Generates an error enum type for operations with multiple error response types.
+    /// Generates an enum type for operations with multiple response types.
     pub fn generate_error_enum(&self, enum_name: &str, variants: &[ErrorVariant]) -> TokenStream {
         let enum_ident = format_ident!("{}", enum_name);
 

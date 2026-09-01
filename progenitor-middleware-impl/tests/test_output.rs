@@ -166,3 +166,21 @@ fn test_cli_gen() {
 fn test_github() {
     verify_apis("api.github.com.json");
 }
+
+#[test]
+fn test_type_null_and_mixed_success_responses() {
+    let spec = serde_json::from_str::<OpenAPI>(include_str!(
+        "../../sample_openapi/openapi-null-and-mixed.json",
+    ))
+    .unwrap();
+    let mut generator =
+        Generator::new(GenerationSettings::default().with_interface(InterfaceStyle::Builder));
+    let output = generate_formatted(&mut generator, &spec);
+
+    assert!(output.contains("pub nullable_value: ::std::option::Option<::std::string::String>,"));
+    assert!(output.contains("pub enum MixedResponseResponse"));
+    assert!(output.contains("Status200(SuccessResponse)"));
+    assert!(output.contains("Status202"));
+    assert!(output.contains("MixedResponseResponse::Status200"));
+    assert!(output.contains("MixedResponseResponse::Status202"));
+}
