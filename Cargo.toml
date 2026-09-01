@@ -13,10 +13,10 @@ members = [
 resolver = "2"
 
 [workspace.dependencies]
-progenitor-middleware = { version = "0.12.3", path = "progenitor-middleware", default-features = false }
+progenitor-middleware = { version = "0.12.5", path = "progenitor-middleware", default-features = false }
 progenitor-middleware-client = { version = "0.12.0", path = "progenitor-middleware-client" }
-progenitor-middleware-impl = { version = "0.12.4", path = "progenitor-middleware-impl" }
-progenitor-middleware-macro = { version = "0.12.4", path = "progenitor-middleware-macro" }
+progenitor-middleware-impl = { version = "0.12.5", path = "progenitor-middleware-impl" }
+progenitor-middleware-macro = { version = "0.12.5", path = "progenitor-middleware-macro" }
 
 anyhow = "1.0.98"
 assert_cmd = "2.0.17"

@@ -13,7 +13,21 @@
 
 == Unreleased changes (release date TBD)
 
-https://github.com/oxidecomputer/progenitor/compare/v0.11.0\...HEAD[Full list of commits]
+https://github.com/sammccord/progenitor/compare/0.12.5\...HEAD[Full list of commits]
+
+== 0.12.5 (released 2026-09-01)
+
+https://github.com/sammccord/progenitor/compare/v0.11.0\...0.12.5[Full list of commits]
+
+Releases 0.12.0 through 0.12.4 of this fork shipped without changelog entries,
+so this section covers everything since 0.11.0.
+
+* BREAKING: build generated clients on `reqwest-middleware` instead of
+  `reqwest`, so a client is constructed from a `ClientWithMiddleware`
+* BREAKING: publish under the `progenitor-middleware-*` crate namespace
+* Accept any OpenAPI 3.x document version, not only 3.0.x
+* Honour `minLength` on string schemas
+* Support null and mixed success responses (#2)
 
 == 0.11.0 (released 2025-05-27)
 
