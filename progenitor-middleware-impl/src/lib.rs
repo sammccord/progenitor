@@ -713,7 +713,6 @@ pub fn space_out_items(content: String) -> Result<String> {
 }
 
 fn validate_openapi_spec_version(spec_version: &str) -> Result<()> {
-    // progenitor currenlty only support OAS 3.0.x
     if spec_version.trim().starts_with("3.") {
         Ok(())
     } else {
@@ -804,11 +803,16 @@ mod tests {
         assert!(validate_openapi_spec_version("3.0.1").is_ok());
         assert!(validate_openapi_spec_version("3.0.4").is_ok());
         assert!(validate_openapi_spec_version("3.0.5-draft").is_ok());
+        assert!(validate_openapi_spec_version("3.1.0").is_ok());
         assert_eq!(
-            validate_openapi_spec_version("3.1.0")
+            validate_openapi_spec_version("2.0").unwrap_err().to_string(),
+            "unexpected or unhandled format in the OpenAPI document invalid version: 2.0"
+        );
+        assert_eq!(
+            validate_openapi_spec_version("4.0.0")
                 .unwrap_err()
                 .to_string(),
-            "unexpected or unhandled format in the OpenAPI document invalid version: 3.1.0"
+            "unexpected or unhandled format in the OpenAPI document invalid version: 4.0.0"
         );
     }
 }
